@@ -563,9 +563,16 @@
     --button-font-family-primary: var(--font-{{ settings.type_font_button_primary }}--family);
     --button-font-family-secondary: var(--font-{{ settings.type_font_button_secondary }}--family);
 
+    --button-font-size-primary: {% if settings.button_font_size_primary != blank %}{{ settings.button_font_size_primary }}{% else %}var(--font-paragraph--size){% endif %};
+    --button-font-size-secondary: {% if settings.button_font_size_secondary != blank %}{{ settings.button_font_size_secondary }}{% else %}var(--font-paragraph--size){% endif %};
+
     /* Button text case */
     --button-text-case-primary: {{ settings.button_text_case_primary }};
     --button-text-case-secondary: {{ settings.button_text_case_secondary }};
+
+    --button-box-shadow-offset: 5px 5px 0px 0px var(--color-foreground);
+    --button-box-shadow-primary: {% if settings.primary_button_box_shadow %}var(--button-box-shadow-offset){% else %}none{% endif %};
+    --button-box-shadow-secondary: {% if settings.secondary_button_box_shadow %}var(--button-box-shadow-offset){% else %}none{% endif %};
 
     /* Borders */
     --border-color: rgb(var(--color-border-rgb) / var(--opacity-50));

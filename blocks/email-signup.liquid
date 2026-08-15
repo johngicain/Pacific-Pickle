@@ -75,7 +75,10 @@
         {% endif %}
       >
       <button
-        class="email-signup__button {% if block_settings.integrated_button or block_settings.border_style == 'underline' %}email-signup__button--integrated{% endif %} email-signup__button--{{ block_settings.display_type }} {{ block_settings.button_type_preset }} {{ block_settings.style_class }} {{ block_settings.style_class }}--{{ block.id }}"
+        class="email-signup__button {% if block_settings.integrated_button or block_settings.border_style == 'underline' %}email-signup__button--integrated{% endif %} email-signup__button--{{ block_settings.display_type }} {{ block_settings.button_type_preset }} {{ block_settings.style_class }} {{ block_settings.style_class }}--{{ block.id }}{% if block_settings.box_shadow and block_settings.style_class != 'button-unstyled' %} button--box-shadow{% endif %}"
+        {% if block_settings.font_size != blank %}
+          style="--button-font-size: {{ block_settings.font_size }}; font-size: {{ block_settings.font_size }};"
+        {% endif %}
         {% if block_settings.display_type != 'text' %}
           aria-label="{{ 'actions.sign_up' | t }}"
         {% endif %}
@@ -439,7 +442,7 @@
       "step": 1,
       "unit": "%",
       "default": 100,
-      "visible_if": "{{ block.settings.width == \"custom\" }}"
+      "visible_if": "{{ block.settings.width == 'custom' }}"
     },
     {
       "type": "header",
@@ -546,7 +549,7 @@
       "step": 0.5,
       "unit": "px",
       "default": 1,
-      "visible_if": "{{ block.settings.input_style == \"custom\" and block.settings.border_style != \"none\" }}"
+      "visible_if": "{{ block.settings.input_style == 'custom' and block.settings.border_style != 'none' }}"
     },
     {
       "type": "range",
@@ -557,28 +560,28 @@
       "step": 1,
       "unit": "px",
       "default": 100,
-      "visible_if": "{{ block.settings.input_style == \"custom\" and block.settings.border_style != \"underline\" }}"
+      "visible_if": "{{ block.settings.input_style == 'custom' and block.settings.border_style != 'underline' }}"
     },
     {
       "type": "color",
       "id": "input_background_color",
       "label": "t:settings.background",
       "placeholder": "t:settings.default",
-      "visible_if": "{{ block.settings.input_style == \"custom\" and block.settings.border_style != \"underline\" }}"
+      "visible_if": "{{ block.settings.input_style == 'custom' and block.settings.border_style != 'underline' }}"
     },
     {
       "type": "color",
       "id": "input_text_color",
       "label": "t:settings.text",
       "placeholder": "t:settings.default",
-      "visible_if": "{{ block.settings.input_style == \"custom\" }}"
+      "visible_if": "{{ block.settings.input_style == 'custom' }}"
     },
     {
       "type": "color",
       "id": "input_border_color",
       "label": "t:settings.borders",
       "placeholder": "t:settings.default",
-      "visible_if": "{{ block.settings.input_style == \"custom\" }}"
+      "visible_if": "{{ block.settings.input_style == 'custom' }}"
     },
     {
       "type": "select",
@@ -620,7 +623,7 @@
       ],
       "default": "paragraph",
       "info": "t:info.edit_presets_in_theme_settings",
-      "visible_if": "{{ block.settings.input_style == \"custom\" }}"
+      "visible_if": "{{ block.settings.input_style == 'custom' }}"
     },
     {
       "type": "header",
@@ -652,9 +655,61 @@
       "info": "t:info.edit_button_style_in_theme_settings"
     },
     {
+      "type": "checkbox",
+      "id": "box_shadow",
+      "label": "t:settings.box_shadow",
+      "default": false,
+      "visible_if": "{{ block.settings.style_class != 'button-unstyled' }}"
+    },
+    {
+      "type": "select",
+      "id": "font_size",
+      "label": "t:settings.font_size",
+      "options": [
+        {
+          "value": "",
+          "label": "t:options.default"
+        },
+        {
+          "value": "0.625rem",
+          "label": "10px"
+        },
+        {
+          "value": "0.75rem",
+          "label": "12px"
+        },
+        {
+          "value": "0.875rem",
+          "label": "14px"
+        },
+        {
+          "value": "1rem",
+          "label": "16px"
+        },
+        {
+          "value": "1.125rem",
+          "label": "18px"
+        },
+        {
+          "value": "1.25rem",
+          "label": "20px"
+        },
+        {
+          "value": "1.5rem",
+          "label": "24px"
+        },
+        {
+          "value": "2rem",
+          "label": "32px"
+        }
+      ],
+      "default": "",
+      "visible_if": "{{ block.settings.display_type == 'text' }}"
+    },
+    {
       "type": "header",
       "content": "t:content.button_colors",
-      "visible_if": "{{ block.settings.style_class == \"button-custom\" }}"
+      "visible_if": "{{ block.settings.style_class == 'button-custom' }}"
     },
     {
       "type": "color",
@@ -708,14 +763,14 @@
       "id": "label",
       "label": "t:settings.label",
       "default": "t:text_defaults.sign_up",
-      "visible_if": "{{ block.settings.display_type == \"text\" }}"
+      "visible_if": "{{ block.settings.display_type == 'text' }}"
     },
     {
       "type": "checkbox",
       "id": "integrated_button",
       "label": "t:settings.integrated_button",
       "default": false,
-      "visible_if": "{{ block.settings.border_style != \"underline\" }}"
+      "visible_if": "{{ block.settings.border_style != 'underline' }}"
     },
     {
       "type": "select",
@@ -757,7 +812,7 @@
       ],
       "default": "paragraph",
       "info": "t:info.edit_presets_in_theme_settings",
-      "visible_if": "{{ block.settings.display_type == \"text\" }}"
+      "visible_if": "{{ block.settings.display_type == 'text' }}"
     },
     {
       "type": "header",

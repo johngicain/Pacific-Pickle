@@ -1331,6 +1331,12 @@
         "default": 100
       },
       {
+        "type": "checkbox",
+        "id": "primary_button_box_shadow",
+        "label": "t:settings.box_shadow",
+        "default": false
+      },
+      {
         "type": "select",
         "id": "type_font_button_primary",
         "label": "t:settings.font",
@@ -1349,6 +1355,50 @@
           }
         ],
         "default": "heading"
+      },
+      {
+        "type": "select",
+        "id": "button_font_size_primary",
+        "label": "t:settings.font_size",
+        "options": [
+          {
+            "value": "",
+            "label": "t:options.default"
+          },
+          {
+            "value": "0.625rem",
+            "label": "10px"
+          },
+          {
+            "value": "0.75rem",
+            "label": "12px"
+          },
+          {
+            "value": "0.875rem",
+            "label": "14px"
+          },
+          {
+            "value": "1rem",
+            "label": "16px"
+          },
+          {
+            "value": "1.125rem",
+            "label": "18px"
+          },
+          {
+            "value": "1.25rem",
+            "label": "20px"
+          },
+          {
+            "value": "1.5rem",
+            "label": "24px"
+          },
+          {
+            "value": "2rem",
+            "label": "32px"
+          }
+        ],
+        "default": ""
       },
       {
         "type": "select",
@@ -1412,6 +1462,12 @@
         "default": 100
       },
       {
+        "type": "checkbox",
+        "id": "secondary_button_box_shadow",
+        "label": "t:settings.box_shadow",
+        "default": false
+      },
+      {
         "type": "select",
         "id": "type_font_button_secondary",
         "label": "t:settings.font",
@@ -1430,6 +1486,50 @@
           }
         ],
         "default": "heading"
+      },
+      {
+        "type": "select",
+        "id": "button_font_size_secondary",
+        "label": "t:settings.font_size",
+        "options": [
+          {
+            "value": "",
+            "label": "t:options.default"
+          },
+          {
+            "value": "0.625rem",
+            "label": "10px"
+          },
+          {
+            "value": "0.75rem",
+            "label": "12px"
+          },
+          {
+            "value": "0.875rem",
+            "label": "14px"
+          },
+          {
+            "value": "1rem",
+            "label": "16px"
+          },
+          {
+            "value": "1.125rem",
+            "label": "18px"
+          },
+          {
+            "value": "1.25rem",
+            "label": "20px"
+          },
+          {
+            "value": "1.5rem",
+            "label": "24px"
+          },
+          {
+            "value": "2rem",
+            "label": "32px"
+          }
+        ],
+        "default": ""
       },
       {
         "type": "select",
