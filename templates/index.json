@@ -265,8 +265,8 @@
                 "box_shadow": true,
                 "font_size": "1.25rem",
                 "custom_button_background": "rgba(0,0,0,0)",
-                "custom_button_text": "#FFFFFF",
-                "custom_button_border": "#FFFFFF",
+                "custom_button_text": "#ffffff",
+                "custom_button_border": "#ffffff",
                 "link_text_color": "",
                 "width": "fit-content",
                 "custom_width": 100,
@@ -1112,6 +1112,7 @@
           "static": true,
           "settings": {
             "media_type": "image",
+            "image": "shopify://shop_images/Give_The__Gift_Of_Good_Brine.webp",
             "link": "",
             "video_loop": true,
             "video_autoplay": false,
@@ -2342,6 +2343,7 @@
           "static": true,
           "settings": {
             "media_type": "image",
+            "image": "shopify://shop_images/Join_Our_24_hour_Pickle_Party.webp",
             "link": "",
             "video_loop": true,
             "video_autoplay": false,
