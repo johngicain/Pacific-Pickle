@@ -266,7 +266,7 @@
                 "font_size": "1.25rem",
                 "custom_button_background": "rgba(0,0,0,0)",
                 "custom_button_text": "#FFFFFF",
-                "custom_button_border": "{{ settings.color_palette.foreground }}",
+                "custom_button_border": "#FFFFFF",
                 "link_text_color": "",
                 "width": "fit-content",
                 "custom_width": 100,
