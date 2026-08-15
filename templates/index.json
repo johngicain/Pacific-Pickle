@@ -834,6 +834,7 @@
           "static": true,
           "settings": {
             "media_type": "image",
+            "image": "shopify://shop_images/From_The_Farm_To_Your_Jar.webp",
             "link": "",
             "video_loop": true,
             "video_autoplay": false,
