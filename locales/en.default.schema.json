@@ -1178,6 +1178,7 @@
     "x_position": "Horizontal position",
     "y_position": "Vertical position",
     "text_color": "Text color",
+    "text_shadow": "Text shadow",
     "text_color_transparent": "Transparent header text",
     "slider_color": "Slider color",
     "slider_inner_color": "Slider inner color",

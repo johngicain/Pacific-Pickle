@@ -47,6 +47,9 @@
     if block_settings.background
       echo ' text-block--background '
     endif
+    if block_settings.text_shadow
+      echo ' text-block--text-shadow '
+    endif
     if is_rte
       echo ' rte '
     endif
@@ -75,6 +78,9 @@
       --text-background-color: {{ block_settings.background_color | default: 'rgb(255 255 255 / 1.0)' }};
       --text-corner-radius: {{ block_settings.corner_radius }}px;
       --text-padding: max(var(--padding-2xs), calc((var(--text-corner-radius) + var(--padding-xs)) * (1 - cos(45deg))));
+    {% endif %}
+    {% if block_settings.text_shadow %}
+      --text-shadow-color: {{ block_settings.text_shadow_color | default: '#00000080' }};
     {% endif %}
   "
 
@@ -141,5 +147,9 @@
     max-inline-size: min(100%, var(--max-width, 100%));
     text-align: var(--text-align, var(--text-align-default));
     text-wrap: var(--text-wrap);
+  }
+
+  .text-block--text-shadow {
+    text-shadow: 0 1px 2px var(--text-shadow-color);
   }
 {% endstylesheet %}

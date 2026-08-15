@@ -301,6 +301,20 @@
     },
     {
       "type": "checkbox",
+      "id": "text_shadow",
+      "label": "t:settings.text_shadow",
+      "default": false
+    },
+    {
+      "type": "color",
+      "id": "text_shadow_color",
+      "label": "t:settings.shadow_color",
+      "alpha": true,
+      "default": "#00000080",
+      "visible_if": "{{ block.settings.text_shadow == true }}"
+    },
+    {
+      "type": "checkbox",
       "id": "background",
       "label": "t:settings.background",
       "default": false
