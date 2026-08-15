@@ -15,6 +15,9 @@
   <span class="footer-utilities__text">
     &copy; {{ 'now' | date: '%Y' }}
     {{ shop.name | link_to: routes.root_url -}}
+    {%- if block_settings.additional_text != blank -%}
+      <span> · {{ block_settings.additional_text | escape }}</span>
+    {%- endif -%}
     {%- if block_settings.show_powered_by -%}
       , {{ powered_by_link }}
     {%- endif -%}
@@ -37,6 +40,11 @@
       "id": "show_powered_by",
       "label": "t:settings.show_powered_by_shopify",
       "default": true
+    },
+    {
+      "type": "text",
+      "id": "additional_text",
+      "label": "t:settings.text"
     },
     {
       "type": "paragraph",

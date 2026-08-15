@@ -95,11 +95,25 @@
   capture navigation_bar
     content_for 'block', type: '_header-menu', id: 'header-menu', variant: 'navigation_bar', transparent: transparent
   endcapture
+%}
 
-  capture actions
-    render 'header-actions', customer_account_menu: section.settings.customer_account_menu, display_style: section.settings.actions_display_style, section: section
-  endcapture
+{% capture actions %}
+  {% if section.settings.show_header_cta and section.settings.header_cta_label != blank %}
+    <a
+      href="{{ section.settings.header_cta_link | default: routes.all_products_collection_url }}"
+      class="button header__cta"
+    >
+      {{- section.settings.header_cta_label | escape -}}
+    </a>
+  {% endif %}
+  {% render 'header-actions',
+    customer_account_menu: section.settings.customer_account_menu,
+    display_style: section.settings.actions_display_style,
+    section: section
+  %}
+{% endcapture %}
 
+{% liquid
   if shop.customer_accounts_enabled
     assign search_class = 'search-action--hidden-on-drawer'
   endif
@@ -804,6 +818,23 @@
 
     .overflow-menu::part(list) {
       justify-content: flex-end;
+    }
+  }
+
+  .header__cta {
+    display: none;
+    min-height: auto;
+    padding-block: 0.55rem;
+    padding-inline: 1.1rem;
+    font-size: 0.875rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  @media screen and (min-width: 750px) {
+    .header__cta {
+      display: inline-flex;
+      align-items: center;
     }
   }
 
@@ -1627,6 +1658,29 @@
       ],
       "default": "none",
       "visible_if": "{{ section.settings.actions_display_style == 'text' }}"
+    },
+    {
+      "type": "header",
+      "content": "t:names.button"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_header_cta",
+      "label": "t:settings.show_button",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "header_cta_label",
+      "label": "t:settings.label",
+      "default": "t:text_defaults.shop_all",
+      "visible_if": "{{ section.settings.show_header_cta }}"
+    },
+    {
+      "type": "url",
+      "id": "header_cta_link",
+      "label": "t:settings.link",
+      "visible_if": "{{ section.settings.show_header_cta }}"
     },
     {
       "type": "header",
