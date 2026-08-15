@@ -1336,6 +1336,10 @@
         "label": "t:settings.font",
         "options": [
           {
+            "value": "heading",
+            "label": "t:options.heading"
+          },
+          {
             "value": "body",
             "label": "t:options.body"
           },
@@ -1344,7 +1348,7 @@
             "label": "t:options.accent"
           }
         ],
-        "default": "body"
+        "default": "heading"
       },
       {
         "type": "select",
@@ -1413,6 +1417,10 @@
         "label": "t:settings.font",
         "options": [
           {
+            "value": "heading",
+            "label": "t:options.heading"
+          },
+          {
             "value": "body",
             "label": "t:options.body"
           },
@@ -1421,7 +1429,7 @@
             "label": "t:options.accent"
           }
         ],
-        "default": "body"
+        "default": "heading"
       },
       {
         "type": "select",

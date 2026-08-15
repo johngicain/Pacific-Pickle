@@ -19,9 +19,9 @@
           "settings": {
             "text": "🥒 Free Shipping on Orders Over $60 — Pickled with Pride in Santa Barbara, CA 🥒",
             "link": "shopify://collections/all",
-            "font": "var(--font-heading--family)",
+            "font": "var(--font-body--family)",
             "font_size": "0.75rem",
-            "weight": "600",
+            "weight": "700",
             "letter_spacing": "loose",
             "case": "uppercase",
             "text_color": "#ffffff"
@@ -36,9 +36,9 @@
       "settings": {
         "speed": 5,
         "section_width": "full-width",
-        "background_color": "#2f5a3a",
+        "background_color": "#3d6b35",
         "divider_width": 0,
-        "divider_color": "#2f5a3a",
+        "divider_color": "#3d6b35",
         "padding-block-start": 12,
         "padding-block-end": 12
       }
@@ -61,11 +61,11 @@
           "static": true,
           "settings": {
             "menu": "main-menu",
-            "background_color": "#f7f4ef",
+            "background_color": "#faf7f0",
             "text_color": "#1c1c1a",
             "type_font_primary_size": "0.875rem",
             "menu_font_style": "inverse",
-            "type_font_primary_link": "heading",
+            "type_font_primary_link": "body",
             "type_case_primary_link": "uppercase",
             "menu_style": "text",
             "featured_products_aspect_ratio": "4 / 5",
@@ -103,7 +103,7 @@
         "show_header_cta": true,
         "header_cta_label": "Shop All",
         "header_cta_link": "shopify://collections/all",
-        "background_color_top": "#f7f4ef",
+        "background_color_top": "#faf7f0",
         "text_color_top": "#1c1c1a",
         "enable_transparent_header_home": false,
         "enable_transparent_header_product": false,
