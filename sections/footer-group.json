@@ -586,8 +586,8 @@
         "section_width": "page-width",
         "gap": 40,
         "background_color": "#1c1c1a",
-        "padding-block-start": 48,
-        "padding-block-end": 24
+        "padding-block-start": 60,
+        "padding-block-end": 60
       }
     },
     "footer_utilities_jLGE8U": {
@@ -626,7 +626,7 @@
         "divider_thickness": 1,
         "divider_color": "#3d3a36",
         "padding-block-start": 20,
-        "padding-block-end": 32
+        "padding-block-end": 20
       }
     }
   },
