@@ -111,7 +111,11 @@
               "type": "email-signup",
               "settings": {
                 "width": "custom",
+<<<<<<< HEAD
                 "custom_width": 45,
+=======
+                "custom_width": 25,
+>>>>>>> a2220e483fefcef8f713d31f54597f09a87f8e1f
                 "heading": "",
                 "heading_text_color": "",
                 "heading_preset": "h3",
@@ -328,6 +332,7 @@
                 "accordion_dividers": false,
                 "background_color": "",
                 "text_color": "#A4A19C",
+<<<<<<< HEAD
                 "heading_preset": "custom",
                 "font": "var(--font-subheading--family)",
                 "font_size": "0.875rem",
@@ -335,6 +340,9 @@
                 "letter_spacing": "loose",
                 "case": "uppercase",
                 "wrap": "pretty",
+=======
+                "heading_preset": "paragraph",
+>>>>>>> a2220e483fefcef8f713d31f54597f09a87f8e1f
                 "link_preset": "paragraph",
                 "padding-block-start": 0,
                 "padding-block-end": 0,
@@ -399,6 +407,7 @@
                 "accordion_dividers": false,
                 "background_color": "",
                 "text_color": "#A4A19C",
+<<<<<<< HEAD
                 "heading_preset": "custom",
                 "font": "var(--font-subheading--family)",
                 "font_size": "0.875rem",
@@ -406,6 +415,9 @@
                 "letter_spacing": "loose",
                 "case": "uppercase",
                 "wrap": "pretty",
+=======
+                "heading_preset": "paragraph",
+>>>>>>> a2220e483fefcef8f713d31f54597f09a87f8e1f
                 "link_preset": "paragraph",
                 "padding-block-start": 0,
                 "padding-block-end": 0,
