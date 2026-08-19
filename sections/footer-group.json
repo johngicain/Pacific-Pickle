@@ -174,7 +174,7 @@
             "align_baseline": false,
             "horizontal_alignment_flex_direction_column": "flex-start",
             "vertical_alignment_flex_direction_column": "flex-start",
-            "gap": 16,
+            "gap": 20,
             "width": "fill",
             "custom_width": 100,
             "width_mobile": "fill",
@@ -253,7 +253,7 @@
             "brand_social": {
               "type": "social-links",
               "settings": {
-                "icon_color": "#f7f4ef",
+                "icon_color": "#A4A19C",
                 "facebook_url": "https://www.facebook.com/pacificpickleworks",
                 "instagram_url": "https://www.instagram.com/pacificpickleworks",
                 "youtube_url": "",
