@@ -237,7 +237,7 @@
                 "letter_spacing": "normal",
                 "case": "none",
                 "wrap": "pretty",
-                "text_color": "#A4A19C",
+                "text_color": "#a4a19c",
                 "text_shadow": false,
                 "text_shadow_color": "#00000080",
                 "background": false,
@@ -316,53 +316,20 @@
             "padding-inline-end": 0
           },
           "blocks": {
-            "shop_heading": {
-              "type": "text",
+            "menu_tcqjHg": {
+              "type": "menu",
+              "name": "t:names.menu",
               "settings": {
-                "text": "<h3><strong>Shop</strong></h3>",
-                "width": "100%",
-                "max_width": "none",
-                "alignment": "left",
-                "type_preset": "custom",
-                "font": "var(--font-subheading--family)",
-                "font_size": "0.875rem",
-                "line_height": "normal",
-                "letter_spacing": "loose",
-                "case": "uppercase",
-                "wrap": "pretty",
-                "text_color": "#777675",
-                "text_shadow": false,
-                "text_shadow_color": "#00000080",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "shop_links": {
-              "type": "text",
-              "settings": {
-                "text": "<p><a href=\"/collections/all\">All Products</a><br/><a href=\"/collections/gift-sets\">Gift Sets</a><br/><a href=\"/collections/all\">Subscribe & Save</a><br/><a href=\"/pages/where-to-buy\">Where to Buy</a></p>",
-                "width": "100%",
-                "max_width": "none",
-                "alignment": "left",
-                "type_preset": "rte",
-                "font": "var(--font-body--family)",
-                "font_size": "1rem",
-                "line_height": "loose",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "text_color": "#96937F",
-                "text_shadow": false,
-                "text_shadow_color": "#00000080",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
+                "menu": "shop",
+                "heading": "SHOP",
+                "menu_spacing": 12,
+                "show_as_accordion": false,
+                "accordion_icon": "caret",
+                "accordion_dividers": false,
+                "background_color": "",
+                "text_color": "#A4A19C",
+                "heading_preset": "paragraph",
+                "link_preset": "paragraph",
                 "padding-block-start": 0,
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
@@ -372,8 +339,7 @@
             }
           },
           "block_order": [
-            "shop_heading",
-            "shop_links"
+            "menu_tcqjHg"
           ]
         },
         "company_column": {
@@ -415,53 +381,20 @@
             "padding-inline-end": 0
           },
           "blocks": {
-            "company_heading": {
-              "type": "text",
+            "menu_ppVChJ": {
+              "type": "menu",
+              "name": "t:names.menu",
               "settings": {
-                "text": "<h3><strong>Company</strong></h3>",
-                "width": "100%",
-                "max_width": "none",
-                "alignment": "left",
-                "type_preset": "custom",
-                "font": "var(--font-subheading--family)",
-                "font_size": "0.875rem",
-                "line_height": "normal",
-                "letter_spacing": "loose",
-                "case": "uppercase",
-                "wrap": "pretty",
-                "text_color": "#777675",
-                "text_shadow": false,
-                "text_shadow_color": "#00000080",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "company_links": {
-              "type": "text",
-              "settings": {
-                "text": "<p><a href=\"/pages/our-story\">Our Story</a><br/><a href=\"/blogs/recipes\">Recipes</a><br/><a href=\"/pages/press\">Press & Awards</a><br/><a href=\"/policies/shipping-policy\">Shipping Policy</a><br/><a href=\"/policies/refund-policy\">Return Policy</a><br/><a href=\"/policies/privacy-policy\">Privacy Policy</a><br/><a href=\"/policies/terms-of-service\">Terms of Service</a></p>",
-                "width": "100%",
-                "max_width": "none",
-                "alignment": "left",
-                "type_preset": "rte",
-                "font": "var(--font-body--family)",
-                "font_size": "1rem",
-                "line_height": "loose",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
+                "menu": "company",
+                "heading": "COMPANY",
+                "menu_spacing": 12,
+                "show_as_accordion": false,
+                "accordion_icon": "caret",
+                "accordion_dividers": false,
+                "background_color": "",
                 "text_color": "#A4A19C",
-                "text_shadow": false,
-                "text_shadow_color": "#00000080",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
+                "heading_preset": "paragraph",
+                "link_preset": "paragraph",
                 "padding-block-start": 0,
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
@@ -471,8 +404,7 @@
             }
           },
           "block_order": [
-            "company_heading",
-            "company_links"
+            "menu_ppVChJ"
           ]
         },
         "contact_column": {
@@ -555,7 +487,7 @@
                 "letter_spacing": "normal",
                 "case": "none",
                 "wrap": "pretty",
-                "text_color": "#A4A19C",
+                "text_color": "#a4a19c",
                 "text_shadow": false,
                 "text_shadow_color": "#00000080",
                 "background": false,
