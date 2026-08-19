@@ -598,7 +598,7 @@
           "settings": {
             "show_powered_by": false,
             "additional_text": "Pickled with Pride in Santa Barbara, CA",
-            "text_color": "#f7f4ef",
+            "text_color": "#777675",
             "font_size": "0.75rem",
             "case": "none"
           },
@@ -607,7 +607,7 @@
         "footer_policy_list_VCdnpa": {
           "type": "footer-policy-list",
           "settings": {
-            "text_color": "#f7f4ef",
+            "text_color": "#777675",
             "font_size": "0.75rem",
             "case": "none"
           },
