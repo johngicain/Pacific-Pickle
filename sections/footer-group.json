@@ -386,7 +386,7 @@
               "name": "t:names.menu",
               "settings": {
                 "menu": "company",
-                "heading": "COMPANY",
+                "heading": "",
                 "menu_spacing": 12,
                 "show_as_accordion": false,
                 "accordion_icon": "caret",
