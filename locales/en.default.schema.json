@@ -224,6 +224,7 @@
   },
   "info": {
     "actions_display_style": "Icons are always used on mobile",
+    "menu_beside_cta": "Moves the desktop menu next to the header button",
     "applies_on_image_only": "Applies to images only",
     "aspect_ratio_adjusted": "Adjusted in some layouts",
     "carousel_hover_behavior_not_supported": "\"Carousel\" hover is not supported when \"Carousel\" type is selected at the section level",
@@ -952,6 +953,7 @@
     "media_type": "Media type",
     "media_width": "Media width",
     "menu": "Menu",
+    "menu_beside_cta": "Place menu beside button",
     "minimum_height": "Minimum height",
     "mobile_card_size": "Mobile card size",
     "mobile_columns": "Mobile columns",

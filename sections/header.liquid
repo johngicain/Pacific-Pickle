@@ -95,9 +95,17 @@
   capture navigation_bar
     content_for 'block', type: '_header-menu', id: 'header-menu', variant: 'navigation_bar', transparent: transparent
   endcapture
+
+  assign menu_beside_cta = false
+  if section.settings.menu_beside_cta and section.settings.show_header_cta
+    assign menu_beside_cta = true
+  endif
 %}
 
 {% capture actions %}
+  {% if menu_beside_cta %}
+    {{ menu }}
+  {% endif %}
   {% if section.settings.show_header_cta and section.settings.header_cta_label != blank %}
     <a
       href="{{ section.settings.header_cta_link | default: routes.all_products_collection_url }}"
@@ -173,7 +181,7 @@
 
   assign bottom_row_blocks = ''
 
-  if section.settings.menu_row == 'bottom'
+  if section.settings.menu_row == 'bottom' and menu_beside_cta == false
     assign bottom_row_blocks = bottom_row_blocks | append: 'menu,'
   endif
 
@@ -511,6 +519,10 @@
 
   #header-component :is(.header-menu, .dropdown-localization) {
     display: none;
+  }
+
+  #header-component .menu-list__link {
+    font-weight: bold;
   }
 
   @media screen and (min-width: 750px) {
@@ -1277,7 +1289,8 @@
           "label": "t:options.right"
         }
       ],
-      "default": "left"
+      "default": "left",
+      "visible_if": "{{ section.settings.show_header_cta == false or section.settings.menu_beside_cta == false }}"
     },
     {
       "type": "select",
@@ -1293,7 +1306,8 @@
           "label": "t:options.bottom"
         }
       ],
-      "default": "top"
+      "default": "top",
+      "visible_if": "{{ section.settings.show_header_cta == false or section.settings.menu_beside_cta == false }}"
     },
     {
       "type": "header",
@@ -1668,6 +1682,14 @@
       "id": "show_header_cta",
       "label": "t:settings.show_button",
       "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "menu_beside_cta",
+      "label": "t:settings.menu_beside_cta",
+      "info": "t:info.menu_beside_cta",
+      "default": false,
+      "visible_if": "{{ section.settings.show_header_cta }}"
     },
     {
       "type": "text",

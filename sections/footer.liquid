@@ -64,8 +64,25 @@
     align-items: start;
   }
 
-  .footer-content .menu__heading__default {
-    font-weight: var(--font-heading--weight);
+  .footer-content .menu__heading.custom-typography {
+    font-family: var(--font-family);
+    font-weight: var(--font-weight);
+    line-height: var(--line-height);
+    letter-spacing: var(--letter-spacing);
+    text-transform: var(--text-transform);
+    text-wrap: var(--text-wrap);
+  }
+
+  .footer-content .menu__heading.custom-font-size {
+    font-size: var(--font-size);
+  }
+
+  .footer-content .menu__heading.custom-font-weight {
+    font-weight: var(--font-weight);
+  }
+
+  .footer-content .menu__heading.custom-color {
+    color: var(--color);
   }
 
   @media screen and (min-width: 750px) and (max-width: 989px) {

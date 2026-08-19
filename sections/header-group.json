@@ -60,7 +60,7 @@
           "type": "_header-menu",
           "static": true,
           "settings": {
-            "menu": "main-menu",
+            "menu": "header",
             "background_color": "#faf7f0",
             "text_color": "#1c1c1a",
             "type_font_primary_size": "0.875rem",
@@ -85,6 +85,7 @@
         "logo_position": "left",
         "menu_position": "center",
         "menu_row": "top",
+        "menu_beside_cta": false,
         "customer_account_menu": "customer-account-main-menu",
         "show_search": false,
         "search_position": "right",

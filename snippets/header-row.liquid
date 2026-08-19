@@ -35,6 +35,10 @@
         assign item_column = 'right'
     endcase
 
+    if item == 'menu' and settings.menu_beside_cta and settings.show_header_cta
+      continue
+    endif
+
     if item_row == row
       case item_column
         when 'left'
