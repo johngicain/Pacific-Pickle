@@ -1188,33 +1188,181 @@
               },
               "blocks": {}
             },
-            "story_heading": {
-              "type": "text",
-              "name": "t:names.heading",
+            "group_VjLDVc": {
+              "type": "group",
+              "name": "t:names.group",
               "settings": {
-                "text": "<h2>From the farm to your jar</h2>",
-                "width": "100%",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "custom",
-                "font": "var(--font-heading--family)",
-                "font_size": "4.5rem",
-                "line_height": "tight",
-                "letter_spacing": "normal",
-                "case": "uppercase",
-                "wrap": "pretty",
-                "text_color": "#ffffff",
-                "text_shadow": false,
-                "text_shadow_color": "#00000080",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
+                "content_direction": "column",
+                "vertical_on_mobile": true,
+                "horizontal_alignment": "flex-start",
+                "vertical_alignment": "center",
+                "align_baseline": false,
+                "horizontal_alignment_flex_direction_column": "flex-start",
+                "vertical_alignment_flex_direction_column": "center",
+                "gap": 0,
+                "width": "fill",
+                "custom_width": 100,
+                "width_mobile": "fill",
+                "custom_width_mobile": 100,
+                "height": "fit",
+                "custom_height": 100,
+                "background_media": "none",
+                "background_color": "",
+                "video_position": "cover",
+                "background_image_position": "cover",
+                "toggle_overlay": false,
+                "overlay_color": "#00000026",
+                "overlay_style": "solid",
+                "gradient_direction": "to top",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_color": "",
+                "border_radius": 0,
+                "link": "",
+                "open_in_new_tab": false,
+                "placeholder": "",
                 "padding-block-start": 0,
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
                 "padding-inline-end": 0
               },
-              "blocks": {}
+              "blocks": {
+                "text_LmRzw6": {
+                  "type": "text",
+                  "name": "t:names.heading",
+                  "settings": {
+                    "text": "<h2>From the farm</h2>",
+                    "width": "100%",
+                    "max_width": "normal",
+                    "alignment": "left",
+                    "type_preset": "custom",
+                    "font": "var(--font-heading--family)",
+                    "font_size": "5.5rem",
+                    "line_height": "tight",
+                    "letter_spacing": "normal",
+                    "case": "uppercase",
+                    "wrap": "pretty",
+                    "text_color": "#ffffff",
+                    "text_shadow": false,
+                    "text_shadow_color": "#00000080",
+                    "background": false,
+                    "background_color": "#00000026",
+                    "corner_radius": 0,
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {}
+                },
+                "group_Hn6rFH": {
+                  "type": "group",
+                  "name": "t:names.group",
+                  "settings": {
+                    "content_direction": "row",
+                    "vertical_on_mobile": true,
+                    "horizontal_alignment": "flex-start",
+                    "vertical_alignment": "center",
+                    "align_baseline": false,
+                    "horizontal_alignment_flex_direction_column": "flex-start",
+                    "vertical_alignment_flex_direction_column": "center",
+                    "gap": 12,
+                    "width": "fill",
+                    "custom_width": 100,
+                    "width_mobile": "fill",
+                    "custom_width_mobile": 100,
+                    "height": "fit",
+                    "custom_height": 100,
+                    "background_media": "none",
+                    "background_color": "",
+                    "video_position": "cover",
+                    "background_image_position": "cover",
+                    "toggle_overlay": false,
+                    "overlay_color": "#00000026",
+                    "overlay_style": "solid",
+                    "gradient_direction": "to top",
+                    "border": "none",
+                    "border_width": 1,
+                    "border_opacity": 100,
+                    "border_color": "",
+                    "border_radius": 0,
+                    "link": "",
+                    "open_in_new_tab": false,
+                    "placeholder": "",
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {
+                    "text_ViqQrU": {
+                      "type": "text",
+                      "name": "t:names.heading",
+                      "settings": {
+                        "text": "<h2>to your</h2>",
+                        "width": "fit-content",
+                        "max_width": "normal",
+                        "alignment": "left",
+                        "type_preset": "custom",
+                        "font": "var(--font-heading--family)",
+                        "font_size": "5.5rem",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none",
+                        "wrap": "pretty",
+                        "text_color": "",
+                        "text_shadow": false,
+                        "text_shadow_color": "#00000080",
+                        "background": false,
+                        "background_color": "#00000026",
+                        "corner_radius": 0,
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0
+                      },
+                      "blocks": {}
+                    },
+                    "text_WeM7dy": {
+                      "type": "text",
+                      "name": "t:names.heading",
+                      "settings": {
+                        "text": "<h2>jar</h2>",
+                        "width": "fit-content",
+                        "max_width": "normal",
+                        "alignment": "left",
+                        "type_preset": "custom",
+                        "font": "var(--font-heading--family)",
+                        "font_size": "5.5rem",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none",
+                        "wrap": "pretty",
+                        "text_color": "#D3721E",
+                        "text_shadow": false,
+                        "text_shadow_color": "#00000080",
+                        "background": false,
+                        "background_color": "#00000026",
+                        "corner_radius": 0,
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "text_ViqQrU",
+                    "text_WeM7dy"
+                  ]
+                }
+              },
+              "block_order": [
+                "text_LmRzw6",
+                "group_Hn6rFH"
+              ]
             },
             "story_text": {
               "type": "text",
@@ -1615,7 +1763,7 @@
           },
           "block_order": [
             "story_caption",
-            "story_heading",
+            "group_VjLDVc",
             "story_text",
             "story_stats",
             "story_button"
@@ -1688,7 +1836,7 @@
               },
               "blocks": {}
             },
-            "group_L4bdgw": {
+            "group_i649Rp": {
               "type": "group",
               "name": "t:names.group",
               "settings": {
@@ -1728,7 +1876,7 @@
                 "padding-inline-end": 0
               },
               "blocks": {
-                "text_LmRzw6": {
+                "text_dhcMT7": {
                   "type": "text",
                   "name": "t:names.heading",
                   "settings": {
@@ -1756,7 +1904,7 @@
                   },
                   "blocks": {}
                 },
-                "group_Hn6rFH": {
+                "group_j3xQtm": {
                   "type": "group",
                   "name": "t:names.group",
                   "settings": {
@@ -1796,7 +1944,7 @@
                     "padding-inline-end": 0
                   },
                   "blocks": {
-                    "text_ViqQrU": {
+                    "text_DDdLe9": {
                       "type": "text",
                       "name": "t:names.heading",
                       "settings": {
@@ -1824,7 +1972,7 @@
                       },
                       "blocks": {}
                     },
-                    "text_WeM7dy": {
+                    "text_kVFHbi": {
                       "type": "text",
                       "name": "t:names.heading",
                       "settings": {
@@ -1854,14 +2002,14 @@
                     }
                   },
                   "block_order": [
-                    "text_ViqQrU",
-                    "text_WeM7dy"
+                    "text_DDdLe9",
+                    "text_kVFHbi"
                   ]
                 }
               },
               "block_order": [
-                "text_LmRzw6",
-                "group_Hn6rFH"
+                "text_dhcMT7",
+                "group_j3xQtm"
               ]
             },
             "gifts_text": {
@@ -1941,7 +2089,7 @@
           },
           "block_order": [
             "gifts_caption",
-            "group_L4bdgw",
+            "group_i649Rp",
             "gifts_text",
             "gifts_list",
             "gifts_button"
