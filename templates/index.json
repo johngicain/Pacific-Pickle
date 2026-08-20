@@ -1660,6 +1660,34 @@
             "gap": 20
           },
           "blocks": {
+            "gifts_caption": {
+              "type": "text",
+              "name": "t:names.caption",
+              "settings": {
+                "text": "<p><strong>✦ The Perfect Gift ✦</strong></p>",
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "custom",
+                "font": "var(--font-body--family)",
+                "font_size": "0.875rem",
+                "line_height": "normal",
+                "letter_spacing": "loose",
+                "case": "uppercase",
+                "wrap": "pretty",
+                "text_color": "#e8821a",
+                "text_shadow": false,
+                "text_shadow_color": "#00000080",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
             "group_L4bdgw": {
               "type": "group",
               "name": "t:names.group",
@@ -1836,63 +1864,6 @@
                 "group_Hn6rFH"
               ]
             },
-            "gifts_caption": {
-              "type": "text",
-              "name": "t:names.caption",
-              "settings": {
-                "text": "<p><strong>✦ The Perfect Gift ✦</strong></p>",
-                "width": "fit-content",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "custom",
-                "font": "var(--font-body--family)",
-                "font_size": "0.875rem",
-                "line_height": "normal",
-                "letter_spacing": "loose",
-                "case": "uppercase",
-                "wrap": "pretty",
-                "text_color": "#e8821a",
-                "text_shadow": false,
-                "text_shadow_color": "#00000080",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "gifts_price": {
-              "type": "text",
-              "name": "t:names.caption",
-              "disabled": true,
-              "settings": {
-                "text": "<p>From $30</p>",
-                "width": "fit-content",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "custom",
-                "font": "var(--font-heading--family)",
-                "font_size": "0.875rem",
-                "line_height": "normal",
-                "letter_spacing": "loose",
-                "case": "uppercase",
-                "wrap": "pretty",
-                "text_color": "#ffffff",
-                "text_shadow": false,
-                "text_shadow_color": "#00000080",
-                "background": true,
-                "background_color": "#e8821a",
-                "corner_radius": 0,
-                "padding-block-start": 6,
-                "padding-block-end": 6,
-                "padding-inline-start": 12,
-                "padding-inline-end": 12
-              },
-              "blocks": {}
-            },
             "gifts_text": {
               "type": "text",
               "settings": {
@@ -1969,9 +1940,8 @@
             }
           },
           "block_order": [
-            "group_L4bdgw",
             "gifts_caption",
-            "gifts_price",
+            "group_L4bdgw",
             "gifts_text",
             "gifts_list",
             "gifts_button"
