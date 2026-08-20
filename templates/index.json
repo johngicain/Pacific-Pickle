@@ -1627,13 +1627,13 @@
           "type": "text",
           "name": "t:names.caption",
           "settings": {
-            "text": "<p>✦ What's Inside Matters ✦</p>",
+            "text": "<p><strong>✦ What's Inside Matters ✦</strong></p>",
             "width": "fit-content",
             "max_width": "normal",
             "alignment": "center",
             "type_preset": "custom",
             "font": "var(--font-body--family)",
-            "font_size": "0.75rem",
+            "font_size": "0.875rem",
             "line_height": "normal",
             "letter_spacing": "loose",
             "case": "uppercase",
@@ -1655,13 +1655,13 @@
           "type": "text",
           "name": "t:names.heading",
           "settings": {
-            "text": "<h2>We proudly make products that are</h2>",
+            "text": "<h2>We proudly make<br/>products that are</h2>",
             "width": "100%",
-            "max_width": "normal",
+            "max_width": "narrow",
             "alignment": "center",
             "type_preset": "custom",
             "font": "var(--font-heading--family)",
-            "font_size": "3.5rem",
+            "font_size": "4.5rem",
             "line_height": "tight",
             "letter_spacing": "normal",
             "case": "uppercase",
@@ -1733,7 +1733,7 @@
                 "custom_width": 100,
                 "width_mobile": "fill",
                 "custom_width_mobile": 100,
-                "height": "fit",
+                "height": "fill",
                 "custom_height": 100,
                 "background_media": "none",
                 "background_color": "#ffffff",
@@ -1757,27 +1757,44 @@
                 "padding-inline-end": 24
               },
               "blocks": {
-                "icon_nongmo": {
-                  "type": "icon",
+                "text_gtxyhp": {
+                  "type": "text",
+                  "name": "t:names.text",
                   "settings": {
-                    "icon": "leaf",
-                    "width": 36,
-                    "link": "",
-                    "open_in_new_tab": false,
-                    "icon_color": "#3d6b35"
+                    "text": "<p>🌱</p>",
+                    "width": "fit-content",
+                    "max_width": "normal",
+                    "alignment": "left",
+                    "type_preset": "h3",
+                    "font": "var(--font-body--family)",
+                    "font_size": "1rem",
+                    "line_height": "normal",
+                    "letter_spacing": "normal",
+                    "case": "none",
+                    "wrap": "pretty",
+                    "text_color": "",
+                    "text_shadow": false,
+                    "text_shadow_color": "#00000080",
+                    "background": false,
+                    "background_color": "#00000026",
+                    "corner_radius": 0,
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
                   },
                   "blocks": {}
                 },
                 "text_nongmo": {
                   "type": "text",
                   "settings": {
-                    "text": "<p>Non-GMO Project Verified</p>",
+                    "text": "<p><strong>Non-GMO Project Verified</strong></p>",
                     "width": "100%",
                     "max_width": "normal",
                     "alignment": "center",
                     "type_preset": "custom",
                     "font": "var(--font-body--family)",
-                    "font_size": "0.75rem",
+                    "font_size": "0.875rem",
                     "line_height": "normal",
                     "letter_spacing": "loose",
                     "case": "uppercase",
@@ -1797,7 +1814,7 @@
                 }
               },
               "block_order": [
-                "icon_nongmo",
+                "text_gtxyhp",
                 "text_nongmo"
               ]
             },
@@ -1816,7 +1833,7 @@
                 "custom_width": 100,
                 "width_mobile": "fill",
                 "custom_width_mobile": 100,
-                "height": "fit",
+                "height": "fill",
                 "custom_height": 100,
                 "background_media": "none",
                 "background_color": "#ffffff",
@@ -1840,27 +1857,44 @@
                 "padding-inline-end": 24
               },
               "blocks": {
-                "icon_gf": {
-                  "type": "icon",
+                "text_A6Arxm": {
+                  "type": "text",
+                  "name": "t:names.text",
                   "settings": {
-                    "icon": "gluten_free",
-                    "width": 36,
-                    "link": "",
-                    "open_in_new_tab": false,
-                    "icon_color": "#3d6b35"
+                    "text": "<p>🌾</p>",
+                    "width": "fit-content",
+                    "max_width": "normal",
+                    "alignment": "left",
+                    "type_preset": "h3",
+                    "font": "var(--font-body--family)",
+                    "font_size": "1rem",
+                    "line_height": "normal",
+                    "letter_spacing": "normal",
+                    "case": "none",
+                    "wrap": "pretty",
+                    "text_color": "",
+                    "text_shadow": false,
+                    "text_shadow_color": "#00000080",
+                    "background": false,
+                    "background_color": "#00000026",
+                    "corner_radius": 0,
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
                   },
                   "blocks": {}
                 },
                 "text_gf": {
                   "type": "text",
                   "settings": {
-                    "text": "<p>Naturally Gluten Free</p>",
+                    "text": "<p><strong>Naturally Gluten Free</strong></p>",
                     "width": "100%",
                     "max_width": "normal",
                     "alignment": "center",
                     "type_preset": "custom",
                     "font": "var(--font-body--family)",
-                    "font_size": "0.75rem",
+                    "font_size": "0.875rem",
                     "line_height": "normal",
                     "letter_spacing": "loose",
                     "case": "uppercase",
@@ -1880,7 +1914,7 @@
                 }
               },
               "block_order": [
-                "icon_gf",
+                "text_A6Arxm",
                 "text_gf"
               ]
             },
@@ -1899,7 +1933,7 @@
                 "custom_width": 100,
                 "width_mobile": "fill",
                 "custom_width_mobile": 100,
-                "height": "fit",
+                "height": "fill",
                 "custom_height": 100,
                 "background_media": "none",
                 "background_color": "#ffffff",
@@ -1923,27 +1957,44 @@
                 "padding-inline-end": 24
               },
               "blocks": {
-                "icon_vegan": {
-                  "type": "icon",
+                "text_7whYk4": {
+                  "type": "text",
+                  "name": "t:names.text",
                   "settings": {
-                    "icon": "plant",
-                    "width": 36,
-                    "link": "",
-                    "open_in_new_tab": false,
-                    "icon_color": "#3d6b35"
+                    "text": "<p>🥦</p>",
+                    "width": "fit-content",
+                    "max_width": "normal",
+                    "alignment": "left",
+                    "type_preset": "h3",
+                    "font": "var(--font-body--family)",
+                    "font_size": "1rem",
+                    "line_height": "normal",
+                    "letter_spacing": "normal",
+                    "case": "none",
+                    "wrap": "pretty",
+                    "text_color": "",
+                    "text_shadow": false,
+                    "text_shadow_color": "#00000080",
+                    "background": false,
+                    "background_color": "#00000026",
+                    "corner_radius": 0,
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
                   },
                   "blocks": {}
                 },
                 "text_vegan": {
                   "type": "text",
                   "settings": {
-                    "text": "<p>100% Vegan</p>",
+                    "text": "<p><strong>100% Vegan</strong></p>",
                     "width": "100%",
                     "max_width": "normal",
                     "alignment": "center",
                     "type_preset": "custom",
                     "font": "var(--font-body--family)",
-                    "font_size": "0.75rem",
+                    "font_size": "0.875rem",
                     "line_height": "normal",
                     "letter_spacing": "loose",
                     "case": "uppercase",
@@ -1963,7 +2014,7 @@
                 }
               },
               "block_order": [
-                "icon_vegan",
+                "text_7whYk4",
                 "text_vegan"
               ]
             },
@@ -1982,7 +2033,7 @@
                 "custom_width": 100,
                 "width_mobile": "fill",
                 "custom_width_mobile": 100,
-                "height": "fit",
+                "height": "fill",
                 "custom_height": 100,
                 "background_media": "none",
                 "background_color": "#ffffff",
@@ -2006,27 +2057,44 @@
                 "padding-inline-end": 24
               },
               "blocks": {
-                "icon_natural": {
-                  "type": "icon",
+                "text_F9aXTc": {
+                  "type": "text",
+                  "name": "t:names.text",
                   "settings": {
-                    "icon": "star",
-                    "width": 36,
-                    "link": "",
-                    "open_in_new_tab": false,
-                    "icon_color": "#3d6b35"
+                    "text": "<p>✨</p>",
+                    "width": "fit-content",
+                    "max_width": "normal",
+                    "alignment": "left",
+                    "type_preset": "h3",
+                    "font": "var(--font-body--family)",
+                    "font_size": "1rem",
+                    "line_height": "normal",
+                    "letter_spacing": "normal",
+                    "case": "none",
+                    "wrap": "pretty",
+                    "text_color": "",
+                    "text_shadow": false,
+                    "text_shadow_color": "#00000080",
+                    "background": false,
+                    "background_color": "#00000026",
+                    "corner_radius": 0,
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
                   },
                   "blocks": {}
                 },
                 "text_natural": {
                   "type": "text",
                   "settings": {
-                    "text": "<p>No Fake Flavors or Colors</p>",
+                    "text": "<p><strong>No Fake Flavors or Colors</strong></p>",
                     "width": "100%",
                     "max_width": "normal",
                     "alignment": "center",
                     "type_preset": "custom",
                     "font": "var(--font-body--family)",
-                    "font_size": "0.75rem",
+                    "font_size": "0.875rem",
                     "line_height": "normal",
                     "letter_spacing": "loose",
                     "case": "uppercase",
@@ -2046,7 +2114,7 @@
                 }
               },
               "block_order": [
-                "icon_natural",
+                "text_F9aXTc",
                 "text_natural"
               ]
             },
@@ -2065,7 +2133,7 @@
                 "custom_width": 100,
                 "width_mobile": "fill",
                 "custom_width_mobile": 100,
-                "height": "fit",
+                "height": "fill",
                 "custom_height": 100,
                 "background_media": "none",
                 "background_color": "#ffffff",
@@ -2089,27 +2157,44 @@
                 "padding-inline-end": 24
               },
               "blocks": {
-                "icon_sugar": {
-                  "type": "icon",
+                "text_eiJjcc": {
+                  "type": "text",
+                  "name": "t:names.text",
                   "settings": {
-                    "icon": "check_box",
-                    "width": 36,
-                    "link": "",
-                    "open_in_new_tab": false,
-                    "icon_color": "#3d6b35"
+                    "text": "<p>🍯</p>",
+                    "width": "fit-content",
+                    "max_width": "normal",
+                    "alignment": "left",
+                    "type_preset": "h3",
+                    "font": "var(--font-body--family)",
+                    "font_size": "1rem",
+                    "line_height": "normal",
+                    "letter_spacing": "normal",
+                    "case": "none",
+                    "wrap": "pretty",
+                    "text_color": "",
+                    "text_shadow": false,
+                    "text_shadow_color": "#00000080",
+                    "background": false,
+                    "background_color": "#00000026",
+                    "corner_radius": 0,
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
                   },
                   "blocks": {}
                 },
                 "text_sugar": {
                   "type": "text",
                   "settings": {
-                    "text": "<p>No Refined Sugars</p>",
+                    "text": "<p><strong>No Refined Sugars</strong></p>",
                     "width": "100%",
                     "max_width": "normal",
                     "alignment": "center",
                     "type_preset": "custom",
                     "font": "var(--font-body--family)",
-                    "font_size": "0.75rem",
+                    "font_size": "0.875rem",
                     "line_height": "normal",
                     "letter_spacing": "loose",
                     "case": "uppercase",
@@ -2129,7 +2214,7 @@
                 }
               },
               "block_order": [
-                "icon_sugar",
+                "text_eiJjcc",
                 "text_sugar"
               ]
             }
