@@ -1096,7 +1096,7 @@
       "settings": {
         "media_position": "left",
         "media_width": "medium",
-        "media_height": "60svh",
+        "media_height": "auto",
         "section_width": "page-width",
         "extend_media": false,
         "background_color": "#1c1c1a",
@@ -1303,7 +1303,7 @@
       "settings": {
         "media_position": "right",
         "media_width": "medium",
-        "media_height": "60svh",
+        "media_height": "auto",
         "section_width": "page-width",
         "extend_media": false,
         "background_color": "#3d6b35",
@@ -2477,7 +2477,7 @@
       "settings": {
         "media_position": "right",
         "media_width": "medium",
-        "media_height": "60svh",
+        "media_height": "auto",
         "section_width": "page-width",
         "extend_media": false,
         "background_color": "#1c1c1a",
