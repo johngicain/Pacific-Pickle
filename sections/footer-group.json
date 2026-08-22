@@ -157,6 +157,7 @@
         "section_width": "page-width",
         "gap": 16,
         "background_color": "#e8821a",
+        "link_hover_color": "",
         "padding-block-start": 70,
         "padding-block-end": 70
       }
@@ -482,6 +483,81 @@
                 "background": false,
                 "background_color": "#00000026",
                 "corner_radius": 0,
+                "padding-block-start": 10,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "icon_with_text_nENRNe": {
+              "type": "icon-with-text",
+              "name": "t:names.icon_with_text",
+              "settings": {
+                "icon": "phone",
+                "width": 24,
+                "icon_color": "{{ settings.color_palette.color3 }}",
+                "heading": "",
+                "heading_preset": "paragraph",
+                "text": "<p><a href=\"tel:+18057651779\">(805) 765-1779</a></p>",
+                "font_size": "0.875rem",
+                "text_color": "#999999",
+                "icon_position": "left",
+                "vertical_alignment": "center",
+                "horizontal_alignment": "flex-start",
+                "gap": 12,
+                "link": "",
+                "open_in_new_tab": false,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "icon_with_text_f6LMPG": {
+              "type": "icon-with-text",
+              "name": "t:names.icon_with_text",
+              "settings": {
+                "icon": "envelope",
+                "width": 24,
+                "icon_color": "{{ settings.color_palette.color3 }}",
+                "heading": "",
+                "heading_preset": "paragraph",
+                "text": "<p><a href=\"mailto:hello@pacificpickleworks.com\">hello@pacificpickleworks.com</a></p>",
+                "font_size": "0.875rem",
+                "text_color": "#999999",
+                "icon_position": "left",
+                "vertical_alignment": "center",
+                "horizontal_alignment": "flex-start",
+                "gap": 12,
+                "link": "",
+                "open_in_new_tab": false,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "icon_with_text_TjTgYT": {
+              "type": "icon-with-text",
+              "name": "t:names.icon_with_text",
+              "settings": {
+                "icon": "map_pin",
+                "width": 24,
+                "icon_color": "{{ settings.color_palette.color3 }}",
+                "heading": "",
+                "heading_preset": "paragraph",
+                "text": "<p>Santa Barbara, CA 93101</p>",
+                "font_size": "0.875rem",
+                "text_color": "#999999",
+                "icon_position": "left",
+                "vertical_alignment": "center",
+                "horizontal_alignment": "flex-start",
+                "gap": 12,
+                "link": "",
+                "open_in_new_tab": false,
                 "padding-block-start": 0,
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
@@ -491,6 +567,7 @@
             },
             "contact_details": {
               "type": "text",
+              "disabled": true,
               "settings": {
                 "text": "<p><a href=\"tel:+18057651779\">(805) 765-1779</a><br/><a href=\"mailto:hello@pacificpickleworks.com\">hello@pacificpickleworks.com</a><br/>Santa Barbara, CA 93101</p>",
                 "width": "100%",
@@ -519,6 +596,9 @@
           },
           "block_order": [
             "contact_heading",
+            "icon_with_text_nENRNe",
+            "icon_with_text_f6LMPG",
+            "icon_with_text_TjTgYT",
             "contact_details"
           ]
         }
@@ -534,6 +614,7 @@
         "section_width": "page-width",
         "gap": 40,
         "background_color": "#1c1c1a",
+        "link_hover_color": "",
         "padding-block-start": 60,
         "padding-block-end": 60
       }
