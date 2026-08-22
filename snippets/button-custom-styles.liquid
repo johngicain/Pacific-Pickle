@@ -46,7 +46,6 @@
     %}
   {%- endcapture -%}
   {%- assign hover_parts = hover_resolved | strip | split: '||' -%}
-  {%- assign effective_hover_bg = hover_parts[0] -%}
   {%- assign effective_hover_text = hover_parts[1] -%}
   {%- assign effective_hover_border = hover_parts[2] -%}
   {% style %}

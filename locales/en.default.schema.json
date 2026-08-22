@@ -147,6 +147,7 @@
     "swatches": "Swatches",
     "submenu_feature": "Submenu feature",
     // Section header for text positioning settings
+    "tag": "Tag",
     "text": "Text",
     "text_presets": "Text presets",
     "thumbnails": "Thumbnails",
@@ -896,6 +897,8 @@
     "gradient_direction": "Gradient direction",
     "heading": "Heading",
     "heading_preset": "Heading preset",
+    "subheading": "Subheading",
+    "subheading_preset": "Subheading preset",
     "headings": "Headings",
     "height": "Height",
     "hide_logo_on_home_page": "Hide logo on home page",

@@ -9,6 +9,8 @@
   assign block_settings = block.settings
   assign show_image = false
   assign show_video = false
+  assign show_tag = false
+  assign tag_id = block.id | append: '-tag'
 
   if block_settings.background_color != blank
     render 'contrast-override', background_color: block_settings.background_color, section_id: block.id
@@ -21,6 +23,14 @@
   if block_settings.media_type == 'video'
     assign show_video = true
   endif
+
+  if block_settings.tag_heading != blank or block_settings.tag_subheading != blank
+    assign show_tag = true
+  endif
+
+  if show_tag and block_settings.tag_background_color != blank
+    render 'contrast-override', background_color: block_settings.tag_background_color, border_color: block_settings.tag_border_color, section_id: tag_id, preset: 'ui'
+  endif
 %}
 
 <div
@@ -31,6 +41,7 @@
     {% if show_image and block_settings.image_position == 'contain' or show_video and block_settings.video_position == 'contain' %}
       media-block--contain
     {% endif %}
+    {% if show_tag %}media-block--has-tag{% endif %}
   "
   style="
     {% render 'border-override', settings: block_settings %}
@@ -77,6 +88,37 @@
       {{ 'hero-apparel-3' | placeholder_svg_tag }}
     </div>
   {%- endif -%}
+
+  {%- if show_tag -%}
+    <div
+      class="
+        media-block__tag
+        media-block__tag--{{ block_settings.tag_position }}
+        {% if block_settings.tag_background_color != blank %}color-custom-{{ tag_id }}{% endif %}
+      "
+      style="
+        --media-block-tag-border-width: {% if block_settings.tag_border == 'solid' %}{{ block_settings.tag_border_width }}px{% else %}0px{% endif %};
+        --media-block-tag-border-style: {{ block_settings.tag_border }};
+        --media-block-tag-border-color: {% if block_settings.tag_border_color != blank %}{{ block_settings.tag_border_color }}{% else %}rgb(var(--color-border-rgb) / {{ block_settings.tag_border_opacity | divided_by: 100.0 }}){% endif %};
+        --media-block-tag-border-radius: {{ block_settings.tag_border_radius }}px;
+        --media-block-tag-padding-block-start: {{ block_settings.tag_padding_block_start }}px;
+        --media-block-tag-padding-block-end: {{ block_settings.tag_padding_block_end }}px;
+        --media-block-tag-padding-inline-start: {{ block_settings.tag_padding_inline_start }}px;
+        --media-block-tag-padding-inline-end: {{ block_settings.tag_padding_inline_end }}px;
+      "
+    >
+      {%- if block_settings.tag_heading != blank -%}
+        <p class="media-block__tag-heading {{ block_settings.tag_heading_preset }}">
+          {{ block_settings.tag_heading }}
+        </p>
+      {%- endif -%}
+      {%- if block_settings.tag_subheading != blank -%}
+        <p class="media-block__tag-subheading {{ block_settings.tag_subheading_preset }}">
+          {{ block_settings.tag_subheading }}
+        </p>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
 </div>
 
 {% stylesheet %}
@@ -87,6 +129,59 @@
     @media screen and (min-width: 750px) {
       min-height: var(--media-height);
     }
+  }
+
+  .media-block.media-block--has-tag {
+    overflow: visible !important;
+    z-index: 1;
+  }
+
+  .media-block--has-tag .media-block__media {
+    border-radius: var(--border-radius, 0);
+  }
+
+  .media-block__tag {
+    position: absolute;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    width: max-content;
+    max-width: min(12rem, 80%);
+    border-width: var(--media-block-tag-border-width, 0);
+    border-style: var(--media-block-tag-border-style, none);
+    border-color: var(--media-block-tag-border-color, transparent);
+    border-radius: var(--media-block-tag-border-radius, 0);
+    padding-block: var(--media-block-tag-padding-block-start, 0) var(--media-block-tag-padding-block-end, 0);
+    padding-inline: var(--media-block-tag-padding-inline-start, 0) var(--media-block-tag-padding-inline-end, 0);
+  }
+
+  .media-block__tag--top-left {
+    top: 0;
+    left: 0;
+    translate: -60% -60%;
+  }
+
+  .media-block__tag--top-right {
+    top: 0;
+    right: 0;
+    translate: 60% -60%;
+  }
+
+  .media-block__tag--bottom-left {
+    bottom: 0;
+    left: 0;
+    translate: -60% 60%;
+  }
+
+  .media-block__tag--bottom-right {
+    bottom: 0;
+    right: 0;
+    translate: 60% 60%;
+  }
+
+  .media-block__tag-heading,
+  .media-block__tag-subheading {
+    margin: 0;
   }
 
   .media-block__media {
