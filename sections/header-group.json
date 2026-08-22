@@ -85,11 +85,8 @@
         "logo_position": "left",
         "menu_position": "center",
         "menu_row": "top",
-<<<<<<< HEAD
-        "show_account": true,
-=======
->>>>>>> d821f2ff58e28c17622a9a17be5ce29f6b7cd6c0
         "customer_account_menu": "customer-account-main-menu",
+        "show_account": true,
         "show_search": false,
         "search_position": "right",
         "search_row": "top",

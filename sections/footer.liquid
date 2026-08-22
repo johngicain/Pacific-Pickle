@@ -89,6 +89,11 @@
     color: var(--color);
   }
 
+  .footer-content a:not(.button, .button-secondary, .button-custom),
+  .footer-content a:not(.button, .button-secondary, .button-custom):is(:hover, :focus-visible) {
+    text-decoration: none;
+  }
+
   .section .footer-content.footer-content--custom-link-hover a:not(.button, .button-secondary, .button-custom):is(:hover, :focus-visible),
   .section .footer-content.footer-content--custom-link-hover .button-unstyled:is(:hover, :focus-visible) {
     color: var(--footer-link-hover-color);
