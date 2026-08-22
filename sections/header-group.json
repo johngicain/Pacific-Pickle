@@ -102,6 +102,8 @@
         "enable_sticky_header": "always",
         "background_color_sticky": "{{ settings.color_palette.foreground }}",
         "text_color_sticky": "#FFFFFF",
+        "border_width_sticky": 3,
+        "bottom_border_color_sticky": "{{ settings.color_palette.color3 }}",
         "divider_width": 0,
         "divider_size": "page-width",
         "divider_color": "",
