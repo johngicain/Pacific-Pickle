@@ -10,6 +10,14 @@
   if section.settings.media_position == 'right'
     assign media_class_modifier = media_class_modifier | append: ' media-with-content--media-right'
   endif
+
+  if section.settings.media_height == 'semi-landscape' or section.settings.media_height == 'landscape'
+    assign media_class_modifier = media_class_modifier | append: ' media-with-content--aspect-ratio'
+  endif
+
+  if section.settings.tablet_alignment == 'flex-start'
+    assign media_class_modifier = media_class_modifier | append: ' media-with-content--tablet-align-top'
+  endif
 %}
 
 {% liquid
@@ -37,6 +45,14 @@
         --media-height-mobile: 70svh;
       {% when '100svh' %}
         --media-height-mobile: 100svh;
+      {% when 'semi-landscape' %}
+        --media-height: auto;
+        --media-aspect-ratio: 4 / 3;
+        --media-height-mobile: auto;
+      {% when 'landscape' %}
+        --media-height: auto;
+        --media-aspect-ratio: 16 / 9;
+        --media-height-mobile: auto;
       {% else %}
         --media-height-mobile: auto;
     {% endcase -%}
@@ -44,6 +60,8 @@
     {% if section.settings.media_height != 'auto' %}
      --section-preview-height: 600px;
      {% endif %}
+    --desktop-alignment: {{ section.settings.desktop_alignment }};
+    --tablet-alignment: {{ section.settings.tablet_alignment }};
   "
   {% if request.visual_preview_mode %}
     data-shopify-visual-preview
@@ -161,9 +179,14 @@
 
     @media screen and (min-width: 750px) {
       --media-with-content-grid-columns: 3.5fr 2.5fr;
+      align-items: var(--tablet-alignment);
 
       /* Default desktop layout is wide media, on the left, in full page section */
       grid-template-areas: 'media content';
+    }
+
+    @media screen and (min-width: 990px) {
+      align-items: var(--desktop-alignment);
     }
 
     .media-block {
@@ -202,6 +225,23 @@
     --hero-min-height: 500px;
 
     min-height: 500px;
+  }
+
+  .media-with-content--aspect-ratio .media-block {
+    aspect-ratio: var(--media-aspect-ratio);
+    min-height: 0;
+
+    .media-block__media {
+      height: 100%;
+      position: absolute;
+      inset: 0;
+    }
+  }
+
+  .media-with-content--tablet-align-top .media-block {
+    @media screen and (min-width: 750px) and (max-width: 989px) {
+      margin-top: var(--page-margin);
+    }
   }
 {% endstylesheet %}
 
@@ -272,9 +312,57 @@
         {
           "value": "100svh",
           "label": "t:options.full_screen"
+        },
+        {
+          "value": "semi-landscape",
+          "label": "t:options.semi_landscape"
+        },
+        {
+          "value": "landscape",
+          "label": "t:options.landscape"
         }
       ],
       "default": "80svh"
+    },
+    {
+      "type": "select",
+      "id": "desktop_alignment",
+      "label": "t:settings.desktop_alignment",
+      "options": [
+        {
+          "value": "flex-start",
+          "label": "t:options.top"
+        },
+        {
+          "value": "center",
+          "label": "t:options.middle"
+        },
+        {
+          "value": "flex-end",
+          "label": "t:options.bottom"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "select",
+      "id": "tablet_alignment",
+      "label": "t:settings.tablet_alignment",
+      "options": [
+        {
+          "value": "flex-start",
+          "label": "t:options.top"
+        },
+        {
+          "value": "center",
+          "label": "t:options.middle"
+        },
+        {
+          "value": "flex-end",
+          "label": "t:options.bottom"
+        }
+      ],
+      "default": "center"
     },
     {
       "type": "select",

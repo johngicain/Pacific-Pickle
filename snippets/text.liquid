@@ -50,6 +50,9 @@
     if block_settings.text_shadow
       echo ' text-block--text-shadow '
     endif
+    if block_settings.font == 'var(--font-heading--family)' and block_settings.bold_color != blank
+      echo ' text-block--bold-color '
+    endif
     if is_rte
       echo ' rte '
     endif
@@ -82,6 +85,10 @@
     {% if block_settings.text_shadow %}
       --text-shadow-color: {{ block_settings.text_shadow_color | default: '#00000080' }};
     {% endif %}
+    {% if block_settings.font == 'var(--font-heading--family)' and block_settings.bold_color != blank %}
+      --bold-color: {{ block_settings.bold_color }};
+      --font-weight: 400;
+    {% endif %}
   "
 
   {{ block.shopify_attributes }}
@@ -106,6 +113,20 @@
   <{{ element }} {{ attributes | strip_newlines | strip }}>
     {{ block.settings.text }}
   </{{ element }}>
+{% endif %}
+
+{% if block_settings.font == 'var(--font-heading--family)' and block_settings.bold_color != blank %}
+  {% style %}
+    {% assign heading_normal_font = settings.type_heading_font | font_modify: 'weight', 'normal' %}
+    {% if heading_normal_font %}
+      {{ heading_normal_font | font_face: font_display: 'swap' }}
+    {% endif %}
+    .text-block--{{ block.id }},
+    .text-block--{{ block.id }} > *,
+    .text-block--{{ block.id }} :is(h1, h2, h3, h4, h5, h6, p, strong, b) {
+      font-weight: 400 !important;
+    }
+  {% endstyle %}
 {% endif %}
 
 {% stylesheet %}
@@ -151,5 +172,16 @@
 
   .text-block--text-shadow {
     text-shadow: 0 1px 2px var(--text-shadow-color);
+  }
+
+  .text-block.custom-typography.text-block--bold-color,
+  .text-block.custom-typography.text-block--bold-color > *,
+  .text-block.custom-typography.text-block--bold-color :is(h1, h2, h3, h4, h5, h6, p, strong, b) {
+    font-weight: 400;
+  }
+
+  .text-block.custom-typography.text-block--bold-color :is(strong, b) {
+    color: var(--bold-color);
+    font-weight: 400;
   }
 {% endstylesheet %}

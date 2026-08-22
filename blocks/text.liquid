@@ -300,6 +300,13 @@
       "placeholder": "t:settings.default"
     },
     {
+      "type": "color",
+      "id": "bold_color",
+      "label": "t:settings.bold_color",
+      "placeholder": "t:settings.default",
+      "visible_if": "{{ block.settings.type_preset == 'custom' and block.settings.font == 'var(--font-heading--family)' }}"
+    },
+    {
       "type": "checkbox",
       "id": "text_shadow",
       "label": "t:settings.text_shadow",

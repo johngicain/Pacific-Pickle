@@ -31,11 +31,22 @@
     size-style
     {{ class }}
     {% if background_color != blank %} color-custom-{{ block_id }}{% endif %}
+    {% if settings.border_left > 0 %} group-block--border-left{% endif %}
   "
   style="
     {% render 'border-override', settings: settings %}
     {% render 'spacing-style', settings: settings %}
     {% render 'size-style', settings: settings %}
+    {% if settings.border_left > 0 %}
+      --border-left-width: {{ settings.border_left }}px;
+      --border-left-color:
+      {%- if settings.border_left_color != blank -%}
+        rgb({{ settings.border_left_color.rgba }})
+      {%- else -%}
+        rgb(var(--color-border-rgb))
+      {%- endif -%}
+      ;
+    {% endif %}
     {{ style }}
   "
   {{ shopify_attributes }}
@@ -80,6 +91,12 @@
 </div>
 
 {% stylesheet %}
+  .group-block.group-block--border-left {
+    border-inline-start-width: var(--border-left-width);
+    border-inline-start-style: solid;
+    border-inline-start-color: var(--border-left-color);
+  }
+
   .group-block__link {
     position: absolute;
     inset: 0;

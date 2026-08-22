@@ -1194,7 +1194,7 @@ summary:hover {
 
 .layout-panel-flex {
   display: flex;
-  gap: var(--gap);
+  gap: var(--gap-mobile, var(--gap));
   height: 100%;
 }
 
@@ -1250,6 +1250,7 @@ summary:hover {
 @media screen and (min-width: 750px) {
   .layout-panel-flex {
     flex-direction: var(--flex-direction);
+    gap: var(--gap);
   }
 }
 
