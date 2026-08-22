@@ -614,7 +614,7 @@
         "section_width": "page-width",
         "gap": 40,
         "background_color": "#1c1c1a",
-        "link_hover_color": "",
+        "link_hover_color": "{{ settings.color_palette.color3 }}",
         "padding-block-start": 60,
         "padding-block-end": 60
       }
