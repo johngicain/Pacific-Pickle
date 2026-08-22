@@ -570,9 +570,16 @@
     --button-text-case-primary: {{ settings.button_text_case_primary }};
     --button-text-case-secondary: {{ settings.button_text_case_secondary }};
 
-    --button-box-shadow-offset: 5px 5px 0px 0px var(--color-foreground);
-    --button-box-shadow-primary: {% if settings.primary_button_box_shadow %}var(--button-box-shadow-offset){% else %}none{% endif %};
-    --button-box-shadow-secondary: {% if settings.secondary_button_box_shadow %}var(--button-box-shadow-offset){% else %}none{% endif %};
+    --button-shadow-size: 5px;
+    --button-shadow-size-hover: 2px;
+    --button-shadow-shift: 3px;
+    --button-shadow-color: var(--color-foreground);
+    --button-box-shadow-primary-rest: {% if settings.primary_button_box_shadow %}var(--button-shadow-size){% else %}0px{% endif %};
+    --button-box-shadow-primary-hover: {% if settings.primary_button_box_shadow %}var(--button-shadow-size-hover){% else %}0px{% endif %};
+    --button-box-shadow-primary-shift: {% if settings.primary_button_box_shadow %}var(--button-shadow-shift){% else %}0px{% endif %};
+    --button-box-shadow-secondary-rest: {% if settings.secondary_button_box_shadow %}var(--button-shadow-size){% else %}0px{% endif %};
+    --button-box-shadow-secondary-hover: {% if settings.secondary_button_box_shadow %}var(--button-shadow-size-hover){% else %}0px{% endif %};
+    --button-box-shadow-secondary-shift: {% if settings.secondary_button_box_shadow %}var(--button-shadow-shift){% else %}0px{% endif %};
 
     /* Borders */
     --border-color: rgb(var(--color-border-rgb) / var(--opacity-50));

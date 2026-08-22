@@ -9,7 +9,7 @@ body {
   flex-direction: column;
   margin: 0;
   min-height: 100svh;
-  font-variation-settings: 'slnt' 0;
+  font-variation-settings: "slnt" 0;
 }
 
 :root {
@@ -25,7 +25,8 @@ body {
 html {
   /* Firefox */
   scrollbar-width: thin;
-  scrollbar-color: rgb(var(--color-foreground-rgb) / var(--opacity-40)) var(--color-background);
+  scrollbar-color: rgb(var(--color-foreground-rgb) / var(--opacity-40))
+    var(--color-background);
   scroll-behavior: smooth;
 }
 
@@ -46,7 +47,8 @@ html[scroll-lock] .page-wrapper {
   display: flex;
   flex-direction: column;
   min-height: 100dvh;
-  transition: margin-right var(--animation-speed) var(--animation-timing-fade-out);
+  transition: margin-right var(--animation-speed)
+    var(--animation-timing-fade-out);
 }
 
 @media (min-width: 990px) {
@@ -55,7 +57,8 @@ html[scroll-lock] .page-wrapper {
     overflow-y: auto;
     scroll-behavior: smooth;
     scrollbar-width: thin;
-    scrollbar-color: rgb(var(--color-foreground-rgb) / var(--opacity-40)) var(--color-background);
+    scrollbar-color: rgb(var(--color-foreground-rgb) / var(--opacity-40))
+      var(--color-background);
   }
 
   .page-wrapper--drawer-open shopify-account::part(dialog) {
@@ -100,7 +103,8 @@ select {
 .predictive-search-results__card--product,
 .predictive-search-results__card {
   position: relative;
-  transition: transform var(--hover-transition-duration) var(--hover-transition-timing),
+  transition:
+    transform var(--hover-transition-duration) var(--hover-transition-timing),
     box-shadow var(--hover-transition-duration) var(--hover-transition-timing);
   z-index: var(--layer-flat);
 }
@@ -183,11 +187,13 @@ p:empty {
     pointer-events: none;
   }
 
-  html:active-view-transition-type(page-navigation) main[data-page-transition-enabled='true'] {
+  html:active-view-transition-type(page-navigation)
+    main[data-page-transition-enabled="true"] {
     view-transition-name: main-content;
   }
 
-  html:active-view-transition-type(page-navigation) main[data-product-transition='true'][data-template*='product'] {
+  html:active-view-transition-type(page-navigation)
+    main[data-product-transition="true"][data-template*="product"] {
     view-transition-name: none;
   }
 
@@ -200,11 +206,11 @@ p:empty {
   }
 
   html:active-view-transition-type(product-image-transition) {
-    [data-view-transition-type='product-image-transition'] {
+    [data-view-transition-type="product-image-transition"] {
       view-transition-name: product-image-transition;
     }
 
-    [data-view-transition-type='product-details'] {
+    [data-view-transition-type="product-details"] {
       view-transition-name: product-details;
     }
   }
@@ -311,18 +317,22 @@ p:empty {
     calc(100% - var(--page-margin) * 2)
   );
   --full-page-grid-margin: minmax(var(--page-margin), 1fr);
-  --full-page-grid-with-margins: var(--full-page-grid-margin) var(--full-page-grid-central-column-width)
-    var(--full-page-grid-margin);
+  --full-page-grid-with-margins: var(--full-page-grid-margin)
+    var(--full-page-grid-central-column-width) var(--full-page-grid-margin);
 
   /* Utility variable gives the grid's first column width. Provides an offset width for components like carousels */
   --util-page-margin-offset: max(
     var(--page-margin),
-    calc((100% - min(var(--page-content-width), 100% - var(--page-margin) * 2)) / 2)
+    calc(
+      (100% - min(var(--page-content-width), 100% - var(--page-margin) * 2)) / 2
+    )
   );
 
   /* Offset for full-width sections to account for the page margin,
   used for Marquee — note that --util-page-margin-offset doesn't work here */
-  --full-page-margin-inline-offset: calc(((100vw - var(--full-page-grid-central-column-width)) / 2) * -1);
+  --full-page-margin-inline-offset: calc(
+    ((100vw - var(--full-page-grid-central-column-width)) / 2) * -1
+  );
 
   width: 100%;
 
@@ -332,7 +342,7 @@ p:empty {
   /* Set up the grid */
   display: grid;
   grid-template-columns: var(--full-page-grid-with-margins);
-  min-height: var(--section-min-height, 'auto');
+  min-height: var(--section-min-height, "auto");
 }
 
 /* Place all direct children in the center column by default */
@@ -350,7 +360,7 @@ p:empty {
 }
 
 .shopify-section:not(.header-section) .section-background {
-  content: '';
+  content: "";
   position: absolute;
   inset: 0;
   z-index: var(--layer-section-background);
@@ -410,7 +420,9 @@ p:empty {
 }
 
 .section-content-wrapper.section-content-wrapper {
-  min-height: calc(var(--section-min-height, 'auto') - var(--section-height-offset, 0px));
+  min-height: calc(
+    var(--section-min-height, "auto") - var(--section-height-offset, 0px)
+  );
   position: relative;
   width: 100%;
   height: 100%;
@@ -481,8 +493,11 @@ p:empty {
   .grid {
     display: grid;
     gap: 0;
-    grid-template-columns: var(--margin-4xl) repeat(var(--centered-column-number), minmax(0, 1fr)) var(--margin-4xl);
-    grid-template-areas: 'column-0 column-1 column-2 column-3 column-4 column-5 column-6 column-7 column-8 column-9 column-10 column-11 column-12 column-13';
+    grid-template-columns: var(--margin-4xl) repeat(
+        var(--centered-column-number),
+        minmax(0, 1fr)
+      ) var(--margin-4xl);
+    grid-template-areas: "column-0 column-1 column-2 column-3 column-4 column-5 column-6 column-7 column-8 column-9 column-10 column-11 column-12 column-13";
   }
 }
 
@@ -491,7 +506,13 @@ p:empty {
     grid-template-columns:
       1fr repeat(
         var(--centered-column-number),
-        minmax(0, calc((var(--page-width) - var(--page-margin) * 2) / var(--centered-column-number)))
+        minmax(
+          0,
+          calc(
+            (var(--page-width) - var(--page-margin) * 2) /
+              var(--centered-column-number)
+          )
+        )
       )
       1fr;
   }
@@ -609,7 +630,7 @@ p:empty {
   fill: currentColor;
 }
 
-[data-placeholder='true'] * {
+[data-placeholder="true"] * {
   cursor: default;
 }
 
@@ -791,7 +812,8 @@ a {
   text-decoration-color: transparent;
   text-decoration-thickness: 0.075em;
   text-underline-offset: 0.125em;
-  transition: text-decoration-color var(--animation-speed) var(--animation-easing),
+  transition:
+    text-decoration-color var(--animation-speed) var(--animation-easing),
     color var(--animation-speed) var(--animation-easing);
 }
 
@@ -801,7 +823,9 @@ a {
 
 /* Add underline to text using our paragraph styles only. */
 p:not(.h1, .h2, .h3, .h4, .h5, .h6) a:where(:not(.button, .button-secondary)),
-.rte :is(p, ul, ol, table):not(.h1, .h2, .h3, .h4, .h5, .h6) a:where(:not(.button, .button-secondary)) {
+.rte
+  :is(p, ul, ol, table):not(.h1, .h2, .h3, .h4, .h5, .h6)
+  a:where(:not(.button, .button-secondary)) {
   text-decoration-color: currentcolor;
 
   &:hover {
@@ -822,11 +846,37 @@ summary::-webkit-details-marker {
 }
 
 /* Buttons */
+@property --button-color {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: transparent;
+}
+
+@property --button-background-color {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: transparent;
+}
+
+@property --button-border-color {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: transparent;
+}
+
+@property --button-shadow-offset {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0px;
+}
+
 .button,
 .button-secondary,
 .button-custom,
 button.shopify-payment-button__button--unbranded {
   --text-align: center;
+  --button-shadow-offset: 0px;
+  --button-hover-shift: 0px;
 
   display: grid;
   align-content: center;
@@ -842,12 +892,25 @@ button.shopify-payment-button__button--unbranded {
   font-size: var(--button-font-size, var(--font-paragraph--size));
   line-height: var(--font-paragraph--line-height);
   margin-block: 0;
-  transition: color var(--animation-speed) var(--animation-easing),
-    box-shadow var(--animation-speed) var(--animation-easing),
-    background-color var(--animation-speed) var(--animation-easing);
+  translate: 0;
+  transition:
+    color var(--hover-transition-duration) var(--hover-transition-timing),
+    background-color var(--hover-transition-duration) var(--hover-transition-timing),
+    box-shadow var(--hover-transition-duration) var(--hover-transition-timing),
+    translate var(--hover-transition-duration) var(--hover-transition-timing),
+    --button-color var(--hover-transition-duration) var(--hover-transition-timing),
+    --button-background-color var(--hover-transition-duration)
+      var(--hover-transition-timing),
+    --button-border-color var(--hover-transition-duration)
+      var(--hover-transition-timing),
+    --button-shadow-offset var(--hover-transition-duration)
+      var(--hover-transition-timing);
   cursor: pointer;
   width: fit-content;
-  box-shadow: inset 0 0 0 var(--button-border-width) var(--button-border-color), var(--button-box-shadow, none);
+  box-shadow:
+    inset 0 0 0 var(--button-border-width) var(--button-border-color),
+    var(--button-shadow-offset) var(--button-shadow-offset) 0 0
+      var(--button-shadow-color);
   padding-block: var(--button-padding-block);
   padding-inline: var(--button-padding-inline);
 }
@@ -859,7 +922,10 @@ button.shopify-payment-button__button--unbranded {
 }
 
 .button:not(.button-secondary, .button-unstyled) {
-  outline-color: var(--button-focus-outline-color, var(--button-background-color));
+  outline-color: var(
+    --button-focus-outline-color,
+    var(--button-background-color)
+  );
 }
 
 .button-secondary {
@@ -874,7 +940,7 @@ button.shopify-payment-button__button--unbranded {
 }
 
 textarea,
-input:not([type='checkbox'], [type='radio']) {
+input:not([type="checkbox"], [type="radio"]) {
   background-color: var(--color-input-background);
   border-color: var(--color-input-border);
 }
@@ -894,8 +960,8 @@ input:not(:placeholder-shown)::placeholder {
   display: none;
 }
 
-.button[aria-disabled='true'],
-.button-secondary[aria-disabled='true'],
+.button[aria-disabled="true"],
+.button-secondary[aria-disabled="true"],
 .button:disabled {
   opacity: 0.5;
   cursor: not-allowed;
@@ -908,15 +974,17 @@ button.shopify-payment-button__button--unbranded {
   --button-border-color: var(--color-primary-button-border);
   --button-border-width: var(--style-border-width-primary);
   --button-focus-outline-color: var(--color-primary-button-focus-outline);
-  --button-box-shadow: var(--button-box-shadow-primary);
+  --button-shadow-offset: var(--button-box-shadow-primary-rest);
+  --button-hover-shift: var(--button-box-shadow-primary-shift);
   --button-font-size: var(--button-font-size-primary);
 }
 
 .button:hover,
 button.shopify-payment-button__button--unbranded:hover:not([disabled]) {
   --button-color: var(--color-primary-button-hover-text);
-  --button-background-color: var(--color-primary-button-hover-background);
   --button-border-color: var(--color-primary-button-hover-border);
+  --button-shadow-offset: var(--button-box-shadow-primary-hover);
+  translate: var(--button-hover-shift) var(--button-hover-shift);
 }
 
 .button-secondary {
@@ -924,14 +992,16 @@ button.shopify-payment-button__button--unbranded:hover:not([disabled]) {
   --button-background-color: var(--color-secondary-button-background);
   --button-border-color: var(--color-secondary-button-border);
   --button-border-width: var(--style-border-width-secondary);
-  --button-box-shadow: var(--button-box-shadow-secondary);
+  --button-shadow-offset: var(--button-box-shadow-secondary-rest);
+  --button-hover-shift: var(--button-box-shadow-secondary-shift);
   --button-font-size: var(--button-font-size-secondary);
 }
 
 .button-secondary:hover {
   --button-color: var(--color-secondary-button-hover-text);
-  --button-background-color: var(--color-secondary-button-hover-background);
   --button-border-color: var(--color-secondary-button-hover-border);
+  --button-shadow-offset: var(--button-box-shadow-secondary-hover);
+  translate: var(--button-hover-shift) var(--button-hover-shift);
 }
 
 .button-custom {
@@ -940,23 +1010,32 @@ button.shopify-payment-button__button--unbranded:hover:not([disabled]) {
   --button-border-color: var(--color-primary-button-border);
   --button-border-width: var(--style-border-width-secondary);
   --button-focus-outline-color: var(--color-primary-button-focus-outline);
-  --button-box-shadow: none;
+  --button-shadow-offset: 0px;
+  --button-hover-shift: 0px;
   --button-font-size: var(--button-font-size-primary);
 
   font-family: var(--button-font-family-primary);
   text-transform: var(--button-text-case-primary);
   border-radius: var(--style-border-radius-buttons-primary);
-  outline-color: var(--button-focus-outline-color, var(--button-background-color));
+  outline-color: var(
+    --button-focus-outline-color,
+    var(--button-background-color)
+  );
 }
 
 .button--box-shadow {
-  --button-box-shadow: var(--button-box-shadow-offset);
+  --button-shadow-offset: var(--button-shadow-size);
+  --button-hover-shift: var(--button-shadow-shift);
+}
+
+.button--box-shadow:hover {
+  --button-shadow-offset: var(--button-shadow-size-hover);
 }
 
 .button-custom:hover {
   --button-color: var(--color-primary-button-hover-text);
-  --button-background-color: var(--color-primary-button-hover-background);
   --button-border-color: var(--color-primary-button-hover-border);
+  translate: var(--button-hover-shift) var(--button-hover-shift);
 }
 
 /* Needed to override the default Shopify styles */
@@ -965,6 +1044,9 @@ button.shopify-payment-button__button--unbranded:hover:not([disabled]) {
 }
 
 .button-unstyled {
+  --button-shadow-offset: 0px;
+  --button-hover-shift: 0px;
+
   display: block;
   padding: 0;
   background-color: inherit;
@@ -976,10 +1058,24 @@ button.shopify-payment-button__button--unbranded:hover:not([disabled]) {
   font-family: var(--font-paragraph--family);
   font-style: var(--font-paragraph--style);
   font-size: var(--button-font-size, var(--font-paragraph--size));
+  translate: 0;
+  transition: color var(--hover-transition-duration) var(--hover-transition-timing);
 }
 
 .button-unstyled:hover {
   background-color: inherit;
+  translate: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .button,
+  .button-secondary,
+  .button-custom,
+  .button--box-shadow,
+  button.shopify-payment-button__button--unbranded,
+  .button-unstyled {
+    --button-hover-shift: 0px;
+  }
 }
 
 /* Default hover dim for link-style buttons, scoped via :where() so component-specific
@@ -1050,7 +1146,7 @@ summary:hover {
   }
 
   .close-button:focus-visible::after {
-    content: '';
+    content: "";
     position: absolute;
     inset: calc(-1 * var(--focus-outline-offset));
     border: var(--focus-outline-width) solid currentColor;
@@ -1060,7 +1156,8 @@ summary:hover {
 }
 
 .dialog--closed .close-button {
-  animation: elementSlideOutBottom calc(var(--animation-speed) * 0.5) var(--animation-easing) forwards;
+  animation: elementSlideOutBottom calc(var(--animation-speed) * 0.5)
+    var(--animation-easing) forwards;
 }
 
 .close-button:hover {
@@ -1120,7 +1217,10 @@ summary:hover {
 
 .spacing-style,
 .inherit-spacing {
-  padding-block: calc(var(--padding-block-start) + var(--section-top-offset, 0px)) var(--padding-block-end);
+  padding-block: calc(
+      var(--padding-block-start) + var(--section-top-offset, 0px)
+    )
+    var(--padding-block-end);
   padding-inline: var(--padding-inline-start) var(--padding-inline-end);
   margin-block: var(--margin-block-start) var(--margin-block-end);
   margin-inline: var(--margin-inline-start) var(--margin-inline-end);
@@ -1242,7 +1342,9 @@ summary:hover {
     }
 
     > .group-block--height-fill {
-      height: calc(var(--section-min-height, auto) - var(--section-height-offset, 0px));
+      height: calc(
+        var(--section-min-height, auto) - var(--section-height-offset, 0px)
+      );
     }
   }
 }
@@ -1266,7 +1368,9 @@ summary:hover {
   flex-grow: 1;
   text-align: left;
   border-radius: var(--style-border-radius-inputs);
-  transition: box-shadow var(--animation-speed) ease, background-color var(--animation-speed) ease;
+  transition:
+    box-shadow var(--animation-speed) ease,
+    background-color var(--animation-speed) ease;
   padding: var(--input-padding);
   box-shadow: var(--input-box-shadow);
   background-color: var(--color-input-background);
@@ -1302,7 +1406,9 @@ summary:hover {
   margin-bottom: 0;
   pointer-events: none;
   position: absolute;
-  transition: top var(--animation-speed) ease, font-size var(--animation-speed) ease;
+  transition:
+    top var(--animation-speed) ease,
+    font-size var(--animation-speed) ease;
 }
 
 /* RTE styles */
@@ -1332,7 +1438,8 @@ summary:hover {
     margin-inline: 1.5em 2.3em;
     margin-block: 3.8em;
     padding-inline-start: 0.8em;
-    border-inline-start: 1.5px solid rgb(var(--color-foreground-rgb) / var(--opacity-25));
+    border-inline-start: 1.5px solid
+      rgb(var(--color-foreground-rgb) / var(--opacity-25));
     font-style: italic;
     font-weight: 500;
   }
@@ -1355,7 +1462,8 @@ summary:hover {
   }
 
   tr:has(td) {
-    border-bottom: 1px solid rgb(var(--color-foreground-rgb) / var(--opacity-10));
+    border-bottom: 1px solid
+      rgb(var(--color-foreground-rgb) / var(--opacity-10));
   }
 
   th,
@@ -1371,8 +1479,8 @@ summary:hover {
 }
 
 /* Radio buttons and checkboxes - shared base styles */
-:where(input[type='radio']),
-:where(input[type='checkbox']) {
+:where(input[type="radio"]),
+:where(input[type="checkbox"]) {
   width: var(--checkbox-size);
   height: var(--checkbox-size);
   aspect-ratio: 1;
@@ -1388,19 +1496,21 @@ summary:hover {
 }
 
 /* Radio buttons */
-input[type='radio'] {
+input[type="radio"] {
   border-radius: var(--style-border-radius-50);
   background: transparent;
-  transition: border-color 0.2s ease, background-color 0.2s ease;
+  transition:
+    border-color 0.2s ease,
+    background-color 0.2s ease;
 }
 
-:where(input[type='radio']):checked {
+:where(input[type="radio"]):checked {
   border-color: var(--color-foreground);
   background: var(--color-background);
 }
 
-:where(input[type='radio']):checked::after {
-  content: '';
+:where(input[type="radio"]):checked::after {
+  content: "";
   position: absolute;
   top: 50%;
   left: 50%;
@@ -1412,44 +1522,46 @@ input[type='radio'] {
   transition: background 0.2s ease;
 }
 
-:where(input[type='radio']):disabled {
+:where(input[type="radio"]):disabled {
   border-color: var(--input-disabled-border-color);
   background-color: var(--input-disabled-background-color);
   cursor: not-allowed;
 }
 
-:where(input[type='radio']):disabled:checked::after {
+:where(input[type="radio"]):disabled:checked::after {
   background: var(--input-disabled-background-color);
 }
 
-:where(input[type='radio']):not(:disabled):hover {
+:where(input[type="radio"]):not(:disabled):hover {
   border-color: rgb(var(--color-foreground-rgb) / var(--opacity-40-60));
   background-color: rgb(var(--color-foreground-rgb) / var(--opacity-5));
 }
 
-:where(input[type='radio']):not(:disabled):hover:checked {
+:where(input[type="radio"]):not(:disabled):hover:checked {
   border-color: var(--color-foreground);
   background-color: var(--color-background);
 }
 
-:where(input[type='radio']):not(:disabled):hover:checked::after {
+:where(input[type="radio"]):not(:disabled):hover:checked::after {
   background: rgb(var(--color-foreground-rgb) / var(--opacity-85));
 }
 
 /* Checkboxes */
-:where(input[type='checkbox']) {
+:where(input[type="checkbox"]) {
   border-radius: var(--checkbox-border-radius);
   background-color: var(--color-background);
-  transition: border-color 0.2s ease, background-color 0.2s ease;
+  transition:
+    border-color 0.2s ease,
+    background-color 0.2s ease;
 }
 
-:where(input[type='checkbox']):checked {
+:where(input[type="checkbox"]):checked {
   background-color: var(--color-foreground);
   border-color: var(--color-foreground);
 }
 
-:where(input[type='checkbox']):checked::after {
-  content: '';
+:where(input[type="checkbox"]):checked::after {
+  content: "";
   position: absolute;
   top: 50%;
   left: 50%;
@@ -1463,51 +1575,51 @@ input[type='radio'] {
   mask-position: center;
 }
 
-:where(input[type='checkbox']):not(:disabled):hover {
+:where(input[type="checkbox"]):not(:disabled):hover {
   border-color: rgb(var(--color-foreground-rgb) / var(--opacity-40-60));
   background-color: rgb(var(--color-foreground-rgb) / var(--opacity-5));
 }
 
-:where(input[type='checkbox']):not(:disabled):hover:checked {
+:where(input[type="checkbox"]):not(:disabled):hover:checked {
   border-color: var(--color-foreground);
   background-color: rgb(var(--color-foreground-rgb) / var(--opacity-85));
 }
 
-:where(input[type='checkbox']):disabled {
+:where(input[type="checkbox"]):disabled {
   background-color: var(--input-disabled-background-color);
   border-color: var(--input-disabled-border-color);
   cursor: not-allowed;
 }
 
-:where(input[type='checkbox']):disabled:checked::after {
+:where(input[type="checkbox"]):disabled:checked::after {
   background-color: var(--input-disabled-text-color);
 }
 
 /* Shared styles for radio buttons and checkboxes */
-:where(input[type='radio']) + label,
-:where(input[type='checkbox']) + label {
+:where(input[type="radio"]) + label,
+:where(input[type="checkbox"]) + label {
   display: inline;
   vertical-align: middle;
   cursor: pointer;
 }
 
-:where(input[type='radio']):disabled + label,
-:where(input[type='checkbox']):disabled + label {
+:where(input[type="radio"]):disabled + label,
+:where(input[type="checkbox"]):disabled + label {
   color: var(--input-disabled-text-color);
   cursor: not-allowed;
 }
 
 /* Flexbox for labels wrapping radio buttons or checkboxes */
-label:has(input[type='radio']),
-label:has(input[type='checkbox']) {
+label:has(input[type="radio"]),
+label:has(input[type="checkbox"]) {
   display: inline-flex;
   align-items: center;
   gap: var(--padding-2xs);
   cursor: pointer;
 }
 
-label:has(input[type='radio']:disabled),
-label:has(input[type='checkbox']:disabled) {
+label:has(input[type="radio"]:disabled),
+label:has(input[type="checkbox"]:disabled) {
   cursor: not-allowed;
 }
 
@@ -1713,11 +1825,14 @@ label:has(input[type='checkbox']:disabled) {
 /* Slideshow Arrow Hover Animation - must stay in base.css for proper CSS cascade */
 
 :not(.media-gallery--carousel)
-  > :is(slideshow-component:hover, slideshow-component:focus-within):not(:has(slideshow-controls:hover))
+  > :is(slideshow-component:hover, slideshow-component:focus-within):not(
+    :has(slideshow-controls:hover)
+  )
   > slideshow-container
   > slideshow-arrows
   .slideshow-control {
-  animation: arrowsSlideIn var(--animation-speed) var(--animation-easing) forwards;
+  animation: arrowsSlideIn var(--animation-speed) var(--animation-easing)
+    forwards;
 }
 
 @keyframes arrowsSlideIn {
@@ -1753,8 +1868,12 @@ label:has(input[type='checkbox']:disabled) {
   display: none;
 }
 
-:where(.section-resource-list.section--full-width) product-card[data-product-transition] > .group-block,
-:where(.section-carousel.section--full-width) product-card[data-product-transition] > .group-block {
+:where(.section-resource-list.section--full-width)
+  product-card[data-product-transition]
+  > .group-block,
+:where(.section-carousel.section--full-width)
+  product-card[data-product-transition]
+  > .group-block {
   @media screen and (max-width: 749px) {
     padding-inline: max(var(--padding-xs), var(--padding-inline-start))
       max(var(--padding-xs), var(--padding-inline-end));
@@ -1777,7 +1896,8 @@ label:has(input[type='checkbox']:disabled) {
 }
 
 /* Container styles */
-.section-content-wrapper.section-content-wrapper:where(.layout-panel-flex) .group-block--fill {
+.section-content-wrapper.section-content-wrapper:where(.layout-panel-flex)
+  .group-block--fill {
   flex: 1;
 }
 
@@ -1883,7 +2003,9 @@ label:has(input[type='checkbox']:disabled) {
 main > .shopify-section:first-child .section:not(.disable-section-top-offset) {
   &.spacing-style,
   .spacing-style {
-    --section-top-offset: calc(var(--header-height) * var(--transparent-header-offset-boolean));
+    --section-top-offset: calc(
+      var(--header-height) * var(--transparent-header-offset-boolean)
+    );
 
     /* Any nested sections should not be offset */
     :is(.spacing-style, .inherit-spacing) {
@@ -1893,6 +2015,8 @@ main > .shopify-section:first-child .section:not(.disable-section-top-offset) {
 
   /* Make sticky content immediately stick to the top of the page */
   .sticky-content {
-    margin-top: calc(var(--header-height) * var(--transparent-header-offset-boolean) * -1);
+    margin-top: calc(
+      var(--header-height) * var(--transparent-header-offset-boolean) * -1
+    );
   }
 }
