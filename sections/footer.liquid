@@ -41,6 +41,7 @@
       spacing-style
       {% if has_isolated_grid_item_desktop %}footer-content--isolated-grid-item-desktop{% endif %}
       {% if has_isolated_grid_item_tablet %}footer-content--isolated-grid-item-tablet{% endif %}
+      {% if section.settings.link_hover_color != blank %}footer-content--custom-link-hover{% endif %}
     "
     style="
       {%  render 'spacing-style', settings: section.settings %}
@@ -48,6 +49,9 @@
       --grid-columns: {{ grid_columns }};
       --last-row-count: {{ last_row_count }};
       --tablet-last-row-count: {{ tablet_last_row_count }};
+      {% if section.settings.link_hover_color != blank %}
+        --footer-link-hover-color: {{ section.settings.link_hover_color }};
+      {% endif %}
     "
   >
     {% content_for 'blocks' %}
@@ -83,6 +87,15 @@
 
   .footer-content .menu__heading.custom-color {
     color: var(--color);
+  }
+
+  .section .footer-content.footer-content--custom-link-hover a:not(.button, .button-secondary, .button-custom):is(:hover, :focus-visible),
+  .section .footer-content.footer-content--custom-link-hover .button-unstyled:is(:hover, :focus-visible) {
+    color: var(--footer-link-hover-color);
+    --color: var(--footer-link-hover-color);
+    --color-utilities: var(--footer-link-hover-color);
+    --icon-with-text-text-color: var(--footer-link-hover-color);
+    --icon-with-text-icon-color: var(--footer-link-hover-color);
   }
 
   @media screen and (min-width: 750px) and (max-width: 989px) {
@@ -138,6 +151,9 @@
     },
     {
       "type": "icon"
+    },
+    {
+      "type": "icon-with-text"
     },
     {
       "type": "image"
@@ -199,6 +215,12 @@
       "id": "background_color",
       "label": "t:settings.background_color",
       "default": "{{ settings.color_palette.foreground }}"
+    },
+    {
+      "type": "color",
+      "id": "link_hover_color",
+      "label": "t:settings.primary_hover_color",
+      "placeholder": "t:settings.default"
     },
     {
       "type": "header",

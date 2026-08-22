@@ -103,7 +103,10 @@ class HeaderComponent extends Component {
 
       if (alwaysSticky) {
         this.dataset.stickyState = isIntersecting ? 'inactive' : 'active';
-        if (this.dataset.themeColor) changeMetaThemeColor(this.dataset.themeColor);
+        const themeColor = isIntersecting
+          ? this.dataset.themeColor
+          : this.dataset.themeColorSticky || this.dataset.themeColor;
+        if (themeColor) changeMetaThemeColor(themeColor);
       } else {
         this.#offscreen = !isIntersecting || this.dataset.stickyState === 'active';
       }

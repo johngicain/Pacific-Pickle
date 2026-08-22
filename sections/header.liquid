@@ -47,6 +47,23 @@
     assign transparent_text_contrast = 'var(--palette-lightest)'
   endif
 
+  if sticky
+    assign sticky_background_color = section.settings.background_color_sticky
+    assign sticky_text_color = section.settings.text_color_sticky
+    if sticky_background_color != blank
+      assign sticky_background = true
+    endif
+    if sticky_text_color != blank
+      assign sticky_text = true
+      assign sticky_text_brightness = sticky_text_color | color_brightness
+      if sticky_text_brightness > 128
+        assign sticky_text_contrast = 'var(--palette-darkest)'
+      else
+        assign sticky_text_contrast = 'var(--palette-lightest)'
+      endif
+    endif
+  endif
+
   # Cart bubble colors: custom styles apply in every header state; default
   # mirrors the top row's effective text color, with a contrasting text color.
   if section.settings.bubble_style == 'custom' or section.settings.text_color_top != blank or section.settings.background_color_top != blank
@@ -109,7 +126,13 @@
   {% if section.settings.show_header_cta and section.settings.header_cta_label != blank %}
     <a
       href="{{ section.settings.header_cta_link | default: routes.all_products_collection_url }}"
-      class="button header__cta"
+      class="button header__cta{% if section.settings.header_cta_box_shadow %} button--box-shadow{% endif %}"
+      style="
+        --header-cta-padding-block-start: {{ section.settings.header_cta_padding_block_start }}px;
+        --header-cta-padding-block-end: {{ section.settings.header_cta_padding_block_end }}px;
+        --header-cta-padding-inline-start: {{ section.settings.header_cta_padding_inline_start }}px;
+        --header-cta-padding-inline-end: {{ section.settings.header_cta_padding_inline_end }}px;
+      "
     >
       {{- section.settings.header_cta_label | escape -}}
     </a> 
@@ -215,6 +238,14 @@
 
   if collapse_header_paddings_class
     assign class = class | append: ' ' | append: collapse_header_paddings_class
+  endif
+
+  if sticky_background
+    assign class = class | append: ' header--sticky-background'
+  endif
+
+  if sticky_text
+    assign class = class | append: ' header--sticky-text'
   endif
 
   # Determine transparent background value
@@ -349,6 +380,9 @@
   id="header-component"
   class="{{ class }}"
   data-theme-color="rgb({{ section.settings.background_color_top.rgb | default: settings.page_background_color.rgb }})"
+  {% if sticky_background %}
+    data-theme-color-sticky="rgb({{ sticky_background_color.rgb }})"
+  {% endif %}
   data-bubble-style="{{ section.settings.bubble_style }}"
   {% if transparent %}
     transparent="{{ transparent }}"
@@ -365,12 +399,20 @@
     data-transparent-background="{{ background_transparent_color_value }}"
   {% endif %}
   style="
-    --color-background-top-row: rgba({{ section.settings.background_color_top.rgba | default: settings.page_background_color.rgba }});
-    --color-background-bottom-row: rgba({{ section.settings.background_color_bottom.rgba | default: settings.page_background_color.rgba }});
+    --color-background-top-row-base: rgba({{ section.settings.background_color_top.rgba | default: settings.page_background_color.rgba }});
+    --color-background-bottom-row-base: rgba({{ section.settings.background_color_bottom.rgba | default: settings.page_background_color.rgba }});
     {% if transparent and text_color_transparent != blank %}
       --color-transparent-text: {{ text_color_transparent }};
       --color-transparent-text-rgb: {{ text_color_transparent.rgb }};
       --color-transparent-text-contrast: {{ transparent_text_contrast }};
+    {% endif %}
+    {% if sticky_background %}
+      --color-background-sticky: rgba({{ sticky_background_color.rgba }});
+    {% endif %}
+    {% if sticky_text %}
+      --color-foreground-sticky: {{ sticky_text_color }};
+      --color-foreground-sticky-rgb: {{ sticky_text_color.rgb }};
+      --color-foreground-sticky-contrast: {{ sticky_text_contrast }};
     {% endif %}
     {% if cart_bubble_color_override %}
       --cart-bubble-background: {{ cart_bubble_background }};
@@ -503,6 +545,8 @@
     --header-padding: var(--padding-sm);
     --font-paragraph--line-height: 1;
     --header-content-transition-timing: 0s;
+    --color-background-top-row: var(--color-background-top-row-base);
+    --color-background-bottom-row: var(--color-background-bottom-row-base);
 
     display: block;
     contain: layout style;
@@ -561,6 +605,7 @@
     z-index: var(--layer-overlay);
 
     &[transparent='not-sticky'][data-sticky-state='active'],
+    &[transparent='not-sticky'][sticky='always']:not([data-scroll-direction='none']),
     &:has(.menu-list__list-item > .menu-list__link:not([aria-haspopup]):hover) {
       --header-logo-display: unset;
       --header-logo-inverse-display: unset;
@@ -669,6 +714,43 @@
     view-transition-name: sticky-header;
   }
 
+  .header.header--sticky-background,
+  .header.header--sticky-text {
+    --header-content-transition-timing: var(--animation-speed) var(--animation-easing);
+  }
+
+  .header--sticky-background:is([data-sticky-state='active'], [sticky='always']:not([data-scroll-direction='none'])) {
+    --color-background-top-row: var(--color-background-sticky);
+    --color-background-bottom-row: var(--color-background-sticky);
+
+    .header__underlay-closed {
+      background: var(--color-background-sticky);
+    }
+
+    .header__underlay-open {
+      --color-background-top-row: var(--color-background-sticky);
+      --color-background-bottom-row: var(--color-background-sticky);
+    }
+  }
+
+  .header--sticky-text:is([data-sticky-state='active'], [sticky='always']:not([data-scroll-direction='none']))
+    .header__row {
+    --color: var(--color-foreground-sticky);
+    --color-rgb: var(--color-foreground-sticky-rgb);
+    --color-foreground: var(--color-foreground-sticky);
+    --color-foreground-rgb: var(--color-foreground-sticky-rgb);
+    --color-foreground-muted: rgb(var(--color-foreground-sticky-rgb) / var(--opacity-muted-text));
+    --color-foreground-subdued: rgb(var(--color-foreground-sticky-rgb) / var(--opacity-subdued-text));
+    --color-border: var(--color-foreground-sticky);
+    --color-border-rgb: var(--color-foreground-sticky-rgb);
+  }
+
+  .header--sticky-text:is([data-sticky-state='active'], [sticky='always']:not([data-scroll-direction='none']))[data-bubble-style='default']
+    .header__row {
+    --cart-bubble-background: var(--color-foreground-sticky);
+    --cart-bubble-text: var(--color-foreground-sticky-contrast);
+  }
+
   :active-view-transition-type(empty-cart-drawer) {
     .header[data-sticky-state='active'] {
       view-transition-name: none;
@@ -694,7 +776,8 @@
       var(--color-background-top-row) 0 var(--top-row-height),
       var(--color-background-bottom-row) var(--top-row-height) var(--header-height)
     );
-    transition: height var(--animation-speed-slow) var(--ease-out-cubic);
+    transition: height var(--animation-speed-slow) var(--ease-out-cubic),
+      background var(--animation-speed) var(--animation-easing);
   }
 
   .header__underlay-open {
@@ -833,18 +916,23 @@
     }
   }
 
-  .header__cta {
+  .button.header__cta {
+    --button-box-shadow: none;
     display: none;
     min-height: auto;
-    padding-block: 0.55rem;
-    padding-inline: 1.1rem;
+    padding-block: var(--header-cta-padding-block-start, 0.55rem) var(--header-cta-padding-block-end, 0.55rem);
+    padding-inline: var(--header-cta-padding-inline-start, 1.1rem) var(--header-cta-padding-inline-end, 1.1rem);
     font-size: 0.875rem;
     letter-spacing: 0.08em;
     text-transform: uppercase;
   }
 
+  .button.header__cta.button--box-shadow {
+    --button-box-shadow: var(--button-box-shadow-offset);
+  }
+
   @media screen and (min-width: 750px) {
-    .header__cta {
+    .button.header__cta {
       display: inline-flex;
       align-items: center;
     }
@@ -1318,10 +1406,17 @@
       "content": "t:content.manage_customer_accounts"
     },
     {
+      "type": "checkbox",
+      "id": "show_account",
+      "label": "t:settings.show_account",
+      "default": true
+    },
+    {
       "type": "link_list",
       "id": "customer_account_menu",
       "label": "t:settings.menu",
-      "default": "customer-account-main-menu"
+      "default": "customer-account-main-menu",
+      "visible_if": "{{ section.settings.show_account }}"
     },
     {
       "type": "header",
@@ -1535,6 +1630,20 @@
       "default": "always"
     },
     {
+      "type": "color",
+      "id": "background_color_sticky",
+      "label": "t:settings.sticky_header_background",
+      "placeholder": "t:settings.default",
+      "visible_if": "{{ section.settings.enable_sticky_header != 'never' }}"
+    },
+    {
+      "type": "color",
+      "id": "text_color_sticky",
+      "label": "t:settings.sticky_header_text",
+      "placeholder": "t:settings.default",
+      "visible_if": "{{ section.settings.enable_sticky_header != 'never' }}"
+    },
+    {
       "type": "range",
       "id": "divider_width",
       "label": "t:settings.divider_thickness",
@@ -1702,6 +1811,62 @@
       "type": "url",
       "id": "header_cta_link",
       "label": "t:settings.link",
+      "visible_if": "{{ section.settings.show_header_cta }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "header_cta_box_shadow",
+      "label": "t:settings.box_shadow",
+      "default": false,
+      "visible_if": "{{ section.settings.show_header_cta }}"
+    },
+    {
+      "type": "header",
+      "content": "t:content.padding",
+      "visible_if": "{{ section.settings.show_header_cta }}"
+    },
+    {
+      "type": "range",
+      "id": "header_cta_padding_block_start",
+      "label": "t:settings.top",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "default": 9,
+      "visible_if": "{{ section.settings.show_header_cta }}"
+    },
+    {
+      "type": "range",
+      "id": "header_cta_padding_block_end",
+      "label": "t:settings.bottom",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "default": 9,
+      "visible_if": "{{ section.settings.show_header_cta }}"
+    },
+    {
+      "type": "range",
+      "id": "header_cta_padding_inline_start",
+      "label": "t:settings.left",
+      "min": 0,
+      "max": 60,
+      "step": 1,
+      "unit": "px",
+      "default": 18,
+      "visible_if": "{{ section.settings.show_header_cta }}"
+    },
+    {
+      "type": "range",
+      "id": "header_cta_padding_inline_end",
+      "label": "t:settings.right",
+      "min": 0,
+      "max": 60,
+      "step": 1,
+      "unit": "px",
+      "default": 18,
       "visible_if": "{{ section.settings.show_header_cta }}"
     },
     {

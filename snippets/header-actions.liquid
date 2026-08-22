@@ -63,7 +63,13 @@
   {% endif %}
   {{- block.shopify_attributes -}}
 >
-  {% if shop.customer_accounts_enabled %}
+  {% liquid
+    assign show_account_button = true
+    if section and section.settings.show_account == false
+      assign show_account_button = false
+    endif
+  %}
+  {% if shop.customer_accounts_enabled and show_account_button %}
     {% liquid
       assign account_actions_style = ''
       if display_style == 'text' and section
