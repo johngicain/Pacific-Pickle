@@ -1112,6 +1112,8 @@
     "sticky_header": "Sticky header",
     "sticky_header_background": "On-scroll background",
     "sticky_header_text": "On-scroll text",
+    "sticky_header_border_width": "On-scroll border thickness",
+    "sticky_header_bottom_border_color": "On-scroll bottom border color",
     // Icon line thickness setting label
     "stroke": "Stroke",
     "button_style": "Button style",
