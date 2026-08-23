@@ -2609,7 +2609,7 @@
             "q1": {
               "type": "_accordion-row",
               "settings": {
-                "heading": "Are these pickles gluten-free?",
+                "heading": "Is No Big Dill gluten-free?",
                 "open_by_default": false,
                 "heading_preset": "",
                 "font": "var(--font-body--family)",
@@ -2626,7 +2626,7 @@
                 "a1": {
                   "type": "text",
                   "settings": {
-                    "text": "<p>Yes. All Pacific Pickle Works products are naturally gluten-free.</p>",
+                    "text": "<p>Yes. All Pacific Pickle Works products are certified gluten-free.</p>",
                     "width": "100%",
                     "max_width": "none",
                     "alignment": "left",
@@ -2659,7 +2659,7 @@
             "q2": {
               "type": "_accordion-row",
               "settings": {
-                "heading": "Are these pickles vegan?",
+                "heading": "Is No Big Dill vegan?",
                 "open_by_default": false,
                 "heading_preset": "",
                 "font": "var(--font-body--family)",
@@ -2709,7 +2709,7 @@
             "q3": {
               "type": "_accordion-row",
               "settings": {
-                "heading": "Where are they made?",
+                "heading": "Where is No Big Dill made?",
                 "open_by_default": false,
                 "heading_preset": "",
                 "font": "var(--font-body--family)",
@@ -2759,7 +2759,7 @@
             "q4": {
               "type": "_accordion-row",
               "settings": {
-                "heading": "How long do they last after opening?",
+                "heading": "How long does No Big Dill last after opening?",
                 "open_by_default": false,
                 "heading_preset": "",
                 "font": "var(--font-body--family)",
@@ -2809,7 +2809,7 @@
             "q5": {
               "type": "_accordion-row",
               "settings": {
-                "heading": "Are they fermented or vinegar-brined?",
+                "heading": "Is No Big Dill fermented or vinegar-brined?",
                 "open_by_default": false,
                 "heading_preset": "",
                 "font": "var(--font-body--family)",
@@ -2859,7 +2859,7 @@
             "q6": {
               "type": "_accordion-row",
               "settings": {
-                "heading": "Can I buy more than one jar?",
+                "heading": "Can I subscribe to receive No Big Dill regularly?",
                 "open_by_default": false,
                 "heading_preset": "",
                 "font": "var(--font-body--family)",
@@ -2876,7 +2876,7 @@
                 "a6": {
                   "type": "text",
                   "settings": {
-                    "text": "<p>Yes. This product is available as a single jar, 2-pack, 3-pack, or 6-pack.</p>",
+                    "text": "<p>Yes. The Subscribe & Save program gives you 15% off every order, free shipping, and flexible delivery every 30, 45, or 60 days. Cancel or pause anytime.</p>",
                     "width": "100%",
                     "max_width": "none",
                     "alignment": "left",
