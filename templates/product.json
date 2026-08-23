@@ -1919,7 +1919,7 @@
             "heading": {
               "type": "text",
               "settings": {
-                "text": "<h2>WHY PACIFIC<br/><strong>PICKLE WORKS?</strong></h2>",
+                "text": "<h2>WHY PACIFIC PICKLE WORKS?</h2>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "center",
@@ -1930,7 +1930,7 @@
                 "letter_spacing": "normal",
                 "case": "uppercase",
                 "wrap": "pretty",
-                "text_color": "{{ settings.color_palette.foreground }}",
+                "text_color": "#FFFFFF",
                 "bold_color": "#3d6b35",
                 "text_shadow": false,
                 "text_shadow_color": "#00000080",
@@ -2071,7 +2071,7 @@
         "section_height": "",
         "section_height_custom": 50,
         "background_media": "none",
-        "background_color": "#faf7f0",
+        "background_color": "#1C1C1A",
         "video_position": "cover",
         "background_image_position": "cover",
         "toggle_overlay": false,
@@ -2706,9 +2706,9 @@
               "settings": {
                 "heading": "Is No Big Dill gluten-free?",
                 "open_by_default": false,
-                "heading_preset": "",
+                "heading_preset": "custom",
                 "font": "var(--font-body--family)",
-                "weight": "",
+                "weight": "700",
                 "font_size": "1rem",
                 "line_height": "normal",
                 "letter_spacing": "normal",
@@ -2756,9 +2756,9 @@
               "settings": {
                 "heading": "Is No Big Dill vegan?",
                 "open_by_default": false,
-                "heading_preset": "",
+                "heading_preset": "custom",
                 "font": "var(--font-body--family)",
-                "weight": "",
+                "weight": "700",
                 "font_size": "1rem",
                 "line_height": "normal",
                 "letter_spacing": "normal",
@@ -2806,9 +2806,9 @@
               "settings": {
                 "heading": "Where is No Big Dill made?",
                 "open_by_default": false,
-                "heading_preset": "",
+                "heading_preset": "custom",
                 "font": "var(--font-body--family)",
-                "weight": "",
+                "weight": "700",
                 "font_size": "1rem",
                 "line_height": "normal",
                 "letter_spacing": "normal",
@@ -2856,9 +2856,9 @@
               "settings": {
                 "heading": "How long does No Big Dill last after opening?",
                 "open_by_default": false,
-                "heading_preset": "",
+                "heading_preset": "custom",
                 "font": "var(--font-body--family)",
-                "weight": "",
+                "weight": "700",
                 "font_size": "1rem",
                 "line_height": "normal",
                 "letter_spacing": "normal",
@@ -2906,9 +2906,9 @@
               "settings": {
                 "heading": "Is No Big Dill fermented or vinegar-brined?",
                 "open_by_default": false,
-                "heading_preset": "",
+                "heading_preset": "custom",
                 "font": "var(--font-body--family)",
-                "weight": "",
+                "weight": "700",
                 "font_size": "1rem",
                 "line_height": "normal",
                 "letter_spacing": "normal",
@@ -2956,9 +2956,9 @@
               "settings": {
                 "heading": "Can I subscribe to receive No Big Dill regularly?",
                 "open_by_default": false,
-                "heading_preset": "",
+                "heading_preset": "custom",
                 "font": "var(--font-body--family)",
-                "weight": "",
+                "weight": "600",
                 "font_size": "1rem",
                 "line_height": "normal",
                 "letter_spacing": "normal",
@@ -3042,8 +3042,8 @@
         "border_opacity": 100,
         "border_color": "",
         "border_radius": 0,
-        "padding-block-start": 80,
-        "padding-block-end": 80
+        "padding-block-start": 40,
+        "padding-block-end": 60
       }
     }
   },
