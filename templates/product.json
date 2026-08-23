@@ -1950,11 +1950,106 @@
           ]
         },
         "why_table": {
-          "type": "custom-liquid",
+          "type": "compare-table",
           "settings": {
-            "custom_liquid": "{% render 'ppw-compare-table' %}"
+            "feature_heading": "Feature",
+            "ours_heading": "Pacific Pickle Works",
+            "theirs_heading": "Mass-Market Brands",
+            "header_background": "#3d6b35",
+            "header_text": "#ffffff",
+            "header_type_preset": "",
+            "header_font": "var(--font-heading--family)",
+            "header_font_size": "0.8125rem",
+            "header_weight": "",
+            "header_letter_spacing": "loose",
+            "header_case": "uppercase",
+            "header_alignment": "left",
+            "ours_color": "#3d6b35",
+            "row_color": "#ffffff",
+            "stripe_color": "#f0ead8",
+            "border_color": "#1c1c1a",
+            "border_width": 2,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
           },
-          "blocks": {}
+          "blocks": {
+            "row-1": {
+              "type": "_compare-row",
+              "settings": {
+                "feature": "Ingredients",
+                "ours": "Real garlic, dill & spices",
+                "theirs": "Artificial flavors & colors"
+              }
+            },
+            "row-2": {
+              "type": "_compare-row",
+              "settings": {
+                "feature": "Vinegar",
+                "ours": "Organic distilled vinegar",
+                "theirs": "Conventional vinegar"
+              }
+            },
+            "row-3": {
+              "type": "_compare-row",
+              "settings": {
+                "feature": "Packaging",
+                "ours": "Glass jar (no leaching)",
+                "theirs": "Plastic or tin"
+              }
+            },
+            "row-4": {
+              "type": "_compare-row",
+              "settings": {
+                "feature": "Production",
+                "ours": "Hand-packed, small-batch",
+                "theirs": "Machine-filled, mass-produced"
+              }
+            },
+            "row-5": {
+              "type": "_compare-row",
+              "settings": {
+                "feature": "Origin",
+                "ours": "Santa Barbara, CA since 2001",
+                "theirs": "Industrial facility, unknown origin"
+              }
+            },
+            "row-6": {
+              "type": "_compare-row",
+              "settings": {
+                "feature": "Non-GMO",
+                "ours": "Project Verified",
+                "theirs": "Not verified"
+              }
+            },
+            "row-7": {
+              "type": "_compare-row",
+              "settings": {
+                "feature": "Gluten-Free",
+                "ours": "Naturally gluten-free",
+                "theirs": "May contain shared equipment"
+              }
+            },
+            "row-8": {
+              "type": "_compare-row",
+              "settings": {
+                "feature": "Flavor Variety",
+                "ours": "16+ bold California flavors",
+                "theirs": "3–5 generic options"
+              }
+            }
+          },
+          "block_order": [
+            "row-1",
+            "row-2",
+            "row-3",
+            "row-4",
+            "row-5",
+            "row-6",
+            "row-7",
+            "row-8"
+          ]
         }
       },
       "block_order": [

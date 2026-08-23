@@ -1,0 +1,40 @@
+{%- doc -%}
+  Outputs CSS variables for compare table header typography, color, and alignment.
+
+  @param {object} settings - Section or block settings
+
+  @example
+  <div style="{% render 'compare-table-header-style', settings: block.settings %}">
+{%- enddoc -%}
+
+{%- liquid
+  assign preset = settings.header_type_preset
+-%}
+{%- if preset != blank and preset != 'custom' -%}
+  --compare-header-font-family: var(--font-{{ preset }}--family);
+  --compare-header-font-style: var(--font-{{ preset }}--style);
+  --compare-header-font-weight: var(--font-{{ preset }}--weight);
+  --compare-header-font-size: var(--font-{{ preset }}--size);
+  --compare-header-line-height: var(--font-{{ preset }}--line-height);
+  --compare-header-letter-spacing: var(--font-{{ preset }}--letter-spacing);
+  --compare-header-text-transform: var(--font-{{ preset }}--case);
+{%- elsif preset == 'custom' -%}
+  --compare-header-font-family: {{ settings.header_font }};
+  {%- if settings.header_font_size != blank -%}
+    --compare-header-font-size: {{ settings.header_font_size }};
+  {%- endif -%}
+  {%- if settings.header_weight != blank -%}
+    --compare-header-font-weight: {{ settings.header_weight }};
+  {%- endif -%}
+  {%- if settings.header_letter_spacing != blank -%}
+    --compare-header-letter-spacing: var(--letter-spacing--heading-{{ settings.header_letter_spacing }});
+  {%- endif -%}
+  --compare-header-text-transform: {{ settings.header_case }};
+{%- endif -%}
+--compare-header-align: {{ settings.header_alignment | default: 'left' }};
+{%- if settings.header_text != blank -%}
+  --compare-header-text: {{ settings.header_text }};
+{%- endif -%}
+{%- if settings.header_background != blank -%}
+  --compare-header-bg: {{ settings.header_background }};
+{%- endif -%}

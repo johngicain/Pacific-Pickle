@@ -1,115 +1,65 @@
 {% doc %}
 Renders the Pacific Pickle Works versus mass-market comparison table.
+@param {object} [settings] - Compare table settings for header typography, color, and alignment
 @example
 {% render 'ppw-compare-table' %}
 {% enddoc %}
 
-<div class="ppw-compare">
+<div
+  class="ppw-compare"
+  style="{% render 'compare-table-header-style', settings: settings %}"
+>
   <table>
     <thead>
       <tr>
-        <th>Feature</th>
-        <th>Pacific Pickle Works</th>
-        <th>Mass-Market Brands</th>
+        <th scope="col">Feature</th>
+        <th scope="col">Pacific Pickle Works</th>
+        <th scope="col">Mass-Market Brands</th>
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>Ingredients</td>
-        <td>Real garlic, dill &amp; spices</td>
+      <tr class="ppw-compare__row">
+        <th scope="row">Ingredients</th>
+        <td class="ppw-compare__ours">Real garlic, dill &amp; spices</td>
         <td>Artificial flavors &amp; colors</td>
       </tr>
-      <tr>
-        <td>Vinegar</td>
-        <td>Organic distilled vinegar</td>
+      <tr class="ppw-compare__row">
+        <th scope="row">Vinegar</th>
+        <td class="ppw-compare__ours">Organic distilled vinegar</td>
         <td>Conventional vinegar</td>
       </tr>
-      <tr>
-        <td>Packaging</td>
-        <td>Glass jar (no leaching)</td>
+      <tr class="ppw-compare__row">
+        <th scope="row">Packaging</th>
+        <td class="ppw-compare__ours">Glass jar (no leaching)</td>
         <td>Plastic or tin</td>
       </tr>
-      <tr>
-        <td>Production</td>
-        <td>Hand-packed, small-batch</td>
+      <tr class="ppw-compare__row">
+        <th scope="row">Production</th>
+        <td class="ppw-compare__ours">Hand-packed, small-batch</td>
         <td>Machine-filled, mass-produced</td>
       </tr>
-      <tr>
-        <td>Origin</td>
-        <td>Santa Barbara, CA since 2001</td>
+      <tr class="ppw-compare__row">
+        <th scope="row">Origin</th>
+        <td class="ppw-compare__ours">Santa Barbara, CA since 2001</td>
         <td>Industrial facility, unknown origin</td>
       </tr>
-      <tr>
-        <td>Non-GMO</td>
-        <td>Project Verified</td>
+      <tr class="ppw-compare__row">
+        <th scope="row">Non-GMO</th>
+        <td class="ppw-compare__ours">Project Verified</td>
         <td>Not verified</td>
       </tr>
-      <tr>
-        <td>Gluten-Free</td>
-        <td>Naturally gluten-free</td>
+      <tr class="ppw-compare__row">
+        <th scope="row">Gluten-Free</th>
+        <td class="ppw-compare__ours">Naturally gluten-free</td>
         <td>May contain shared equipment</td>
       </tr>
-      <tr>
-        <td>Flavor Variety</td>
-        <td>16+ bold California flavors</td>
+      <tr class="ppw-compare__row">
+        <th scope="row">Flavor Variety</th>
+        <td class="ppw-compare__ours">16+ bold California flavors</td>
         <td>3–5 generic options</td>
       </tr>
     </tbody>
   </table>
 </div>
 
-{% stylesheet %}
-  .ppw-compare {
-    width: 100%;
-    overflow-x: auto;
-  }
-
-  .ppw-compare table {
-    width: 100%;
-    border-collapse: collapse;
-    font-family: var(--font-body--family);
-    border: 2px solid #1c1c1a;
-  }
-
-  .ppw-compare th,
-  .ppw-compare td {
-    padding: 14px 16px;
-    text-align: left;
-    border-bottom: 1px solid #1c1c1a;
-    font-size: 0.9375rem;
-    line-height: 1.4;
-  }
-
-  .ppw-compare thead th {
-    background: #3d6b35;
-    color: #ffffff;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    font-size: 0.8125rem;
-    font-family: var(--font-heading--family);
-  }
-
-  .ppw-compare tbody tr:nth-child(even) {
-    background: #f0ead8;
-  }
-
-  .ppw-compare tbody tr:nth-child(odd) {
-    background: #ffffff;
-  }
-
-  .ppw-compare tbody tr:last-child td {
-    border-bottom: none;
-  }
-
-  .ppw-compare td:nth-child(2) {
-    font-weight: 600;
-    color: #3d6b35;
-  }
-
-  .ppw-compare td:first-child {
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    font-size: 0.8125rem;
-  }
-{% endstylesheet %}
+{% render 'compare-table-styles' %}

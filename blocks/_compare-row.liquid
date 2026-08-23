@@ -1,0 +1,38 @@
+
+
+<th scope="row">{{ block.settings.feature }}</th>
+<td class="ppw-compare__ours">{{ block.settings.ours }}</td>
+<td>{{ block.settings.theirs }}</td>
+
+{% schema %}
+{
+  "name": "t:names.compare_row",
+  "tag": "tr",
+  "class": "ppw-compare__row",
+  "settings": [
+    {
+      "type": "text",
+      "id": "feature",
+      "label": "t:settings.feature",
+      "default": "t:text_defaults.feature"
+    },
+    {
+      "type": "text",
+      "id": "ours",
+      "label": "t:settings.ours",
+      "default": "t:text_defaults.ours_value"
+    },
+    {
+      "type": "text",
+      "id": "theirs",
+      "label": "t:settings.theirs",
+      "default": "t:text_defaults.theirs_value"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:names.compare_row"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,74 @@
+{% doc %}
+Styles for the compare table component.
+@example
+{% render 'compare-table-styles' %}
+{% enddoc %}
+
+{% stylesheet %}
+  .ppw-compare {
+    flex: 1;
+    width: 100%;
+    overflow-x: auto;
+  }
+
+  .ppw-compare__heading {
+    margin: 0 0 1.5rem;
+    text-align: var(--compare-heading-align, center);
+  }
+
+  .ppw-compare table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: var(--font-body--family);
+    border: var(--compare-border-width, 2px) solid var(--compare-border, #1c1c1a);
+  }
+
+  .ppw-compare th,
+  .ppw-compare td {
+    padding: 14px 16px;
+    text-align: left;
+    border-bottom: 1px solid var(--compare-border, #1c1c1a);
+    font-size: 0.9375rem;
+    line-height: 1.4;
+  }
+
+  .ppw-compare thead th {
+    background: var(--compare-header-bg, #3d6b35);
+    color: var(--compare-header-text, #ffffff);
+    text-align: var(--compare-header-align, left);
+    font-family: var(--compare-header-font-family, var(--font-heading--family));
+    font-style: var(--compare-header-font-style, normal);
+    font-weight: var(--compare-header-font-weight, inherit);
+    font-size: var(--compare-header-font-size, 0.8125rem);
+    line-height: var(--compare-header-line-height, 1.4);
+    letter-spacing: var(--compare-header-letter-spacing, 0.08em);
+    text-transform: var(--compare-header-text-transform, uppercase);
+  }
+
+  .ppw-compare tbody tr:nth-child(even) th,
+  .ppw-compare tbody tr:nth-child(even) td {
+    background: var(--compare-stripe, #f0ead8);
+  }
+
+  .ppw-compare tbody tr:nth-child(odd) th,
+  .ppw-compare tbody tr:nth-child(odd) td {
+    background: var(--compare-row, #ffffff);
+  }
+
+  .ppw-compare tbody tr:last-child th,
+  .ppw-compare tbody tr:last-child td {
+    border-bottom: none;
+  }
+
+  .ppw-compare .ppw-compare__ours {
+    font-weight: 600;
+    color: var(--compare-ours, #3d6b35);
+  }
+
+  .ppw-compare tbody th {
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    font-size: 0.8125rem;
+  }
+{% endstylesheet %}
