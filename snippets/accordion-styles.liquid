@@ -43,10 +43,6 @@
     border-block-end: calc(var(--style-border-width) * var(--show-fallback-borders)) solid var(--color-border);
   }
 
-  .accordion--dividers .details-content {
-    padding-block-end: var(--padding-sm);
-  }
-
   .accordion--caret .icon-plus,
   .accordion--plus .icon-caret {
     display: none;
@@ -73,6 +69,20 @@
     stroke: var(--accordion-icon-color, currentColor);
   }
 
+  .accordion .details__header {
+    padding-top: var(--accordion-padding-top, var(--padding-sm));
+    padding-bottom: var(--accordion-padding-bottom, var(--padding-sm));
+    padding-left: var(--accordion-padding-left, 0);
+    padding-right: var(--accordion-padding-right, 0);
+  }
+
+  .accordion .details-content {
+    padding-top: 0;
+    padding-bottom: var(--accordion-padding-bottom, var(--padding-sm));
+    padding-left: var(--accordion-padding-left, 0);
+    padding-right: var(--accordion-padding-right, 0);
+  }
+
   /* because we can't pass apply a specific class on a block based on its parent block setting */
   .accordion .details__header {
     font-family: var(--summary-font-family);
@@ -82,10 +92,6 @@
     line-height: var(--summary-font-line-height);
     text-transform: var(--summary-font-case);
     min-height: var(--minimum-touch-target);
-    padding-top: var(--accordion-header-padding-top, var(--padding-sm));
-    padding-bottom: var(--accordion-header-padding-bottom, var(--padding-sm));
-    padding-left: var(--accordion-header-padding-left, 0);
-    padding-right: var(--accordion-header-padding-right, 0);
   }
 
   .accordion .details__header.custom-typography {

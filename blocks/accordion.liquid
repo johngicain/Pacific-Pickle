@@ -22,10 +22,10 @@
     {% if block_settings.divider_color != blank %} --color-border: {{ block_settings.divider_color }};{% endif %}
     {% if block_settings.icon_color != blank %} --accordion-icon-color: {{ block_settings.icon_color }};{% endif %}
     {% if block_settings.icon_fill != blank %} --accordion-icon-fill: {{ block_settings.icon_fill }};{% endif %}
-    --accordion-header-padding-top: {{ block_settings.padding-top }}px;
-    --accordion-header-padding-bottom: {{ block_settings.padding-bottom }}px;
-    --accordion-header-padding-left: {{ block_settings.padding-left }}px;
-    --accordion-header-padding-right: {{ block_settings.padding-right }}px;
+    --accordion-padding-top: {{ block_settings.padding-top }}px;
+    --accordion-padding-bottom: {{ block_settings.padding-bottom }}px;
+    --accordion-padding-left: {{ block_settings.padding-left }}px;
+    --accordion-padding-right: {{ block_settings.padding-right }}px;
   "
   {{ block.shopify_attributes }}
 >
