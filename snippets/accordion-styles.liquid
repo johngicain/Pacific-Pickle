@@ -11,6 +11,15 @@
     width: 100%;
   }
 
+  .accordion--narrow {
+    flex: 0 1 auto;
+    width: 100%;
+    max-width: 48rem;
+    height: fit-content;
+    margin-inline: auto;
+    align-self: center;
+  }
+
   .accordion--dividers accordion-custom:not(:first-child) .details {
     border-block-start: var(--style-border-width) solid var(--color-border);
   }
@@ -43,6 +52,21 @@
     display: none;
   }
 
+  .accordion .svg-wrapper {
+    color: var(--accordion-icon-color, currentColor);
+  }
+
+  .accordion .svg-wrapper svg {
+    color: inherit;
+    fill: var(--accordion-icon-fill, none);
+    stroke: var(--accordion-icon-color, currentColor);
+  }
+
+  .accordion .svg-wrapper svg * {
+    fill: var(--accordion-icon-fill, none);
+    stroke: var(--accordion-icon-color, currentColor);
+  }
+
   /* because we can't pass apply a specific class on a block based on its parent block setting */
   .accordion .details__header {
     font-family: var(--summary-font-family);
@@ -52,6 +76,27 @@
     line-height: var(--summary-font-line-height);
     text-transform: var(--summary-font-case);
     min-height: var(--minimum-touch-target);
+    padding-top: var(--accordion-header-padding-top, var(--padding-sm));
+    padding-bottom: var(--accordion-header-padding-bottom, var(--padding-sm));
+    padding-left: var(--accordion-header-padding-left, 0);
+    padding-right: var(--accordion-header-padding-right, 0);
+  }
+
+  .accordion .details__header.custom-typography {
+    font-family: var(--font-family);
+    font-weight: var(--font-weight);
+    line-height: var(--line-height);
+    letter-spacing: var(--letter-spacing);
+    text-transform: var(--text-transform);
+    text-wrap: var(--text-wrap);
+  }
+
+  .accordion .details__header.custom-font-size {
+    font-size: var(--font-size);
+  }
+
+  .accordion .details__header.custom-font-weight {
+    font-weight: var(--font-weight);
   }
 
   .details__icon {

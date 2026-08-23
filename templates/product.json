@@ -2462,35 +2462,6 @@
     "faq_ppw": {
       "type": "section",
       "blocks": {
-        "faq_eyebrow": {
-          "type": "text",
-          "name": "t:names.caption",
-          "settings": {
-            "text": "<p><strong>✦ Questions ✦</strong></p>",
-            "width": "fit-content",
-            "max_width": "normal",
-            "alignment": "center",
-            "type_preset": "custom",
-            "font": "var(--font-body--family)",
-            "font_size": "0.875rem",
-            "line_height": "normal",
-            "letter_spacing": "loose",
-            "case": "uppercase",
-            "wrap": "pretty",
-            "text_color": "#e8821a",
-            "bold_color": "",
-            "text_shadow": false,
-            "text_shadow_color": "#00000080",
-            "background": false,
-            "background_color": "#00000026",
-            "corner_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {}
-        },
         "faq_heading": {
           "type": "group",
           "settings": {
@@ -2528,7 +2499,7 @@
             "open_in_new_tab": false,
             "placeholder": "",
             "padding-block-start": 0,
-            "padding-block-end": 20,
+            "padding-block-end": 0,
             "padding-inline-start": 0,
             "padding-inline-end": 0
           },
@@ -2536,19 +2507,19 @@
             "heading": {
               "type": "text",
               "settings": {
-                "text": "<h2>FREQUENTLY ASKED<br/><strong>QUESTIONS</strong></h2>",
+                "text": "<h3>FREQUENTLY ASKED QUESTIONS</h3>",
                 "width": "100%",
-                "max_width": "normal",
-                "alignment": "center",
+                "max_width": "none",
+                "alignment": "left",
                 "type_preset": "custom",
                 "font": "var(--font-heading--family)",
-                "font_size": "4.5rem",
+                "font_size": "3rem",
                 "line_height": "tight",
                 "letter_spacing": "normal",
                 "case": "uppercase",
                 "wrap": "pretty",
                 "text_color": "{{ settings.color_palette.foreground }}",
-                "bold_color": "#3d6b35",
+                "bold_color": "{{ settings.color_palette.foreground }}",
                 "text_shadow": false,
                 "text_shadow_color": "#00000080",
                 "background": false,
@@ -2850,7 +2821,6 @@
         }
       },
       "block_order": [
-        "faq_eyebrow",
         "faq_heading",
         "faq_accordion"
       ],

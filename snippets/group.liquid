@@ -32,6 +32,7 @@
     {{ class }}
     {% if background_color != blank %} color-custom-{{ block_id }}{% endif %}
     {% if settings.border_left > 0 %} group-block--border-left{% endif %}
+    {% if settings.narrow_width %} group-block--narrow{% endif %}
   "
   style="
     {% render 'border-override', settings: settings %}
@@ -91,6 +92,14 @@
 </div>
 
 {% stylesheet %}
+  .group-block--narrow {
+    flex: 0 1 auto;
+    width: 100%;
+    max-width: 48rem;
+    margin-inline: auto;
+    align-self: center;
+  }
+
   .group-block.group-block--border-left {
     border-inline-start-width: var(--border-left-width);
     border-inline-start-style: solid;
