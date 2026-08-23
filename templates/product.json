@@ -2515,7 +2515,7 @@
             "vertical_alignment_flex_direction_column": "center",
             "gap": 12,
             "gap_mobile": 12,
-            "narrow_width": false,
+            "narrow_width": true,
             "width": "fill",
             "custom_width": 100,
             "width_mobile": "fill",
@@ -2541,7 +2541,7 @@
             "open_in_new_tab": false,
             "placeholder": "",
             "padding-block-start": 0,
-            "padding-block-end": 0,
+            "padding-block-end": 10,
             "padding-inline-start": 0,
             "padding-inline-end": 0
           },
@@ -2549,7 +2549,7 @@
             "heading": {
               "type": "text",
               "settings": {
-                "text": "<h3>FREQUENTLY ASKED QUESTIONS</h3>",
+                "text": "<h3><strong>FREQUENTLY ASKED QUESTIONS</strong></h3>",
                 "width": "100%",
                 "max_width": "none",
                 "alignment": "left",
