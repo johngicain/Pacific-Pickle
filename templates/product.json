@@ -96,9 +96,21 @@
               },
               "blocks": {}
             },
+            "review": {
+              "type": "review",
+              "settings": {
+                "stars_style": "shaded",
+                "show_number": true,
+                "text_color": "#e8821a",
+                "type_preset": "paragraph",
+                "width": "fit-content",
+                "alignment": "left"
+              },
+              "blocks": {}
+            },
             "title": {
-              "name": "t:names.product_title",
               "type": "text",
+              "name": "t:names.product_title",
               "settings": {
                 "text": "<h1>{{ closest.product.title }}</h1>",
                 "width": "100%",
@@ -185,7 +197,6 @@
               "type": "icon-with-text",
               "settings": {
                 "icon": "pepper",
-                "image_upload": "",
                 "width": 20,
                 "icon_color": "#e8821a",
                 "heading": "Mild",
@@ -203,18 +214,8 @@
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
                 "padding-inline-end": 0
-              }
-            },
-            "review": {
-              "type": "review",
-              "settings": {
-                "stars_style": "shaded",
-                "show_number": true,
-                "text_color": "#e8821a",
-                "type_preset": "paragraph",
-                "width": "fit-content",
-                "alignment": "left"
-              }
+              },
+              "blocks": {}
             },
             "price": {
               "type": "price",
@@ -381,7 +382,6 @@
                   "type": "icon-with-text",
                   "settings": {
                     "icon": "truck",
-                    "image_upload": "",
                     "width": 20,
                     "icon_color": "#3d6b35",
                     "heading": "Free ship $60+",
@@ -399,13 +399,13 @@
                     "padding-block-end": 0,
                     "padding-inline-start": 0,
                     "padding-inline-end": 0
-                  }
+                  },
+                  "blocks": {}
                 },
                 "returns": {
                   "type": "icon-with-text",
                   "settings": {
                     "icon": "return",
-                    "image_upload": "",
                     "width": 20,
                     "icon_color": "#3d6b35",
                     "heading": "Easy returns",
@@ -423,13 +423,13 @@
                     "padding-block-end": 0,
                     "padding-inline-start": 0,
                     "padding-inline-end": 0
-                  }
+                  },
+                  "blocks": {}
                 },
                 "secure": {
                   "type": "icon-with-text",
                   "settings": {
                     "icon": "lock",
-                    "image_upload": "",
                     "width": 20,
                     "icon_color": "#3d6b35",
                     "heading": "Secure checkout",
@@ -447,7 +447,8 @@
                     "padding-block-end": 0,
                     "padding-inline-start": 0,
                     "padding-inline-end": 0
-                  }
+                  },
+                  "blocks": {}
                 }
               },
               "block_order": [
@@ -465,19 +466,8 @@
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
                 "padding-inline-end": 0
-              }
-            },
-            "inventory": {
-              "type": "product-inventory",
-              "settings": {
-                "inventory_threshold": 50,
-                "show_inventory_quantity": true,
-                "text_color": "",
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              }
+              },
+              "blocks": {}
             },
             "highlights": {
               "type": "group",
@@ -525,7 +515,6 @@
                   "type": "icon-with-text",
                   "settings": {
                     "icon": "leaf",
-                    "image_upload": "",
                     "width": 24,
                     "icon_color": "#3d6b35",
                     "heading": "Non-GMO",
@@ -543,13 +532,13 @@
                     "padding-block-end": 12,
                     "padding-inline-start": 8,
                     "padding-inline-end": 8
-                  }
+                  },
+                  "blocks": {}
                 },
                 "h2": {
                   "type": "icon-with-text",
                   "settings": {
                     "icon": "gluten_free",
-                    "image_upload": "",
                     "width": 24,
                     "icon_color": "#3d6b35",
                     "heading": "Gluten-Free",
@@ -567,13 +556,13 @@
                     "padding-block-end": 12,
                     "padding-inline-start": 8,
                     "padding-inline-end": 8
-                  }
+                  },
+                  "blocks": {}
                 },
                 "h3": {
                   "type": "icon-with-text",
                   "settings": {
                     "icon": "bottle",
-                    "image_upload": "",
                     "width": 24,
                     "icon_color": "#3d6b35",
                     "heading": "Hand-Packed",
@@ -591,7 +580,8 @@
                     "padding-block-end": 12,
                     "padding-inline-start": 8,
                     "padding-inline-end": 8
-                  }
+                  },
+                  "blocks": {}
                 }
               },
               "block_order": [
@@ -599,6 +589,19 @@
                 "h2",
                 "h3"
               ]
+            },
+            "inventory": {
+              "type": "product-inventory",
+              "settings": {
+                "inventory_threshold": 50,
+                "show_inventory_quantity": true,
+                "text_color": "",
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
             },
             "pairs": {
               "type": "group",
@@ -864,7 +867,6 @@
                     "heading": "Description",
                     "open_by_default": true,
                     "icon": "none",
-                    "image_upload": "",
                     "width": 20
                   },
                   "blocks": {
@@ -1003,7 +1005,6 @@
                     "heading": "Ingredients",
                     "open_by_default": false,
                     "icon": "none",
-                    "image_upload": "",
                     "width": 20
                   },
                   "blocks": {
@@ -1046,7 +1047,6 @@
                     "heading": "Nutrition",
                     "open_by_default": false,
                     "icon": "none",
-                    "image_upload": "",
                     "width": 20
                   },
                   "blocks": {
@@ -1111,7 +1111,6 @@
           ]
         }
       },
-      "block_order": [],
       "settings": {
         "content_width": "content-center-aligned",
         "desktop_media_position": "left",
@@ -1128,8 +1127,8 @@
       "type": "section",
       "blocks": {
         "reviews_eyebrow": {
-          "name": "t:names.caption",
           "type": "text",
+          "name": "t:names.caption",
           "settings": {
             "text": "<p><strong>✦ Customer Reviews ✦</strong></p>",
             "width": "fit-content",
@@ -1806,8 +1805,8 @@
       "type": "section",
       "blocks": {
         "why_eyebrow": {
-          "name": "t:names.caption",
           "type": "text",
+          "name": "t:names.caption",
           "settings": {
             "text": "<p><strong>✦ Not All Pickles Are Created Equal ✦</strong></p>",
             "width": "fit-content",
@@ -1913,7 +1912,8 @@
           "type": "custom-liquid",
           "settings": {
             "custom_liquid": "{% render 'ppw-compare-table' %}"
-          }
+          },
+          "blocks": {}
         }
       },
       "block_order": [
@@ -1955,8 +1955,8 @@
       "type": "product-recommendations",
       "blocks": {
         "recs_eyebrow": {
-          "name": "t:names.caption",
           "type": "text",
+          "name": "t:names.caption",
           "settings": {
             "text": "<p><strong>❖ Bundle & Save ❖</strong></p>",
             "width": "fit-content",
@@ -2171,10 +2171,85 @@
             "padding-inline-start": 0,
             "padding-inline-end": 0
           },
-          "blocks": {}
+          "blocks": {
+            "image": {
+              "type": "_featured-blog-posts-image",
+              "static": true,
+              "settings": {
+                "image_ratio": "square",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_color": "",
+                "border_radius": 0
+              },
+              "blocks": {}
+            },
+            "title": {
+              "type": "_heading",
+              "static": true,
+              "settings": {
+                "type_preset": "rte",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "text": "",
+                "read_only": false,
+                "alignment": "left",
+                "show_alignment": true,
+                "text_color": "",
+                "text_shadow": false,
+                "text_shadow_color": "#00000080",
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "blog-post-info-text": {
+              "type": "_blog-post-info-text",
+              "static": true,
+              "settings": {
+                "show_date": true,
+                "show_author": true,
+                "type_preset": "",
+                "alignment": "left",
+                "text_color": "",
+                "show_alignment": true,
+                "padding-block-start": 24,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "blog-post-description": {
+              "type": "_blog-post-description",
+              "static": true,
+              "settings": {
+                "type_preset": "rte",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "text_color": "",
+                "padding-block-start": 16,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": []
         }
       },
-      "block_order": [],
       "settings": {
         "blog": "recipes",
         "layout_type": "grid",
@@ -2198,8 +2273,8 @@
       "type": "product-recommendations",
       "blocks": {
         "recs_eyebrow": {
-          "name": "t:names.caption",
           "type": "text",
+          "name": "t:names.caption",
           "settings": {
             "text": "<p><strong>✦ Keep the Party Going ✦</strong></p>",
             "width": "fit-content",
@@ -2369,12 +2444,27 @@
         "padding-block-end": 80
       }
     },
+    "divider_6EE8B7": {
+      "type": "divider",
+      "name": "t:names.divider_section",
+      "settings": {
+        "background_color": "",
+        "divider_color": "{{ settings.color_palette.foreground }}",
+        "section_width": "full-width",
+        "thickness": 2,
+        "corner_radius": "square",
+        "width_percent": 100,
+        "alignment_horizontal": "center",
+        "padding-block-start": 16,
+        "padding-block-end": 16
+      }
+    },
     "faq_ppw": {
       "type": "section",
       "blocks": {
         "faq_eyebrow": {
-          "name": "t:names.caption",
           "type": "text",
+          "name": "t:names.caption",
           "settings": {
             "text": "<p><strong>✦ Questions ✦</strong></p>",
             "width": "fit-content",
@@ -2502,7 +2592,6 @@
                 "heading": "Are these pickles gluten-free?",
                 "open_by_default": false,
                 "icon": "none",
-                "image_upload": "",
                 "width": 20
               },
               "blocks": {
@@ -2545,7 +2634,6 @@
                 "heading": "Are these pickles vegan?",
                 "open_by_default": false,
                 "icon": "none",
-                "image_upload": "",
                 "width": 20
               },
               "blocks": {
@@ -2588,7 +2676,6 @@
                 "heading": "Where are they made?",
                 "open_by_default": false,
                 "icon": "none",
-                "image_upload": "",
                 "width": 20
               },
               "blocks": {
@@ -2631,7 +2718,6 @@
                 "heading": "How long do they last after opening?",
                 "open_by_default": false,
                 "icon": "none",
-                "image_upload": "",
                 "width": 20
               },
               "blocks": {
@@ -2674,7 +2760,6 @@
                 "heading": "Are they fermented or vinegar-brined?",
                 "open_by_default": false,
                 "icon": "none",
-                "image_upload": "",
                 "width": 20
               },
               "blocks": {
@@ -2717,7 +2802,6 @@
                 "heading": "Can I buy more than one jar?",
                 "open_by_default": false,
                 "icon": "none",
-                "image_upload": "",
                 "width": 20
               },
               "blocks": {
@@ -2784,7 +2868,7 @@
         "section_height": "",
         "section_height_custom": 50,
         "background_media": "none",
-        "background_color": "#faf7f0",
+        "background_color": "#FAF7F0",
         "video_position": "cover",
         "background_image_position": "cover",
         "toggle_overlay": false,
@@ -2808,6 +2892,7 @@
     "fbt_ppw",
     "recipes_ppw",
     "related_ppw",
+    "divider_6EE8B7",
     "faq_ppw"
   ]
 }
