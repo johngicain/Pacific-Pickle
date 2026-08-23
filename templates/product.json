@@ -1919,7 +1919,7 @@
             "heading": {
               "type": "text",
               "settings": {
-                "text": "<h2>WHY PACIFIC<br/><strong>PICKLE WORKS?</strong></h2>",
+                "text": "<h2>WHY PACIFIC PICKLE WORKS?</h2>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "center",
@@ -1930,7 +1930,7 @@
                 "letter_spacing": "normal",
                 "case": "uppercase",
                 "wrap": "pretty",
-                "text_color": "{{ settings.color_palette.foreground }}",
+                "text_color": "#FFFFFF",
                 "bold_color": "#3d6b35",
                 "text_shadow": false,
                 "text_shadow_color": "#00000080",
@@ -1976,7 +1976,7 @@
         "section_height": "",
         "section_height_custom": 50,
         "background_media": "none",
-        "background_color": "#faf7f0",
+        "background_color": "#1C1C1A",
         "video_position": "cover",
         "background_image_position": "cover",
         "toggle_overlay": false,
