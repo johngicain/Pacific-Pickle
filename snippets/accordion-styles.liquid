@@ -52,6 +52,12 @@
     display: none;
   }
 
+  .accordion details[open] > summary .icon-plus .horizontal,
+  .accordion details[open] > summary .icon-plus .vertical {
+    transform: rotate(45deg);
+    opacity: 1;
+  }
+
   .accordion .svg-wrapper {
     color: var(--accordion-icon-color, currentColor);
   }
