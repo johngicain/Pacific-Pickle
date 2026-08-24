@@ -12,6 +12,8 @@
     --compare-row: {{ block_settings.row_color }};
     --compare-border: {{ block_settings.border_color }};
     --compare-border-width: {{ block_settings.border_width }}px;
+    --compare-border-style: {{ block_settings.border }};
+    --compare-feature-max-width: {{ block_settings.feature_max_width }}%;
     {% render 'compare-table-header-style', settings: block_settings %}
     {% render 'spacing-style', settings: block_settings %}
   "
@@ -22,19 +24,43 @@
       <tr>
         <th
           scope="col"
-          style="--compare-cell-align: {{ block_settings.header_feature_alignment }}"
+          style="
+            --compare-cell-align: {{ block_settings.header_feature_alignment }};
+            {% if block_settings.header_feature_color != blank -%}
+              --compare-cell-color: {{ block_settings.header_feature_color }};
+            {% endif -%}
+            {% if block_settings.header_feature_background != blank -%}
+              --compare-cell-bg: {{ block_settings.header_feature_background }};
+            {% endif -%}
+          "
         >
           {{ block_settings.feature_heading }}
         </th>
         <th
           scope="col"
-          style="--compare-cell-align: {{ block_settings.header_ours_alignment }}"
+          style="
+            --compare-cell-align: {{ block_settings.header_ours_alignment }};
+            {% if block_settings.header_ours_color != blank -%}
+              --compare-cell-color: {{ block_settings.header_ours_color }};
+            {% endif -%}
+            {% if block_settings.header_ours_background != blank -%}
+              --compare-cell-bg: {{ block_settings.header_ours_background }};
+            {% endif -%}
+          "
         >
           {{ block_settings.ours_heading }}
         </th>
         <th
           scope="col"
-          style="--compare-cell-align: {{ block_settings.header_theirs_alignment }}"
+          style="
+            --compare-cell-align: {{ block_settings.header_theirs_alignment }};
+            {% if block_settings.header_theirs_color != blank -%}
+              --compare-cell-color: {{ block_settings.header_theirs_color }};
+            {% endif -%}
+            {% if block_settings.header_theirs_background != blank -%}
+              --compare-cell-bg: {{ block_settings.header_theirs_background }};
+            {% endif -%}
+          "
         >
           {{ block_settings.theirs_heading }}
         </th>
@@ -79,6 +105,17 @@
       "id": "theirs_heading",
       "label": "t:settings.theirs_column",
       "default": "t:text_defaults.theirs_heading"
+    },
+    {
+      "type": "range",
+      "id": "feature_max_width",
+      "min": 15,
+      "max": 50,
+      "step": 1,
+      "unit": "%",
+      "label": "t:settings.feature_max_width",
+      "default": 25,
+      "info": "t:info.feature_max_width"
     },
     {
       "type": "header",
@@ -274,9 +311,79 @@
     },
     {
       "type": "color",
+      "id": "header_feature_color",
+      "label": "t:settings.feature_color",
+      "placeholder": "t:settings.default"
+    },
+    {
+      "type": "color",
+      "id": "header_ours_color",
+      "label": "t:settings.ours_color",
+      "placeholder": "t:settings.default"
+    },
+    {
+      "type": "color",
+      "id": "header_theirs_color",
+      "label": "t:settings.theirs_color",
+      "placeholder": "t:settings.default"
+    },
+    {
+      "type": "color",
       "id": "header_background",
       "label": "t:settings.header_background",
       "default": "#3d6b35"
+    },
+    {
+      "type": "color",
+      "id": "header_feature_background",
+      "label": "t:settings.feature_background",
+      "placeholder": "t:settings.default"
+    },
+    {
+      "type": "color",
+      "id": "header_ours_background",
+      "label": "t:settings.ours_background",
+      "placeholder": "t:settings.default"
+    },
+    {
+      "type": "color",
+      "id": "header_theirs_background",
+      "label": "t:settings.theirs_background",
+      "placeholder": "t:settings.default"
+    },
+    {
+      "type": "select",
+      "id": "header_border",
+      "label": "t:settings.bottom_border",
+      "options": [
+        {
+          "value": "none",
+          "label": "t:options.none"
+        },
+        {
+          "value": "solid",
+          "label": "t:options.solid"
+        }
+      ],
+      "default": "solid"
+    },
+    {
+      "type": "range",
+      "id": "header_border_width",
+      "min": 0,
+      "max": 8,
+      "step": 1,
+      "unit": "px",
+      "label": "t:settings.thickness",
+      "default": 1,
+      "visible_if": "{{ block.settings.header_border != 'none' }}"
+    },
+    {
+      "type": "color",
+      "id": "header_border_color",
+      "label": "t:settings.bottom_border_color",
+      "placeholder": "t:settings.default",
+      "visible_if": "{{ block.settings.header_border != 'none' }}"
     },
     {
       "type": "text_alignment",
@@ -319,10 +426,27 @@
       "default": "#f0ead8"
     },
     {
+      "type": "select",
+      "id": "border",
+      "label": "t:settings.border",
+      "options": [
+        {
+          "value": "none",
+          "label": "t:options.none"
+        },
+        {
+          "value": "solid",
+          "label": "t:options.solid"
+        }
+      ],
+      "default": "solid"
+    },
+    {
       "type": "color",
       "id": "border_color",
       "label": "t:settings.border_color",
-      "default": "#1c1c1a"
+      "default": "#1c1c1a",
+      "visible_if": "{{ block.settings.border != 'none' }}"
     },
     {
       "type": "range",
@@ -332,7 +456,8 @@
       "step": 1,
       "unit": "px",
       "label": "t:settings.thickness",
-      "default": 2
+      "default": 2,
+      "visible_if": "{{ block.settings.border != 'none' }}"
     },
     {
       "type": "header",

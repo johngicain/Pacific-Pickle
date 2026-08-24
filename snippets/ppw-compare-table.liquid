@@ -7,26 +7,54 @@ Renders the Pacific Pickle Works versus mass-market comparison table.
 
 <div
   class="ppw-compare"
-  style="{% render 'compare-table-header-style', settings: settings %}"
+  style="
+    {% render 'compare-table-header-style', settings: settings %}
+    --compare-border-style: {{ settings.border | default: 'solid' }};
+    --compare-feature-max-width: {{ settings.feature_max_width | default: 25 }}%;
+  "
 >
   <table>
     <thead>
       <tr>
         <th
           scope="col"
-          style="--compare-cell-align: {{ settings.header_feature_alignment | default: 'left' }}"
+          style="
+            --compare-cell-align: {{ settings.header_feature_alignment | default: 'left' }};
+            {% if settings.header_feature_color != blank -%}
+              --compare-cell-color: {{ settings.header_feature_color }};
+            {% endif -%}
+            {% if settings.header_feature_background != blank -%}
+              --compare-cell-bg: {{ settings.header_feature_background }};
+            {% endif -%}
+          "
         >
           Feature
         </th>
         <th
           scope="col"
-          style="--compare-cell-align: {{ settings.header_ours_alignment | default: 'left' }}"
+          style="
+            --compare-cell-align: {{ settings.header_ours_alignment | default: 'left' }};
+            {% if settings.header_ours_color != blank -%}
+              --compare-cell-color: {{ settings.header_ours_color }};
+            {% endif -%}
+            {% if settings.header_ours_background != blank -%}
+              --compare-cell-bg: {{ settings.header_ours_background }};
+            {% endif -%}
+          "
         >
           Pacific Pickle Works
         </th>
         <th
           scope="col"
-          style="--compare-cell-align: {{ settings.header_theirs_alignment | default: 'left' }}"
+          style="
+            --compare-cell-align: {{ settings.header_theirs_alignment | default: 'left' }};
+            {% if settings.header_theirs_color != blank -%}
+              --compare-cell-color: {{ settings.header_theirs_color }};
+            {% endif -%}
+            {% if settings.header_theirs_background != blank -%}
+              --compare-cell-bg: {{ settings.header_theirs_background }};
+            {% endif -%}
+          "
         >
           Mass-Market Brands
         </th>

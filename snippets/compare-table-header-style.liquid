@@ -37,3 +37,10 @@
 {%- if settings.header_background != blank -%}
   --compare-header-bg: {{ settings.header_background }};
 {%- endif -%}
+--compare-header-border-style: {{ settings.header_border | default: 'solid' }};
+{%- if settings.header_border != 'none' -%}
+  --compare-header-border-width: {{ settings.header_border_width | default: 1 }}px;
+  {%- if settings.header_border_color != blank -%}
+    --compare-header-border: {{ settings.header_border_color }};
+  {%- endif -%}
+{%- endif -%}

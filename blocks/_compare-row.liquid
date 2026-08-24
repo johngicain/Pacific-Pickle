@@ -5,6 +5,9 @@
     {% if block.settings.feature_background != blank -%}
       --compare-cell-bg: {{ block.settings.feature_background }};
     {% endif -%}
+    {% if block.settings.feature_color != blank -%}
+      --compare-cell-color: {{ block.settings.feature_color }};
+    {% endif -%}
     {% render 'compare-row-cell-style', preset: block.settings.feature_type_preset, font: block.settings.feature_font, font_size: block.settings.feature_font_size, weight: block.settings.feature_weight, letter_spacing: block.settings.feature_letter_spacing, text_case: block.settings.feature_case %}
   "
 >
@@ -17,6 +20,9 @@
     {% if block.settings.ours_background != blank -%}
       --compare-cell-bg: {{ block.settings.ours_background }};
     {% endif -%}
+    {% if block.settings.ours_color != blank -%}
+      --compare-cell-color: {{ block.settings.ours_color }};
+    {% endif -%}
     {% render 'compare-row-cell-style', preset: block.settings.ours_type_preset, font: block.settings.ours_font, font_size: block.settings.ours_font_size, weight: block.settings.ours_weight, letter_spacing: block.settings.ours_letter_spacing, text_case: block.settings.ours_case %}
   "
 >
@@ -27,6 +33,9 @@
     --compare-cell-align: {{ block.settings.theirs_alignment }};
     {% if block.settings.theirs_background != blank -%}
       --compare-cell-bg: {{ block.settings.theirs_background }};
+    {% endif -%}
+    {% if block.settings.theirs_color != blank -%}
+      --compare-cell-color: {{ block.settings.theirs_color }};
     {% endif -%}
     {% render 'compare-row-cell-style', preset: block.settings.theirs_type_preset, font: block.settings.theirs_font, font_size: block.settings.theirs_font_size, weight: block.settings.theirs_weight, letter_spacing: block.settings.theirs_letter_spacing, text_case: block.settings.theirs_case %}
   "
@@ -100,6 +109,28 @@
       "type": "color",
       "id": "theirs_background",
       "label": "t:settings.theirs_background",
+      "placeholder": "t:settings.default"
+    },
+    {
+      "type": "header",
+      "content": "t:settings.color"
+    },
+    {
+      "type": "color",
+      "id": "feature_color",
+      "label": "t:settings.feature_color",
+      "placeholder": "t:settings.default"
+    },
+    {
+      "type": "color",
+      "id": "ours_color",
+      "label": "t:settings.ours_color",
+      "placeholder": "t:settings.default"
+    },
+    {
+      "type": "color",
+      "id": "theirs_color",
+      "label": "t:settings.theirs_color",
       "placeholder": "t:settings.default"
     },
     {

@@ -20,7 +20,25 @@ Styles for the compare table component.
     width: 100%;
     border-collapse: collapse;
     font-family: var(--font-body--family);
-    border: var(--compare-border-width, 2px) solid var(--compare-border, #1c1c1a);
+    border: var(--compare-border-width, 2px) var(--compare-border-style, solid) var(--compare-border, #1c1c1a);
+  }
+
+  @media screen and (min-width: 750px) {
+    .ppw-compare table {
+      table-layout: fixed;
+    }
+
+    .ppw-compare th:first-child,
+    .ppw-compare td:first-child {
+      width: var(--compare-feature-max-width, 25%);
+      max-width: var(--compare-feature-max-width, 25%);
+      overflow-wrap: anywhere;
+    }
+
+    .ppw-compare th:not(:first-child),
+    .ppw-compare td:not(:first-child) {
+      width: calc((100% - var(--compare-feature-max-width, 25%)) / 2);
+    }
   }
 
   .ppw-compare th,
@@ -35,11 +53,12 @@ Styles for the compare table component.
     line-height: var(--compare-cell-line-height, 1.4);
     letter-spacing: var(--compare-cell-letter-spacing, inherit);
     text-transform: var(--compare-cell-text-transform, none);
+    color: var(--compare-cell-color, inherit);
   }
 
   .ppw-compare thead th {
-    background: var(--compare-header-bg, #3d6b35);
-    color: var(--compare-header-text, #ffffff);
+    background: var(--compare-cell-bg, var(--compare-header-bg, #3d6b35));
+    color: var(--compare-cell-color, var(--compare-header-text, #ffffff));
     text-align: var(--compare-cell-align, left);
     font-family: var(--compare-header-font-family, var(--font-heading--family));
     font-style: var(--compare-header-font-style, normal);
@@ -48,6 +67,9 @@ Styles for the compare table component.
     line-height: var(--compare-header-line-height, 1.4);
     letter-spacing: var(--compare-header-letter-spacing, 0.08em);
     text-transform: var(--compare-header-text-transform, uppercase);
+    border-bottom-width: var(--compare-header-border-width, 1px);
+    border-bottom-style: var(--compare-header-border-style, solid);
+    border-bottom-color: var(--compare-header-border, var(--compare-border, #1c1c1a));
   }
 
   .ppw-compare tbody tr:nth-child(even) th,
@@ -67,7 +89,7 @@ Styles for the compare table component.
 
   .ppw-compare .ppw-compare__ours {
     font-weight: var(--compare-cell-font-weight, 600);
-    color: var(--compare-ours, #3d6b35);
+    color: var(--compare-cell-color, var(--compare-ours, #3d6b35));
   }
 
   .ppw-compare tbody th {
