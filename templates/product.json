@@ -1955,7 +1955,7 @@
             "feature_heading": "Feature",
             "ours_heading": "🥒 Pacific Pickle Works",
             "theirs_heading": "Mass-Market Brands",
-            "feature_max_width": 25,
+            "feature_max_width": 35,
             "header_type_preset": "custom",
             "header_font": "var(--font-subheading--family)",
             "header_font_size": "0.875rem",
