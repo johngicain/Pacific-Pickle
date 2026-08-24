@@ -2146,7 +2146,7 @@
               "type": "_compare-row",
               "settings": {
                 "feature": "Non-GMO",
-                "ours": "Project Verified",
+                "ours": "✔ Project Verified",
                 "theirs": "Not verified",
                 "feature_alignment": "left",
                 "ours_alignment": "center",
@@ -2179,7 +2179,7 @@
               "type": "_compare-row",
               "settings": {
                 "feature": "Gluten-Free",
-                "ours": "Naturally gluten-free",
+                "ours": "✔ Naturally gluten-free",
                 "theirs": "May contain shared equipment",
                 "feature_alignment": "left",
                 "ours_alignment": "center",
@@ -2240,6 +2240,39 @@
                 "theirs_case": "none"
               },
               "blocks": {}
+            },
+            "compare_row_nDP87V": {
+              "type": "_compare-row",
+              "settings": {
+                "feature": "Subscribe & Save",
+                "ours": "15% off, cancel anytime",
+                "theirs": "Not available",
+                "feature_alignment": "left",
+                "ours_alignment": "center",
+                "theirs_alignment": "center",
+                "feature_background": "",
+                "ours_background": "#243521",
+                "theirs_background": "",
+                "feature_type_preset": "",
+                "feature_font": "var(--font-heading--family)",
+                "feature_font_size": "",
+                "feature_weight": "",
+                "feature_letter_spacing": "normal",
+                "feature_case": "uppercase",
+                "ours_type_preset": "",
+                "ours_font": "var(--font-body--family)",
+                "ours_font_size": "",
+                "ours_weight": "",
+                "ours_letter_spacing": "normal",
+                "ours_case": "none",
+                "theirs_type_preset": "",
+                "theirs_font": "var(--font-body--family)",
+                "theirs_font_size": "",
+                "theirs_weight": "",
+                "theirs_letter_spacing": "normal",
+                "theirs_case": "none"
+              },
+              "blocks": {}
             }
           },
           "block_order": [
@@ -2250,7 +2283,8 @@
             "row-5",
             "row-6",
             "row-7",
-            "row-8"
+            "row-8",
+            "compare_row_nDP87V"
           ]
         }
       },
