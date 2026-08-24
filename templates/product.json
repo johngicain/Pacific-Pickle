@@ -1979,7 +1979,7 @@
             "ours_color": "#6ec36a",
             "row_color": "{{ settings.color_palette.foreground }}",
             "stripe_color": "#252522",
-            "border": "solid",
+            "border": "none",
             "border_color": "#2e2e2c",
             "border_width": 2,
             "padding-block-start": 0,
