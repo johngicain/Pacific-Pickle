@@ -26,16 +26,21 @@ Styles for the compare table component.
   .ppw-compare th,
   .ppw-compare td {
     padding: 14px 16px;
-    text-align: left;
+    text-align: var(--compare-cell-align, left);
     border-bottom: 1px solid var(--compare-border, #1c1c1a);
-    font-size: 0.9375rem;
-    line-height: 1.4;
+    font-family: var(--compare-cell-font-family, inherit);
+    font-style: var(--compare-cell-font-style, inherit);
+    font-weight: var(--compare-cell-font-weight, inherit);
+    font-size: var(--compare-cell-font-size, 0.9375rem);
+    line-height: var(--compare-cell-line-height, 1.4);
+    letter-spacing: var(--compare-cell-letter-spacing, inherit);
+    text-transform: var(--compare-cell-text-transform, none);
   }
 
   .ppw-compare thead th {
     background: var(--compare-header-bg, #3d6b35);
     color: var(--compare-header-text, #ffffff);
-    text-align: var(--compare-header-align, left);
+    text-align: var(--compare-cell-align, left);
     font-family: var(--compare-header-font-family, var(--font-heading--family));
     font-style: var(--compare-header-font-style, normal);
     font-weight: var(--compare-header-font-weight, inherit);
@@ -47,12 +52,12 @@ Styles for the compare table component.
 
   .ppw-compare tbody tr:nth-child(even) th,
   .ppw-compare tbody tr:nth-child(even) td {
-    background: var(--compare-stripe, #f0ead8);
+    background: var(--compare-cell-bg, var(--compare-stripe, #f0ead8));
   }
 
   .ppw-compare tbody tr:nth-child(odd) th,
   .ppw-compare tbody tr:nth-child(odd) td {
-    background: var(--compare-row, #ffffff);
+    background: var(--compare-cell-bg, var(--compare-row, #ffffff));
   }
 
   .ppw-compare tbody tr:last-child th,
@@ -61,14 +66,14 @@ Styles for the compare table component.
   }
 
   .ppw-compare .ppw-compare__ours {
-    font-weight: 600;
+    font-weight: var(--compare-cell-font-weight, 600);
     color: var(--compare-ours, #3d6b35);
   }
 
   .ppw-compare tbody th {
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    font-size: 0.8125rem;
+    font-weight: var(--compare-cell-font-weight, 600);
+    text-transform: var(--compare-cell-text-transform, uppercase);
+    letter-spacing: var(--compare-cell-letter-spacing, 0.04em);
+    font-size: var(--compare-cell-font-size, 0.8125rem);
   }
 {% endstylesheet %}

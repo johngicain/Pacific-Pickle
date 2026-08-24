@@ -33,9 +33,24 @@
     <table>
       <thead>
         <tr>
-          <th scope="col">{{ section_settings.feature_heading }}</th>
-          <th scope="col">{{ section_settings.ours_heading }}</th>
-          <th scope="col">{{ section_settings.theirs_heading }}</th>
+          <th
+            scope="col"
+            style="--compare-cell-align: {{ section_settings.header_feature_alignment }}"
+          >
+            {{ section_settings.feature_heading }}
+          </th>
+          <th
+            scope="col"
+            style="--compare-cell-align: {{ section_settings.header_ours_alignment }}"
+          >
+            {{ section_settings.ours_heading }}
+          </th>
+          <th
+            scope="col"
+            style="--compare-cell-align: {{ section_settings.header_theirs_alignment }}"
+          >
+            {{ section_settings.theirs_heading }}
+          </th>
         </tr>
       </thead>
       <tbody>
@@ -295,8 +310,20 @@
     },
     {
       "type": "text_alignment",
-      "id": "header_alignment",
-      "label": "t:settings.alignment",
+      "id": "header_feature_alignment",
+      "label": "t:settings.feature_alignment",
+      "default": "left"
+    },
+    {
+      "type": "text_alignment",
+      "id": "header_ours_alignment",
+      "label": "t:settings.ours_alignment",
+      "default": "left"
+    },
+    {
+      "type": "text_alignment",
+      "id": "header_theirs_alignment",
+      "label": "t:settings.theirs_alignment",
       "default": "left"
     },
     {

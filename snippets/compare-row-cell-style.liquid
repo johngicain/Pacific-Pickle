@@ -1,0 +1,35 @@
+{%- doc -%}
+  Outputs CSS variables for a compare row cell's typography.
+
+  @param {string} [preset] - Type preset: paragraph, h1–h6, custom, or blank for default
+  @param {string} [font] - Custom font family CSS value
+  @param {string} [font_size] - Custom font size
+  @param {string} [weight] - Custom font weight
+  @param {string} [letter_spacing] - Custom letter spacing: tight, normal, or loose
+  @param {string} [text_case] - Custom text transform: none or uppercase
+
+  @example
+  <th style="{% render 'compare-row-cell-style', preset: block.settings.feature_type_preset %}">
+{%- enddoc -%}
+
+{%- if preset != blank and preset != 'custom' -%}
+  --compare-cell-font-family: var(--font-{{ preset }}--family);
+  --compare-cell-font-style: var(--font-{{ preset }}--style);
+  --compare-cell-font-weight: var(--font-{{ preset }}--weight);
+  --compare-cell-font-size: var(--font-{{ preset }}--size);
+  --compare-cell-line-height: var(--font-{{ preset }}--line-height);
+  --compare-cell-letter-spacing: var(--font-{{ preset }}--letter-spacing);
+  --compare-cell-text-transform: var(--font-{{ preset }}--case);
+{%- elsif preset == 'custom' -%}
+  --compare-cell-font-family: {{ font }};
+  {%- if font_size != blank -%}
+    --compare-cell-font-size: {{ font_size }};
+  {%- endif -%}
+  {%- if weight != blank -%}
+    --compare-cell-font-weight: {{ weight }};
+  {%- endif -%}
+  {%- if letter_spacing != blank -%}
+    --compare-cell-letter-spacing: var(--letter-spacing--body-{{ letter_spacing }});
+  {%- endif -%}
+  --compare-cell-text-transform: {{ text_case }};
+{%- endif -%}

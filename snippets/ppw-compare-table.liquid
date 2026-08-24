@@ -12,9 +12,24 @@ Renders the Pacific Pickle Works versus mass-market comparison table.
   <table>
     <thead>
       <tr>
-        <th scope="col">Feature</th>
-        <th scope="col">Pacific Pickle Works</th>
-        <th scope="col">Mass-Market Brands</th>
+        <th
+          scope="col"
+          style="--compare-cell-align: {{ settings.header_feature_alignment | default: 'left' }}"
+        >
+          Feature
+        </th>
+        <th
+          scope="col"
+          style="--compare-cell-align: {{ settings.header_ours_alignment | default: 'left' }}"
+        >
+          Pacific Pickle Works
+        </th>
+        <th
+          scope="col"
+          style="--compare-cell-align: {{ settings.header_theirs_alignment | default: 'left' }}"
+        >
+          Mass-Market Brands
+        </th>
       </tr>
     </thead>
     <tbody>

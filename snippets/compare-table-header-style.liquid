@@ -1,5 +1,5 @@
 {%- doc -%}
-  Outputs CSS variables for compare table header typography, color, and alignment.
+  Outputs CSS variables for compare table header typography and color.
 
   @param {object} settings - Section or block settings
 
@@ -31,7 +31,6 @@
   {%- endif -%}
   --compare-header-text-transform: {{ settings.header_case }};
 {%- endif -%}
---compare-header-align: {{ settings.header_alignment | default: 'left' }};
 {%- if settings.header_text != blank -%}
   --compare-header-text: {{ settings.header_text }};
 {%- endif -%}
