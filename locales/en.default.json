@@ -24,6 +24,7 @@
     "discount_menu": "Discount Codes",
     "discount_applied": "Applied discount code: {{ code }}",
     "featured_product": "Featured product",
+    "heat_level": "{{ label }}, heat level {{ count }}",
     "filters": "Filters",
     "filter_count": {
       "one": "{{ count }} filter applied",

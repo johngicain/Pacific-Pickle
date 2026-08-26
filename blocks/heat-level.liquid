@@ -1,0 +1,340 @@
+{% liquid
+  assign block_settings = block.settings
+  assign product = closest.product
+
+  if request.visual_preview_mode and product == blank
+    assign product = collections.all.products.first
+  endif
+
+  assign level_metafield = product.metafields.custom.level
+  assign level = 0
+  assign max_level = block_settings.max_level | default: 5 | plus: 0
+
+  if level_metafield.type == 'rating'
+    assign level = level_metafield.value.rating | plus: 0 | round
+    assign max_level = level_metafield.value.scale_max | default: max_level | plus: 0 | round
+  elsif level_metafield.value != blank
+    assign level = level_metafield.value | plus: 0 | round
+  endif
+
+  assign level_label = product.metafields.custom.level_label.value | default: product.metafields.custom.level_label
+
+  if request.visual_preview_mode or request.design_mode
+    if level == 0
+      assign level = 3
+    endif
+    if level_label == blank
+      assign level_label = 'Mild'
+    endif
+  endif
+
+  if level > max_level
+    assign level = max_level
+  endif
+
+  assign active_icon_color = block_settings.icon_color | default: '#111111'
+  assign default_icon_color = block_settings.default_icon_color | default: '#CECBC5'
+%}
+
+{% if max_level > 0 or level_label != blank %}
+  {% style %}
+    .heat-level--{{ block.id }} {
+      --heat-level-icon-color: {{ default_icon_color }};
+      --heat-level-icon-color-active: {{ active_icon_color }};
+      {% if block_settings.text_color != blank %}
+        --heat-level-text-color: {{ block_settings.text_color }};
+        --color: {{ block_settings.text_color }};
+      {% endif %}
+    }
+  {% endstyle %}
+
+  <div
+    class="
+      heat-level
+      heat-level--{{ block.id }}
+      spacing-style
+    "
+    style="
+      {% render 'spacing-style', settings: block_settings %}
+      --heat-level-gap: {{ block_settings.gap }}px;
+      --heat-level-icon-size: {{ block_settings.icon_size }}px;
+      --heat-level-icon-gap: {{ block_settings.icon_gap }}px;
+      {% if block_settings.font_size != blank %}
+        --heat-level-font-size: {{ block_settings.font_size }};
+      {% endif %}
+    "
+    {% if level_label != blank %}
+      role="img"
+      aria-label="{{ 'accessibility.heat_level' | t: label: level_label, count: level }}"
+    {% endif %}
+    {{ block.shopify_attributes }}
+  >
+    {% if max_level > 0 %}
+      <div class="heat-level__icons" aria-hidden="true">
+        {% for i in (1..max_level) %}
+          {% liquid
+            assign icon_class = 'heat-level__icon heat-level__icon--' | append: block.id
+            if i <= level
+              assign icon_class = icon_class | append: ' heat-level__icon--active'
+            endif
+          %}
+          {% render 'icon-or-image',
+            icon: 'pepper_solid',
+            image_upload: blank,
+            width: block_settings.icon_size,
+            class_name: icon_class
+          %}
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    {% if level_label != blank %}
+      <p class="heat-level__label {{ block_settings.type_preset }}{% if block_settings.font_size != blank %} heat-level__label--custom-size{% endif %}">
+        {{ level_label }}
+      </p>
+    {% endif %}
+  </div>
+{% endif %}
+
+{% stylesheet %}
+  .heat-level {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: var(--heat-level-gap, 4px);
+    color: var(--heat-level-text-color, inherit);
+    max-width: 100%;
+  }
+
+  .heat-level__icons {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--heat-level-icon-gap, 2px);
+  }
+
+  .heat-level__icon {
+    flex-shrink: 0;
+    display: block;
+    width: var(--heat-level-icon-size, 20px);
+    height: var(--heat-level-icon-size, 20px);
+    color: var(--heat-level-icon-color, #cecbc5);
+  }
+
+  .heat-level__icon--active {
+    color: var(--heat-level-icon-color-active, #111111);
+  }
+
+  .heat-level__label {
+    margin: 0;
+    font-style: italic;
+  }
+
+  .heat-level__label--custom-size {
+    font-size: var(--heat-level-font-size);
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:names.heat_level",
+  "tag": null,
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:content.heat_level_metafields"
+    },
+    {
+      "type": "header",
+      "content": "t:content.icon"
+    },
+    {
+      "type": "range",
+      "id": "icon_size",
+      "label": "t:settings.size",
+      "min": 12,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "icon_gap",
+      "label": "t:settings.gap",
+      "min": 0,
+      "max": 16,
+      "step": 1,
+      "unit": "px",
+      "default": 2
+    },
+    {
+      "type": "range",
+      "id": "max_level",
+      "label": "t:settings.max_level",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "default": 5
+    },
+    {
+      "type": "color",
+      "id": "default_icon_color",
+      "label": "t:settings.default_icon_color",
+      "default": "#CECBC5"
+    },
+    {
+      "type": "color",
+      "id": "icon_color",
+      "label": "t:settings.active_icon_color",
+      "default": "#111111"
+    },
+    {
+      "type": "header",
+      "content": "t:content.typography"
+    },
+    {
+      "type": "select",
+      "id": "type_preset",
+      "label": "t:settings.preset",
+      "options": [
+        {
+          "value": "paragraph",
+          "label": "t:options.paragraph"
+        },
+        {
+          "value": "h1",
+          "label": "t:options.h1"
+        },
+        {
+          "value": "h2",
+          "label": "t:options.h2"
+        },
+        {
+          "value": "h3",
+          "label": "t:options.h3"
+        },
+        {
+          "value": "h4",
+          "label": "t:options.h4"
+        },
+        {
+          "value": "h5",
+          "label": "t:options.h5"
+        },
+        {
+          "value": "h6",
+          "label": "t:options.h6"
+        }
+      ],
+      "default": "h6"
+    },
+    {
+      "type": "select",
+      "id": "font_size",
+      "label": "t:settings.font_size",
+      "options": [
+        {
+          "value": "",
+          "label": "t:options.default"
+        },
+        {
+          "value": "0.625rem",
+          "label": "10px"
+        },
+        {
+          "value": "0.75rem",
+          "label": "12px"
+        },
+        {
+          "value": "0.875rem",
+          "label": "14px"
+        },
+        {
+          "value": "1rem",
+          "label": "16px"
+        },
+        {
+          "value": "1.125rem",
+          "label": "18px"
+        },
+        {
+          "value": "1.25rem",
+          "label": "20px"
+        },
+        {
+          "value": "1.5rem",
+          "label": "24px"
+        }
+      ],
+      "default": ""
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "t:settings.text_color",
+      "placeholder": "t:settings.default"
+    },
+    {
+      "type": "range",
+      "id": "gap",
+      "label": "t:settings.gap",
+      "min": 0,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 4
+    },
+    {
+      "type": "header",
+      "content": "t:content.padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "t:settings.top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "t:settings.bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-start",
+      "label": "t:settings.left",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-end",
+      "label": "t:settings.right",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:names.heat_level",
+      "category": "t:categories.product"
+    }
+  ]
+}
+{% endschema %}
