@@ -68,34 +68,6 @@
             "padding-inline-end": 0
           },
           "blocks": {
-            "product_type": {
-              "type": "text",
-              "settings": {
-                "text": "<p><strong>Bestseller</strong></p>",
-                "width": "fit-content",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "custom",
-                "font": "var(--font-body--family)",
-                "font_size": "0.75rem",
-                "line_height": "normal",
-                "letter_spacing": "loose",
-                "case": "uppercase",
-                "wrap": "pretty",
-                "text_color": "#ffffff",
-                "bold_color": "",
-                "text_shadow": false,
-                "text_shadow_color": "#00000080",
-                "background": true,
-                "background_color": "#e8821a",
-                "corner_radius": 0,
-                "padding-block-start": 4,
-                "padding-block-end": 4,
-                "padding-inline-start": 10,
-                "padding-inline-end": 10
-              },
-              "blocks": {}
-            },
             "review": {
               "type": "review",
               "settings": {
@@ -118,7 +90,7 @@
                 "alignment": "left",
                 "type_preset": "custom",
                 "font": "var(--font-heading--family)",
-                "font_size": "3.5rem",
+                "font_size": "4.5rem",
                 "line_height": "tight",
                 "letter_spacing": "normal",
                 "case": "none",
@@ -151,7 +123,7 @@
                 "letter_spacing": "normal",
                 "case": "none",
                 "wrap": "pretty",
-                "text_color": "#1C1C1A",
+                "text_color": "#1c1c1a",
                 "bold_color": "",
                 "text_shadow": false,
                 "text_shadow_color": "#00000080",
@@ -286,11 +258,11 @@
                   "type": "add-to-cart",
                   "static": true,
                   "settings": {
-                    "style_class": "button",
+                    "style_class": "button-custom",
                     "box_shadow": true,
                     "font_size": "1.125rem",
-                    "custom_button_background": "#e8821a",
-                    "custom_button_text": "#1c1c1a",
+                    "custom_button_background": "#3D6B35",
+                    "custom_button_text": "#FFFFFF",
                     "custom_button_border": "#1c1c1a"
                   },
                   "blocks": {}
@@ -1091,7 +1063,6 @@
             }
           },
           "block_order": [
-            "product_type",
             "review",
             "title",
             "subtitle",
