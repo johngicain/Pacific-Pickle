@@ -1396,52 +1396,21 @@
         "tab-2": {
           "type": "_tab",
           "settings": {
-            "heading": "Ingredients",
-            "content": "<p>Authentic materials, no compromises </p>",
+            "heading": "INGREDIENTS",
+            "content": "",
             "open_by_default": false
           },
           "blocks": {
-            "text_xXzz3j": {
-              "type": "text",
-              "name": "t:names.heading",
-              "settings": {
-                "text": "<h2>New arrivals</h2>",
-                "width": "fit-content",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "rte",
-                "font": "var(--font-body--family)",
-                "font_size": "1rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "text_color": "",
-                "bold_color": "",
-                "italic_color": "",
-                "italic_font_size": "",
-                "text_shadow": false,
-                "text_shadow_color": "#00000080",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
             "product_information_details_wTf7xx": {
               "type": "product-information-details",
               "name": "t:names.product_information_details",
               "settings": {
                 "details": "<p>{{ closest.product.metafields.custom.ingredients | metafield_tag }}</p>",
-                "heading": "",
-                "heading_preset": "h6",
-                "heading_color": "",
-                "heading_font": "var(--font-heading--family)",
-                "heading_font_size": "",
+                "heading": "WHAT'S INSIDE",
+                "heading_preset": "custom",
+                "heading_color": "{{ settings.color_palette.color3 }}",
+                "heading_font": "var(--font-subheading--family)",
+                "heading_font_size": "0.875rem",
                 "heading_weight": "",
                 "heading_line_height": "normal",
                 "heading_letter_spacing": "normal",
@@ -1468,7 +1437,7 @@
                 "border_opacity": 100,
                 "border_color": "",
                 "border_radius": 0,
-                "padding-block-start": 0,
+                "padding-block-start": 20,
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
                 "padding-inline-end": 0
@@ -1520,7 +1489,6 @@
             }
           },
           "block_order": [
-            "text_xXzz3j",
             "product_information_details_wTf7xx",
             "product_information_details_WbMibh"
           ]
@@ -1528,11 +1496,39 @@
         "tab-3": {
           "type": "_tab",
           "settings": {
-            "heading": "Shipping",
-            "content": "<p>We will work quickly to ship your order as soon as possible. Once your order has shipped, you will receive an email with further information. Delivery times vary depending on your location.</p>",
+            "heading": "NUTRITION",
+            "content": "",
             "open_by_default": false
           },
-          "blocks": {}
+          "blocks": {
+            "image_cVLbCc": {
+              "type": "image",
+              "name": "t:names.image",
+              "settings": {
+                "image": "{{ closest.product.metafields.custom.nutrition.value }}",
+                "link": "",
+                "image_ratio": "adapt",
+                "width": "custom",
+                "custom_width": 26,
+                "width_mobile": "fill",
+                "custom_width_mobile": 100,
+                "height": "fit",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_color": "",
+                "border_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "image_cVLbCc"
+          ]
         }
       },
       "block_order": [
@@ -1546,13 +1542,13 @@
         "heading_alignment": "left",
         "tab_style": "underline",
         "tab_alignment": "start",
-        "gap": 8,
+        "gap": 20,
         "content_padding": 24,
         "type_preset": "h6",
         "background_color": "",
-        "text_color": "",
-        "active_color": "",
-        "indicator_color": "",
+        "text_color": "#6B6F7C",
+        "active_color": "{{ settings.color_palette.color3 }}",
+        "indicator_color": "{{ settings.color_palette.color3 }}",
         "section_width": "page-width",
         "padding-block-start": 48,
         "padding-block-end": 48
