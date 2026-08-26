@@ -140,7 +140,7 @@
             "subtitle": {
               "type": "text",
               "settings": {
-                "text": "<p>Kosher Deli-Style Baby Dill Pickles</p>",
+                "text": "{{ closest.product.metafields.custom.sub_details | metafield_tag }}",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
