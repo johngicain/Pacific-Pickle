@@ -848,7 +848,7 @@
                 "description": {
                   "type": "_accordion-row",
                   "settings": {
-                    "heading": "Description",
+                    "heading": "DESCRIPTION",
                     "open_by_default": true,
                     "heading_preset": "",
                     "font": "var(--font-body--family)",
@@ -994,7 +994,7 @@
                 "ingredients": {
                   "type": "_accordion-row",
                   "settings": {
-                    "heading": "Ingredients",
+                    "heading": "INGREDIENTS",
                     "open_by_default": false,
                     "heading_preset": "",
                     "font": "var(--font-body--family)",
@@ -1044,7 +1044,7 @@
                 "nutrition": {
                   "type": "_accordion-row",
                   "settings": {
-                    "heading": "Nutrition",
+                    "heading": "NUTRITION",
                     "open_by_default": false,
                     "heading_preset": "",
                     "font": "var(--font-body--family)",
