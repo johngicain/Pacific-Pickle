@@ -3596,11 +3596,62 @@
         "padding-block-start": 40,
         "padding-block-end": 60
       }
+    },
+    "tabs_ppw": {
+      "type": "tabs",
+      "blocks": {
+        "tab-1": {
+          "type": "_tab",
+          "settings": {
+            "heading": "Description",
+            "content": "<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.</p>",
+            "open_by_default": true
+          },
+          "blocks": {}
+        },
+        "tab-2": {
+          "type": "_tab",
+          "settings": {
+            "heading": "Ingredients",
+            "content": "<p>Authentic materials, no compromises </p>",
+            "open_by_default": false
+          },
+          "blocks": {}
+        },
+        "tab-3": {
+          "type": "_tab",
+          "settings": {
+            "heading": "Shipping",
+            "content": "<p>We will work quickly to ship your order as soon as possible. Once your order has shipped, you will receive an email with further information. Delivery times vary depending on your location.</p>",
+            "open_by_default": false
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": ["tab-1", "tab-2", "tab-3"],
+      "name": "t:names.tabs",
+      "settings": {
+        "heading": "",
+        "heading_alignment": "left",
+        "tab_style": "underline",
+        "tab_alignment": "start",
+        "gap": 8,
+        "content_padding": 24,
+        "type_preset": "h6",
+        "background_color": "",
+        "text_color": "",
+        "active_color": "",
+        "indicator_color": "",
+        "section_width": "page-width",
+        "padding-block-start": 48,
+        "padding-block-end": 48
+      }
     }
   },
   "order": [
     "breadcrumbs",
     "main",
+    "tabs_ppw",
     "reviews_ppw",
     "why_ppw",
     "fbt_ppw",

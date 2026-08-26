@@ -1,0 +1,133 @@
+import { Component } from '@theme/component';
+
+/**
+ * @extends Component
+ */
+class TabsComponent extends Component {
+  connectedCallback() {
+    super.connectedCallback();
+    this.#sync();
+    document.addEventListener('shopify:block:select', this.#onBlockSelect);
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    document.removeEventListener('shopify:block:select', this.#onBlockSelect);
+  }
+
+  /**
+   * @param {Event} event
+   */
+  selectTab = (event) => {
+    const path = typeof event.composedPath === 'function' ? event.composedPath() : [event.target];
+    const button = path.find(
+      (node) => node instanceof HTMLButtonElement && node.getAttribute('role') === 'tab'
+    );
+    if (!(button instanceof HTMLButtonElement) || !this.contains(button)) return;
+    this.#activate(button);
+  };
+
+  /**
+   * @param {KeyboardEvent} event
+   */
+  onKeyDown = (event) => {
+    const keys = ['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Home', 'End'];
+    if (!keys.includes(event.key)) return;
+
+    const tabs = this.#tabs;
+    if (tabs.length === 0) return;
+
+    const current = document.activeElement;
+    const index = tabs.indexOf(/** @type {HTMLButtonElement} */ (current));
+    if (index < 0) return;
+
+    event.preventDefault();
+
+    const rtl = document.documentElement.getAttribute('dir') === 'rtl';
+    let next = index;
+
+    switch (event.key) {
+      case 'ArrowLeft':
+      case 'ArrowUp':
+        next = rtl && event.key === 'ArrowLeft' ? index + 1 : index - 1;
+        break;
+      case 'ArrowRight':
+      case 'ArrowDown':
+        next = rtl && event.key === 'ArrowRight' ? index - 1 : index + 1;
+        break;
+      case 'Home':
+        next = 0;
+        break;
+      case 'End':
+        next = tabs.length - 1;
+        break;
+    }
+
+    if (next < 0) next = tabs.length - 1;
+    if (next >= tabs.length) next = 0;
+
+    const button = tabs[next];
+    if (button) this.#activate(button, true);
+  };
+
+  /**
+   * @param {Event} event
+   */
+  #onBlockSelect = (event) => {
+    const target = /** @type {HTMLElement} */ (event.target);
+    if (!this.contains(target)) return;
+
+    const item = target.closest('.tabs__item');
+    const panel =
+      (item instanceof HTMLElement ? item.querySelector('[role="tabpanel"]') : null) ??
+      target.closest('[role="tabpanel"]');
+    if (!(panel instanceof HTMLElement)) return;
+
+    const button = this.querySelector(`[role="tab"][aria-controls="${panel.id}"]`);
+    if (button instanceof HTMLButtonElement) this.#activate(button);
+  };
+
+  get #tabs() {
+    return Array.from(this.querySelectorAll('[role="tab"]')).filter(
+      (tab) => tab instanceof HTMLButtonElement && tab.closest('tabs-component') === this
+    );
+  }
+
+  get #panels() {
+    return Array.from(this.querySelectorAll('[role="tabpanel"]')).filter(
+      (panel) => panel instanceof HTMLElement && panel.closest('tabs-component') === this
+    );
+  }
+
+  #sync() {
+    const selected =
+      this.#tabs.find((tab) => tab.getAttribute('aria-selected') === 'true') ?? this.#tabs[0];
+    if (selected) this.#activate(selected);
+  }
+
+  /**
+   * @param {HTMLButtonElement} button
+   * @param {boolean} [focus]
+   */
+  #activate(button, focus = false) {
+    const panelId = button.getAttribute('aria-controls');
+
+    for (const tab of this.#tabs) {
+      const selected = tab === button;
+      tab.setAttribute('aria-selected', selected ? 'true' : 'false');
+      tab.tabIndex = selected ? 0 : -1;
+    }
+
+    for (const panel of this.#panels) {
+      const selected = panel.id === panelId;
+      panel.classList.toggle('is-active', selected);
+      panel.hidden = !selected;
+    }
+
+    if (focus) button.focus();
+  }
+}
+
+if (!customElements.get('tabs-component')) {
+  customElements.define('tabs-component', TabsComponent);
+}

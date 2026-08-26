@@ -1,0 +1,154 @@
+{%- doc -%}
+  Styles for the tabs component.
+{%- enddoc -%}
+
+{% stylesheet %}
+  .tabs {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .tabs__heading {
+    margin: 0;
+    text-align: var(--tabs-heading-align, start);
+  }
+
+  .tabs__heading + .tabs__layout {
+    margin-block-start: var(--padding-lg);
+  }
+
+  .tabs__layout {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    column-gap: var(--tabs-gap, var(--gap-sm));
+  }
+
+  .tabs__item {
+    display: contents;
+  }
+
+  .tabs--align-center .tabs__layout {
+    justify-content: center;
+  }
+
+  .tabs--align-fill .tabs__tab {
+    flex: 1 1 0;
+    text-align: center;
+    justify-content: center;
+  }
+
+  .tabs__tab {
+    appearance: none;
+    display: inline-flex;
+    align-items: center;
+    margin: 0;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    white-space: nowrap;
+    color: var(--tabs-text, rgb(var(--color-foreground-rgb) / 0.65));
+    font-family: var(--tabs-font-family);
+    font-style: var(--tabs-font-style);
+    font-weight: var(--tabs-font-weight);
+    font-size: var(--tabs-font-size);
+    line-height: var(--tabs-line-height);
+    letter-spacing: var(--tabs-letter-spacing);
+    text-transform: var(--tabs-font-case);
+    padding: var(--padding-sm) var(--padding-md);
+    order: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition:
+      color var(--hover-transition-duration) var(--hover-transition-timing),
+      background-color var(--hover-transition-duration) var(--hover-transition-timing),
+      border-color var(--hover-transition-duration) var(--hover-transition-timing);
+  }
+
+  .tabs__tab:hover {
+    color: var(--tabs-active, var(--color-foreground));
+  }
+
+  .tabs__tab:focus-visible {
+    outline: 2px solid currentcolor;
+    outline-offset: 2px;
+  }
+
+  .tabs--underline .tabs__layout {
+    border-block-end: var(--border-width-sm) solid var(--color-border);
+  }
+
+  .tabs--underline .tabs__tab {
+    margin-block-end: calc(var(--border-width-sm) * -1);
+    border-block-end: 2px solid transparent;
+    border-radius: 0;
+  }
+
+  .tabs--underline .tabs__tab[aria-selected='true'] {
+    color: var(--tabs-active, var(--color-foreground));
+    border-block-end-color: var(--tabs-indicator, var(--color-foreground));
+  }
+
+  .tabs--pills .tabs__tab {
+    border-radius: var(--style-border-radius-pills, 999px);
+  }
+
+  .tabs--pills .tabs__tab[aria-selected='true'] {
+    color: var(--tabs-active, var(--color-background));
+    background-color: var(--tabs-indicator, var(--color-foreground));
+  }
+
+  .tabs--boxed .tabs__layout {
+    gap: 0;
+    border-block-end: var(--border-width-sm) solid var(--color-border);
+  }
+
+  .tabs--boxed .tabs__tab {
+    margin-block-end: calc(var(--border-width-sm) * -1);
+    border: var(--border-width-sm) solid transparent;
+    border-block-end: none;
+    border-start-start-radius: var(--style-border-radius, 0);
+    border-start-end-radius: var(--style-border-radius, 0);
+  }
+
+  .tabs--boxed .tabs__tab[aria-selected='true'] {
+    color: var(--tabs-active, var(--color-foreground));
+    background-color: var(--color-background);
+    border-color: var(--tabs-indicator, var(--color-border));
+  }
+
+  .tabs__panel {
+    display: none;
+    order: 1;
+    flex: 1 0 100%;
+    width: 100%;
+    padding-block-start: var(--tabs-content-padding, var(--padding-lg));
+  }
+
+  .tabs__panel.is-active,
+  .tabs__item:first-of-type .tabs__panel {
+    display: block;
+  }
+
+  .tabs__layout:has(.tabs__panel.is-active) .tabs__item:first-of-type .tabs__panel:not(.is-active) {
+    display: none;
+  }
+
+  .tabs__panel[hidden] {
+    display: none;
+  }
+
+  .tabs__panel .rte > *:first-child {
+    margin-block-start: 0;
+  }
+
+  .tabs__panel .rte > *:last-child {
+    margin-block-end: 0;
+  }
+
+  .tabs__empty {
+    margin: 0;
+    color: rgb(var(--color-foreground-rgb) / 0.65);
+  }
+{% endstylesheet %}

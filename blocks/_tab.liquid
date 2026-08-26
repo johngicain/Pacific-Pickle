@@ -1,0 +1,78 @@
+{% liquid
+  assign is_selected = false
+  if block.settings.open_by_default
+    assign is_selected = true
+  endif
+%}
+
+<div
+  class="tabs__item"
+  {{ block.shopify_attributes }}
+>
+  <button
+    class="tabs__tab"
+    type="button"
+    role="tab"
+    id="tab-{{ block.id }}"
+    aria-controls="panel-{{ block.id }}"
+    aria-selected="{% if is_selected %}true{% else %}false{% endif %}"
+    tabindex="{% if is_selected %}0{% else %}-1{% endif %}"
+  >
+    {% if block.settings.heading != blank %}
+      {{ block.settings.heading }}
+    {% else %}
+      {{ 'accessibility.tabs' | t }}
+    {% endif %}
+  </button>
+
+  <div
+    class="tabs__panel{% if is_selected %} is-active{% endif %}"
+    id="panel-{{ block.id }}"
+    role="tabpanel"
+    aria-labelledby="tab-{{ block.id }}"
+    tabindex="0"
+  >
+    {% if block.settings.content != blank %}
+      <rte-formatter class="rte">
+        {{ block.settings.content }}
+      </rte-formatter>
+    {% endif %}
+
+    {% content_for 'blocks' %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:names.tab",
+  "tag": null,
+  "blocks": [
+    {
+      "type": "@theme"
+    },
+    {
+      "type": "@app"
+    }
+  ],
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:settings.heading",
+      "default": "t:text_defaults.tab_heading"
+    },
+    {
+      "type": "richtext",
+      "id": "content",
+      "label": "t:settings.content",
+      "default": "t:html_defaults.share_information_about_your"
+    },
+    {
+      "type": "checkbox",
+      "id": "open_by_default",
+      "label": "t:settings.open_by_default",
+      "default": false
+    }
+  ]
+}
+{% endschema %}

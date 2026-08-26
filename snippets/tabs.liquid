@@ -1,0 +1,69 @@
+{%- doc -%}
+  Accessible tabs with per-tab block settings.
+
+  @param {string} items - Rendered tab items from content_for
+  @param {object} settings - Section or block settings
+  @param {string} id - Unique id for this tabs instance
+  @param {string} [attributes] - Optional attributes for the component wrapper
+{%- enddoc -%}
+
+<script
+  src="{{ 'tabs.js' | asset_url }}"
+  type="module"
+  fetchpriority="low"
+></script>
+
+{% liquid
+  assign tab_style = settings.tab_style | default: 'underline'
+  assign tab_alignment = settings.tab_alignment | default: 'start'
+  assign type_preset = settings.type_preset | default: 'h6'
+  if type_preset == blank
+    assign type_preset = 'h6'
+  endif
+%}
+
+{% render 'tabs-styles' %}
+
+<tabs-component
+  class="tabs tabs--{{ tab_style }} tabs--align-{{ tab_alignment }}"
+  style="
+    --tabs-font-family: var(--font-{{ type_preset }}--family);
+    --tabs-font-style: var(--font-{{ type_preset }}--style);
+    --tabs-font-weight: var(--font-{{ type_preset }}--weight);
+    --tabs-font-size: var(--font-{{ type_preset }}--size);
+    --tabs-line-height: var(--font-{{ type_preset }}--line-height);
+    --tabs-letter-spacing: var(--font-{{ type_preset }}--letter-spacing);
+    --tabs-font-case: var(--font-{{ type_preset }}--case);
+    --tabs-gap: {{ settings.gap }}px;
+    --tabs-content-padding: {{ settings.content_padding }}px;
+    {% if settings.text_color != blank %}--tabs-text: {{ settings.text_color }};{% endif %}
+    {% if settings.active_color != blank %}--tabs-active: {{ settings.active_color }};{% endif %}
+    {% if settings.indicator_color != blank %}--tabs-indicator: {{ settings.indicator_color }};{% endif %}
+  "
+  {{ attributes }}
+>
+  {% if settings.heading != blank %}
+    <h2
+      class="tabs__heading"
+      style="--tabs-heading-align: {{ settings.heading_alignment | default: 'left' }};"
+    >
+      {{ settings.heading }}
+    </h2>
+  {% endif %}
+
+  {% if items != blank %}
+    <div
+      class="tabs__layout"
+      role="tablist"
+      aria-label="{{ 'accessibility.tabs' | t }}"
+      id="tablist-{{ id }}"
+      ref="tablist"
+      on:click="/selectTab"
+      on:keydown="/onKeyDown"
+    >
+      {{ items }}
+    </div>
+  {% elsif request.design_mode or request.visual_preview_mode %}
+    <p class="tabs__empty">{{ 'accessibility.tabs' | t }}</p>
+  {% endif %}
+</tabs-component>

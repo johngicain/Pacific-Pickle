@@ -58,6 +58,7 @@
     "skip_to_text": "Skip to content",
     "slide_status": "Slide {{ index }} of {{ length }}",
     "slideshow": "Slideshow",
+    "tabs": "Tabs",
     "slideshow_next": "Next slide",
     "slideshow_pause": "Pause slideshow",
     "slideshow_play": "Play slideshow",
