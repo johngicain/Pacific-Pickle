@@ -162,7 +162,7 @@
                 "text_color": "{{ settings.color_palette.color1 }}",
                 "gap": 10,
                 "padding-block-start": 0,
-                "padding-block-end": 10,
+                "padding-block-end": 15,
                 "padding-inline-start": 0,
                 "padding-inline-end": 0
               },
@@ -194,6 +194,7 @@
             "divider": {
               "type": "_divider",
               "name": "t:names.divider",
+              "disabled": true,
               "settings": {
                 "thickness": 1,
                 "corner_radius": "square",
@@ -249,7 +250,7 @@
                 "border_width": 2,
                 "border_radius": 0,
                 "padding-block-start": 0,
-                "padding-block-end": 0,
+                "padding-block-end": 20,
                 "padding-inline-start": 0,
                 "padding-inline-end": 0
               },
@@ -289,128 +290,6 @@
                 }
               },
               "block_order": []
-            },
-            "trust_row": {
-              "type": "group",
-              "settings": {
-                "content_direction": "row",
-                "vertical_on_mobile": true,
-                "horizontal_alignment": "space-between",
-                "vertical_alignment": "center",
-                "align_baseline": false,
-                "horizontal_alignment_flex_direction_column": "flex-start",
-                "vertical_alignment_flex_direction_column": "flex-start",
-                "gap": 12,
-                "gap_mobile": 12,
-                "narrow_width": false,
-                "width": "fill",
-                "custom_width": 100,
-                "width_mobile": "fill",
-                "custom_width_mobile": 100,
-                "height": "fit",
-                "custom_height": 100,
-                "background_media": "none",
-                "background_color": "",
-                "video_position": "cover",
-                "background_image_position": "cover",
-                "toggle_overlay": false,
-                "overlay_color": "#00000026",
-                "overlay_style": "solid",
-                "gradient_direction": "to top",
-                "border": "none",
-                "border_width": 1,
-                "border_opacity": 100,
-                "border_color": "",
-                "border_left": 0,
-                "border_left_color": "",
-                "border_radius": 0,
-                "link": "",
-                "open_in_new_tab": false,
-                "placeholder": "",
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {
-                "ship": {
-                  "type": "icon-with-text",
-                  "settings": {
-                    "icon": "truck",
-                    "width": 20,
-                    "icon_color": "#3d6b35",
-                    "heading": "Free ship $60+",
-                    "heading_preset": "h6",
-                    "text": "",
-                    "font_size": "0.75rem",
-                    "text_color": "",
-                    "icon_position": "left",
-                    "vertical_alignment": "center",
-                    "horizontal_alignment": "flex-start",
-                    "gap": 8,
-                    "link": "",
-                    "open_in_new_tab": false,
-                    "padding-block-start": 0,
-                    "padding-block-end": 0,
-                    "padding-inline-start": 0,
-                    "padding-inline-end": 0
-                  },
-                  "blocks": {}
-                },
-                "returns": {
-                  "type": "icon-with-text",
-                  "settings": {
-                    "icon": "return",
-                    "width": 20,
-                    "icon_color": "#3d6b35",
-                    "heading": "Easy returns",
-                    "heading_preset": "h6",
-                    "text": "",
-                    "font_size": "0.75rem",
-                    "text_color": "",
-                    "icon_position": "left",
-                    "vertical_alignment": "center",
-                    "horizontal_alignment": "flex-start",
-                    "gap": 8,
-                    "link": "",
-                    "open_in_new_tab": false,
-                    "padding-block-start": 0,
-                    "padding-block-end": 0,
-                    "padding-inline-start": 0,
-                    "padding-inline-end": 0
-                  },
-                  "blocks": {}
-                },
-                "secure": {
-                  "type": "icon-with-text",
-                  "settings": {
-                    "icon": "lock",
-                    "width": 20,
-                    "icon_color": "#3d6b35",
-                    "heading": "Secure checkout",
-                    "heading_preset": "h6",
-                    "text": "",
-                    "font_size": "0.75rem",
-                    "text_color": "",
-                    "icon_position": "left",
-                    "vertical_alignment": "center",
-                    "horizontal_alignment": "flex-start",
-                    "gap": 8,
-                    "link": "",
-                    "open_in_new_tab": false,
-                    "padding-block-start": 0,
-                    "padding-block-end": 0,
-                    "padding-inline-start": 0,
-                    "padding-inline-end": 0
-                  },
-                  "blocks": {}
-                }
-              },
-              "block_order": [
-                "ship",
-                "returns",
-                "secure"
-              ]
             },
             "payment_icons": {
               "type": "payment-icons",
@@ -1088,6 +967,129 @@
                 "ingredients",
                 "nutrition"
               ]
+            },
+            "trust_row": {
+              "type": "group",
+              "disabled": true,
+              "settings": {
+                "content_direction": "row",
+                "vertical_on_mobile": true,
+                "horizontal_alignment": "space-between",
+                "vertical_alignment": "center",
+                "align_baseline": false,
+                "horizontal_alignment_flex_direction_column": "flex-start",
+                "vertical_alignment_flex_direction_column": "flex-start",
+                "gap": 12,
+                "gap_mobile": 12,
+                "narrow_width": false,
+                "width": "fill",
+                "custom_width": 100,
+                "width_mobile": "fill",
+                "custom_width_mobile": 100,
+                "height": "fit",
+                "custom_height": 100,
+                "background_media": "none",
+                "background_color": "",
+                "video_position": "cover",
+                "background_image_position": "cover",
+                "toggle_overlay": false,
+                "overlay_color": "#00000026",
+                "overlay_style": "solid",
+                "gradient_direction": "to top",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_color": "",
+                "border_left": 0,
+                "border_left_color": "",
+                "border_radius": 0,
+                "link": "",
+                "open_in_new_tab": false,
+                "placeholder": "",
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {
+                "ship": {
+                  "type": "icon-with-text",
+                  "settings": {
+                    "icon": "truck",
+                    "width": 20,
+                    "icon_color": "#3d6b35",
+                    "heading": "Free ship $60+",
+                    "heading_preset": "h6",
+                    "text": "",
+                    "font_size": "0.75rem",
+                    "text_color": "",
+                    "icon_position": "left",
+                    "vertical_alignment": "center",
+                    "horizontal_alignment": "flex-start",
+                    "gap": 8,
+                    "link": "",
+                    "open_in_new_tab": false,
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {}
+                },
+                "returns": {
+                  "type": "icon-with-text",
+                  "settings": {
+                    "icon": "return",
+                    "width": 20,
+                    "icon_color": "#3d6b35",
+                    "heading": "Easy returns",
+                    "heading_preset": "h6",
+                    "text": "",
+                    "font_size": "0.75rem",
+                    "text_color": "",
+                    "icon_position": "left",
+                    "vertical_alignment": "center",
+                    "horizontal_alignment": "flex-start",
+                    "gap": 8,
+                    "link": "",
+                    "open_in_new_tab": false,
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {}
+                },
+                "secure": {
+                  "type": "icon-with-text",
+                  "settings": {
+                    "icon": "lock",
+                    "width": 20,
+                    "icon_color": "#3d6b35",
+                    "heading": "Secure checkout",
+                    "heading_preset": "h6",
+                    "text": "",
+                    "font_size": "0.75rem",
+                    "text_color": "",
+                    "icon_position": "left",
+                    "vertical_alignment": "center",
+                    "horizontal_alignment": "flex-start",
+                    "gap": 8,
+                    "link": "",
+                    "open_in_new_tab": false,
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "ship",
+                "returns",
+                "secure"
+              ]
             }
           },
           "block_order": [
@@ -1099,12 +1101,12 @@
             "divider",
             "variant_picker",
             "buy_buttons",
-            "trust_row",
             "payment_icons",
             "highlights",
             "inventory",
             "pairs",
-            "details_accordion"
+            "details_accordion",
+            "trust_row"
           ]
         }
       },
