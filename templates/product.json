@@ -79,7 +79,7 @@
               "type": "icon-with-text",
               "settings": {
                 "icon": "truck",
-                "width": 24,
+                "width": 20,
                 "icon_color": "#3d6b35",
                 "heading": "",
                 "heading_preset": "h6",
@@ -429,7 +429,11 @@
             "details_columns": {
               "type": "details-multicolumn",
               "settings": {
-                "metaobjects": [],
+                "metaobjects": [
+                  "features-dud9cgu1",
+                  "features-3uorvr9c",
+                  "features-8arelnjo"
+                ],
                 "display_mode": "icon_text",
                 "columns": 3,
                 "mobile_columns": "1",
