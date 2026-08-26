@@ -447,7 +447,7 @@
                 "case": "none",
                 "wrap": "pretty",
                 "item_padding_top": 20,
-                "item_padding_bottom": 20,
+                "item_padding_bottom": 15,
                 "item_padding_left": 20,
                 "item_padding_right": 20,
                 "background_color": "#ffffff",
