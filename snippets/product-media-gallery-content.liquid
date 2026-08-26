@@ -159,6 +159,24 @@
     assign product_media_container_class = product_media_container_class | append: ' media-fit-contain'
   endif
 
+  assign media_border_style = block_settings.media_border | default: 'none'
+  assign media_border_width = block_settings.media_border_width | default: 1
+  if block_settings.media_border_color != blank
+    assign media_border_color_value = 'rgb(' | append: block_settings.media_border_color.rgba | append: ')'
+  else
+    assign media_border_opacity_value = block_settings.media_border_opacity | default: 100 | divided_by: 100.0
+    assign media_border_color_value = 'rgb(var(--color-border-rgb) / ' | append: media_border_opacity_value | append: ')'
+  endif
+
+  assign controls_border_style = block_settings.controls_border | default: 'none'
+  assign controls_border_width = block_settings.controls_border_width | default: 1
+  if block_settings.controls_border_color != blank
+    assign controls_border_color_value = 'rgb(' | append: block_settings.controls_border_color.rgba | append: ')'
+  else
+    assign controls_border_opacity_value = block_settings.controls_border_opacity | default: 100 | divided_by: 100.0
+    assign controls_border_color_value = 'rgb(var(--color-border-rgb) / ' | append: controls_border_opacity_value | append: ')'
+  endif
+
   if block_settings.aspect_ratio == 'adapt'
     assign lowest_aspect_ratio = 50
     assign lowest_aspect_ratio_index = 0
@@ -355,7 +373,7 @@
         media-gallery--extend
       {% endif %}
     "
-    style="{% render 'spacing-style', settings: block_settings %} --thumbnail-width: {{ block_settings.thumbnail_width }}px; --media-radius: {{ block_settings.media_radius }}px;{% if block_settings.icons_style contains 'large' %} --slideshow-icon-padding: 0px;{% endif %}--image-gap: {{ block_settings.image_gap }}px;{% unless block_settings.aspect_ratio == 'adapt' %} --gallery-aspect-ratio: {{ block_settings.aspect_ratio }};{% endunless %}"
+    style="{% render 'spacing-style', settings: block_settings %} --thumbnail-width: {{ block_settings.thumbnail_width }}px; --media-radius: {{ block_settings.media_radius }}px;{% if block_settings.icons_style contains 'large' %} --slideshow-icon-padding: 0px;{% endif %}--image-gap: {{ block_settings.image_gap }}px;{% unless block_settings.aspect_ratio == 'adapt' %} --gallery-aspect-ratio: {{ block_settings.aspect_ratio }};{% endunless %} --product-media-border-style: {{ media_border_style }}; --product-media-border-width: {{ media_border_width }}px; --product-media-border-color: {{ media_border_color_value }}; --slideshow-control-border-style: {{ controls_border_style }}; --slideshow-control-border-width: {{ controls_border_width }}px; --slideshow-control-border-color: {{ controls_border_color_value }};"
     data-presentation="{{ media_presentation }}"
     {{ block_shopify_attributes }}
   >
@@ -1052,5 +1070,16 @@
 
   slideshow-slide.product-media-container--tallest {
     content-visibility: visible;
+  }
+
+  media-gallery slideshow-component .product-media,
+  media-gallery .media-gallery__grid .product-media {
+    border: var(--product-media-border-width, 0px) var(--product-media-border-style, none)
+      var(--product-media-border-color, transparent);
+  }
+
+  media-gallery .slideshow-control {
+    border: var(--slideshow-control-border-width, 0px) var(--slideshow-control-border-style, none)
+      var(--slideshow-control-border-color, transparent);
   }
 {% endstylesheet %}

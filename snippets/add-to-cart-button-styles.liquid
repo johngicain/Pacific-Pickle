@@ -44,6 +44,12 @@
     height: 30px;
   }
 
+  .add-to-cart-icon.svg-wrapper,
+  .add-to-cart-icon.svg-wrapper > svg {
+    width: 18px;
+    height: 18px;
+  }
+
   .add-to-cart-text {
     --atc-opacity: 0;
     --atc-destination: -1em;
@@ -57,6 +63,14 @@
     animation-fill-mode: forwards;
     transition: width var(--animation-speed) var(--animation-easing),
       opacity var(--animation-speed) var(--animation-easing);
+  }
+
+  .add-to-cart-text--with-price {
+    gap: var(--gap-sm);
+  }
+
+  .add-to-cart-text__price {
+    font-variant-numeric: tabular-nums;
   }
 
   .add-to-cart__added {

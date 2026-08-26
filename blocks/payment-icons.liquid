@@ -21,8 +21,34 @@
     role="list"
   >
     {%- for type in shop.enabled_payment_types -%}
-      <li class="payment-icons__item">
-        {{ type | payment_type_svg_tag: class: 'icon icon--full-color' }}
+      {%- liquid
+        case type
+          when 'master'
+            assign type_name = 'Mastercard'
+          when 'paypal'
+            assign type_name = 'PayPal'
+          when 'shopify_pay'
+            assign type_name = 'Shop Pay'
+          when 'unionpay'
+            assign type_name = 'UnionPay'
+          when 'jcb'
+            assign type_name = 'JCB'
+          when 'ideal'
+            assign type_name = 'iDEAL'
+          else
+            assign type_name = ''
+            assign type_words = type | split: '_'
+            for word in type_words
+              assign word_name = word | capitalize
+              assign type_name = type_name | append: word_name
+              unless forloop.last
+                assign type_name = type_name | append: ' '
+              endunless
+            endfor
+        endcase
+      -%}
+      <li class="payment-icons__wrapper">
+        <span class="payment-icons__item">{{ type_name }}</span>
       </li>
     {%- endfor -%}
   </ul>
@@ -43,9 +69,19 @@
     padding: 0;
   }
 
-  .payment-icons__item {
+  .payment-icons__wrapper {
     display: flex;
     align-items: center;
+    border: var(--style-border-width) solid var(--color-border);
+    padding: var(--padding-2xs) var(--padding-xs);
+  }
+
+  .payment-icons__item {
+    font-size: 10px;
+    text-transform: uppercase;
+    color: rgb(var(--color-foreground-rgb) / var(--opacity-subdued-text));
+    white-space: nowrap;
+    line-height: 1;
   }
 {% endstylesheet %}
 
