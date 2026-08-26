@@ -403,7 +403,7 @@
             "payment_icons": {
               "type": "payment-icons",
               "settings": {
-                "horizontal_alignment": "flex-start",
+                "horizontal_alignment": "center",
                 "gap": 8,
                 "padding-block-start": 0,
                 "padding-block-end": 10,
@@ -1387,8 +1387,8 @@
         "tab-1": {
           "type": "_tab",
           "settings": {
-            "heading": "Description",
-            "content": "<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.</p>",
+            "heading": "DESCRIPTION",
+            "content": "{{ closest.product.metafields.custom.description | metafield_tag }}",
             "open_by_default": true
           },
           "blocks": {}
