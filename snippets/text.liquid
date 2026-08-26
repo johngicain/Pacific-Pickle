@@ -50,12 +50,8 @@
     if block_settings.text_shadow
       echo ' text-block--text-shadow '
     endif
-    if block_settings.font == 'var(--font-heading--family)'
-      if block_settings.bold_color != blank
-        echo ' text-block--bold-color '
-      else
-        echo ' text-block--bold-weight '
-      endif
+    if block_settings.font == 'var(--font-heading--family)' and block_settings.bold_color != blank
+      echo ' text-block--bold-color '
     endif
     if block_settings.italic_color != blank
       echo ' text-block--italic-color '
@@ -95,13 +91,9 @@
     {% if block_settings.text_shadow %}
       --text-shadow-color: {{ block_settings.text_shadow_color | default: '#00000080' }};
     {% endif %}
-    {% if block_settings.font == 'var(--font-heading--family)' %}
-      {% if block_settings.bold_color != blank %}
-        --bold-color: {{ block_settings.bold_color }};
-        --font-weight: 400;
-      {% else %}
-        --font-weight: bold;
-      {% endif %}
+    {% if block_settings.font == 'var(--font-heading--family)' and block_settings.bold_color != blank %}
+      --bold-color: {{ block_settings.bold_color }};
+      --font-weight: 400;
     {% endif %}
     {% if block_settings.italic_color != blank %}
       --italic-color: {{ block_settings.italic_color }};
@@ -135,22 +127,16 @@
   </{{ element }}>
 {% endif %}
 
-{% if block_settings.font == 'var(--font-heading--family)' %}
+{% if block_settings.font == 'var(--font-heading--family)' and block_settings.bold_color != blank %}
   {% style %}
-    {% if block_settings.bold_color != blank %}
-      {% assign heading_variant_font = settings.type_heading_font | font_modify: 'weight', 'normal' %}
-      {% assign heading_font_weight = '400' %}
-    {% else %}
-      {% assign heading_variant_font = settings.type_heading_font | font_modify: 'weight', 'bold' %}
-      {% assign heading_font_weight = 'bold' %}
-    {% endif %}
+    {% assign heading_variant_font = settings.type_heading_font | font_modify: 'weight', 'normal' %}
     {% if heading_variant_font %}
       {{ heading_variant_font | font_face: font_display: 'swap' }}
     {% endif %}
     .text-block--{{ block.id }},
     .text-block--{{ block.id }} > *,
     .text-block--{{ block.id }} :is(h1, h2, h3, h4, h5, h6, p, strong, b) {
-      font-weight: {{ heading_font_weight }} !important;
+      font-weight: 400 !important;
     }
   {% endstyle %}
 {% endif %}
@@ -219,9 +205,4 @@
     font-size: var(--italic-font-size);
   }
 
-  .text-block.custom-typography.text-block--bold-weight,
-  .text-block.custom-typography.text-block--bold-weight > *,
-  .text-block.custom-typography.text-block--bold-weight :is(h1, h2, h3, h4, h5, h6, p, strong, b) {
-    font-weight: bold;
-  }
 {% endstylesheet %}

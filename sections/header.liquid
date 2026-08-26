@@ -62,10 +62,15 @@
         assign sticky_text_contrast = 'var(--palette-lightest)'
       endif
     endif
-    if section.settings.border_width_sticky > 0
+    if section.settings.show_bottom_border_sticky
       assign sticky_border = true
       assign sticky_border_color = section.settings.bottom_border_color_sticky
     endif
+  endif
+
+  assign header_border_width = 0
+  if section.settings.show_bottom_border
+    assign header_border_width = section.settings.border_width
   endif
 
   # Cart bubble colors: custom styles apply in every header state; default
@@ -465,23 +470,22 @@
           endif
 
           if bottom_row_blocks.size > 0
-            assign border_bottom_setting_id = 'divider_width'
-            assign border_bottom_color_setting_id = 'divider_color'
+            assign border_bottom_width = section.settings.divider_width
+            assign border_bottom_color_value = section.settings.divider_color
           else
-            assign border_bottom_setting_id = 'border_width'
-            assign border_bottom_color_setting_id = 'bottom_border_color'
+            assign border_bottom_width = header_border_width
+            assign border_bottom_color_value = section.settings.bottom_border_color
           endif
         when 'bottom'
           assign first = ''
           assign class = class | append: ' mobile:hidden'
 
-          assign border_bottom_setting_id = 'border_width'
-          assign border_bottom_color_setting_id = 'bottom_border_color'
+          assign border_bottom_width = header_border_width
+          assign border_bottom_color_value = section.settings.bottom_border_color
       endcase
 
-      assign style = '--border-bottom-width: [width]px; ' | replace: '[width]', section.settings[border_bottom_setting_id]
+      assign style = '--border-bottom-width: [width]px; ' | replace: '[width]', border_bottom_width
 
-      assign border_bottom_color_value = section.settings[border_bottom_color_setting_id]
       if border_bottom_color_value != blank
         assign style = style | append: '--border-bottom-color: [color]; ' | replace: '[color]', border_bottom_color_value
       endif
@@ -489,7 +493,7 @@
       if row == 'top'
         assign custom_color_styles = true
         assign class = class | append: row_class
-        assign style = style | append: '--border-bottom-width-mobile: [width]px; ' | replace: '[width]', section.settings.border_width
+        assign style = style | append: '--border-bottom-width-mobile: [width]px; ' | replace: '[width]', header_border_width
 
         assign mobile_border_color = section.settings.bottom_border_color | default: 'var(--color-border)'
         assign style = style | append: '--border-bottom-color-mobile: [color]; ' | replace: '[color]', mobile_border_color
@@ -1706,6 +1710,13 @@
       "visible_if": "{{ section.settings.enable_sticky_header != 'never' }}"
     },
     {
+      "type": "checkbox",
+      "id": "show_bottom_border_sticky",
+      "label": "t:settings.sticky_header_bottom_border",
+      "default": false,
+      "visible_if": "{{ section.settings.enable_sticky_header != 'never' }}"
+    },
+    {
       "type": "range",
       "id": "border_width_sticky",
       "label": "t:settings.sticky_header_border_width",
@@ -1713,15 +1724,15 @@
       "max": 5,
       "step": 0.5,
       "unit": "px",
-      "default": 0,
-      "visible_if": "{{ section.settings.enable_sticky_header != 'never' }}"
+      "default": 1,
+      "visible_if": "{{ section.settings.enable_sticky_header != 'never' and section.settings.show_bottom_border_sticky }}"
     },
     {
       "type": "color",
       "id": "bottom_border_color_sticky",
       "label": "t:settings.sticky_header_bottom_border_color",
       "placeholder": "t:settings.default",
-      "visible_if": "{{ section.settings.enable_sticky_header != 'never' and section.settings.border_width_sticky > 0 }}"
+      "visible_if": "{{ section.settings.enable_sticky_header != 'never' and section.settings.show_bottom_border_sticky }}"
     },
     {
       "type": "range",
@@ -1758,6 +1769,12 @@
       "visible_if": "{{ section.settings.divider_width > 0 and section.settings.menu_row == 'bottom' or section.settings.localization_row == 'bottom' or section.settings.search_row == 'bottom' }}"
     },
     {
+      "type": "checkbox",
+      "id": "show_bottom_border",
+      "label": "t:settings.bottom_border",
+      "default": false
+    },
+    {
       "type": "range",
       "id": "border_width",
       "label": "t:settings.border_width",
@@ -1765,14 +1782,15 @@
       "max": 5,
       "step": 0.5,
       "unit": "px",
-      "default": 0
+      "default": 1,
+      "visible_if": "{{ section.settings.show_bottom_border }}"
     },
     {
       "type": "color",
       "id": "bottom_border_color",
       "label": "t:settings.bottom_border_color",
       "placeholder": "t:settings.default",
-      "visible_if": "{{ section.settings.border_width > 0 }}"
+      "visible_if": "{{ section.settings.show_bottom_border }}"
     },
     {
       "type": "header",

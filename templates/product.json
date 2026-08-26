@@ -26,6 +26,7 @@
             "thumbnail_position": "bottom",
             "thumbnail_width": 64,
             "thumbnail_radius": 0,
+            "thumbnail_active_border_color": "#1c1c1a",
             "controls_border": "solid",
             "controls_border_width": 2,
             "controls_border_opacity": 100,

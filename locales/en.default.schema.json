@@ -133,6 +133,7 @@
     "resource_reference_product_sku": "Displays SKU from parent product",
     "resource_reference_product_review": "Displays reviews from parent product",
     "heat_level_metafields": "Uses the product metafields custom.level (chilli count) and custom.level_label",
+    "product_tag_metafield": "Uses the product metafield custom.tag",
     "resource_reference_product_swatches": "Displays swatches from parent product",
     "resource_reference_product_title": "Displays title from parent product",
     "resource_reference_product_variant_picker": "Displays variants from parent product",
@@ -788,6 +789,7 @@
     "blurred_reflection": "Blurred reflection",
     "border": "Border",
     "border_color": "Border color",
+    "active_border_color": "Active border color",
     "border_left": "Left border",
     "border_left_color": "Left border color",
     "border_opacity": "Border opacity",
@@ -1118,6 +1120,7 @@
     "show_button": "Show button",
     "show_second_image_on_hover": "Show second image on hover",
     "show_swatch_label": "Text labels for swatches",
+    "show_tag": "Show tag",
     "show_tax_info": "Tax information",
     // Font size or element dimensions setting
     "size": "Size",
@@ -1135,6 +1138,7 @@
     "sticky_header": "Sticky header",
     "sticky_header_background": "On-scroll background",
     "sticky_header_text": "On-scroll text",
+    "sticky_header_bottom_border": "On-scroll bottom border",
     "sticky_header_border_width": "On-scroll border thickness",
     "sticky_header_bottom_border_color": "On-scroll bottom border color",
     // Icon line thickness setting label

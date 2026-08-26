@@ -11,6 +11,7 @@
   @param {boolean} [first_3d_model] - Indicates if this is the first 3D model.
   @param {boolean} [is_main_product_media] - Indicates if this is the main product image.
   @param {string} [image_ref] - Optional ref attribute for the image element.
+  @param {string} [product_tag] - Optional product tag overlay text.
 
   @example
   {% render 'product-media', media: media, preview_image_only: false, loading: 'lazy' %}
@@ -52,6 +53,10 @@
       style: focal_point_style,
       ref: image_ref
   }}
+
+  {% if product_tag != blank %}
+    <div class="product-media__tag-wrapper">{{ product_tag | escape }}</div>
+  {% endif %}
 
   {% unless preview_image_only %}
     {%- case media.media_type -%}
