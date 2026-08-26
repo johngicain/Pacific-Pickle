@@ -26,10 +26,18 @@
             "thumbnail_position": "bottom",
             "thumbnail_width": 64,
             "thumbnail_radius": 0,
+            "controls_border": "solid",
+            "controls_border_width": 2,
+            "controls_border_opacity": 100,
+            "controls_border_color": "",
             "aspect_ratio": "1",
             "constrain_to_viewport": true,
             "media_fit": "contain",
             "media_radius": 0,
+            "media_border": "solid",
+            "media_border_width": 3,
+            "media_border_opacity": 100,
+            "media_border_color": "",
             "extend_media": false,
             "zoom": true,
             "video_loop": false,
@@ -127,7 +135,7 @@
                 "wrap": "pretty",
                 "text_color": "#1c1c1a",
                 "bold_color": "",
-                "italic_color": "#645E58",
+                "italic_color": "#645e58",
                 "italic_font_size": "0.875rem",
                 "text_shadow": false,
                 "text_shadow_color": "#00000080",
@@ -162,6 +170,7 @@
             },
             "price": {
               "type": "price",
+              "disabled": true,
               "settings": {
                 "show_sale_price_first": true,
                 "show_installments": false,
@@ -273,6 +282,7 @@
                 },
                 "accelerated-checkout": {
                   "type": "accelerated-checkout",
+                  "disabled": true,
                   "static": true,
                   "settings": {},
                   "blocks": {}
