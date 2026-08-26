@@ -1058,27 +1058,23 @@
                     "width": 20
                   },
                   "blocks": {
-                    "nutrition_text": {
-                      "type": "text",
+                    "image_DfQwYQ": {
+                      "type": "image",
+                      "name": "t:names.image",
                       "settings": {
-                        "text": "<p>See the nutrition facts label in the product gallery.</p>",
-                        "width": "100%",
-                        "max_width": "none",
-                        "alignment": "left",
-                        "type_preset": "rte",
-                        "font": "var(--font-body--family)",
-                        "font_size": "1rem",
-                        "line_height": "normal",
-                        "letter_spacing": "normal",
-                        "case": "none",
-                        "wrap": "pretty",
-                        "text_color": "",
-                        "bold_color": "",
-                        "text_shadow": false,
-                        "text_shadow_color": "#00000080",
-                        "background": false,
-                        "background_color": "#00000026",
-                        "corner_radius": 0,
+                        "image": "{{ closest.product.metafields.custom.nutrition.value }}",
+                        "link": "",
+                        "image_ratio": "adapt",
+                        "width": "fill",
+                        "custom_width": 100,
+                        "width_mobile": "fill",
+                        "custom_width_mobile": 100,
+                        "height": "fit",
+                        "border": "none",
+                        "border_width": 1,
+                        "border_opacity": 100,
+                        "border_color": "",
+                        "border_radius": 0,
                         "padding-block-start": 0,
                         "padding-block-end": 0,
                         "padding-inline-start": 0,
@@ -1088,7 +1084,7 @@
                     }
                   },
                   "block_order": [
-                    "nutrition_text"
+                    "image_DfQwYQ"
                   ]
                 }
               },
