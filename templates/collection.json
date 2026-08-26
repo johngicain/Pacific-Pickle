@@ -8,6 +8,18 @@
  * ------------------------------------------------------------
  */{
   "sections": {
+    "breadcrumbs": {
+      "type": "breadcrumbs",
+      "settings": {
+        "text_color": "#989EA2",
+        "active_color": "#111111",
+        "alignment": "flex-start",
+        "background_color": "",
+        "section_width": "page-width",
+        "padding-block-start": 16,
+        "padding-block-end": 8
+      }
+    },
     "section": {
       "type": "section",
       "blocks": {
@@ -216,6 +228,7 @@
     }
   },
   "order": [
+    "breadcrumbs",
     "section",
     "main"
   ]

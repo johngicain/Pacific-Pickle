@@ -22,6 +22,15 @@
   endif
 %}
 
+{% if block_settings.background_color != blank %}
+  {% render 'contrast-override',
+    background_color: block_settings.background_color,
+    text_color: block_settings.text_color,
+    border_color: block_settings.border_color,
+    section_id: block.id
+  %}
+{% endif %}
+
 {% if block_settings.icon_color != blank or block_settings.text_color != blank %}
   {% style %}
     .icon-with-text--{{ block.id }} {
@@ -42,10 +51,13 @@
     icon-with-text--{{ block.id }}
     icon-with-text--{{ block_settings.icon_position }}
     spacing-style
+    border-style
+    {% if block_settings.background_color != blank %} color-custom-{{ block.id }}{% endif %}
     {% if block_settings.link != blank %}icon-with-text--link{% endif %}
   "
   style="
     {% render 'spacing-style', settings: block_settings %}
+    {% render 'border-override', settings: block_settings %}
     --icon-with-text-gap: {{ block_settings.gap }}px;
     --icon-with-text-align: {{ block_settings.vertical_alignment }};
     --icon-with-text-horizontal-align: {{ block_settings.horizontal_alignment }};
@@ -314,6 +326,10 @@
         {
           "value": "serving_dish",
           "label": "t:options.serving_dish"
+        },
+        {
+          "value": "shield",
+          "label": "t:options.shield"
         },
         {
           "value": "shirt",
@@ -603,6 +619,71 @@
       "id": "open_in_new_tab",
       "label": "t:settings.open_new_tab",
       "default": false
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "t:settings.background_color",
+      "placeholder": "t:settings.default"
+    },
+    {
+      "type": "header",
+      "content": "t:content.borders"
+    },
+    {
+      "type": "select",
+      "id": "border",
+      "label": "t:settings.style",
+      "options": [
+        {
+          "value": "none",
+          "label": "t:options.none"
+        },
+        {
+          "value": "solid",
+          "label": "t:options.solid"
+        }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "range",
+      "id": "border_width",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "t:settings.thickness",
+      "default": 1,
+      "visible_if": "{{ block.settings.border != 'none' }}"
+    },
+    {
+      "type": "range",
+      "id": "border_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "label": "t:settings.opacity",
+      "default": 100,
+      "visible_if": "{{ block.settings.border != 'none' }}"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "t:settings.color",
+      "placeholder": "t:settings.default",
+      "visible_if": "{{ block.settings.border != 'none' }}"
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "label": "t:settings.border_radius",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
     },
     {
       "type": "header",

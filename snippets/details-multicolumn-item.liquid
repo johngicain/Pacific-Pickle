@@ -1,0 +1,140 @@
+{%- doc -%}
+  Renders one details column from a features metaobject.
+
+  @param {object} [item] - Features metaobject entry
+  @param {boolean} [show_placeholder] - Whether to render editor placeholders
+  @param {string} [placeholder_heading] - Placeholder heading
+  @param {string} [placeholder_text] - Placeholder text
+  @param {string} display_mode - `icon` or `icon_text`
+  @param {object} block_settings - Parent block settings
+  @param {string} [item_class] - Extra classes for the item wrapper
+{%- enddoc -%}
+
+{% liquid
+  assign image = ''
+  assign icon_text = ''
+  assign heading = ''
+  assign text = ''
+  assign show_placeholder_image = false
+
+  if show_placeholder
+    assign heading = placeholder_heading
+    assign text = placeholder_text
+    if display_mode == 'icon_text'
+      assign icon_text = placeholder_heading | slice: 0
+    else
+      assign show_placeholder_image = true
+    endif
+  elsif item != blank
+    assign source = item
+    assign object_type = item.system.type
+    assign object_handle = item.system.handle
+    if object_type != blank and object_handle != blank
+      assign fetched = metaobjects[object_type][object_handle]
+      if fetched != blank
+        assign source = fetched
+      endif
+    endif
+
+    if source.icon.type == 'file_reference' and source.icon.value != blank
+      assign image = source.icon.value
+    elsif source.image.type == 'file_reference' and source.image.value != blank
+      assign image = source.image.value
+    endif
+
+    assign icon_text = source.icon_text.value | strip
+    if icon_text == blank
+      assign icon_text = source.icon_text | metafield_text | strip
+    endif
+
+    assign heading = source.heading.value | strip
+    if heading == blank
+      assign heading = source.heading | metafield_text | strip
+    endif
+
+    if source.text.type == 'rich_text_field' and source.text.value != blank
+      assign text = source.text | metafield_tag
+    elsif source.text.value != blank
+      assign text = source.text.value
+    elsif source.sub_heading.type == 'rich_text_field' and source.sub_heading.value != blank
+      assign text = source.sub_heading | metafield_tag
+    elsif source.sub_heading.value != blank
+      assign text = source.sub_heading.value
+    endif
+  endif
+
+  assign show_icon_image = false
+  assign show_icon_text = false
+  if display_mode == 'icon'
+    if image != blank
+      assign show_icon_image = true
+    endif
+  else
+    if icon_text != blank
+      assign show_icon_text = true
+    elsif image != blank
+      assign show_icon_image = true
+    endif
+  endif
+
+  assign show_item = false
+  if show_icon_image or show_icon_text or show_placeholder_image or heading != blank or text != blank
+    assign show_item = true
+  endif
+
+  assign text_preset = block_settings.type_preset | default: 'custom'
+  assign text_classes = 'details-multicolumn__text rte'
+  assign text_type = 'body'
+  if text_preset == 'custom'
+    assign text_classes = text_classes | append: ' custom-typography'
+    if block_settings.font_size != blank
+      assign text_classes = text_classes | append: ' custom-font-size'
+      assign font_size_value = block_settings.font_size | split: 'rem' | first | times: 1.0
+      if font_size_value >= 3
+        assign text_type = 'display'
+      elsif font_size_value >= 1.25
+        assign text_type = 'heading'
+      endif
+    endif
+    if block_settings.weight != blank
+      assign text_classes = text_classes | append: ' custom-font-weight'
+    endif
+  elsif text_preset != blank
+    assign text_classes = text_classes | append: ' ' | append: text_preset
+  endif
+%}
+
+{% if show_item %}
+  <div class="{{ item_class | default: 'details-multicolumn__item' }}">
+    {% if show_icon_image %}
+      {{
+        image
+        | image_url: width: 400
+        | image_tag:
+          class: 'details-multicolumn__image',
+          widths: '80, 160, 240, 400',
+          alt: heading,
+          loading: 'lazy'
+      }}
+    {% elsif show_placeholder_image %}
+      {{ 'image' | placeholder_svg_tag: 'details-multicolumn__image details-multicolumn__placeholder' }}
+    {% elsif show_icon_text %}
+      <span class="details-multicolumn__icon-text">{{ icon_text }}</span>
+    {% endif %}
+
+    {% if heading != blank %}
+      <p class="details-multicolumn__heading {{ block_settings.heading_preset }}">
+        {{ heading }}
+      </p>
+    {% endif %}
+
+    {% if text != blank %}
+      <div
+        class="{{ text_classes }}"
+        style="{% render 'typography-style', settings: block_settings, preset: text_preset, type: text_type %}{% if block_settings.weight != blank %} --font-weight: {{ block_settings.weight }};{% endif %}"
+      >
+        {{ text }}
+      </div>
+    {% endif %}
+  </div>
+{% endif %}

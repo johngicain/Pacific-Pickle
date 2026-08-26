@@ -9,6 +9,18 @@
  */
 {
   "sections": {
+    "breadcrumbs": {
+      "type": "breadcrumbs",
+      "settings": {
+        "text_color": "#989EA2",
+        "active_color": "#111111",
+        "alignment": "flex-start",
+        "background_color": "",
+        "section_width": "page-width",
+        "padding-block-start": 16,
+        "padding-block-end": 8
+      }
+    },
     "main": {
       "type": "product-information",
       "blocks": {
@@ -48,12 +60,99 @@
             "tag_background_color": "{{ settings.color_palette.color3 }}",
             "tag_text_color": "#ffffff",
             "tag_font_size": "0.875rem",
+            "columns": 3,
+            "mobile_columns": "1",
+            "columns_gap": 8,
+            "background_color": "",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_color": "",
+            "border_radius": 0,
             "padding-block-start": 0,
             "padding-block-end": 0,
             "padding-inline-start": 0,
             "padding-inline-end": 0
           },
-          "blocks": {}
+          "blocks": {
+            "h1": {
+              "type": "icon-with-text",
+              "settings": {
+                "icon": "leaf",
+                "width": 24,
+                "icon_color": "#3d6b35",
+                "heading": "Non-GMO",
+                "heading_preset": "h6",
+                "text": "<p>Project Verified</p>",
+                "font_size": "0.75rem",
+                "text_color": "",
+                "icon_position": "top",
+                "vertical_alignment": "center",
+                "horizontal_alignment": "center",
+                "gap": 6,
+                "link": "",
+                "open_in_new_tab": false,
+                "padding-block-start": 12,
+                "padding-block-end": 12,
+                "padding-inline-start": 8,
+                "padding-inline-end": 8
+              },
+              "blocks": {}
+            },
+            "h2": {
+              "type": "icon-with-text",
+              "settings": {
+                "icon": "gluten_free",
+                "width": 24,
+                "icon_color": "#3d6b35",
+                "heading": "Gluten-Free",
+                "heading_preset": "h6",
+                "text": "<p>Naturally</p>",
+                "font_size": "0.75rem",
+                "text_color": "",
+                "icon_position": "top",
+                "vertical_alignment": "center",
+                "horizontal_alignment": "center",
+                "gap": 6,
+                "link": "",
+                "open_in_new_tab": false,
+                "padding-block-start": 12,
+                "padding-block-end": 12,
+                "padding-inline-start": 8,
+                "padding-inline-end": 8
+              },
+              "blocks": {}
+            },
+            "h3": {
+              "type": "icon-with-text",
+              "settings": {
+                "icon": "bottle",
+                "width": 24,
+                "icon_color": "#3d6b35",
+                "heading": "Hand-Packed",
+                "heading_preset": "h6",
+                "text": "<p>Santa Barbara, CA</p>",
+                "font_size": "0.75rem",
+                "text_color": "",
+                "icon_position": "top",
+                "vertical_alignment": "center",
+                "horizontal_alignment": "center",
+                "gap": 6,
+                "link": "",
+                "open_in_new_tab": false,
+                "padding-block-start": 12,
+                "padding-block-end": 12,
+                "padding-inline-start": 8,
+                "padding-inline-end": 8
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "h1",
+            "h2",
+            "h3"
+          ]
         },
         "product-details": {
           "type": "_product-details",
@@ -309,8 +408,35 @@
               },
               "blocks": {}
             },
+            "details_columns": {
+              "type": "details-multicolumn",
+              "settings": {
+                "display_mode": "icon_text",
+                "columns": 3,
+                "mobile_columns": "1",
+                "columns_gap": 12,
+                "gap": 6,
+                "alignment": "center",
+                "image_width": 48,
+                "heading_preset": "h6",
+                "type_preset": "custom",
+                "font": "var(--font-body--family)",
+                "font_size": "0.75rem",
+                "weight": "",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "text_color": "",
+                "padding-block-start": 8,
+                "padding-block-end": 8,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
             "highlights": {
               "type": "group",
+              "disabled": true,
               "settings": {
                 "content_direction": "row",
                 "vertical_on_mobile": true,
@@ -1108,6 +1234,7 @@
             "variant_picker",
             "buy_buttons",
             "payment_icons",
+            "details_columns",
             "highlights",
             "inventory",
             "pairs",
@@ -3346,6 +3473,7 @@
     }
   },
   "order": [
+    "breadcrumbs",
     "main",
     "reviews_ppw",
     "why_ppw",

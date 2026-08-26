@@ -1,17 +1,111 @@
-
-{% render 'product-media-gallery-content',
-  media_presentation: block.settings.media_presentation,
-  block_settings: block.settings,
-  block_id: block.id,
-  block_shopify_attributes: block.shopify_attributes,
-  block: block,
-  section: section
+{% liquid
+  assign block_settings = block.settings
+  assign desktop_columns = block_settings.columns | default: 3
+  assign mobile_columns = block_settings.mobile_columns | default: 1
 %}
+
+{% if block_settings.background_color != blank %}
+  {% render 'contrast-override', background_color: block_settings.background_color, section_id: block.id %}
+{% endif %}
+
+{% capture nested_blocks %}
+  <div
+    class="
+      product-media-block__multicolumn
+      border-style
+      {% if block_settings.background_color != blank %} color-custom-{{ block.id }}{% endif %}
+      {% if block_settings.background_color != blank or block_settings.border != 'none' %} product-media-block__multicolumn--surface{% endif %}
+    "
+    style="
+      {% render 'border-override', settings: block_settings %}
+      --product-media-columns: {{ desktop_columns }};
+      --product-media-columns-mobile: {{ mobile_columns }};
+      --product-media-columns-gap: {{ block_settings.columns_gap | default: 8 }}px;
+    "
+  >
+    {% content_for 'blocks' %}
+  </div>
+{% endcapture %}
+
+<div
+  class="product-media-block"
+  {{ block.shopify_attributes }}
+>
+  {% render 'product-media-gallery-content',
+    media_presentation: block.settings.media_presentation,
+    block_settings: block.settings,
+    block_id: block.id,
+    block_shopify_attributes: '',
+    block: block,
+    section: section,
+    nested_blocks: nested_blocks
+  %}
+</div>
+
+{% stylesheet %}
+  .product-media-block {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .product-media-block__multicolumn {
+    display: grid;
+    grid-template-columns: repeat(var(--product-media-columns-mobile, 1), minmax(0, 1fr));
+    gap: var(--product-media-columns-gap, 8px);
+    width: 100%;
+    min-width: 0;
+    margin-block-start: var(--padding-md, 12px);
+  }
+
+  .product-media-block__multicolumn:not(:has(*)) {
+    display: none;
+  }
+
+  .product-media-block__multicolumn--surface {
+    padding: var(--padding-sm, 8px);
+  }
+
+  @media screen and (min-width: 750px) {
+    .product-media-block__multicolumn {
+      grid-template-columns: repeat(var(--product-media-columns, 3), minmax(0, 1fr));
+    }
+  }
+
+  .product-media-block__multicolumn > .shopify-block:has(.group-block, .details-multicolumn) {
+    grid-column: 1 / -1;
+  }
+{% endstylesheet %}
 
 {% schema %}
 {
   "name": "t:names.product_media",
   "tag": null,
+  "blocks": [
+    {
+      "type": "@theme"
+    },
+    {
+      "type": "@app"
+    },
+    {
+      "type": "icon-with-text"
+    },
+    {
+      "type": "group"
+    },
+    {
+      "type": "details-multicolumn"
+    },
+    {
+      "type": "text"
+    },
+    {
+      "type": "icon"
+    },
+    {
+      "type": "spacer"
+    }
+  ],
   "settings": [
     {
       "type": "select",
@@ -461,6 +555,110 @@
     },
     {
       "type": "header",
+      "content": "t:names.multicolumn"
+    },
+    {
+      "type": "range",
+      "id": "columns",
+      "label": "t:settings.columns",
+      "min": 1,
+      "max": 6,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "select",
+      "id": "mobile_columns",
+      "label": "t:settings.mobile_columns",
+      "options": [
+        {
+          "value": "1",
+          "label": "t:options.one_number"
+        },
+        {
+          "value": "2",
+          "label": "t:options.two_number"
+        }
+      ],
+      "default": "1"
+    },
+    {
+      "type": "range",
+      "id": "columns_gap",
+      "label": "t:settings.horizontal_gap",
+      "min": 0,
+      "max": 48,
+      "step": 1,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "t:settings.background_color",
+      "placeholder": "t:settings.default"
+    },
+    {
+      "type": "header",
+      "content": "t:content.borders"
+    },
+    {
+      "type": "select",
+      "id": "border",
+      "label": "t:settings.style",
+      "options": [
+        {
+          "value": "none",
+          "label": "t:options.none"
+        },
+        {
+          "value": "solid",
+          "label": "t:options.solid"
+        }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "range",
+      "id": "border_width",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "t:settings.thickness",
+      "default": 1,
+      "visible_if": "{{ block.settings.border != 'none' }}"
+    },
+    {
+      "type": "range",
+      "id": "border_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "label": "t:settings.opacity",
+      "default": 100,
+      "visible_if": "{{ block.settings.border != 'none' }}"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "t:settings.color",
+      "placeholder": "t:settings.default",
+      "visible_if": "{{ block.settings.border != 'none' }}"
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "label": "t:settings.border_radius",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "header",
       "content": "t:content.padding"
     },
     {
@@ -506,7 +704,51 @@
   ],
   "presets": [
     {
-      "name": "t:names.product_media"
+      "name": "t:names.product_media",
+      "blocks": [
+        {
+          "type": "icon-with-text",
+          "settings": {
+            "icon": "leaf",
+            "width": 24,
+            "heading": "Non-GMO",
+            "heading_preset": "h6",
+            "text": "<p>Project Verified</p>",
+            "font_size": "0.75rem",
+            "icon_position": "top",
+            "horizontal_alignment": "center",
+            "gap": 6
+          }
+        },
+        {
+          "type": "icon-with-text",
+          "settings": {
+            "icon": "gluten_free",
+            "width": 24,
+            "heading": "Gluten-Free",
+            "heading_preset": "h6",
+            "text": "<p>Naturally</p>",
+            "font_size": "0.75rem",
+            "icon_position": "top",
+            "horizontal_alignment": "center",
+            "gap": 6
+          }
+        },
+        {
+          "type": "icon-with-text",
+          "settings": {
+            "icon": "bottle",
+            "width": 24,
+            "heading": "Hand-Packed",
+            "heading_preset": "h6",
+            "text": "<p>Santa Barbara, CA</p>",
+            "font_size": "0.75rem",
+            "icon_position": "top",
+            "horizontal_alignment": "center",
+            "gap": 6
+          }
+        }
+      ]
     }
   ]
 }

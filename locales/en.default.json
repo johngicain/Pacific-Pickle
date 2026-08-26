@@ -11,6 +11,7 @@
   "accessibility": {
     "account": "Account",
     "active_filters": "Active filters:",
+    "breadcrumbs": "Breadcrumbs",
     "cart": "Cart",
     "cart_count": "Total items in cart",
     "close_dialog": "Close dialog",
@@ -200,6 +201,7 @@
       "single_item": "Single",
       "zoom_out": "Zoom out"
     },
+    "home": "Home",
     "inventory_low_stock_show_count": {
       "one": "{{ count }} left",
       "other": "{{ count }} left"

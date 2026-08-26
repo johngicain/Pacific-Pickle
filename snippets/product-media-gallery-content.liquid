@@ -9,6 +9,7 @@
   @param {string} block_shopify_attributes - Block shopify attributes
   @param {block} block - The current block object
   @param {section} section - The current section object
+  @param {string} [nested_blocks] - Optional HTML for nested blocks rendered below slideshow controls
 
   @example
   {% render 'product-media-gallery-content',
@@ -367,6 +368,7 @@
     {{ block_shopify_attributes }}
   >
     {{ 'product-apparel-1' | placeholder_svg_tag: 'product-media-gallery__placeholder-image' }}
+    {{ nested_blocks }}
   </div>
 {% else %}
   <media-gallery
@@ -525,6 +527,8 @@
         {% endfor %}
       </ul>
     {% endif %}
+
+    {{ nested_blocks }}
 
     {%- if block_settings.zoom -%}
       <zoom-dialog
