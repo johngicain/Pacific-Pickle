@@ -3217,7 +3217,7 @@
         "icons_shape": "none",
         "section_width": "page-width",
         "gap": 24,
-        "background_color": "#f0ead8",
+        "background_color": "{{ settings.color_palette.background }}",
         "padding-block-start": 80,
         "padding-block-end": 80
       }
@@ -3396,7 +3396,7 @@
         "icons_shape": "none",
         "section_width": "page-width",
         "gap": 24,
-        "background_color": "#faf7f0",
+        "background_color": "#F0EAD8",
         "padding-block-start": 80,
         "padding-block-end": 80
       }
