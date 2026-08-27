@@ -494,10 +494,9 @@ p:empty {
   .grid {
     display: grid;
     gap: 0;
-    grid-template-columns: var(--margin-4xl) repeat(
-        var(--centered-column-number),
-        minmax(0, 1fr)
-      ) var(--margin-4xl);
+    grid-template-columns:
+      var(--margin-4xl) repeat(var(--centered-column-number), minmax(0, 1fr))
+      var(--margin-4xl);
     grid-template-areas: "column-0 column-1 column-2 column-3 column-4 column-5 column-6 column-7 column-8 column-9 column-10 column-11 column-12 column-13";
   }
 }
@@ -907,10 +906,12 @@ button.shopify-payment-button__button--unbranded {
   translate: 0;
   transition:
     color var(--hover-transition-duration) var(--hover-transition-timing),
-    background-color var(--hover-transition-duration) var(--hover-transition-timing),
+    background-color var(--hover-transition-duration)
+      var(--hover-transition-timing),
     box-shadow var(--hover-transition-duration) var(--hover-transition-timing),
     translate var(--hover-transition-duration) var(--hover-transition-timing),
-    --button-color var(--hover-transition-duration) var(--hover-transition-timing),
+    --button-color var(--hover-transition-duration)
+      var(--hover-transition-timing),
     --button-background-color var(--hover-transition-duration)
       var(--hover-transition-timing),
     --button-border-color var(--hover-transition-duration)
@@ -1071,7 +1072,8 @@ button.shopify-payment-button__button--unbranded:hover:not([disabled]) {
   font-style: var(--font-paragraph--style);
   font-size: var(--button-font-size, var(--font-paragraph--size));
   translate: 0;
-  transition: color var(--hover-transition-duration) var(--hover-transition-timing);
+  transition: color var(--hover-transition-duration)
+    var(--hover-transition-timing);
 }
 
 .button-unstyled:hover {
@@ -1484,6 +1486,15 @@ summary:hover {
     padding-inline: var(--padding-md);
     padding-block: var(--padding-sm);
   }
+}
+
+.metafield-rich_text_field ul {
+  list-style-type: "\2713";
+  padding-left: 1rem;
+}
+
+.metafield-rich_text_field ul > li {
+  padding-inline-start: 0.65em;
 }
 
 .shopify-policy__container {

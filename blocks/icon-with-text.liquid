@@ -20,6 +20,45 @@
   if block_settings.link != blank
     assign wrapper_tag = 'a'
   endif
+
+  assign heading_content = ''
+  if heading.value != blank
+    assign heading_content = heading.value | strip_html | strip
+  elsif heading != blank
+    assign heading_content = heading | metafield_text | strip
+    if heading_content == blank
+      assign heading_content = heading | strip_html | strip
+    endif
+  endif
+
+  assign text_content = ''
+  if text.value != blank
+    assign text_content = text.value | strip_html | strip
+  elsif text != blank
+    assign text_content = text | metafield_text | strip
+    if text_content == blank
+      assign text_content = text | strip_html | strip
+    endif
+  endif
+
+  assign hide_block = false
+  if heading_content == blank and text_content == blank
+    assign hide_block = true
+  endif
+
+  assign heading_classes = 'icon-with-text__heading'
+  if block_settings.heading_preset != blank
+    assign heading_classes = heading_classes | append: ' ' | append: block_settings.heading_preset
+  endif
+  if block_settings.heading_font != blank
+    assign heading_classes = heading_classes | append: ' icon-with-text__heading--custom-font'
+  endif
+  if block_settings.heading_font_size != blank
+    assign heading_classes = heading_classes | append: ' icon-with-text__heading--custom-size'
+  endif
+  if block_settings.heading_color != blank
+    assign heading_classes = heading_classes | append: ' icon-with-text__heading--custom-color'
+  endif
 %}
 
 {% if block_settings.background_color != blank %}
@@ -53,15 +92,36 @@
     spacing-style
     border-style
     {% if block_settings.background_color != blank %} color-custom-{{ block.id }}{% endif %}
+    {% if block_settings.enable_border_left %} icon-with-text--border-left{% endif %}
     {% if block_settings.link != blank %}icon-with-text--link{% endif %}
+    {% if hide_block %} icon-with-text--empty{% endif %}
   "
+  {% if hide_block %}
+    hidden
+  {% endif %}
   style="
+    {% if hide_block %}
+      display: none;
+    {% endif %}
     {% render 'spacing-style', settings: block_settings %}
     {% render 'border-override', settings: block_settings %}
     --icon-with-text-gap: {{ block_settings.gap }}px;
     --icon-with-text-align: {{ block_settings.vertical_alignment }};
     --icon-with-text-horizontal-align: {{ block_settings.horizontal_alignment }};
     --icon-with-text-text-align: {{ text_align }};
+    {% if block_settings.background_color != blank %}
+      --icon-with-text-background: {{ block_settings.background_color }};
+    {% endif %}
+    {% if block_settings.enable_border_left %}
+      --border-left-width: {{ block_settings.border_left }}px;
+      --border-left-color:
+      {%- if block_settings.border_left_color != blank -%}
+        rgb({{ block_settings.border_left_color.rgba }})
+      {%- else -%}
+        rgb(var(--color-border-rgb))
+      {%- endif -%}
+      ;
+    {% endif %}
     {% if block_settings.font_size != blank %}
       --icon-with-text-font-size: {{ block_settings.font_size }};
     {% endif %}
@@ -84,14 +144,31 @@
     %}
   {% endif %}
 
-  {% if heading != blank or text != blank or request.design_mode %}
+  {% if heading_content != blank or text_content != blank or request.design_mode %}
     <div class="icon-with-text__content">
-      {% if heading != blank or request.design_mode %}
-        <p class="icon-with-text__heading {{ block_settings.heading_preset }}">
+      {% if heading_content != blank or request.design_mode %}
+        <p
+          class="{{ heading_classes }}"
+          {% if block_settings.heading_font != blank or block_settings.heading_font_size != blank or block_settings.heading_color != blank %}
+            style="
+              {% if block_settings.heading_font != blank %}
+                --icon-with-text-heading-font: {{ block_settings.heading_font }};
+                --icon-with-text-heading-weight: {{ block_settings.heading_font | replace: 'family', 'weight' }};
+              {% endif %}
+              {% if block_settings.heading_font_size != blank %}
+                --icon-with-text-heading-font-size: {{ block_settings.heading_font_size }};
+              {% endif %}
+              {% if block_settings.heading_color != blank %}
+                --icon-with-text-heading-color: {{ block_settings.heading_color }};
+                --color: {{ block_settings.heading_color }};
+              {% endif %}
+            "
+          {% endif %}
+        >
           {{ heading }}
         </p>
       {% endif %}
-      {% if text != blank %}
+      {% if text_content != blank %}
         <div class="icon-with-text__text rte{% if block_settings.font_size != blank %} icon-with-text__text--custom-size{% endif %}">
           {{ text }}
         </div>
@@ -106,7 +183,19 @@
     gap: var(--icon-with-text-gap, 12px);
     align-items: var(--icon-with-text-align, center);
     color: var(--icon-with-text-text-color, inherit);
+    background-color: var(--icon-with-text-background, transparent);
     max-width: 100%;
+  }
+
+  .icon-with-text.icon-with-text--empty,
+  .icon-with-text[hidden] {
+    display: none;
+  }
+
+  .icon-with-text.icon-with-text--border-left {
+    border-inline-start-width: var(--border-left-width);
+    border-inline-start-style: solid;
+    border-inline-start-color: var(--border-left-color);
   }
 
   .icon-with-text--top {
@@ -141,6 +230,34 @@
 
   .icon-with-text__heading {
     margin: 0;
+  }
+
+  .icon-with-text .icon-with-text__heading--custom-font,
+  .icon-with-text .icon-with-text__heading--custom-font.h4,
+  .icon-with-text .icon-with-text__heading--custom-font.h5,
+  .icon-with-text .icon-with-text__heading--custom-font.h6,
+  .icon-with-text .icon-with-text__heading--custom-font.paragraph,
+  .icon-with-text .icon-with-text__heading--custom-font.paragraph:not(.button) {
+    font-family: var(--icon-with-text-heading-font);
+    font-weight: var(--icon-with-text-heading-weight);
+  }
+
+  .icon-with-text .icon-with-text__heading--custom-size,
+  .icon-with-text .icon-with-text__heading--custom-size.h4,
+  .icon-with-text .icon-with-text__heading--custom-size.h5,
+  .icon-with-text .icon-with-text__heading--custom-size.h6,
+  .icon-with-text .icon-with-text__heading--custom-size.paragraph,
+  .icon-with-text .icon-with-text__heading--custom-size.paragraph:not(.button) {
+    font-size: var(--icon-with-text-heading-font-size);
+  }
+
+  .icon-with-text .icon-with-text__heading--custom-color,
+  .icon-with-text .icon-with-text__heading--custom-color.h4,
+  .icon-with-text .icon-with-text__heading--custom-color.h5,
+  .icon-with-text .icon-with-text__heading--custom-color.h6,
+  .icon-with-text .icon-with-text__heading--custom-color.paragraph,
+  .icon-with-text .icon-with-text__heading--custom-color.paragraph:not(.button) {
+    color: var(--icon-with-text-heading-color);
   }
 
   .icon-with-text__text--custom-size,
@@ -478,6 +595,84 @@
       "default": "paragraph"
     },
     {
+      "type": "select",
+      "id": "heading_font",
+      "label": "t:settings.font",
+      "options": [
+        {
+          "value": "",
+          "label": "t:options.default"
+        },
+        {
+          "value": "var(--font-body--family)",
+          "label": "t:options.body"
+        },
+        {
+          "value": "var(--font-subheading--family)",
+          "label": "t:options.subheading"
+        },
+        {
+          "value": "var(--font-heading--family)",
+          "label": "t:options.heading"
+        },
+        {
+          "value": "var(--font-accent--family)",
+          "label": "t:options.accent"
+        }
+      ],
+      "default": ""
+    },
+    {
+      "type": "select",
+      "id": "heading_font_size",
+      "label": "t:settings.size",
+      "options": [
+        {
+          "value": "",
+          "label": "t:options.default"
+        },
+        {
+          "value": "0.625rem",
+          "label": "10px"
+        },
+        {
+          "value": "0.75rem",
+          "label": "12px"
+        },
+        {
+          "value": "0.875rem",
+          "label": "14px"
+        },
+        {
+          "value": "1rem",
+          "label": "16px"
+        },
+        {
+          "value": "1.125rem",
+          "label": "18px"
+        },
+        {
+          "value": "1.25rem",
+          "label": "20px"
+        },
+        {
+          "value": "1.5rem",
+          "label": "24px"
+        }
+      ],
+      "default": ""
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "t:settings.heading_color",
+      "placeholder": "t:settings.default"
+    },
+    {
+      "type": "header",
+      "content": "t:content.text"
+    },
+    {
       "type": "richtext",
       "id": "text",
       "label": "t:settings.text",
@@ -607,6 +802,16 @@
     },
     {
       "type": "header",
+      "content": "t:content.background"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "t:settings.background_color",
+      "placeholder": "t:settings.default"
+    },
+    {
+      "type": "header",
       "content": "t:content.block_link"
     },
     {
@@ -619,12 +824,6 @@
       "id": "open_in_new_tab",
       "label": "t:settings.open_new_tab",
       "default": false
-    },
-    {
-      "type": "color",
-      "id": "background_color",
-      "label": "t:settings.background_color",
-      "placeholder": "t:settings.default"
     },
     {
       "type": "header",
@@ -674,6 +873,30 @@
       "label": "t:settings.color",
       "placeholder": "t:settings.default",
       "visible_if": "{{ block.settings.border != 'none' }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_border_left",
+      "label": "t:settings.border_left",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "border_left",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "t:settings.thickness",
+      "default": 3,
+      "visible_if": "{{ block.settings.enable_border_left }}"
+    },
+    {
+      "type": "color",
+      "id": "border_left_color",
+      "label": "t:settings.border_left_color",
+      "placeholder": "t:settings.default",
+      "visible_if": "{{ block.settings.enable_border_left }}"
     },
     {
       "type": "range",

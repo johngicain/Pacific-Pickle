@@ -493,6 +493,7 @@
     "clipboard": "Clipboard",
     "collection_images": "Collection images",
     "color": "Color",
+    "column": "Column",
     "compact": "Compact",
     "complementary": "Complementary",
     // CSS object-fit property: scale media to fit container
@@ -675,6 +676,7 @@
     // Positional option for alignment/layout (opposite of left)
     "right": "Right",
     "rounded": "Rounded",
+    "row": "Row",
     "ruler": "Ruler",
     "s": "S",
     "scale": "Scale",
@@ -1188,6 +1190,7 @@
     "title_preset": "Title preset",
     // Label for range input controlling top spacing/margin
     "top": "Top",
+    "top_border": "Top border",
     "top_level_size": "Top level size",
     "top_padding": "Top padding",
     "top_row": "Top row",

@@ -20,6 +20,11 @@
   if type_preset == blank
     assign type_preset = 'h6'
   endif
+  if type_preset == 'custom'
+    assign preset_name = 'body'
+  else
+    assign preset_name = type_preset
+  endif
 %}
 
 {% render 'tabs-styles' %}
@@ -27,15 +32,16 @@
 <tabs-component
   class="tabs tabs--{{ tab_style }} tabs--align-{{ tab_alignment }}"
   style="
-    --tabs-font-family: var(--font-{{ type_preset }}--family);
-    --tabs-font-style: var(--font-{{ type_preset }}--style);
-    --tabs-font-weight: var(--font-{{ type_preset }}--weight);
-    --tabs-font-size: var(--font-{{ type_preset }}--size);
-    --tabs-line-height: var(--font-{{ type_preset }}--line-height);
-    --tabs-letter-spacing: var(--font-{{ type_preset }}--letter-spacing);
-    --tabs-font-case: var(--font-{{ type_preset }}--case);
+    --tabs-font-family: {% if settings.font != blank %}{{ settings.font }}{% else %}var(--font-{{ preset_name }}--family){% endif %};
+    --tabs-font-style: {% if settings.font != blank %}{{ settings.font | replace: 'family', 'style' }}{% else %}var(--font-{{ preset_name }}--style){% endif %};
+    --tabs-font-weight: {% if settings.weight != blank %}{{ settings.weight }}{% elsif settings.font != blank %}{{ settings.font | replace: 'family', 'weight' }}{% else %}var(--font-{{ preset_name }}--weight){% endif %};
+    --tabs-font-size: {% if settings.font_size != blank %}{{ settings.font_size }}{% else %}var(--font-{{ preset_name }}--size){% endif %};
+    --tabs-line-height: var(--font-{{ preset_name }}--line-height);
+    --tabs-letter-spacing: var(--font-{{ preset_name }}--letter-spacing);
+    --tabs-font-case: {% if settings.case != blank %}{{ settings.case }}{% else %}var(--font-{{ preset_name }}--case){% endif %};
     --tabs-gap: {{ settings.gap }}px;
     --tabs-content-padding: {{ settings.content_padding }}px;
+    {% if settings.panel_max_width == 'custom' %}--tabs-panel-max-width: {{ settings.panel_custom_max_width }}px;{% endif %}
     {% if settings.text_color != blank %}--tabs-text: {{ settings.text_color }};{% endif %}
     {% if settings.active_color != blank %}--tabs-active: {{ settings.active_color }};{% endif %}
     {% if settings.indicator_color != blank %}--tabs-indicator: {{ settings.indicator_color }};{% endif %}

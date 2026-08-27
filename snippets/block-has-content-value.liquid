@@ -1,0 +1,51 @@
+{%- doc -%}
+  Echoes 1 when settings contain metafield, metaobject, media, or text content.
+
+  @param {object} settings - Block or section settings
+{%- enddoc -%}
+
+{% liquid
+  assign keys = 'content,details,text,image,video,media,metaobjects,caption,page' | split: ','
+  for key in keys
+    assign value = settings[key]
+    if value == blank
+      continue
+    endif
+    if value.type != blank
+      if value.value != blank
+        echo '1'
+        break
+      endif
+    elsif value.system != blank
+      echo '1'
+      break
+    elsif value.src != blank
+      echo '1'
+      break
+    elsif value.preview_image != blank
+      echo '1'
+      break
+    else
+      assign text = value | strip_html | strip
+      if text != blank
+        echo '1'
+        break
+      endif
+      assign first_item = value | first
+      if first_item.system != blank
+        echo '1'
+        break
+      endif
+      if first_item.type != blank
+        if first_item.value != blank
+          echo '1'
+          break
+        endif
+      endif
+      if first_item.src != blank
+        echo '1'
+        break
+      endif
+    endif
+  endfor
+%}

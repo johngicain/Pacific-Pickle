@@ -87,15 +87,25 @@ class TabsComponent extends Component {
     if (button instanceof HTMLButtonElement) this.#activate(button);
   };
 
+  /**
+   * @param {Element} element
+   */
+  #isVisibleItem(element) {
+    const item = element.closest('.tabs__item');
+    return !(item instanceof HTMLElement && (item.hidden || item.classList.contains('tabs__item--empty')));
+  }
+
   get #tabs() {
     return Array.from(this.querySelectorAll('[role="tab"]')).filter(
-      (tab) => tab instanceof HTMLButtonElement && tab.closest('tabs-component') === this
+      (tab) =>
+        tab instanceof HTMLButtonElement && tab.closest('tabs-component') === this && this.#isVisibleItem(tab)
     );
   }
 
   get #panels() {
     return Array.from(this.querySelectorAll('[role="tabpanel"]')).filter(
-      (panel) => panel instanceof HTMLElement && panel.closest('tabs-component') === this
+      (panel) =>
+        panel instanceof HTMLElement && panel.closest('tabs-component') === this && this.#isVisibleItem(panel)
     );
   }
 

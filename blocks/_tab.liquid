@@ -1,12 +1,47 @@
+{% capture nested_blocks %}
+  {% content_for 'blocks' %}
+{% endcapture %}
+
 {% liquid
+  assign has_value = false
+
+  capture tab_value
+    render 'block-has-content-value', settings: block.settings
+  endcapture
+  if tab_value != blank
+    assign has_value = true
+  endif
+
+  if nested_blocks contains 'metafield-'
+    assign has_value = true
+  endif
+  if nested_blocks contains 'product-information-details__item'
+    assign has_value = true
+  endif
+  if nested_blocks contains 'image-block__image'
+    assign has_value = true
+  endif
+  if nested_blocks contains 'icon-with-text__text'
+    assign has_value = true
+  endif
+
+  assign is_empty = false
+  if has_value == false
+    assign is_empty = true
+  endif
+
   assign is_selected = false
-  if block.settings.open_by_default
+  if is_empty == false and block.settings.open_by_default
     assign is_selected = true
   endif
 %}
 
 <div
-  class="tabs__item"
+  class="tabs__item{% if is_empty %} tabs__item--empty{% endif %}"
+  {% if is_empty %}
+    style="display: none;"
+    hidden
+  {% endif %}
   {{ block.shopify_attributes }}
 >
   <button
@@ -38,7 +73,7 @@
       </rte-formatter>
     {% endif %}
 
-    {% content_for 'blocks' %}
+    {{ nested_blocks }}
   </div>
 </div>
 

@@ -50,11 +50,19 @@
 
   .product-media-block__multicolumn {
     display: grid;
-    grid-template-columns: repeat(var(--product-media-columns-mobile, 1), minmax(0, 1fr));
+    /* grid-template-columns: repeat(var(--product-media-columns-mobile, 1), minmax(0, 1fr)); */
+    grid-template-columns: repeat(3, 1fr);
     gap: var(--product-media-columns-gap, 8px);
     width: 100%;
     min-width: 0;
     margin-block-start: var(--padding-md, 12px);
+    padding: var(--padding-xl, 8px);
+  }
+  
+  @media screen and (min-width: 750px) {
+    .product-media-block__multicolumn {
+      padding: 0;
+    }
   }
 
   .product-media-block__multicolumn:not(:has(*)) {

@@ -4,6 +4,7 @@
 
 {% stylesheet %}
   .tabs {
+    --tabs-layout-border-width: 3px;
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -25,8 +26,21 @@
     column-gap: var(--tabs-gap, var(--gap-sm));
   }
 
+  .tabs__layout::after {
+    content: '';
+    order: 0;
+    flex: 1 0 100%;
+    border-block-end: var(--tabs-layout-border-width) solid var(--color-border);
+    pointer-events: none;
+  }
+
   .tabs__item {
     display: contents;
+  }
+
+  .tabs__item--empty,
+  .tabs__item[hidden] {
+    display: none;
   }
 
   .tabs--align-center .tabs__layout {
@@ -75,19 +89,16 @@
     outline-offset: 2px;
   }
 
-  .tabs--underline .tabs__layout {
-    border-block-end: var(--border-width-sm) solid var(--color-border);
-  }
-
   .tabs--underline .tabs__tab {
-    margin-block-end: calc(var(--border-width-sm) * -1);
-    border-block-end: 2px solid transparent;
+    margin-block-end: calc(var(--tabs-layout-border-width) * -1);
+    border-block-end: var(--tabs-layout-border-width) solid transparent;
     border-radius: 0;
   }
 
   .tabs--underline .tabs__tab[aria-selected='true'] {
     color: var(--tabs-active, var(--color-foreground));
     border-block-end-color: var(--tabs-indicator, var(--color-foreground));
+    z-index: 1; 
   }
 
   .tabs--pills .tabs__tab {
@@ -101,11 +112,10 @@
 
   .tabs--boxed .tabs__layout {
     gap: 0;
-    border-block-end: var(--border-width-sm) solid var(--color-border);
   }
 
   .tabs--boxed .tabs__tab {
-    margin-block-end: calc(var(--border-width-sm) * -1);
+    margin-block-end: calc(var(--tabs-layout-border-width) * -1);
     border: var(--border-width-sm) solid transparent;
     border-block-end: none;
     border-start-start-radius: var(--style-border-radius, 0);
@@ -123,15 +133,28 @@
     order: 1;
     flex: 1 0 100%;
     width: 100%;
+    max-width: 100%;
     padding-block-start: var(--tabs-content-padding, var(--padding-lg));
   }
 
-  .tabs__panel.is-active,
-  .tabs__item:first-of-type .tabs__panel {
+  @media screen and (min-width: 750px) {
+    .tabs__panel {
+      max-width: var(--tabs-panel-max-width, 100%);
+    }
+  }
+
+  .tabs__panel.is-active {
     display: block;
   }
 
-  .tabs__layout:has(.tabs__panel.is-active) .tabs__item:first-of-type .tabs__panel:not(.is-active) {
+  .tabs__layout:not(:has(.tabs__panel.is-active)) .tabs__item:not(.tabs__item--empty) .tabs__panel {
+    display: block;
+  }
+
+  .tabs__layout:not(:has(.tabs__panel.is-active))
+    .tabs__item:not(.tabs__item--empty)
+    ~ .tabs__item:not(.tabs__item--empty)
+    .tabs__panel {
     display: none;
   }
 
