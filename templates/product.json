@@ -1508,7 +1508,7 @@
                 "height": "fit",
                 "custom_height": 100,
                 "background_media": "none",
-                "background_color": "",
+                "background_color": "#F0F7EE",
                 "video_position": "cover",
                 "background_image_position": "cover",
                 "toggle_overlay": false,
@@ -1516,26 +1516,57 @@
                 "overlay_style": "solid",
                 "gradient_direction": "to top",
                 "border": "none",
-                "border_width": 1,
+                "border_width": 3,
                 "border_opacity": 100,
                 "border_color": "",
-                "border_left": 0,
-                "border_left_color": "",
+                "border_left": 4,
+                "border_left_color": "#3D6B35",
                 "border_radius": 0,
                 "link": "",
                 "open_in_new_tab": false,
                 "placeholder": "",
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
+                "padding-block-start": 20,
+                "padding-block-end": 15,
+                "padding-inline-start": 20,
                 "padding-inline-end": 0
               },
               "blocks": {
+                "text_t3gTXh": {
+                  "type": "text",
+                  "name": "t:names.text",
+                  "settings": {
+                    "text": "<p>{{ closest.product.metafields.custom.allergen_info_heading.value }}</p>",
+                    "width": "fit-content",
+                    "max_width": "normal",
+                    "alignment": "left",
+                    "type_preset": "rte",
+                    "font": "var(--font-body--family)",
+                    "font_size": "1rem",
+                    "line_height": "normal",
+                    "letter_spacing": "normal",
+                    "case": "none",
+                    "wrap": "pretty",
+                    "text_color": "",
+                    "bold_color": "",
+                    "italic_color": "",
+                    "italic_font_size": "",
+                    "text_shadow": false,
+                    "text_shadow_color": "#00000080",
+                    "background": false,
+                    "background_color": "#00000026",
+                    "corner_radius": 0,
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {}
+                },
                 "text_pk96Xm": {
                   "type": "text",
                   "name": "t:names.text",
                   "settings": {
-                    "text": "<p>We make things that work better and last longer. Our products solve real problems with clean design and honest materials.</p>",
+                    "text": "{{ closest.product.metafields.custom.allergen_info | metafield_tag }}",
                     "width": "fit-content",
                     "max_width": "normal",
                     "alignment": "left",
@@ -1564,6 +1595,7 @@
                 }
               },
               "block_order": [
+                "text_t3gTXh",
                 "text_pk96Xm"
               ]
             }
