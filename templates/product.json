@@ -2344,6 +2344,7 @@
         "reviews_heading",
         "reviews_row"
       ],
+      "disabled": true,
       "name": "t:names.custom_section",
       "settings": {
         "content_direction": "column",
