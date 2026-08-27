@@ -1489,7 +1489,7 @@
                 "item_padding_left": 14,
                 "item_padding_right": 14,
                 "background_color": "",
-                "box_shadow": false,
+                "box_shadow": true,
                 "enable_border": true,
                 "border_width": 1,
                 "border_opacity": 100,
