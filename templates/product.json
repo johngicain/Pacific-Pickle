@@ -3280,7 +3280,7 @@
                 "align_baseline": false,
                 "horizontal_alignment_flex_direction_column": "flex-start",
                 "vertical_alignment_flex_direction_column": "center",
-                "gap": 4,
+                "gap": 8,
                 "gap_mobile": 8,
                 "narrow_width": false,
                 "width": "fill",
@@ -3778,6 +3778,21 @@
         "padding-block-end": 16
       }
     },
+    "divider_wC8KPM": {
+      "type": "divider",
+      "name": "t:names.divider_section",
+      "settings": {
+        "background_color": "",
+        "divider_color": "{{ settings.color_palette.foreground }}",
+        "section_width": "full-width",
+        "thickness": 2,
+        "corner_radius": "square",
+        "width_percent": 100,
+        "alignment_horizontal": "center",
+        "padding-block-start": 16,
+        "padding-block-end": 16
+      }
+    },
     "faq_ppw": {
       "type": "section",
       "blocks": {
@@ -4252,6 +4267,7 @@
     "why_ppw",
     "fbt_ppw",
     "recipes_ppw",
+    "divider_wC8KPM",
     "related_ppw",
     "divider_6EE8B7",
     "faq_ppw"
