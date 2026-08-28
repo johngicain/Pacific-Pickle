@@ -6,6 +6,12 @@
   @param {string} text
 {%- enddoc -%}
 
+{% liquid
+  if text == blank and closest.article.title != blank
+    assign text = closest.article.title
+  endif
+%}
+
 {% render 'text', width: '100%', block: block, fallback_text: text %}
 
 {% schema %}

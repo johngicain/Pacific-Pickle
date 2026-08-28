@@ -29,7 +29,6 @@
   "
 >
   <div class="section-resource-list__content">
-    {% content_for 'block', id: 'static-blog-title', type: '_featured-blog-posts-title' %}
     {% content_for 'blocks' %}
   </div>
 
@@ -356,7 +355,6 @@
         "static-blog-title": {
           "type": "_featured-blog-posts-title",
           "name": "t:names.title",
-          "static": true,
           "settings": {
             "text": "<h3>{{ closest.blog.title }}</h3>",
             "type_preset": "rte"
@@ -368,10 +366,16 @@
           "static": true,
           "settings": {},
           "blocks": {
+            "image": {
+              "type": "_featured-blog-posts-image",
+              "name": "t:names.image",
+              "settings": {
+                "image_ratio": "square"
+              }
+            },
             "title": {
               "type": "_heading",
               "name": "t:names.title",
-              "static": true,
               "settings": {
                 "text": "<h4>{{ closest.article.title }}</h4>",
                 "show_alignment": false
@@ -380,7 +384,6 @@
             "blog-post-info-text": {
               "type": "_blog-post-info-text",
               "name": "t:names.details",
-              "static": true,
               "settings": {
                 "padding-block-start": 0,
                 "padding-block-end": 0,
@@ -390,15 +393,16 @@
             "blog-post-description": {
               "type": "_blog-post-description",
               "name": "t:names.excerpt",
-              "static": true,
               "settings": {
                 "padding-block-start": 8,
                 "padding-block-end": 0
               }
             }
-          }
+          },
+          "block_order": ["image", "title", "blog-post-info-text", "blog-post-description"]
         }
       },
+      "block_order": ["static-blog-title"],
       "settings": {
         "layout_type": "carousel",
         "post_limit": 5,
@@ -419,7 +423,6 @@
         "static-blog-title": {
           "type": "_featured-blog-posts-title",
           "name": "t:names.title",
-          "static": true,
           "settings": {
             "text": "<h3>{{ closest.blog.title }}</h3>",
             "type_preset": "rte"
@@ -431,10 +434,16 @@
           "static": true,
           "settings": {},
           "blocks": {
+            "image": {
+              "type": "_featured-blog-posts-image",
+              "name": "t:names.image",
+              "settings": {
+                "image_ratio": "square"
+              }
+            },
             "title": {
               "type": "_heading",
               "name": "t:names.title",
-              "static": true,
               "settings": {
                 "text": "<h4>{{ closest.article.title }}</h4>",
                 "show_alignment": false
@@ -443,7 +452,6 @@
             "blog-post-info-text": {
               "type": "_blog-post-info-text",
               "name": "t:names.details",
-              "static": true,
               "settings": {
                 "padding-block-start": 0,
                 "padding-block-end": 0,
@@ -453,15 +461,16 @@
             "blog-post-description": {
               "type": "_blog-post-description",
               "name": "t:names.excerpt",
-              "static": true,
               "settings": {
                 "padding-block-start": 8,
                 "padding-block-end": 0
               }
             }
-          }
+          },
+          "block_order": ["image", "title", "blog-post-info-text", "blog-post-description"]
         }
       },
+      "block_order": ["static-blog-title"],
       "settings": {
         "layout_type": "grid",
         "carousel_on_mobile": false,
@@ -481,7 +490,6 @@
         "static-blog-title": {
           "type": "_featured-blog-posts-title",
           "name": "t:names.title",
-          "static": true,
           "settings": {
             "text": "<h3>{{ closest.blog.title }}</h3>",
             "type_preset": "rte"
@@ -493,10 +501,16 @@
           "static": true,
           "settings": {},
           "blocks": {
+            "image": {
+              "type": "_featured-blog-posts-image",
+              "name": "t:names.image",
+              "settings": {
+                "image_ratio": "square"
+              }
+            },
             "title": {
               "type": "_heading",
               "name": "t:names.title",
-              "static": true,
               "settings": {
                 "text": "<h4>{{ closest.article.title }}</h4>",
                 "show_alignment": false
@@ -505,7 +519,6 @@
             "blog-post-info-text": {
               "type": "_blog-post-info-text",
               "name": "t:names.details",
-              "static": true,
               "settings": {
                 "padding-block-start": 0,
                 "padding-block-end": 0,
@@ -515,15 +528,16 @@
             "blog-post-description": {
               "type": "_blog-post-description",
               "name": "t:names.excerpt",
-              "static": true,
               "settings": {
                 "padding-block-start": 8,
                 "padding-block-end": 0
               }
             }
-          }
+          },
+          "block_order": ["image", "title", "blog-post-info-text", "blog-post-description"]
         }
       },
+      "block_order": ["static-blog-title"],
       "settings": {
         "layout_type": "editorial",
         "carousel_on_mobile": false,

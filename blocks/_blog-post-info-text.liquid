@@ -9,9 +9,18 @@
 {%- enddoc -%}
 
 {% assign block_settings = block.settings %}
+{% assign article = article | default: closest.article %}
 {% assign alignment = alignment | default: block_settings.alignment %}
-{% assign display_author = author | default: article.author %}
-{% assign display_date = date | default: article.published_at %}
+
+{% liquid
+  if article == blank
+    assign display_author = author | default: 'placeholders.blog_post_author' | t
+    assign display_date = date | default: 'placeholders.blog_post_date' | t
+  else
+    assign display_author = author | default: article.author
+    assign display_date = date | default: article.published_at
+  endif
+%}
 
 {%- if block_settings.show_date or block_settings.show_author -%}
   <div

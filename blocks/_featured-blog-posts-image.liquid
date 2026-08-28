@@ -7,7 +7,15 @@
   @param {string} parent_block_id - The block.id of the parent blog post card
 {%- enddoc -%}
 
-{% comment %} Render using unified resource image component {% endcomment %}
+{% liquid
+  if image == blank
+    assign image = closest.article.image
+  endif
+  if parent_block_id == blank
+    assign parent_block_id = block.id
+  endif
+%}
+
 {% render 'resource-image',
   content_type: 'articles',
   image_source: image,
@@ -117,6 +125,11 @@
       "step": 1,
       "unit": "px",
       "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:names.image"
     }
   ]
 }

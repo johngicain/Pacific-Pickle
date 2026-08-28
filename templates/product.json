@@ -3087,7 +3087,6 @@
       "blocks": {
         "static-blog-title": {
           "type": "_featured-blog-posts-title",
-          "static": true,
           "settings": {
             "text": "<h2>RECIPES FEATURING THIS PRODUCT</h2>",
             "width": "100%",
@@ -3130,7 +3129,6 @@
           "blocks": {
             "image": {
               "type": "_featured-blog-posts-image",
-              "static": true,
               "settings": {
                 "image_ratio": "square",
                 "border": "none",
@@ -3143,7 +3141,6 @@
             },
             "title": {
               "type": "_heading",
-              "static": true,
               "settings": {
                 "type_preset": "rte",
                 "font": "var(--font-body--family)",
@@ -3152,7 +3149,7 @@
                 "letter_spacing": "normal",
                 "case": "none",
                 "wrap": "pretty",
-                "text": "",
+                "text": "<h4>{{ closest.article.title }}</h4>",
                 "read_only": false,
                 "alignment": "left",
                 "show_alignment": true,
@@ -3168,7 +3165,6 @@
             },
             "blog-post-info-text": {
               "type": "_blog-post-info-text",
-              "static": true,
               "settings": {
                 "show_date": true,
                 "show_author": true,
@@ -3185,7 +3181,6 @@
             },
             "blog-post-description": {
               "type": "_blog-post-description",
-              "static": true,
               "settings": {
                 "type_preset": "rte",
                 "font": "var(--font-body--family)",
@@ -3203,9 +3198,10 @@
               "blocks": {}
             }
           },
-          "block_order": []
+          "block_order": ["image", "title", "blog-post-info-text", "blog-post-description"]
         }
       },
+      "block_order": ["static-blog-title"],
       "settings": {
         "blog": "recipes",
         "layout_type": "grid",

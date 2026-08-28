@@ -1,4 +1,8 @@
+{%- doc -%}
+  Renders a featured blog post card for resource lists.
 
+  @param {object} [article] - The article to render
+{%- enddoc -%}
 
 {% assign block_settings = block.settings %}
 
@@ -7,61 +11,15 @@
 
   if article == blank
     assign onboarding = true
-    # Assign placeholder variables
     assign display_title = 'placeholders.blog_post_title' | t
-    assign display_author = 'placeholders.blog_post_author' | t
-    assign display_date = 'placeholders.blog_post_date' | t
-    assign display_description = 'placeholders.blog_post_description' | t
   else
     assign display_title = article.title
-    assign display_author = article.author
-    assign display_date = article.published_at
-    assign display_description = null
-  endif
-
-  assign truncate_description = true
-  if section.settings.layout_type == 'editorial'
-    assign truncate_description = false
   endif
 
   if block_settings.background_color != blank
     render 'contrast-override', background_color: block_settings.background_color, section_id: block.id
   endif
 %}
-
-{% capture image %}
-  {% content_for 'block',
-    id: 'image',
-    type: '_featured-blog-posts-image',
-    image: article.image,
-    parent_block_id: block.id
-  %}
-{% endcapture %}
-
-{% capture title %}
-  {% content_for 'block', id: 'title', type: '_heading', text: display_title %}
-{% endcapture %}
-
-{% capture details %}
-  {% content_for 'block',
-    id: 'blog-post-info-text',
-    type: '_blog-post-info-text',
-    alignment: block_settings.alignment,
-    author: display_author,
-    date: display_date
-  %}
-{% endcapture %}
-
-{% capture description %}
-  {% content_for 'block',
-    id: 'blog-post-description',
-    type: '_blog-post-description',
-    article: article,
-    show_read_more: false,
-    should_truncate: truncate_description,
-    onboarding_text: display_description
-  %}
-{% endcapture %}
 
 <div
   class="
@@ -92,16 +50,8 @@
     <span class="visually-hidden">{{ display_title }}</span>
   </a>
 
-  <div class="featured-blog-posts-card__inner">
-    {% if onboarding or article.image %}
-      {{ image }}
-    {% endif %}
-
-    <div class="featured-blog-posts-card__content layout-panel-flex--column">
-      <h4>{{ title }}</h4>
-      {{ details }}
-      {{ description }}
-    </div>
+  <div class="featured-blog-posts-card__inner featured-blog-posts-card__content layout-panel-flex--column">
+    {% content_for 'blocks', closest.article: article %}
   </div>
 </div>
 
@@ -152,9 +102,6 @@
 
     .featured-blog-posts-card__content {
       --flex-wrap: nowrap;
-
-      flex-shrink: 0;
-      height: auto;
     }
   }
 
@@ -173,12 +120,12 @@
   }
 
   /* allow all blocks to be selectable in editor preview */
-  .shopify-design-mode .featured-blog-posts-card__content * {
+  .shopify-design-mode .featured-blog-posts-card__inner * {
     pointer-events: auto;
   }
 
   .featured-blog-posts-card__content {
-    --flex-wrap: wrap;
+    /* --flex-wrap: wrap; */
 
     display: flex;
     position: relative;
@@ -196,6 +143,35 @@
 {
   "name": "t:names.blog_card",
   "tag": null,
+  "blocks": [
+    {
+      "type": "_featured-blog-posts-image"
+    },
+    {
+      "type": "_heading"
+    },
+    {
+      "type": "_blog-post-info-text"
+    },
+    {
+      "type": "_blog-post-description"
+    },
+    {
+      "type": "@theme"
+    },
+    {
+      "type": "text"
+    },
+    {
+      "type": "button"
+    },
+    {
+      "type": "group"
+    },
+    {
+      "type": "spacer"
+    }
+  ],
   "settings": [
     {
       "type": "header",

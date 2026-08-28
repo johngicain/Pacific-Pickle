@@ -13,8 +13,13 @@
 
 {% liquid
   assign block_settings = block.settings
+  assign article = article | default: closest.article
 
-  assign content = onboarding_text | default: article.excerpt | default: article.content
+  if article == blank
+    assign content = onboarding_text | default: 'placeholders.blog_post_description' | t
+  else
+    assign content = onboarding_text | default: article.excerpt | default: article.content
+  endif
 
   if block_settings.type_preset == 'rte' or block_settings.type_preset == 'paragraph'
     assign is_rte = true
