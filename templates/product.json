@@ -3733,7 +3733,7 @@
                       "name": "t:names.ratings",
                       "settings": {
                         "icon_size": 16,
-                        "icon_gap": 2,
+                        "icon_gap": 0,
                         "icon_color": "{{ settings.color_palette.color3 }}",
                         "text": "",
                         "type_preset": "paragraph",
