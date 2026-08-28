@@ -105,7 +105,8 @@ select {
   position: relative;
   transition:
     transform var(--hover-transition-duration) var(--hover-transition-timing),
-    box-shadow var(--hover-transition-duration) var(--hover-transition-timing);
+    box-shadow var(--hover-transition-duration) var(--hover-transition-timing),
+    rotate var(--hover-transition-duration) var(--hover-transition-timing);
   z-index: var(--layer-flat);
 }
 

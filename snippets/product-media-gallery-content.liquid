@@ -152,13 +152,11 @@
   if block_settings.constrain_to_viewport
     assign product_media_container_class = product_media_container_class | append: ' constrain-height'
   endif
-  if block_settings.aspect_ratio != 'adapt'
-    assign product_media_container_class = product_media_container_class | append: ' media-fit-cover'
-  elsif block_settings.constrain_to_viewport
-    assign product_media_container_class = product_media_container_class | append: ' media-fit-' | append: block_settings.media_fit
-  else
-    assign product_media_container_class = product_media_container_class | append: ' media-fit-contain'
+  assign media_fit = block_settings.media_fit | default: 'cover'
+  if block_settings.aspect_ratio == 'adapt' and block_settings.constrain_to_viewport == false
+    assign media_fit = 'contain'
   endif
+  assign product_media_container_class = product_media_container_class | append: ' media-fit-' | append: media_fit
 
   assign media_border_style = block_settings.media_border | default: 'none'
   assign media_border_width = block_settings.media_border_width | default: 1
@@ -264,7 +262,7 @@
     .product-media-container:not(.dialog-zoomed-gallery *) .product-media deferred-media iframe {
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: {{ media_fit }};
     }
 
     /* 3D models need special handling since they don't support object-fit */
@@ -279,46 +277,24 @@
     }
   {% endunless %}
 
-  {% if block_settings.aspect_ratio == 'adapt' and block_settings.constrain_to_viewport %}
-    .media-fit-{{ block_settings.media_fit }} {
-      --product-media-fit: {{ block_settings.media_fit }};
-    }
+  .media-fit-{{ media_fit }} {
+    --product-media-fit: {{ media_fit }};
+  }
 
-    /* Media fit for all media elements */
-    .media-fit-{{ block_settings.media_fit }} :is(img, video, iframe, .deferred-media__poster-image) {
-      object-fit: {{ block_settings.media_fit }};
-      width: 100%;
-      height: 100%;
-    }
+  .media-fit-{{ media_fit }} :is(img, video, iframe, .deferred-media__poster-image),
+  .media-fit-{{ media_fit }} .product-media img {
+    object-fit: {{ media_fit }};
+    width: 100%;
+    height: 100%;
+  }
 
-    /* 3D Models (no object-fit support, just sizing) */
-    .media-fit-{{ block_settings.media_fit }} model-viewer {
-      width: 100%;
-      height: 100%;
-    }
-  {% endif %}
-
-  {% unless block_settings.aspect_ratio == 'adapt' and block_settings.constrain_to_viewport %}
-    .media-fit-cover {
-      --product-media-fit: cover;
-    }
-
-    /* Media fit for all media elements - default to cover */
-    .media-fit-cover :is(img, video, iframe, .deferred-media__poster-image) {
-      object-fit: cover;
-      width: 100%;
-      height: 100%;
-    }
-
-    /* 3D Models (no object-fit support, just sizing) */
-    .media-fit-cover model-viewer {
-      width: 100%;
-      height: 100%;
-    }
-  {% endunless %}
+  .media-fit-{{ media_fit }} model-viewer {
+    width: 100%;
+    height: 100%;
+  }
 
   /* Add background color so carousel arrows' mix-blend-mode works correctly even on transparent areas. */
-  {% if block_settings.media_fit == 'contain' %}
+  {% if media_fit == 'contain' %}
     .media-fit-contain :is(img, .deferred-media__poster-image) {
       background-color: var(--color-background);
     }
@@ -347,9 +323,7 @@
       object-position: var(--gallery-media-focal-point, center);
     }
   {% endcapture %}
-  {% if block_settings.aspect_ratio == 'adapt' and block_settings.constrain_to_viewport == false %}
-    {{ view_transition_styles_contain }}
-  {% elsif block_settings.aspect_ratio == 'adapt' and block_settings.constrain_to_viewport == true and block_settings.media_fit == 'contain' %}
+  {% if media_fit == 'contain' %}
     {{ view_transition_styles_contain }}
   {% else %}
     {{ view_transition_styles_cover }}
@@ -430,7 +404,7 @@
           class: class,
           style: style,
           attributes: attributes,
-          media_fit: block_settings.media_fit,
+          media_fit: media_fit,
         %}
       {% endfor %}
     {% endcapture %}
@@ -815,6 +789,7 @@
 
   .dialog-zoomed-gallery {
     cursor: zoom-out;
+    --product-media-fit: contain;
   }
 
   .dialog--preloading {
@@ -897,7 +872,7 @@
         width: 90%;
 
         .product-media img {
-          object-fit: cover;
+          object-fit: var(--product-media-fit, cover);
         }
       }
     }

@@ -8,6 +8,7 @@
     display: flex;
     flex-direction: column;
     width: 100%;
+    min-width: 0;
   }
 
   .tabs__heading {
@@ -24,6 +25,27 @@
     flex-wrap: wrap;
     align-items: stretch;
     column-gap: var(--tabs-gap, var(--gap-sm));
+    min-width: 0;
+    width: 100%;
+  }
+
+  .tabs__scroller {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    column-gap: var(--tabs-gap, var(--gap-sm));
+    order: 0;
+    flex: 1 0 100%;
+    min-width: 0;
+    width: 100%;
+  }
+
+  .tabs__scroller:empty {
+    display: none;
+  }
+
+  .tabs__scroller:not(:empty) {
+    border-block-end: var(--tabs-layout-border-width) solid var(--color-border);
   }
 
   .tabs__layout::after {
@@ -32,6 +54,10 @@
     flex: 1 0 100%;
     border-block-end: var(--tabs-layout-border-width) solid var(--color-border);
     pointer-events: none;
+  }
+
+  .tabs__layout:has(.tabs__scroller:not(:empty))::after {
+    display: none;
   }
 
   .tabs__item {
@@ -43,7 +69,8 @@
     display: none;
   }
 
-  .tabs--align-center .tabs__layout {
+  .tabs--align-center .tabs__layout,
+  .tabs--align-center .tabs__scroller {
     justify-content: center;
   }
 
@@ -110,7 +137,8 @@
     background-color: var(--tabs-indicator, var(--color-foreground));
   }
 
-  .tabs--boxed .tabs__layout {
+  .tabs--boxed .tabs__layout,
+  .tabs--boxed .tabs__scroller {
     gap: 0;
   }
 
@@ -173,5 +201,35 @@
   .tabs__empty {
     margin: 0;
     color: rgb(var(--color-foreground-rgb) / 0.65);
+  }
+
+  @media screen and (max-width: 989px) {
+    .tabs__scroller:not(:empty) {
+      flex-wrap: nowrap;
+      justify-content: flex-start;
+      overflow-x: auto;
+      overscroll-behavior-x: contain;
+      -webkit-overflow-scrolling: touch;
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    .tabs__scroller:not(:empty)::-webkit-scrollbar {
+      display: none;
+    }
+
+    .tabs--align-center .tabs__scroller:not(:empty) {
+      justify-content: safe center;
+    }
+
+    .tabs__scroller .tabs__tab {
+      flex: 0 0 auto;
+      overflow: visible;
+      text-overflow: unset;
+    }
+
+    .tabs--align-fill .tabs__scroller .tabs__tab {
+      flex: 1 0 auto;
+    }
   }
 {% endstylesheet %}

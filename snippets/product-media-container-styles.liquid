@@ -51,9 +51,10 @@
     }
   }
 
-  .product-media-container img {
+  .product-media-container img,
+  .product-media img {
     aspect-ratio: inherit;
-    object-fit: contain;
+    object-fit: var(--product-media-fit, contain);
   }
 
   .product-media-container.media-fit-contain img {

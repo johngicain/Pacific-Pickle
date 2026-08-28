@@ -1988,6 +1988,13 @@
       },
       {
         "type": "checkbox",
+        "id": "product_card_hover",
+        "label": "t:settings.product_card_hover",
+        "info": "t:info.product_card_hover",
+        "default": true
+      },
+      {
+        "type": "checkbox",
         "id": "show_second_image_on_hover",
         "label": "t:settings.show_second_image_on_hover",
         "default": true

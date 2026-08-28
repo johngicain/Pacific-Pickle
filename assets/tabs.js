@@ -6,6 +6,7 @@ import { Component } from '@theme/component';
 class TabsComponent extends Component {
   connectedCallback() {
     super.connectedCallback();
+    this.#syncScroller();
     this.#sync();
     document.addEventListener('shopify:block:select', this.#onBlockSelect);
   }
@@ -90,9 +91,58 @@ class TabsComponent extends Component {
   /**
    * @param {Element} element
    */
-  #isVisibleItem(element) {
+  #itemFrom(element) {
     const item = element.closest('.tabs__item');
+    if (item instanceof HTMLElement) return item;
+
+    if (element instanceof HTMLButtonElement) {
+      const panelId = element.getAttribute('aria-controls');
+      if (!panelId) return null;
+      const panel = this.querySelector(`[role="tabpanel"]#${CSS.escape(panelId)}`);
+      return panel instanceof HTMLElement ? panel.closest('.tabs__item') : null;
+    }
+
+    return null;
+  }
+
+  /**
+   * @param {Element} element
+   */
+  #isVisibleItem(element) {
+    const item = this.#itemFrom(element);
     return !(item instanceof HTMLElement && (item.hidden || item.classList.contains('tabs__item--empty')));
+  }
+
+  #syncScroller() {
+    const layout = this.querySelector('.tabs__layout');
+    if (!(layout instanceof HTMLElement)) return;
+
+    let scroller = layout.querySelector(':scope > .tabs__scroller');
+    if (!(scroller instanceof HTMLElement)) {
+      scroller = document.createElement('div');
+      scroller.className = 'tabs__scroller';
+      layout.prepend(scroller);
+    }
+
+    const items = Array.from(this.querySelectorAll('.tabs__item')).filter(
+      (item) => item.closest('tabs-component') === this
+    );
+
+    for (const tab of Array.from(scroller.querySelectorAll('.tabs__tab'))) {
+      const item = this.#itemFrom(tab);
+      if (item instanceof HTMLElement && (item.hidden || item.classList.contains('tabs__item--empty'))) {
+        item.prepend(tab);
+      }
+    }
+
+    for (const item of items) {
+      const tab = item.querySelector(':scope > .tabs__tab');
+      if (!(tab instanceof HTMLButtonElement)) continue;
+
+      if (item.hidden || item.classList.contains('tabs__item--empty')) continue;
+
+      scroller.append(tab);
+    }
   }
 
   get #tabs() {
@@ -135,6 +185,17 @@ class TabsComponent extends Component {
     }
 
     if (focus) button.focus();
+
+    const scroller = button.parentElement;
+    if (scroller instanceof HTMLElement && scroller.classList.contains('tabs__scroller')) {
+      const left = button.offsetLeft;
+      const right = left + button.offsetWidth;
+      if (left < scroller.scrollLeft) {
+        scroller.scrollTo({ left, behavior: 'smooth' });
+      } else if (right > scroller.scrollLeft + scroller.clientWidth) {
+        scroller.scrollTo({ left: right - scroller.clientWidth, behavior: 'smooth' });
+      }
+    }
   }
 }
 

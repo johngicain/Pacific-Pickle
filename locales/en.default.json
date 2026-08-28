@@ -46,6 +46,8 @@
     "play_video": "Play video",
     "loading_product_recommendations": "Loading product recommendations",
     "rating": "Rating of this product is {{ rating }} out of 5",
+    "ratings": "5 out of 5 stars",
+    "ratings_with_text": "{{ text }}, 5 out of 5 stars",
     "remove_item": "Remove {{ title}}",
     "remove": "Remove",
     "reset_search": "Reset search",

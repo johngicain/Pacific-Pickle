@@ -42,6 +42,10 @@
   .shopify-section.tabs-section {
     box-sizing: border-box;
   }
+
+  .shopify-section.tabs-section:not(:has(.tabs__item:not(.tabs__item--empty))) {
+    display: none;
+  }
 {% endstylesheet %}
 
 {% schema %}

@@ -36,6 +36,7 @@
 <product-recommendations
   id="product-recommendations-{{ section.id }}"
   class="product-recommendations"
+  style="--product-recommendations-media-fit: {{ section.settings.media_fit | default: 'cover' }};"
   data-url="{{ routes.product_recommendations_url }}?limit={{ section.settings.max_products }}"
   data-section-id="{{ section.id }}"
   data-product-id="{{ section.settings.product.id | default: product.id }}"
@@ -260,6 +261,22 @@
     },
     {
       "type": "select",
+      "id": "media_fit",
+      "label": "t:settings.media_fit",
+      "options": [
+        {
+          "value": "cover",
+          "label": "t:options.cover"
+        },
+        {
+          "value": "contain",
+          "label": "t:options.contain"
+        }
+      ],
+      "default": "cover"
+    },
+    {
+      "type": "select",
       "id": "layout_type",
       "label": "t:settings.layout_style",
       "options": [
@@ -461,6 +478,7 @@
       "settings": {
         "product": "{{ closest.product }}",
         "recommendation_type": "related",
+        "media_fit": "cover",
         "layout_type": "grid",
         "carousel_on_mobile": false,
         "max_products": 4,
@@ -511,7 +529,7 @@
               "type": "product-title",
               "name": "t:names.product_title",
               "settings": {
-                "width": "fit-content",
+                "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
                 "type_preset": "paragraph",
@@ -520,7 +538,7 @@
                 "line_height": "normal",
                 "letter_spacing": "normal",
                 "case": "none",
-                "wrap": "pretty",
+                "wrap": "nowrap",
                 "background": false,
                 "background_color": "#00000026",
                 "corner_radius": 0,
