@@ -3085,6 +3085,86 @@
     "recipes_ppw": {
       "type": "featured-blog-posts",
       "blocks": {
+        "group_hbxPWy": {
+          "type": "group",
+          "name": "t:names.group",
+          "settings": {
+            "content_direction": "column",
+            "vertical_on_mobile": true,
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "center",
+            "align_baseline": false,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 12,
+            "gap_mobile": 12,
+            "narrow_width": false,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "custom_height": 100,
+            "background_media": "none",
+            "background_color": "",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "toggle_overlay": false,
+            "overlay_color": "#00000026",
+            "overlay_style": "solid",
+            "gradient_direction": "to top",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_color": "",
+            "border_left": 0,
+            "border_left_color": "",
+            "border_radius": 0,
+            "link": "",
+            "open_in_new_tab": false,
+            "placeholder": "",
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "text_hQNbLK": {
+              "type": "text",
+              "name": "t:names.text",
+              "settings": {
+                "text": "<p>We make things that work better and last longer. Our products solve real problems with clean design and honest materials.</p>",
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "text_color": "",
+                "bold_color": "",
+                "italic_color": "",
+                "italic_font_size": "",
+                "text_shadow": false,
+                "text_shadow_color": "#00000080",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "text_hQNbLK"
+          ]
+        },
         "static-blog-title": {
           "type": "_featured-blog-posts-title",
           "settings": {
@@ -3201,7 +3281,13 @@
           "block_order": ["image", "title", "blog-post-info-text", "blog-post-description"]
         }
       },
+<<<<<<< HEAD
       "block_order": ["static-blog-title"],
+=======
+      "block_order": [
+        "group_hbxPWy"
+      ],
+>>>>>>> 6ec5acac9c24c92acb887821729b9fbc8bf32a2f
       "settings": {
         "blog": "recipes",
         "layout_type": "grid",
