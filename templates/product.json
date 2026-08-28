@@ -1558,7 +1558,7 @@
                 "heading_preset": "paragraph",
                 "heading_font": "var(--font-subheading--family)",
                 "heading_font_size": "",
-                "heading_color": "#3D6B35",
+                "heading_color": "#3d6b35",
                 "text": "<p>{{ closest.product.metafields.custom.allergen_info | metafield_tag }}</p>",
                 "font_size": "0.875rem",
                 "text_color": "",
@@ -1566,7 +1566,7 @@
                 "vertical_alignment": "center",
                 "horizontal_alignment": "flex-start",
                 "gap": 12,
-                "background_color": "#F0F7EE",
+                "background_color": "#f0f7ee",
                 "link": "",
                 "open_in_new_tab": false,
                 "border": "none",
@@ -1575,7 +1575,7 @@
                 "border_color": "",
                 "enable_border_left": true,
                 "border_left": 3,
-                "border_left_color": "#3D6B35",
+                "border_left_color": "#3d6b35",
                 "border_radius": 0,
                 "padding-block-start": 20,
                 "padding-block-end": 20,
@@ -1659,7 +1659,7 @@
         "border_opacity": 100,
         "border_color": "{{ settings.color_palette.foreground }}",
         "section_width": "page-width",
-        "padding-block-start": 20,
+        "padding-block-start": 40,
         "padding-block-end": 40
       }
     },
@@ -3396,7 +3396,7 @@
         "icons_shape": "none",
         "section_width": "page-width",
         "gap": 24,
-        "background_color": "#F0EAD8",
+        "background_color": "#f0ead8",
         "padding-block-start": 80,
         "padding-block-end": 80
       }
