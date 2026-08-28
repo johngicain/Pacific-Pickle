@@ -3229,10 +3229,10 @@
           "type": "group",
           "name": "t:names.group",
           "settings": {
-            "content_direction": "column",
+            "content_direction": "row",
             "vertical_on_mobile": true,
             "horizontal_alignment": "flex-start",
-            "vertical_alignment": "center",
+            "vertical_alignment": "flex-end",
             "align_baseline": false,
             "horizontal_alignment_flex_direction_column": "flex-start",
             "vertical_alignment_flex_direction_column": "center",
@@ -3379,10 +3379,32 @@
                 "text_HaQFAT",
                 "text_yCEaE6"
               ]
+            },
+            "button_p6RaiC": {
+              "type": "button",
+              "name": "t:names.button",
+              "settings": {
+                "label": "VIEW ALL →",
+                "link": "shopify://collections/all",
+                "open_in_new_tab": false,
+                "style_class": "button-custom",
+                "box_shadow": true,
+                "font_size": "",
+                "custom_button_background": "{{ settings.color_palette.foreground }}",
+                "custom_button_text": "{{ settings.color_palette.background }}",
+                "custom_button_border": "{{ settings.color_palette.background }}",
+                "link_text_color": "",
+                "width": "fit-content",
+                "custom_width": 100,
+                "width_mobile": "fit-content",
+                "custom_width_mobile": 100
+              },
+              "blocks": {}
             }
           },
           "block_order": [
-            "group_6T7AFb"
+            "group_6T7AFb",
+            "button_p6RaiC"
           ]
         },
         "static-product-card": {
