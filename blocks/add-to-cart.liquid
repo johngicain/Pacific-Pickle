@@ -14,10 +14,36 @@
   if block.settings.box_shadow
     assign class = class | append: ' button--box-shadow'
   endif
+  assign show_atc_icon = false
+  assign icon_display = 'none'
+  if can_add_to_cart
+    if block.settings.show_icon
+      assign show_atc_icon = true
+      assign icon_display = 'flex'
+    else
+      assign class = class | append: ' add-to-cart-button--hide-icon'
+    endif
+  endif
   assign id = 'BuyButtons-ProductSubmitButton-' | append: block.id | append: '-' | append: closest.product.id
   assign button_style = ''
   if block.settings.font_size != blank
     assign button_style = '--button-font-size: ' | append: block.settings.font_size | append: '; font-size: ' | append: block.settings.font_size
+  endif
+  assign atc_font_styles = ''
+  if block.settings.font != blank
+    assign atc_font_styles = atc_font_styles | append: '--add-to-cart-font-family: ' | append: block.settings.font | append: ';'
+  endif
+  if block.settings.weight != blank
+    assign atc_font_styles = atc_font_styles | append: '--add-to-cart-font-weight: ' | append: block.settings.weight | append: ';'
+  endif
+  if block.settings.font_size != blank
+    assign atc_font_styles = atc_font_styles | append: '--add-to-cart-font-size: ' | append: block.settings.font_size | append: ';'
+  endif
+  if block.settings.letter_spacing != blank
+    assign atc_font_styles = atc_font_styles | append: '--add-to-cart-letter-spacing: var(--letter-spacing--body-' | append: block.settings.letter_spacing | append: ');'
+  endif
+  if block.settings.case != blank
+    assign atc_font_styles = atc_font_styles | append: '--add-to-cart-font-case: ' | append: block.settings.case | append: ';'
   endif
 %}
 {% render 'button-custom-styles', block_settings: block.settings, block_id: block.id %}
@@ -26,13 +52,13 @@
 
 <span
   {{ block.shopify_attributes }}
-  style="--add-to-cart-font-case: {{ settings.button_text_case }};"
+  style="--add-to-cart-icon-display: {{ icon_display }}; {{ atc_font_styles }}"
 >
   {% render 'add-to-cart-button',
     id: id,
     class: class,
     can_add_to_cart: can_add_to_cart,
-    show_icon: can_add_to_cart,
+    show_icon: show_atc_icon,
     product: closest.product,
     add_to_cart_text: add_to_cart_text,
     show_price: true,
@@ -46,6 +72,12 @@
   "name": "t:names.add_to_cart",
   "tag": null,
   "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_icon",
+      "label": "t:settings.show_icon",
+      "default": true
+    },
     {
       "type": "select",
       "id": "style_class",
@@ -72,6 +104,78 @@
       "id": "box_shadow",
       "label": "t:settings.box_shadow",
       "default": false
+    },
+    {
+      "type": "header",
+      "content": "t:content.typography"
+    },
+    {
+      "type": "select",
+      "id": "font",
+      "label": "t:settings.font",
+      "options": [
+        {
+          "value": "",
+          "label": "t:options.default"
+        },
+        {
+          "value": "var(--font-body--family)",
+          "label": "t:options.body"
+        },
+        {
+          "value": "var(--font-subheading--family)",
+          "label": "t:options.subheading"
+        },
+        {
+          "value": "var(--font-heading--family)",
+          "label": "t:options.heading"
+        },
+        {
+          "value": "var(--font-accent--family)",
+          "label": "t:options.accent"
+        }
+      ],
+      "default": ""
+    },
+    {
+      "type": "select",
+      "id": "weight",
+      "label": "t:settings.font_weight",
+      "options": [
+        {
+          "value": "",
+          "label": "t:options.default"
+        },
+        {
+          "value": "100",
+          "label": "t:options.thin"
+        },
+        {
+          "value": "300",
+          "label": "t:options.light"
+        },
+        {
+          "value": "400",
+          "label": "t:options.regular"
+        },
+        {
+          "value": "500",
+          "label": "t:options.medium"
+        },
+        {
+          "value": "600",
+          "label": "t:options.semibold"
+        },
+        {
+          "value": "700",
+          "label": "t:options.bold"
+        },
+        {
+          "value": "900",
+          "label": "t:options.black"
+        }
+      ],
+      "default": ""
     },
     {
       "type": "select",
@@ -113,6 +217,50 @@
         {
           "value": "2rem",
           "label": "32px"
+        }
+      ],
+      "default": ""
+    },
+    {
+      "type": "select",
+      "id": "letter_spacing",
+      "label": "t:settings.letter_spacing",
+      "options": [
+        {
+          "value": "",
+          "label": "t:options.default"
+        },
+        {
+          "value": "tight",
+          "label": "t:options.tight"
+        },
+        {
+          "value": "normal",
+          "label": "t:options.normal"
+        },
+        {
+          "value": "loose",
+          "label": "t:options.loose"
+        }
+      ],
+      "default": ""
+    },
+    {
+      "type": "select",
+      "id": "case",
+      "label": "t:settings.case",
+      "options": [
+        {
+          "value": "",
+          "label": "t:options.default"
+        },
+        {
+          "value": "none",
+          "label": "t:options.none"
+        },
+        {
+          "value": "uppercase",
+          "label": "t:options.uppercase"
         }
       ],
       "default": ""

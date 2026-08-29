@@ -44,10 +44,19 @@
     height: 30px;
   }
 
-  .add-to-cart-icon.svg-wrapper,
+  .add-to-cart-icon.svg-wrapper {
+    display: var(--add-to-cart-icon-display, flex);
+    width: 18px;
+    height: 18px;
+  }
+
   .add-to-cart-icon.svg-wrapper > svg {
     width: 18px;
     height: 18px;
+  }
+
+  .add-to-cart-button--hide-icon .add-to-cart-icon {
+    display: none;
   }
 
   .add-to-cart-text {
@@ -58,6 +67,11 @@
     gap: var(--gap-2xs);
     align-items: center;
     justify-content: center;
+    font-family: var(--add-to-cart-font-family, inherit);
+    font-weight: var(--add-to-cart-font-weight, inherit);
+    font-size: var(--add-to-cart-font-size, inherit);
+    letter-spacing: var(--add-to-cart-letter-spacing, inherit);
+    text-transform: var(--add-to-cart-font-case, inherit);
     animation-duration: var(--animation-speed);
     animation-timing-function: var(--animation-easing);
     animation-fill-mode: forwards;

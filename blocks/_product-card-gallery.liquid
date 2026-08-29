@@ -2,6 +2,15 @@
 
 {% assign product = closest.product %}
 
+{% liquid
+  assign product_tag = blank
+  if block.settings.show_tag
+    if product != blank
+      assign product_tag = product.metafields.custom.tag | metafield_text | strip
+    endif
+  endif
+%}
+
 {% capture children %}
   {% unless product == blank %}
     {%- if product.available == false or product.compare_at_price > product.price -%}
@@ -26,6 +35,17 @@
         </div>
       </div>
     {%- endif -%}
+    {% if product_tag != blank %}
+      <div
+        class="product-card-tag"
+        style="
+          {% if block.settings.color != blank %}--product-card-tag-color: {{ block.settings.color }};{% endif %}
+          {% if block.settings.background_color != blank %}--product-card-tag-background: {{ block.settings.background_color }};{% endif %}
+        "
+      >
+        {{ product_tag | escape }}
+      </div>
+    {% endif %}
     {% if product.available and settings.quick_add or settings.mobile_quick_add %}
       {% render 'quick-add', product: product, section_id: section.id %}
     {% endif %}
@@ -45,6 +65,27 @@
 
 {% render 'product-card-gallery-zoom-details-styles' %}
 {% render 'product-badges-styles' %}
+
+{% stylesheet %}
+  .product-card-tag {
+    position: absolute;
+    inset-block-start: var(--padding-sm);
+    inset-inline-start: var(--padding-sm);
+    z-index: var(--layer-raised);
+    pointer-events: none;
+    color: var(--product-card-tag-color, #ffffff);
+    background-color: var(--product-card-tag-background, #1c1c1a);
+    font-size: 0.75rem;
+    line-height: 1.2;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    padding: 0.35em 0.6em;
+  }
+
+  .product-card-tag:empty {
+    display: none;
+  }
+{% endstylesheet %}
 
 {% schema %}
 {
@@ -79,6 +120,34 @@
       "default": "portrait",
       "label": "t:settings.aspect_ratio",
       "info": "t:info.aspect_ratio_adjusted"
+    },
+    {
+      "type": "header",
+      "content": "t:content.tag"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:content.product_tag_metafield"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_tag",
+      "label": "t:settings.show_tag",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "color",
+      "label": "t:settings.color",
+      "default": "#FFFFFF",
+      "visible_if": "{{ block.settings.show_tag }}"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "t:settings.background_color",
+      "default": "#1C1C1A",
+      "visible_if": "{{ block.settings.show_tag }}"
     },
     {
       "type": "header",

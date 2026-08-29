@@ -361,6 +361,12 @@
     "blog_post_description": "An excerpt of your blog post's content"
   },
   "products": {
+    "heat": {
+      "no_heat": "No heat",
+      "mild": "Mild",
+      "medium": "Medium",
+      "spicy": "Spicy"
+    },
     "product": {
       "add_to_cart": "Add to cart",
       "adding_to_cart": "Adding...",

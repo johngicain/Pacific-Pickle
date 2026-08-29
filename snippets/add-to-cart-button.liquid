@@ -68,7 +68,9 @@
         </span>
       </span>
     {%- else -%}
-      {{- add_to_cart_text | default: default_add_to_cart_text -}}
+      <span class="add-to-cart-text">
+        {{- add_to_cart_text | default: default_add_to_cart_text -}}
+      </span>
     {%- endif -%}
     {% comment %} checkmark burst markup {% endcomment %}
     <span class="add-to-cart__added">

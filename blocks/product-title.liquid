@@ -15,6 +15,13 @@
   </a>
 {% endif %}
 
+{% stylesheet %}
+  .text-block.custom-font-weight:is(.h1, .h2, .h3, .h4, .h5, .h6, .paragraph, .rte) > *,
+  .text-block.custom-font-weight:is(.h1, .h2, .h3, .h4, .h5, .h6, .paragraph, .rte) :is(h1, h2, h3, h4, h5, h6, p) {
+    font-weight: var(--product-title-font-weight, var(--font-weight));
+  }
+{% endstylesheet %}
+
 {% schema %}
 {
   "name": "t:names.product_title",
@@ -119,6 +126,46 @@
       ],
       "default": "rte",
       "info": "t:info.edit_presets_in_theme_settings"
+    },
+    {
+      "type": "select",
+      "id": "weight",
+      "label": "t:settings.font_weight",
+      "options": [
+        {
+          "value": "",
+          "label": "t:options.default"
+        },
+        {
+          "value": "100",
+          "label": "t:options.thin"
+        },
+        {
+          "value": "300",
+          "label": "t:options.light"
+        },
+        {
+          "value": "400",
+          "label": "t:options.regular"
+        },
+        {
+          "value": "500",
+          "label": "t:options.medium"
+        },
+        {
+          "value": "600",
+          "label": "t:options.semibold"
+        },
+        {
+          "value": "700",
+          "label": "t:options.bold"
+        },
+        {
+          "value": "900",
+          "label": "t:options.black"
+        }
+      ],
+      "default": ""
     },
     {
       "type": "select",
