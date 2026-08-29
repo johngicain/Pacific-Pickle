@@ -1099,8 +1099,8 @@
         "border_color": "#2e2e2c",
         "border_width": 2,
         "section_width": "page-width",
-        "intro_narrow_width": false,
-        "narrow_width": false,
+        "intro_narrow_width": true,
+        "narrow_width": true,
         "padding-block-start": 80,
         "padding-block-end": 60
       }
