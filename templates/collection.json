@@ -785,7 +785,7 @@
         "border_color": "",
         "border_radius": 0,
         "padding-block-start": 60,
-        "padding-block-end": 0
+        "padding-block-end": 30
       }
     },
     "compare": {
@@ -1162,7 +1162,7 @@
         "border_color": "#2e2e2c",
         "border_width": 2,
         "section_width": "page-width",
-        "padding-block-start": 80,
+        "padding-block-start": 0,
         "padding-block-end": 80
       }
     },
