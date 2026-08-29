@@ -73,6 +73,7 @@
               "name": "t:names.caption",
               "settings": {
                 "text": "<p><strong>✦ Santa Barbara, California ✦</strong></p>",
+                "narrow_width": false,
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
@@ -104,6 +105,7 @@
               "name": "t:names.title",
               "settings": {
                 "text": "<h1>STOP THE FULL LINE</h1>",
+                "narrow_width": false,
                 "width": "fit-content",
                 "max_width": "none",
                 "alignment": "left",
@@ -135,6 +137,7 @@
               "name": "t:names.description",
               "settings": {
                 "text": "<p> All natural, hand-packed, Non-GMO</p>",
+                "narrow_width": false,
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
@@ -219,7 +222,11 @@
           "static": true,
           "settings": {
             "show_count": true,
-            "show_icon_text": true
+            "show_icon_text": true,
+            "text": "",
+            "font_size": "",
+            "color": "",
+            "background_color": ""
           },
           "blocks": {
             "title": {
@@ -258,16 +265,20 @@
           "pickled-veggies"
         ],
         "layout": "tabs",
-        "all_prefix": "All",
         "section_width": "page-width",
         "alignment": "left",
         "image_position": "right",
         "background_color": "#faf7f0",
-        "padding-block-start": 0,
-        "padding-block-end": 0,
+        "font_size": "",
+        "all_prefix": "All",
+        "border": "none",
         "border_top": true,
         "border_bottom": true,
-        "border_width": 2
+        "border_width": 2,
+        "border_opacity": 100,
+        "border_color": "",
+        "padding-block-start": 0,
+        "padding-block-end": 0
       }
     },
     "main": {
@@ -424,6 +435,7 @@
               "type": "text",
               "settings": {
                 "text": "{{ closest.product.description }}",
+                "narrow_width": false,
                 "width": "100%",
                 "max_width": "none",
                 "alignment": "left",
@@ -566,6 +578,7 @@
           "type": "text",
           "settings": {
             "text": "<h2>SUBSCRIBE & SAVE 15% ON EVERY ORDER</h2>",
+            "narrow_width": false,
             "width": "100%",
             "max_width": "none",
             "alignment": "center",
@@ -596,6 +609,7 @@
           "type": "text",
           "settings": {
             "text": "<p>Cancel or pause anytime. Free shipping on every subscription order.</p>",
+            "narrow_width": false,
             "width": "100%",
             "max_width": "normal",
             "alignment": "center",
@@ -691,106 +705,6 @@
         "alignment_horizontal": "center",
         "padding-block-start": 0,
         "padding-block-end": 0
-      }
-    },
-    "section_4triEG": {
-      "type": "section",
-      "blocks": {
-        "text_X89fFG": {
-          "type": "text",
-          "name": "t:names.heading",
-          "settings": {
-            "text": "<h2><strong>CRAFT VS. COMMERCIAL PICKLES</strong></h2>",
-            "width": "fit-content",
-            "max_width": "normal",
-            "alignment": "left",
-            "type_preset": "custom",
-            "font": "var(--font-heading--family)",
-            "font_size": "3.5rem",
-            "line_height": "tight",
-            "letter_spacing": "normal",
-            "case": "none",
-            "wrap": "pretty",
-            "text_color": "",
-            "bold_color": "",
-            "italic_color": "",
-            "italic_font_size": "",
-            "text_shadow": false,
-            "text_shadow_color": "#00000080",
-            "background": false,
-            "background_color": "#00000026",
-            "corner_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {}
-        },
-        "text_EQbxyT": {
-          "type": "text",
-          "name": "t:names.text",
-          "settings": {
-            "text": "<p>Not all pickles are created equal. Here's how Pacific Pickle Works compares to mass-market brands.</p>",
-            "width": "fit-content",
-            "max_width": "none",
-            "alignment": "left",
-            "type_preset": "custom",
-            "font": "var(--font-body--family)",
-            "font_size": "1rem",
-            "line_height": "normal",
-            "letter_spacing": "normal",
-            "case": "none",
-            "wrap": "pretty",
-            "text_color": "",
-            "bold_color": "",
-            "italic_color": "",
-            "italic_font_size": "",
-            "text_shadow": false,
-            "text_shadow_color": "#00000080",
-            "background": false,
-            "background_color": "#00000026",
-            "corner_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {}
-        }
-      },
-      "block_order": [
-        "text_X89fFG",
-        "text_EQbxyT"
-      ],
-      "name": "t:names.rich_text_section",
-      "settings": {
-        "content_direction": "column",
-        "vertical_on_mobile": true,
-        "horizontal_alignment": "flex-start",
-        "vertical_alignment": "center",
-        "align_baseline": false,
-        "horizontal_alignment_flex_direction_column": "flex-start",
-        "vertical_alignment_flex_direction_column": "center",
-        "gap": 0,
-        "section_width": "page-width",
-        "section_height": "",
-        "section_height_custom": 50,
-        "background_media": "none",
-        "background_color": "",
-        "video_position": "cover",
-        "background_image_position": "cover",
-        "toggle_overlay": false,
-        "overlay_color": "#00000026",
-        "overlay_style": "solid",
-        "gradient_direction": "to top",
-        "border": "none",
-        "border_width": 1,
-        "border_opacity": 100,
-        "border_color": "",
-        "border_radius": 0,
-        "padding-block-start": 60,
-        "padding-block-end": 30
       }
     },
     "compare": {
@@ -1134,8 +1048,26 @@
       ],
       "name": "t:names.compare_table",
       "settings": {
-        "heading": "",
-        "heading_alignment": "center",
+        "heading": "<strong>CRAFT VS. COMMERCIAL PICKLES</strong>",
+        "heading_alignment": "left",
+        "heading_type_preset": "",
+        "heading_font": "var(--font-heading--family)",
+        "heading_font_size": "",
+        "heading_weight": "",
+        "heading_letter_spacing": "normal",
+        "heading_case": "uppercase",
+        "heading_color": "",
+        "heading_narrow_width": true,
+        "text": "<p>Not all pickles are created equal. Here's how Pacific Pickle Works compares to mass-market brands.</p>",
+        "text_alignment": "left",
+        "text_type_preset": "",
+        "text_font": "var(--font-body--family)",
+        "text_font_size": "",
+        "text_weight": "",
+        "text_letter_spacing": "normal",
+        "text_case": "none",
+        "text_color": "",
+        "text_narrow_width": true,
         "feature_heading": "Feature",
         "ours_heading": "Pacific Pickle Works",
         "theirs_heading": "Mass-Market Brand",
@@ -1167,7 +1099,9 @@
         "border_color": "#2e2e2c",
         "border_width": 2,
         "section_width": "page-width",
-        "padding-block-start": 0,
+        "intro_narrow_width": false,
+        "narrow_width": false,
+        "padding-block-start": 80,
         "padding-block-end": 60
       }
     },
@@ -1266,6 +1200,7 @@
                   "name": "t:names.heading",
                   "settings": {
                     "text": "<h2><strong>FREQUENTLY ASKED QUESTIONS</strong></h2>",
+                    "narrow_width": false,
                     "width": "fit-content",
                     "max_width": "normal",
                     "alignment": "left",
@@ -1297,6 +1232,7 @@
                   "name": "t:names.text",
                   "settings": {
                     "text": "<p>Everything you need to know about Pacific Pickle Works products.<br/></p>",
+                    "narrow_width": false,
                     "width": "fit-content",
                     "max_width": "normal",
                     "alignment": "left",
@@ -1382,6 +1318,7 @@
                   "type": "text",
                   "settings": {
                     "text": "<p>Pacific Pickle Works pickles are vinegar-brined, not fermented. They are crafted with a carefully balanced brine of vinegar, water, salt, and spices — delivering a clean, bright, tangy flavor profile without the sourness of fermentation.</p>",
+                    "narrow_width": false,
                     "width": "100%",
                     "max_width": "none",
                     "alignment": "left",
@@ -1434,6 +1371,7 @@
                   "type": "text",
                   "settings": {
                     "text": "<p>Yes — all Pacific Pickle Works products are Non-GMO, Gluten-Free, and Vegan certified. They contain no artificial preservatives, no artificial colors, and no high-fructose corn syrup.</p>",
+                    "narrow_width": false,
                     "width": "100%",
                     "max_width": "none",
                     "alignment": "left",
@@ -1486,6 +1424,7 @@
                   "type": "text",
                   "settings": {
                     "text": "<p>Every jar is hand-packed at our production facility in Santa Barbara, California. We source peak-season produce from California farms whenever possible.</p>",
+                    "narrow_width": false,
                     "width": "100%",
                     "max_width": "none",
                     "alignment": "left",
@@ -1538,6 +1477,7 @@
                   "type": "text",
                   "settings": {
                     "text": "<p>Once opened, Pacific Pickle Works pickles should be refrigerated and consumed within 3–4 months for best flavor. The brine helps preserve the product naturally — always keep the jar sealed and submerged in brine.</p>",
+                    "narrow_width": false,
                     "width": "100%",
                     "max_width": "none",
                     "alignment": "left",
@@ -1590,6 +1530,7 @@
                   "type": "text",
                   "settings": {
                     "text": "<p>Pacific Pickle Works is available at Whole Foods Market, Lazy Acres, Lassens Natural Foods, Bristol Farms, Sprouts, and specialty grocers across California. Use our store locator to find the nearest retailer, or order online with free shipping on orders over $60.</p>",
+                    "narrow_width": false,
                     "width": "100%",
                     "max_width": "none",
                     "alignment": "left",
@@ -1642,6 +1583,7 @@
                   "type": "text",
                   "settings": {
                     "text": "<p>Yes — subscribe to any product and save 15% on every order. Choose delivery every 30, 45, or 60 days. Cancel, pause, or skip a delivery anytime with no fees.</p>",
+                    "narrow_width": false,
                     "width": "100%",
                     "max_width": "none",
                     "alignment": "left",
@@ -1694,6 +1636,7 @@
                   "type": "text",
                   "settings": {
                     "text": "<p>Our award-winning Bloody Mary Elixir is specifically crafted as a Bloody Mary mix — just add vodka. For garnishes, Asparagusto (pickled asparagus), Jalabeaños (pickled jalapeños), and Carriots of Fire (pickled carrots) are all classic Bloody Mary bar additions.</p>",
+                    "narrow_width": false,
                     "width": "100%",
                     "max_width": "none",
                     "alignment": "left",
@@ -1779,7 +1722,6 @@
     "main",
     "subscribe",
     "divider_Mrnk37",
-    "section_4triEG",
     "compare",
     "faq"
   ]
