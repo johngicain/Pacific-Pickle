@@ -1,0 +1,81 @@
+{%- doc -%}
+  Outputs CSS variables for compare table heading and text typography, color, and alignment.
+
+  @param {object} settings - Section or block settings
+
+  @example
+  <div style="{% render 'compare-table-intro-style', settings: section.settings %}">
+{%- enddoc -%}
+
+{%- liquid
+  assign heading_preset = settings.heading_type_preset
+  assign text_preset = settings.text_type_preset
+
+  if settings.heading_alignment == 'left'
+    assign heading_self = 'flex-start'
+  elsif settings.heading_alignment == 'right'
+    assign heading_self = 'flex-end'
+  else
+    assign heading_self = 'center'
+  endif
+
+  if settings.text_alignment == 'left'
+    assign text_self = 'flex-start'
+  elsif settings.text_alignment == 'right'
+    assign text_self = 'flex-end'
+  else
+    assign text_self = 'center'
+  endif
+-%}
+--compare-heading-align: {{ settings.heading_alignment | default: 'center' }};
+--compare-heading-narrow-self: {{ heading_self }};
+--compare-text-align: {{ settings.text_alignment | default: 'center' }};
+--compare-text-narrow-self: {{ text_self }};
+{%- if heading_preset != blank and heading_preset != 'custom' -%}
+  --compare-heading-font-family: var(--font-{{ heading_preset }}--family);
+  --compare-heading-font-style: var(--font-{{ heading_preset }}--style);
+  --compare-heading-font-weight: var(--font-{{ heading_preset }}--weight);
+  --compare-heading-font-size: var(--font-{{ heading_preset }}--size);
+  --compare-heading-line-height: var(--font-{{ heading_preset }}--line-height);
+  --compare-heading-letter-spacing: var(--font-{{ heading_preset }}--letter-spacing);
+  --compare-heading-text-transform: var(--font-{{ heading_preset }}--case);
+{%- elsif heading_preset == 'custom' -%}
+  --compare-heading-font-family: {{ settings.heading_font }};
+  {%- if settings.heading_font_size != blank -%}
+    --compare-heading-font-size: {{ settings.heading_font_size }};
+  {%- endif -%}
+  {%- if settings.heading_weight != blank -%}
+    --compare-heading-font-weight: {{ settings.heading_weight }};
+  {%- endif -%}
+  {%- if settings.heading_letter_spacing != blank -%}
+    --compare-heading-letter-spacing: var(--letter-spacing--heading-{{ settings.heading_letter_spacing }});
+  {%- endif -%}
+  --compare-heading-text-transform: {{ settings.heading_case }};
+{%- endif -%}
+{%- if settings.heading_color != blank -%}
+  --compare-heading-color: {{ settings.heading_color }};
+{%- endif -%}
+{%- if text_preset != blank and text_preset != 'custom' -%}
+  --compare-text-font-family: var(--font-{{ text_preset }}--family);
+  --compare-text-font-style: var(--font-{{ text_preset }}--style);
+  --compare-text-font-weight: var(--font-{{ text_preset }}--weight);
+  --compare-text-font-size: var(--font-{{ text_preset }}--size);
+  --compare-text-line-height: var(--font-{{ text_preset }}--line-height);
+  --compare-text-letter-spacing: var(--font-{{ text_preset }}--letter-spacing);
+  --compare-text-text-transform: var(--font-{{ text_preset }}--case);
+{%- elsif text_preset == 'custom' -%}
+  --compare-text-font-family: {{ settings.text_font }};
+  {%- if settings.text_font_size != blank -%}
+    --compare-text-font-size: {{ settings.text_font_size }};
+  {%- endif -%}
+  {%- if settings.text_weight != blank -%}
+    --compare-text-font-weight: {{ settings.text_weight }};
+  {%- endif -%}
+  {%- if settings.text_letter_spacing != blank -%}
+    --compare-text-letter-spacing: var(--letter-spacing--body-{{ settings.text_letter_spacing }});
+  {%- endif -%}
+  --compare-text-text-transform: {{ settings.text_case }};
+{%- endif -%}
+{%- if settings.text_color != blank -%}
+  --compare-text-color: {{ settings.text_color }};
+{%- endif -%}

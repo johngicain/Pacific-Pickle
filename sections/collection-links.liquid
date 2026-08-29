@@ -30,10 +30,19 @@
 
 <div
   class="section-background{% if section.settings.background_color != blank %} color-custom-{{ section.id }}{% endif %}"
-></div>
+></div> 
 <div
-  class="section section--{{ section.settings.section_width }}{% if section.settings.background_color != blank %} color-custom-{{ section.id }}{% endif %} spacing-style"
-  style="{% render 'spacing-style', settings: section.settings %}"
+  class="section section--{{ section.settings.section_width }}{% if section.settings.background_color != blank %} color-custom-{{ section.id }}{% endif %} spacing-style{% if section.settings.border != 'none' %} collection-links--border{% endif %}{% if section.settings.border_top %} collection-links--border-top{% endif %}{% if section.settings.border_bottom %} collection-links--border-bottom{% endif %}"
+  style="
+    {% render 'spacing-style', settings: section.settings %}
+    {% if section.settings.layout == 'tabs' and section.settings.font_size != blank %}
+      --collection-links-tab-font-size: {{ section.settings.font_size }};
+    {% endif %}
+    {% if section.settings.border != 'none' or section.settings.border_top or section.settings.border_bottom %}
+      --collection-links-border-width: {{ section.settings.border_width }}px;
+      --collection-links-border-color: {% if section.settings.border_color != blank %}{{ section.settings.border_color }}{% else %}rgb(var(--color-border-rgb) / {{ section.settings.border_opacity | divided_by: 100.0 }}){% endif %};
+    {% endif %}
+  "
   data-testid="collection-links-{{ section.id }}"
 >
   <collection-links-component
@@ -194,10 +203,33 @@
         max-width: 100%;
         overflow-x: auto;
         overflow-y: hidden;
-        border: 2px solid var(--color-foreground);
+        border-block: var(--collection-links-border-width, 2px) solid var(--collection-links-border-color, var(--collection-links-tab-color, var(--color-foreground)));
+        border-inline: 0;
         scrollbar-width: thin;
       }
     }
+  }
+
+  .section.collection-links--border {
+    border: var(--collection-links-border-width) solid var(--collection-links-border-color);
+  }
+
+  .section.collection-links--border-top:not(.collection-links--border) {
+    border-block-start: var(--collection-links-border-width) solid var(--collection-links-border-color);
+  }
+
+  .section.collection-links--border-bottom:not(.collection-links--border) {
+    border-block-end: var(--collection-links-border-width) solid var(--collection-links-border-color);
+  }
+
+  .section.collection-links--border-top collection-links-component[layout='tabs'] .collection-links__container {
+    border-block-start: 0;
+    margin-block-start: calc(var(--collection-links-border-width) * -1);
+  }
+
+  .section.collection-links--border-bottom collection-links-component[layout='tabs'] .collection-links__container {
+    border-block-end: 0;
+    margin-block-end: calc(var(--collection-links-border-width) * -1);
   }
 
   .collection-links__container {
@@ -315,6 +347,128 @@
     },
     {
       "type": "header",
+      "content": "t:content.appearance",
+      "visible_if": "{{ section.settings.layout == 'tabs' }}"
+    },
+    {
+      "type": "select",
+      "id": "font_size",
+      "label": "t:settings.font_size",
+      "options": [
+        {
+          "value": "",
+          "label": "t:options.default"
+        },
+        {
+          "value": "0.625rem",
+          "label": "10px"
+        },
+        {
+          "value": "0.75rem",
+          "label": "12px"
+        },
+        {
+          "value": "0.8125rem",
+          "label": "13px"
+        },
+        {
+          "value": "0.875rem",
+          "label": "14px"
+        },
+        {
+          "value": "1rem",
+          "label": "16px"
+        },
+        {
+          "value": "1.125rem",
+          "label": "18px"
+        },
+        {
+          "value": "1.25rem",
+          "label": "20px"
+        },
+        {
+          "value": "1.5rem",
+          "label": "24px"
+        },
+        {
+          "value": "2rem",
+          "label": "32px"
+        }
+      ],
+      "default": "",
+      "visible_if": "{{ section.settings.layout == 'tabs' }}"
+    },
+    {
+      "type": "text",
+      "id": "all_prefix",
+      "label": "t:settings.all_prefix",
+      "default": "All",
+      "visible_if": "{{ section.settings.layout == 'tabs' }}"
+    },
+    {
+      "type": "header",
+      "content": "t:content.borders"
+    },
+    {
+      "type": "select",
+      "id": "border",
+      "label": "t:settings.style",
+      "options": [
+        {
+          "value": "none",
+          "label": "t:options.none"
+        },
+        {
+          "value": "solid",
+          "label": "t:options.solid"
+        }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "checkbox",
+      "id": "border_top",
+      "label": "t:settings.top_border",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "border_bottom",
+      "label": "t:settings.bottom_border",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "border_width",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "t:settings.thickness",
+      "default": 2,
+      "visible_if": "{{ section.settings.border != 'none' or section.settings.border_top or section.settings.border_bottom }}"
+    },
+    {
+      "type": "range",
+      "id": "border_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "label": "t:settings.opacity",
+      "default": 100,
+      "visible_if": "{{ section.settings.border != 'none' or section.settings.border_top or section.settings.border_bottom }}"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "t:settings.color",
+      "placeholder": "t:settings.default",
+      "visible_if": "{{ section.settings.border != 'none' or section.settings.border_top or section.settings.border_bottom }}"
+    },
+    {
+      "type": "header",
       "content": "t:content.padding"
     },
     {
@@ -406,14 +560,19 @@
         "alignment": "left",
         "section_width": "page-width",
         "padding-block-start": 0,
-        "padding-block-end": 0
+        "padding-block-end": 0,
+        "border_top": true,
+        "border_bottom": true,
+        "border_width": 2,
+        "all_prefix": "All"
       },
       "blocks": {
         "link": {
           "type": "_collection-link",
           "static": true,
           "settings": {
-            "show_count": true
+            "show_count": true,
+            "show_icon_text": true
           },
           "blocks": {
             "title": {

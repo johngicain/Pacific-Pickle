@@ -1,6 +1,7 @@
 
 {%- doc -%}
   @param {string} [suffix] - The suffix to add to the collection title
+  @param {string} [prefix] - The prefix to add to the collection title
 {%- enddoc -%}
 
 {% render 'text-block-styles' %}
@@ -29,7 +30,7 @@
     "
     {{ block.shopify_attributes }}
   >
-    <span>{{ collection_title }}</span>{{ suffix }}
+    <span>{{ prefix | escape }}{{ collection_title }}</span>{{ suffix }}
   </span>
 {%- endif -%}
 

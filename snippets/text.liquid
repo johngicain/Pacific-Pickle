@@ -29,6 +29,9 @@
   endif
 
   capture text_block_classes
+    if block_settings.narrow_width
+      echo ' text-block--narrow '
+    endif
     if text_width == '100%'
       echo 'text-block--align-' | append: block_settings.alignment
       if block_settings.max_width == 'none'
@@ -153,6 +156,15 @@
     flex-direction: column;
     align-items: var(--horizontal-alignment);
     color: var(--color, var(--color-foreground));
+  }
+
+  .text-block--narrow {
+    flex: 0 1 auto;
+    width: 100%;
+    max-width: 48rem;
+    height: fit-content;
+    margin-inline: auto;
+    align-self: center;
   }
 
   [style*='--horizontal-alignment: center'] .text-block {

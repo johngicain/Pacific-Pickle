@@ -19,21 +19,51 @@
   endif
 %}
 
-{% if block.settings.show_count %}
-  {% assign count = closest.collection.all_products_count %}
-  {%- capture count -%}
-    &nbsp;<sup class="collection-links__count">{{ count }}</sup>
-  {%- endcapture -%}
+{% liquid
+  assign icon_text = ''
+  if block.settings.show_icon_text and section.settings.layout == 'tabs' and onboarding == false
+    assign icon_text = closest.collection.metafields.custom.icon_text.value | strip
+    if icon_text == blank
+      assign icon_text = closest.collection.metafields.custom.icon_text | metafield_text | strip
+    endif
+  endif
+%}
 
+{% if block.settings.show_count %}
+  {% assign count_value = closest.collection.all_products_count %}
   {% if onboarding %}
+    {% assign count_value = 5 %}
+  {% endif %}
+
+  {% if section.settings.layout == 'tabs' %}
     {%- capture count -%}
-      &nbsp;<sup class="collection-links__count">5</sup>
+      <span class="collection-links__count">{% if block.settings.text != blank %}{{ block.settings.text | escape }} {% endif %}({{ count_value }})</span>
+    {%- endcapture -%}
+  {% else %}
+    {%- capture count -%}
+      &nbsp;<sup class="collection-links__count">{% if block.settings.text != blank %}{{ block.settings.text | escape }} {% endif %}({{ count_value }})</sup>
     {%- endcapture -%}
   {% endif %}
 {% endif %}
 
 {% capture title_block %}
-  {% content_for 'block', type: '_inline-collection-title', id: 'title', suffix: count %}
+  {% liquid
+    assign title_prefix = ''
+    if section.settings.layout == 'tabs' and closest.collection.handle == 'all' and section.settings.all_prefix != blank
+      assign all_prefix = section.settings.all_prefix | strip
+      assign title_down = closest.collection.title | downcase
+      assign prefix_down = all_prefix | downcase
+      unless title_down contains prefix_down
+        assign title_prefix = all_prefix | append: ' '
+      endunless
+    endif
+    if section.settings.layout == 'tabs'
+      assign title_suffix = ''
+    else
+      assign title_suffix = count
+    endif
+  %}
+  {% content_for 'block', type: '_inline-collection-title', id: 'title', suffix: title_suffix, prefix: title_prefix %}
 {% endcapture %}
 
 {% capture image_block %}
@@ -58,6 +88,25 @@
     {{ image_block }}
   </a>
 {% elsif section.settings.layout == 'tabs' %}
+  {% if index == 0 %}
+    {% if block.settings.color != blank or block.settings.background_color != blank or block.settings.font_size != blank %}
+      {% style %}
+        #shopify-section-{{ section.id }} .collection-links__container {
+          {% if block.settings.color != blank %}
+            --collection-links-tab-color: {{ block.settings.color }};
+          {% endif %}
+          {% if block.settings.background_color != blank %}
+            --collection-links-tab-background: {{ block.settings.background_color }};
+          {% endif %}
+          {% if block.settings.font_size != blank %}
+            --collection-links-tab-font-size: {{ block.settings.font_size }};
+          {% elsif section.settings.font_size != blank %}
+            --collection-links-tab-font-size: {{ section.settings.font_size }};
+          {% endif %}
+        }
+      {% endstyle %}
+    {% endif %}
+  {% endif %}
   <a
     href="{{ closest.collection.url }}"
     class="collection-links__link collection-links__link--tab"
@@ -70,7 +119,11 @@
     {% endif %}
     {{ block.shopify_attributes }}
   >
+    {% if icon_text != blank %}
+      <span class="collection-links__icon-text">{{ icon_text | escape }}</span>
+    {% endif %}
     {{ title_block }}
+    {{ count }}
   </a>
 {% else %}
   <a
@@ -145,43 +198,81 @@
     }
   }
 
-  .collection-links__link--tab {
+  .collection-links__link.collection-links__link--tab {
     --min-font-size: 0.75rem;
     --max-font-size: 0.875rem;
+    --tab-color: var(--collection-links-tab-color, var(--color-foreground));
+    --tab-background: var(--collection-links-tab-background, var(--color-background));
 
     align-items: center;
+    gap: 0.35em;
     flex-shrink: 0;
     padding: 0.75rem 1.25rem;
-    font-size: 0.8125rem;
+    font-size: var(--collection-links-tab-font-size, 0.8125rem);
     font-weight: 700;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    border-inline-end: 2px solid var(--color-foreground);
-    background: var(--color-background);
-    color: var(--color-foreground);
+    border-inline-end: var(--collection-links-border-width, 2px) solid var(--tab-color);
+    background: var(--tab-background);
+    color: var(--tab-color);
+    --color: var(--tab-color);
     opacity: 1;
     white-space: nowrap;
 
+    .section.collection-links--border-top & {
+      border-block-start: var(--collection-links-border-width, 2px) solid var(--collection-links-border-color, var(--tab-color));
+    }
+
+    .section.collection-links--border-bottom & {
+      border-block-end: var(--collection-links-border-width, 2px) solid var(--collection-links-border-color, var(--tab-color));
+    }
+
     &[aria-current] {
-      background: var(--color-foreground);
-      color: var(--color-background);
+      background: var(--tab-color);
+      color: var(--tab-background);
+      --color: var(--tab-background);
     }
 
     &:hover {
       opacity: 1;
-      color: var(--color-background);
-      background: var(--color-foreground);
+      color: var(--tab-background);
+      background: var(--tab-color);
+      --color: var(--tab-background);
+    }
+
+    .text-block,
+    .text-block > * {
+      color: inherit;
+      font-size: inherit;
+    }
+
+    .collection-links__icon-text {
+      flex-shrink: 0;
+      font-size: inherit;
+      font-weight: inherit;
+      letter-spacing: normal;
+      line-height: 1;
+      text-transform: none;
+      color: inherit;
     }
 
     .collection-links__count {
-      opacity: 0.7;
-      font-size: 0.65em;
+      font-size: inherit;
+      font-weight: inherit;
+      letter-spacing: inherit;
+      line-height: inherit;
+      opacity: 1;
+      color: color-mix(in srgb, var(--tab-color) calc(var(--opacity-muted-text) * 100%), transparent);
     }
 
-    &[aria-current] .collection-links__count {
-      color: inherit;
-      opacity: 0.75;
+    &[aria-current] .collection-links__count,
+    &:hover .collection-links__count {
+      color: color-mix(in srgb, var(--tab-background) calc(var(--opacity-muted-text) * 100%), transparent);
     }
+  }
+
+  .collection-links__link--tab:first-child {
+    border-inline-start: 0;
   }
 
   .collection-links__link--tab:last-child {
@@ -237,6 +328,88 @@
       "id": "show_count",
       "label": "t:settings.show_count",
       "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_icon_text",
+      "label": "t:settings.show_icon_text",
+      "info": "t:content.icon_text_metafield",
+      "default": false,
+      "visible_if": "{{ section.settings.layout == 'tabs' }}"
+    },
+    {
+      "type": "text",
+      "id": "text",
+      "label": "t:settings.text",
+      "visible_if": "{{ block.settings.show_count }}"
+    },
+    {
+      "type": "header",
+      "content": "t:content.appearance",
+      "visible_if": "{{ section.settings.layout == 'tabs' }}"
+    },
+    {
+      "type": "select",
+      "id": "font_size",
+      "label": "t:settings.font_size",
+      "options": [
+        {
+          "value": "",
+          "label": "t:options.default"
+        },
+        {
+          "value": "0.625rem",
+          "label": "10px"
+        },
+        {
+          "value": "0.75rem",
+          "label": "12px"
+        },
+        {
+          "value": "0.8125rem",
+          "label": "13px"
+        },
+        {
+          "value": "0.875rem",
+          "label": "14px"
+        },
+        {
+          "value": "1rem",
+          "label": "16px"
+        },
+        {
+          "value": "1.125rem",
+          "label": "18px"
+        },
+        {
+          "value": "1.25rem",
+          "label": "20px"
+        },
+        {
+          "value": "1.5rem",
+          "label": "24px"
+        },
+        {
+          "value": "2rem",
+          "label": "32px"
+        }
+      ],
+      "default": "",
+      "visible_if": "{{ section.settings.layout == 'tabs' }}"
+    },
+    {
+      "type": "color",
+      "id": "color",
+      "label": "t:settings.color",
+      "placeholder": "t:settings.default",
+      "visible_if": "{{ section.settings.layout == 'tabs' }}"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "t:settings.background_color",
+      "placeholder": "t:settings.default",
+      "visible_if": "{{ section.settings.layout == 'tabs' }}"
     }
   ]
 }

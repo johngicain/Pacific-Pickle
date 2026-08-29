@@ -1,19 +1,35 @@
 {% doc %}
 Renders the Pacific Pickle Works versus mass-market comparison table.
-@param {object} [settings] - Compare table settings for header typography, color, and alignment
+@param {object} [settings] - Compare table settings for heading and text typography, color, alignment, and limit content width
 @example
 {% render 'ppw-compare-table' %}
 {% enddoc %}
 
 <div
-  class="ppw-compare"
   style="
     {% render 'compare-table-header-style', settings: settings %}
+    {% render 'compare-table-intro-style', settings: settings %}
     --compare-border-style: {{ settings.border | default: 'solid' }};
     --compare-feature-max-width: {{ settings.feature_max_width | default: 25 }}%;
   "
 >
-  <table>
+  <div class="ppw-compare-stack{% if settings.narrow_width %} ppw-compare-stack--narrow{% endif %}">
+    {% if settings.heading != blank or settings.text != blank %}
+      <div class="ppw-compare__intro{% if settings.intro_narrow_width or settings.narrow_width %} ppw-compare__intro--narrow{% endif %}">
+        {% if settings.heading != blank %}
+          <h2 class="ppw-compare__heading{% if settings.heading_narrow_width %} ppw-compare__heading--narrow{% endif %}">
+            {{ settings.heading }}
+          </h2>
+        {% endif %}
+        {% if settings.text != blank %}
+          <div class="ppw-compare__text rte{% if settings.text_narrow_width %} ppw-compare__text--narrow{% endif %}">
+            {{ settings.text }}
+          </div>
+        {% endif %}
+      </div>
+    {% endif %}
+    <div class="ppw-compare{% if settings.narrow_width %} ppw-compare--narrow{% endif %}">
+      <table>
     <thead>
       <tr>
         <th
@@ -103,6 +119,8 @@ Renders the Pacific Pickle Works versus mass-market comparison table.
       </tr>
     </tbody>
   </table>
+    </div>
+  </div>
 </div>
 
 {% render 'compare-table-styles' %}

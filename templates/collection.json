@@ -218,7 +218,8 @@
           "type": "_collection-link",
           "static": true,
           "settings": {
-            "show_count": true
+            "show_count": true,
+            "show_icon_text": true
           },
           "blocks": {
             "title": {
@@ -257,12 +258,16 @@
           "pickled-veggies"
         ],
         "layout": "tabs",
+        "all_prefix": "All",
         "section_width": "page-width",
         "alignment": "left",
         "image_position": "right",
         "background_color": "#faf7f0",
         "padding-block-start": 0,
-        "padding-block-end": 0
+        "padding-block-end": 0,
+        "border_top": true,
+        "border_bottom": true,
+        "border_width": 2
       }
     },
     "main": {
