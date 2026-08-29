@@ -688,6 +688,106 @@
         "padding-block-end": 0
       }
     },
+    "section_4triEG": {
+      "type": "section",
+      "blocks": {
+        "text_X89fFG": {
+          "type": "text",
+          "name": "t:names.heading",
+          "settings": {
+            "text": "<h2><strong>CRAFT VS. COMMERCIAL PICKLES</strong></h2>",
+            "width": "fit-content",
+            "max_width": "normal",
+            "alignment": "left",
+            "type_preset": "custom",
+            "font": "var(--font-heading--family)",
+            "font_size": "3.5rem",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "text_color": "",
+            "bold_color": "",
+            "italic_color": "",
+            "italic_font_size": "",
+            "text_shadow": false,
+            "text_shadow_color": "#00000080",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "text_EQbxyT": {
+          "type": "text",
+          "name": "t:names.text",
+          "settings": {
+            "text": "<p>Not all pickles are created equal. Here's how Pacific Pickle Works compares to mass-market brands.</p>",
+            "width": "fit-content",
+            "max_width": "none",
+            "alignment": "left",
+            "type_preset": "custom",
+            "font": "var(--font-body--family)",
+            "font_size": "1rem",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "text_color": "",
+            "bold_color": "",
+            "italic_color": "",
+            "italic_font_size": "",
+            "text_shadow": false,
+            "text_shadow_color": "#00000080",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "text_X89fFG",
+        "text_EQbxyT"
+      ],
+      "name": "t:names.rich_text_section",
+      "settings": {
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 0,
+        "section_width": "page-width",
+        "section_height": "",
+        "section_height_custom": 50,
+        "background_media": "none",
+        "background_color": "",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_color": "",
+        "border_radius": 0,
+        "padding-block-start": 60,
+        "padding-block-end": 0
+      }
+    },
     "compare": {
       "type": "compare-table",
       "blocks": {
@@ -1029,7 +1129,7 @@
       ],
       "name": "t:names.compare_table",
       "settings": {
-        "heading": "CRAFT VS. COMMERCIAL PICKLES",
+        "heading": "",
         "heading_alignment": "center",
         "feature_heading": "Feature",
         "ours_heading": "🥒 Pacific Pickle Works",
@@ -1160,7 +1260,7 @@
                   "type": "text",
                   "name": "t:names.heading",
                   "settings": {
-                    "text": "<h3><strong>FREQUENTLY ASKED QUESTIONS</strong></h3>",
+                    "text": "<h2><strong>FREQUENTLY ASKED QUESTIONS</strong></h2>",
                     "width": "fit-content",
                     "max_width": "normal",
                     "alignment": "left",
@@ -1674,6 +1774,7 @@
     "main",
     "subscribe",
     "divider_xkJacQ",
+    "section_4triEG",
     "compare",
     "faq"
   ]
