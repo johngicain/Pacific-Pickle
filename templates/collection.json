@@ -805,7 +805,7 @@
             "theirs_background": "#ffffff",
             "feature_color": "",
             "ours_color": "",
-            "theirs_color": "#645e58",
+            "theirs_color": "#645E58",
             "feature_type_preset": "custom",
             "feature_font": "var(--font-body--family)",
             "feature_font_size": "0.875rem",
