@@ -1294,6 +1294,41 @@
     height: var(--font-paragraph--size);
     position: absolute;
   }
+
+  .facets-toggle__button {
+    border: 2px solid var(--color-foreground);
+    padding: 0.5rem 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+  }
+
+  .facets--vertical .facets__summary {
+    padding-block: 0.85rem;
+    border-bottom: 2px solid var(--color-foreground);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+  }
+
+  .facets--vertical .facets__label {
+    font-size: 0.75rem;
+  }
+
+  .facets.facets-controls-wrapper {
+    @media screen and (min-width: 750px) {
+      border-block: 2px solid var(--color-foreground);
+      padding-block: 0.75rem;
+      margin-block-end: 1rem;
+    }
+  }
+
+  .facets--vertical .facets__clear-all-link,
+  .facets--horizontal .facets__clear-all-link {
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
 {% endstylesheet %}
 
 {% schema %}

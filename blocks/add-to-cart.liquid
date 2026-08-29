@@ -14,7 +14,7 @@
   if block.settings.box_shadow
     assign class = class | append: ' button--box-shadow'
   endif
-  assign id = 'BuyButtons-ProductSubmitButton-' | append: block.id
+  assign id = 'BuyButtons-ProductSubmitButton-' | append: block.id | append: '-' | append: closest.product.id
   assign button_style = ''
   if block.settings.font_size != blank
     assign button_style = '--button-font-size: ' | append: block.settings.font_size | append: '; font-size: ' | append: block.settings.font_size

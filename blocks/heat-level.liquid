@@ -36,7 +36,17 @@
   assign default_icon_color = block_settings.default_icon_color | default: '#CECBC5'
 %}
 
-{% if max_level > 0 or level_label != blank %}
+{% liquid
+  assign show_heat_level = false
+  if level_metafield.value != blank or level_label != blank
+    assign show_heat_level = true
+  endif
+  if request.visual_preview_mode or request.design_mode
+    assign show_heat_level = true
+  endif
+%}
+
+{% if show_heat_level %}
   {% style %}
     .heat-level--{{ block.id }} {
       --heat-level-icon-color: {{ default_icon_color }};

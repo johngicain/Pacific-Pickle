@@ -41,7 +41,10 @@ class CollectionLinks extends Component {
   }
 
   get currentIndex() {
-    return this.links.findIndex((link) => link.getAttribute('aria-current') === 'true');
+    return this.links.findIndex((link) => {
+      const current = link.getAttribute('aria-current');
+      return current === 'true' || current === 'page';
+    });
   }
 
   /**
@@ -118,6 +121,8 @@ class CollectionLinks extends Component {
    * Handle scroll event
    */
   #handleScroll = () => {
+    if (this.getAttribute('layout') === 'tabs') return;
+
     const { links } = this;
     const { container } = this.refs;
     const visibleLinks = getVisibleElements(this, links, 0.1);

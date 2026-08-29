@@ -57,6 +57,21 @@
   >
     {{ image_block }}
   </a>
+{% elsif section.settings.layout == 'tabs' %}
+  <a
+    href="{{ closest.collection.url }}"
+    class="collection-links__link collection-links__link--tab"
+    ref="links[]"
+    {% if current %}
+      aria-current="page"
+    {% endif %}
+    {% if onboarding %}
+      data-placeholder="true"
+    {% endif %}
+    {{ block.shopify_attributes }}
+  >
+    {{ title_block }}
+  </a>
 {% else %}
   <a
     href="{{ closest.collection.url }}"
@@ -101,20 +116,11 @@
 
     /* When hovering over container, dim non-current links (text layout only) */
     @media (hover: hover) {
-      collection-links-component:not([layout='spotlight']) .collection-links__container:hover & {
+      collection-links-component[layout='text'] .collection-links__container:hover & {
         opacity: var(--opacity-subdued-text);
       }
 
-      collection-links-component:not([layout='spotlight']) .collection-links__container:hover &[aria-current='true'] {
-        opacity: 1;
-      }
-    }
-
-    [layout='spotlight'] & {
-      /* Spotlight layout: dimmed by default */
-      opacity: var(--disabled-opacity);
-
-      &[aria-current='true'] {
+      collection-links-component[layout='text'] .collection-links__container:hover &[aria-current='true'] {
         opacity: 1;
       }
     }
@@ -137,6 +143,49 @@
         }
       }
     }
+  }
+
+  .collection-links__link--tab {
+    --min-font-size: 0.75rem;
+    --max-font-size: 0.875rem;
+
+    align-items: center;
+    flex-shrink: 0;
+    padding: 0.75rem 1.25rem;
+    font-size: 0.8125rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border-inline-end: 2px solid var(--color-foreground);
+    background: var(--color-background);
+    color: var(--color-foreground);
+    opacity: 1;
+    white-space: nowrap;
+
+    &[aria-current] {
+      background: var(--color-foreground);
+      color: var(--color-background);
+    }
+
+    &:hover {
+      opacity: 1;
+      color: var(--color-background);
+      background: var(--color-foreground);
+    }
+
+    .collection-links__count {
+      opacity: 0.7;
+      font-size: 0.65em;
+    }
+
+    &[aria-current] .collection-links__count {
+      color: inherit;
+      opacity: 0.75;
+    }
+  }
+
+  .collection-links__link--tab:last-child {
+    border-inline-end: 0;
   }
 
   .collection-links__count {

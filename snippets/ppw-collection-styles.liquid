@@ -1,0 +1,82 @@
+{%- doc -%}
+  Collection page styles for the Pacific Pickle Works shop layout.
+
+  @example
+  {% render 'ppw-collection-styles' %}
+{%- enddoc -%}
+
+{% stylesheet %}
+  .shopify-section:has(.ppw-collection-search) h1 {
+    font-size: clamp(3rem, 8vw, 5rem);
+    line-height: 0.9;
+  }
+
+  *:has(> .ppw-collection-search) {
+    flex: 0 1 20rem;
+    width: min(20rem, 100%);
+    max-width: 100%;
+  }
+
+  .ppw-collection-search {
+    position: relative;
+    width: 20rem;
+    min-width: min(20rem, 100%);
+    max-width: 100%;
+  }
+
+  @media screen and (min-width: 750px) and (max-width: 989px) {
+    .collection-wrapper .product-grid.product-grid--grid {
+      --product-grid-columns-desktop: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media screen and (min-width: 990px) {
+    .collection-wrapper .product-grid.product-grid--grid {
+      --product-grid-columns-desktop: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  .ppw-collection-search .svg-wrapper {
+    position: absolute;
+    inset-block-start: 50%;
+    inset-inline-start: 0.75rem;
+    z-index: 1;
+    width: 14px;
+    height: 14px;
+    color: #aaaaaa;
+    pointer-events: none;
+    translate: 0 -50%;
+  }
+
+  .ppw-collection-search .svg-wrapper svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .ppw-collection-search input[type='search'] {
+    appearance: none;
+    width: 100%;
+    padding: 0.65rem 1rem 0.65rem 2.25rem;
+    color: #ffffff;
+    background-color: transparent;
+    border: 2px solid #555555;
+    border-radius: 0;
+    box-shadow: none;
+    font-family: var(--font-body--family);
+    font-size: 0.875rem;
+    color-scheme: dark;
+  }
+
+  .ppw-collection-search input[type='search']::placeholder {
+    color: #888888;
+  }
+
+  .ppw-collection-search input[type='search']:focus {
+    outline: none;
+    border-color: #e8821a;
+  }
+
+  .product-grid .product-card .heat-level {
+    padding-inline: 12px;
+  }
+{% endstylesheet %}
