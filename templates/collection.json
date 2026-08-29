@@ -673,6 +673,21 @@
         "padding-block-end": 64
       }
     },
+    "divider_xkJacQ": {
+      "type": "divider",
+      "name": "t:names.divider_section",
+      "settings": {
+        "background_color": "",
+        "divider_color": "",
+        "section_width": "full-width",
+        "thickness": 5,
+        "corner_radius": "square",
+        "width_percent": 100,
+        "alignment_horizontal": "center",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    },
     "compare": {
       "type": "compare-table",
       "blocks": {
@@ -1647,7 +1662,7 @@
         "border_opacity": 100,
         "border_color": "",
         "border_radius": 0,
-        "padding-block-start": 80,
+        "padding-block-start": 0,
         "padding-block-end": 80
       }
     }
@@ -1658,6 +1673,7 @@
     "collection_tabs",
     "main",
     "subscribe",
+    "divider_xkJacQ",
     "compare",
     "faq"
   ]
