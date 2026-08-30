@@ -331,13 +331,26 @@
               },
               "blocks": {}
             },
+            "divider_ywDhJ7": {
+              "type": "_divider",
+              "name": "t:names.divider",
+              "settings": {
+                "thickness": 2,
+                "corner_radius": "square",
+                "divider_color": "",
+                "width_percent": 100,
+                "padding-block-start": 0,
+                "padding-block-end": 0
+              },
+              "blocks": {}
+            },
             "title_price": {
               "type": "_product-card-group",
               "settings": {
                 "content_direction": "row",
                 "vertical_on_mobile": false,
                 "horizontal_alignment": "space-between",
-                "vertical_alignment": "flex-start",
+                "vertical_alignment": "center",
                 "align_baseline": false,
                 "horizontal_alignment_flex_direction_column": "flex-start",
                 "vertical_alignment_flex_direction_column": "flex-start",
@@ -363,7 +376,7 @@
                 "border_radius": 0,
                 "link": "",
                 "open_in_new_tab": false,
-                "padding-block-start": 12,
+                "padding-block-start": 6,
                 "padding-block-end": 0,
                 "padding-inline-start": 12,
                 "padding-inline-end": 12
@@ -404,7 +417,7 @@
                     "width": "100%",
                     "alignment": "right",
                     "font": "var(--font-body--family)",
-                    "font_size": "1rem",
+                    "font_size": "0.875rem",
                     "weight": "700",
                     "line_height": "normal",
                     "letter_spacing": "normal",
@@ -565,7 +578,7 @@
                   "type": "add-to-cart",
                   "static": true,
                   "settings": {
-                    "show_icon": true,
+                    "show_icon": false,
                     "style_class": "button-custom",
                     "box_shadow": false,
                     "font": "var(--font-body--family)",
@@ -592,6 +605,7 @@
           },
           "block_order": [
             "card-gallery",
+            "divider_ywDhJ7",
             "title_price",
             "description",
             "heat",
