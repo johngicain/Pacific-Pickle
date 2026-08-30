@@ -619,7 +619,7 @@
         "product_card_size": "medium",
         "mobile_product_card_size": "large",
         "level_on_hover": true,
-        "product_card_box_shadow": false,
+        "product_card_box_shadow": true,
         "price_font_weight": "",
         "enable_infinite_scroll": false,
         "products_per_page": 24,
