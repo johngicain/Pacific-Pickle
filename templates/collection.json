@@ -257,7 +257,7 @@
         "alignment": "left",
         "image_position": "right",
         "background_color": "#faf7f0",
-        "font_size": "",
+        "font_size": "1rem",
         "all_prefix": "All",
         "border": "none",
         "border_top": true,
