@@ -427,7 +427,7 @@
               "type": "text",
               "settings": {
                 "text": "{{ closest.product.description }}",
-                "narrow_width": false,
+                "narrow_width": true,
                 "width": "100%",
                 "max_width": "none",
                 "alignment": "left",
@@ -473,6 +473,51 @@
                 "padding-block-end": 4,
                 "padding-inline-start": 12,
                 "padding-inline-end": 12
+              },
+              "blocks": {}
+            },
+            "product_information_details_cjTmGg": {
+              "type": "product-information-details",
+              "name": "t:names.product_information_details",
+              "settings": {
+                "details": "",
+                "heading": "",
+                "heading_preset": "h6",
+                "heading_color": "",
+                "heading_font": "var(--font-heading--family)",
+                "heading_font_size": "",
+                "heading_weight": "",
+                "heading_line_height": "normal",
+                "heading_letter_spacing": "normal",
+                "heading_case": "none",
+                "heading_wrap": "pretty",
+                "type_preset": "custom",
+                "text_color": "#645E58",
+                "font": "var(--font-body--family)",
+                "font_size": "0.75rem",
+                "weight": "",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "layout": "column",
+                "alignment": "left",
+                "gap": 4,
+                "item_padding_top": 4,
+                "item_padding_bottom": 4,
+                "item_padding_left": 6,
+                "item_padding_right": 6,
+                "background_color": "{{ settings.color_palette.color2 }}",
+                "box_shadow": false,
+                "enable_border": false,
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_color": "",
+                "border_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
               },
               "blocks": {}
             },
@@ -550,6 +595,7 @@
             "title_price",
             "description",
             "heat",
+            "product_information_details_cjTmGg",
             "buy_buttons"
           ]
         }
