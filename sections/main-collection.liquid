@@ -81,12 +81,17 @@
           {% endfor %}
         {% endcapture %}
 
+        {% capture extra_blocks %}
+          {%- content_for 'blocks' -%}
+        {% endcapture %}
+
         {% render 'product-grid',
           section: section,
           children: children,
           products: collection.products,
           paginate: paginate,
-          enable_infinite_scroll: section.settings.enable_infinite_scroll
+          enable_infinite_scroll: section.settings.enable_infinite_scroll,
+          extra_blocks: extra_blocks
         %}
       {% endpaginate %}
     </div>
@@ -99,6 +104,20 @@
   "enabled_on": {
     "templates": ["collection"]
   },
+  "blocks": [
+    {
+      "type": "group"
+    },
+    {
+      "type": "text"
+    },
+    {
+      "type": "button"
+    },
+    {
+      "type": "@app"
+    }
+  ],
   "settings": [
     {
       "type": "select",

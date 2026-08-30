@@ -7,6 +7,7 @@
   @param {string} [title] - Header of the collection or search results
   @param {string} children - List or grid of product cards
   @param {boolean} [enable_infinite_scroll] - Whether to enable infinite scroll (default: true)
+  @param {string} [extra_blocks] - Optional Collection section blocks rendered below the product grid
 {%- enddoc -%}
 
 {%- liquid
@@ -77,6 +78,10 @@
       padding-block-start: var(--zoom-out-padding-block-start, 0);
       padding-block-end: var(--zoom-out-padding-block-end, 0);
     }
+  }
+
+  .product-grid .product-media {
+    background-color: {{ settings.color_palette.background }};
   }
 {% endstyle %}
 <div 
@@ -183,6 +188,11 @@
       {% else %}
         {% render 'pagination-controls', paginate: paginate %}
       {% endif %}
+    {% endif %}
+    {% if extra_blocks != blank %}
+      <div class="collection-section-blocks">
+        {{ extra_blocks }}
+      </div>
     {% endif %}
   </div>
 </div>
@@ -438,6 +448,10 @@
     display: var(--add-to-cart-icon-display, flex);
   }
 
+  .product-grid .product-card .product-form-buttons button {
+    padding-block: 0.5rem;
+  }
+
   @media (any-pointer: fine) {
     .product-grid .product-card:hover .add-to-cart-button {
       --button-background-color: var(--border-color);
@@ -453,7 +467,7 @@
     font-family: var(--add-to-cart-font-family, inherit);
     font-weight: var(--add-to-cart-font-weight, inherit);
     font-size: var(--add-to-cart-font-size, inherit);
-    letter-spacing: var(--add-to-cart-letter-spacing, 0.08em);
+    letter-spacing: var(--add-to-cart-letter-spacing, 0);
     text-transform: var(--add-to-cart-font-case, inherit);
   }
 
@@ -502,6 +516,18 @@
       grid-column: var(--grid-column--desktop);
       padding: var(--padding-block-start) var(--padding-inline-end) var(--padding-block-end) var(--padding-inline-start);
     }
+  }
+
+  .collection-section-blocks {
+    display: flex;
+    flex-direction: column;
+    gap: var(--padding-lg);
+    width: 100%;
+    padding-block-start: var(--padding-2xl);
+  }
+
+  .collection-section-blocks:empty {
+    display: none;
   }
 
   .main-collection-grid__empty {
