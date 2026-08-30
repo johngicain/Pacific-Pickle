@@ -101,6 +101,9 @@
     {% if section.settings.level_on_hover %}
       --product-card-hover-rotate: 0deg;
     {% endif %}
+    {% if section.settings.product_card_box_shadow %}
+      --product-card-box-shadow: 3px 3px var(--color-foreground);
+    {% endif %}
   "
 >
   <div
@@ -229,6 +232,10 @@
 
   .product-grid__item {
     border: var(--product-card-border-width) solid rgb(var(--color-border-rgb) / var(--product-card-border-opacity));
+  }
+
+  .product-grid .product-card {
+    box-shadow: var(--product-card-box-shadow, none);
   }
 
   @media (any-pointer: fine) and (prefers-reduced-motion: no-preference) {
@@ -397,13 +404,45 @@
   }
 
   .product-grid .product-card .product-information-details {
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
     min-width: 0;
     max-width: 100%;
+    width: 100%;
+    overflow: visible;
     padding-inline: 12px;
+  }
+
+  .product-grid .product-card .product-information-details__items {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--product-information-details-gap, 4px);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+  }
+
+  .product-grid .product-card .product-information-details__item {
+    display: inline-flex;
+    align-items: center;
+    list-style: none;
+    width: auto;
+    max-width: 100%;
+    margin: 0;
   }
 
   .product-grid .product-card .add-to-cart-icon {
     display: var(--add-to-cart-icon-display, flex);
+  }
+
+  @media (any-pointer: fine) {
+    .product-grid .product-card:hover .add-to-cart-button {
+      --button-background-color: var(--border-color);
+      background-color: var(--border-color);
+    }
   }
 
   .product-grid .product-card .add-to-cart-button--hide-icon .add-to-cart-icon {
@@ -426,7 +465,8 @@
     pointer-events: none;
     color: var(--product-card-tag-color, #ffffff);
     background-color: var(--product-card-tag-background, #1c1c1a);
-    font-size: 0.75rem;
+    font-size: 14px;
+    font-weight: 600;
     line-height: 1.2;
     letter-spacing: 0.04em;
     text-transform: uppercase;

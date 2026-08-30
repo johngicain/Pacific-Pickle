@@ -180,7 +180,10 @@
 
   assign product_tag = blank
   if block_settings.show_tag
-    assign product_tag = selected_product.metafields.custom.tag.value | default: selected_product.metafields.custom.tag
+    capture product_tag
+      render 'product-tag-label', product: selected_product
+    endcapture
+    assign product_tag = product_tag | strip
     if product_tag == blank
       if request.design_mode or request.visual_preview_mode
         assign product_tag = 'Tag'

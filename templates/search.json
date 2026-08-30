@@ -166,6 +166,7 @@
         "product_card_size": "medium",
         "mobile_product_card_size": "small",
         "level_on_hover": true,
+        "product_card_box_shadow": false,
         "price_font_weight": "",
         "product_grid_width": "centered",
         "full_width_on_mobile": true,

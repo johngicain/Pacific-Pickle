@@ -1,15 +1,23 @@
 {% liquid
   assign block_settings = block.settings
+  assign product = closest.product
+  if request.visual_preview_mode and product == blank
+    assign product = collections.all.products.first
+  endif
   assign details_data = block_settings.details
-  assign metafield_type = details_data.type
-  assign details_string = details_data
+  assign details_string = blank
 
-  if metafield_type != blank and details_data.value != blank
-    if metafield_type contains 'list.'
+  if details_data.value != blank
+    if details_data.type contains 'list.'
       assign details_string = details_data.value | join: '~~'
     else
-      assign details_string = details_data.value
+      assign details_string = details_data | metafield_tag
+      if details_string == blank
+        assign details_string = details_data.value
+      endif
     endif
+  elsif details_data != blank
+    assign details_string = details_data
   endif
 
   assign details_string = details_string | replace: '</li>', '~~' | replace: '</p>', '~~'
@@ -24,6 +32,33 @@
       assign has_items = true
     endif
   endfor
+
+  if has_items == false and product != blank
+    assign fallback = product.metafields.custom.attributes
+    if fallback.value == blank
+      assign fallback = product.metafields.custom.pairs_well
+    endif
+    if fallback.value != blank
+      if fallback.type contains 'list.'
+        assign details_string = fallback.value | join: '~~'
+      else
+        assign details_string = fallback | metafield_tag
+        if details_string == blank
+          assign details_string = fallback.value
+        endif
+      endif
+      assign details_string = details_string | replace: '</li>', '~~' | replace: '</p>', '~~'
+      assign details_string = details_string | replace: '<br />', '~~' | replace: '<br/>', '~~' | replace: '<br>', '~~'
+      assign details_string = details_string | newline_to_br | replace: '<br />', '~~' | strip_html
+      assign detail_items = details_string | split: '~~'
+      for item in detail_items
+        assign item_text = item | strip
+        if item_text != blank
+          assign has_items = true
+        endif
+      endfor
+    endif
+  endif
 
   assign show_placeholders = false
   if has_items == false
@@ -290,9 +325,12 @@
 
   .product-information-details__item {
     box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
     width: auto;
     max-width: 100%;
     margin: 0;
+    list-style: none;
     color: var(--product-information-details-text-color, inherit);
     background-color: var(--product-information-details-item-background, transparent);
     padding-block-start: var(--product-information-details-item-padding-block-start, 0);

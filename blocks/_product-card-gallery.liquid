@@ -4,10 +4,11 @@
 
 {% liquid
   assign product_tag = blank
-  if block.settings.show_tag
-    if product != blank
-      assign product_tag = product.metafields.custom.tag | metafield_text | strip
-    endif
+  if block.settings.show_tag and product != blank
+    capture product_tag
+      render 'product-tag-label', product: product
+    endcapture
+    assign product_tag = product_tag | strip
   endif
 %}
 
@@ -75,7 +76,8 @@
     pointer-events: none;
     color: var(--product-card-tag-color, #ffffff);
     background-color: var(--product-card-tag-background, #1c1c1a);
-    font-size: 0.75rem;
+    font-size: 14px;
+    font-weight: 600;
     line-height: 1.2;
     letter-spacing: 0.04em;
     text-transform: uppercase;

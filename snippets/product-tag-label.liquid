@@ -1,0 +1,34 @@
+{%- doc -%}
+  Resolves display text for the product metafield custom.tag.
+
+  @param {object} product - The product
+
+  @example
+    {% render 'product-tag-label', product: product %}
+{%- enddoc -%}
+
+{%- liquid
+  assign tag_label = blank
+  unless product == blank
+    assign tag_entry = product.metafields.custom.tag.value
+    if tag_entry.label.value != blank
+      assign tag_label = tag_entry.label.value | strip
+    elsif tag_entry.label != blank
+      assign tag_label = tag_entry.label | metafield_text | strip
+    endif
+
+    if tag_label == blank and tag_entry.system.handle != blank
+      assign fetched = metaobjects[tag_entry.system.type][tag_entry.system.handle]
+      if fetched.label.value != blank
+        assign tag_label = fetched.label.value | strip
+      elsif fetched.label != blank
+        assign tag_label = fetched.label | metafield_text | strip
+      endif
+    endif
+
+    if tag_label == blank
+      assign tag_label = product.metafields.custom.tag | metafield_text | strip
+    endif
+  endunless
+-%}
+{{- tag_label -}}
