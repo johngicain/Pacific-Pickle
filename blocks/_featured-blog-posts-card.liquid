@@ -34,6 +34,8 @@
   data-testid="featured-blog-posts-card"
   {% if onboarding %}
     data-placeholder="true"
+  {% elsif block_settings.link_unstyled_buttons_to_article and article.url != blank %}
+    data-article-url="{{ article.url }}"
   {% endif %}
   style="
     {%- render 'spacing-style', settings: block_settings -%}
@@ -205,6 +207,33 @@
   }
 {% endstylesheet %}
 
+{% javascript %}
+  function applyFeaturedBlogUnstyledButtonLinks(root) {
+    const scope = root && root.querySelectorAll ? root : document;
+    const cards = scope.querySelectorAll('.featured-blog-posts-card[data-article-url]');
+
+    for (const card of cards) {
+      const url = card.getAttribute('data-article-url');
+      if (!url) continue;
+
+      const links = card.querySelectorAll('a.button-unstyled');
+      for (const link of links) {
+        link.setAttribute('href', url);
+        link.removeAttribute('aria-disabled');
+        if (link.getAttribute('role') === 'link') {
+          link.removeAttribute('role');
+        }
+      }
+    }
+  }
+
+  applyFeaturedBlogUnstyledButtonLinks();
+
+  document.addEventListener('shopify:section:load', (event) => {
+    applyFeaturedBlogUnstyledButtonLinks(event.target);
+  });
+{% endjavascript %}
+
 {% schema %}
 {
   "name": "t:names.blog_card",
@@ -354,6 +383,13 @@
       "type": "checkbox",
       "id": "zoom_image_on_hover",
       "label": "t:settings.zoom_image_on_hover",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "link_unstyled_buttons_to_article",
+      "label": "t:settings.link_unstyled_buttons_to_article",
+      "info": "t:info.link_unstyled_buttons_to_article",
       "default": true
     },
     {

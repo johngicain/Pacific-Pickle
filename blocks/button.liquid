@@ -1,5 +1,16 @@
+{% liquid
+  assign button_link = block.settings.link
 
-{% render 'button', link: block.settings.link %}
+  if block.settings.style_class == 'button-unstyled'
+    if closest.article.url != blank
+      if section.settings.link_unstyled_buttons_to_article
+        assign button_link = closest.article.url
+      endif
+    endif
+  endif
+%}
+
+{% render 'button', link: button_link %}
 
 {% schema %}
 {

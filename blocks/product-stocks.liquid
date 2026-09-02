@@ -53,6 +53,12 @@
   if block_settings.background_color != blank or block_settings.text_color != blank
     assign stocks_classes = stocks_classes | append: ' color-custom-' | append: block.id
   endif
+
+  assign max_width = 'fit-content'
+  if block_settings.max_width == 'custom'
+    assign stocks_classes = stocks_classes | append: ' product-stocks--custom-max-width'
+    assign max_width = block_settings.custom_max_width | append: '%'
+  endif
 %}
 
 {% if block_settings.background_color != blank or block_settings.text_color != blank %}
@@ -89,6 +95,7 @@
     {% if block_settings.text_color != blank %}
       --color: {{ block_settings.text_color }};
     {% endif %}
+    --product-stocks-max-width: {{ max_width }};
   "
   {{ block.shopify_attributes }}
 >
@@ -112,9 +119,13 @@
     align-items: center;
     gap: 4px;
     width: fit-content;
-    max-width: 100%;
+    max-width: var(--product-stocks-max-width, 100%);
     color: var(--color, inherit);
     box-sizing: border-box;
+  }
+
+  .product-stocks--custom-max-width {
+    width: 100%;
   }
 
   .product-stocks[hidden] {
@@ -133,6 +144,11 @@
   .product-stocks__value {
     margin: 0;
     white-space: nowrap;
+  }
+
+  .product-stocks--custom-max-width .product-stocks__value {
+    white-space: normal;
+    min-width: 0;
   }
 
   .product-stocks.custom-font-size,
@@ -353,6 +369,37 @@
       ],
       "default": "none",
       "visible_if": "{{ block.settings.type_preset == 'custom' }}"
+    },
+    {
+      "type": "header",
+      "content": "t:content.size"
+    },
+    {
+      "type": "select",
+      "id": "max_width",
+      "label": "t:settings.max_width",
+      "options": [
+        {
+          "value": "fit-content",
+          "label": "t:options.fit"
+        },
+        {
+          "value": "custom",
+          "label": "t:options.custom"
+        }
+      ],
+      "default": "fit-content"
+    },
+    {
+      "type": "range",
+      "id": "custom_max_width",
+      "label": "t:settings.custom_width",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "default": 100,
+      "visible_if": "{{ block.settings.max_width == 'custom' }}"
     },
     {
       "type": "header",

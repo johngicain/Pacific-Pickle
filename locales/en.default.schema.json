@@ -261,7 +261,8 @@
     "video_autoplay": "Videos will be muted by default",
     "video_external": "Use a YouTube or Vimeo URL",
     "pills_usage": "Used for applied filters, discount codes, and search suggestions",
-    "media_type_info": "Features are populated from your menu links"
+    "media_type_info": "Features are populated from your menu links",
+    "link_unstyled_buttons_to_article": "Sets unstyled button links to each blog post page"
   },
   "names": {
     "column": "Column",
@@ -1080,6 +1081,7 @@
     "level_on_hover": "Keep cards level on hover",
     "lift_on_hover": "Lift on hover",
     "zoom_image_on_hover": "Zoom image on hover",
+    "link_unstyled_buttons_to_article": "Link buttons to blog post",
     "product_cards": "Product cards",
     "product_count": "Product count",
     "product_pages": "Product pages",
