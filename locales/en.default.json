@@ -35,6 +35,7 @@
     "increase_quantity": "Increase quantity",
     "inventory_status": "Inventory status",
     "product_stocks": "{{ count }} in stock",
+    "product_cart_visitors": "{{ count }} {{ text }}",
     "localization_region_and_language": "Region and language selector",
     "menu": "Menu",
     // This is the label for the header navigation menu when using screen readers, it will read "Primary navigation"
