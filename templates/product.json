@@ -321,7 +321,7 @@
                 "text_color": "",
                 "font": "var(--font-body--family)",
                 "font_size": "0.875rem",
-                "weight": "",
+                "weight": "600",
                 "line_height": "normal",
                 "letter_spacing": "normal",
                 "case": "none",

@@ -32,11 +32,12 @@
 
   if type_preset == 'custom'
     assign stocks_classes = stocks_classes | append: ' custom-typography'
-    if block_settings.weight != blank
-      assign stocks_classes = stocks_classes | append: ' custom-font-weight'
-    endif
   elsif type_preset != blank
     assign stocks_classes = stocks_classes | append: ' ' | append: type_preset
+  endif
+
+  if block_settings.weight != blank
+    assign stocks_classes = stocks_classes | append: ' custom-font-weight'
   endif
 
   if block_settings.font_size != blank
@@ -122,6 +123,7 @@
     max-width: var(--product-stocks-max-width, 100%);
     color: var(--color, inherit);
     box-sizing: border-box;
+    font-weight: var(--font-weight, 600);
   }
 
   .product-stocks--custom-max-width {
@@ -144,6 +146,7 @@
   .product-stocks__value {
     margin: 0;
     white-space: nowrap;
+    font-weight: var(--font-weight, 600);
   }
 
   .product-stocks--custom-max-width .product-stocks__value {
@@ -154,6 +157,11 @@
   .product-stocks.custom-font-size,
   .product-stocks.custom-font-size .product-stocks__value {
     font-size: var(--product-stocks-font-size, var(--font-size));
+  }
+
+  .product-stocks.custom-font-weight,
+  .product-stocks.custom-font-weight .product-stocks__value {
+    font-weight: var(--font-weight, 600);
   }
 {% endstylesheet %}
 
@@ -308,8 +316,7 @@
           "label": "t:options.black"
         }
       ],
-      "default": "",
-      "visible_if": "{{ block.settings.type_preset == 'custom' }}"
+      "default": "600"
     },
     {
       "type": "select",
