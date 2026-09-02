@@ -314,38 +314,6 @@
               },
               "blocks": {}
             },
-<<<<<<< HEAD
-            "stocks": {
-              "type": "product-stocks",
-              "settings": {
-                "type_preset": "paragraph",
-                "text_color": "",
-                "font": "var(--font-body--family)",
-                "font_size": "0.875rem",
-                "weight": "600",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "max_width": "fit-content",
-                "custom_max_width": 100,
-                "show_icon": true,
-                "icon_size": 14,
-                "icon_color": "#c4541a",
-                "background_color": "",
-                "border": "none",
-                "border_width": 1,
-                "border_opacity": 100,
-                "border_color": "",
-                "border_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-=======
->>>>>>> 72ccd33368753673f1bc13cec6276ffb1a6babd5
             "price": {
               "type": "price",
               "disabled": true,
@@ -538,6 +506,7 @@
                 "case": "none",
                 "max_width": "custom",
                 "custom_max_width": 100,
+                "gap": 4,
                 "show_icon": true,
                 "icon_size": 14,
                 "icon_color": "#c4541a",

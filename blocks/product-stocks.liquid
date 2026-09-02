@@ -83,6 +83,7 @@
     {% render 'spacing-style', settings: block_settings %}
     {% render 'border-override', settings: block_settings %}
     --product-stocks-icon-size: {{ block_settings.icon_size }}px;
+    --product-stocks-gap: {{ block_settings.gap }}px;
     {% if block_settings.icon_color != blank %}
       --product-stocks-icon-color: {{ block_settings.icon_color }};
     {% endif %}
@@ -118,7 +119,7 @@
   .product-stocks {
     display: inline-flex;
     align-items: center;
-    gap: 4px;
+    gap: var(--product-stocks-gap, 4px);
     width: fit-content;
     max-width: var(--product-stocks-max-width, 100%);
     color: var(--color, inherit);
@@ -407,6 +408,16 @@
       "unit": "%",
       "default": 100,
       "visible_if": "{{ block.settings.max_width == 'custom' }}"
+    },
+    {
+      "type": "range",
+      "id": "gap",
+      "label": "t:settings.gap",
+      "min": 0,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 4
     },
     {
       "type": "header",
