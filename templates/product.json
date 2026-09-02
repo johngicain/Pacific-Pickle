@@ -506,7 +506,7 @@
                 "case": "none",
                 "max_width": "custom",
                 "custom_max_width": 100,
-                "gap": 4,
+                "gap": 8,
                 "show_icon": true,
                 "icon_size": 14,
                 "icon_color": "#c4541a",
