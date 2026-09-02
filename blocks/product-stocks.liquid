@@ -1,0 +1,506 @@
+{% liquid
+  assign block_settings = block.settings
+  assign product = closest.product
+
+  if request.visual_preview_mode and product == blank
+    assign product = collections.all.products.first
+  endif
+
+  assign variant = product.selected_or_first_available_variant
+  assign inventory_quantity = variant.inventory_quantity | default: 0 | plus: 0 | at_least: 0
+  assign inventory_tracked = false
+
+  if variant.inventory_management == 'shopify'
+    assign inventory_tracked = true
+  endif
+
+  assign show_stocks = false
+  if inventory_tracked
+    assign show_stocks = true
+  endif
+
+  if request.visual_preview_mode or request.design_mode
+    assign show_stocks = true
+    if inventory_tracked == false
+      assign inventory_quantity = 24
+    endif
+  endif
+
+  assign type_preset = block_settings.type_preset | default: 'paragraph'
+  assign stocks_classes = 'product-stocks product-stocks--' | append: block.id
+  assign text_type = 'body'
+
+  if type_preset == 'custom'
+    assign stocks_classes = stocks_classes | append: ' custom-typography'
+    if block_settings.weight != blank
+      assign stocks_classes = stocks_classes | append: ' custom-font-weight'
+    endif
+  elsif type_preset != blank
+    assign stocks_classes = stocks_classes | append: ' ' | append: type_preset
+  endif
+
+  if block_settings.font_size != blank
+    assign stocks_classes = stocks_classes | append: ' custom-font-size'
+    assign font_size_value = block_settings.font_size | split: 'rem' | first | times: 1.0
+    if font_size_value >= 3
+      assign text_type = 'display'
+    elsif font_size_value >= 1.25
+      assign text_type = 'heading'
+    endif
+  endif
+
+  assign stocks_classes = stocks_classes | append: ' spacing-style border-style'
+  if block_settings.background_color != blank or block_settings.text_color != blank
+    assign stocks_classes = stocks_classes | append: ' color-custom-' | append: block.id
+  endif
+%}
+
+{% if block_settings.background_color != blank or block_settings.text_color != blank %}
+  {% render 'contrast-override',
+    background_color: block_settings.background_color,
+    text_color: block_settings.text_color,
+    border_color: block_settings.border_color,
+    section_id: block.id
+  %}
+{% endif %}
+
+<product-stocks
+  class="{{ stocks_classes }}"
+  data-product-id="{{ product.id }}"
+  data-block-id="{{ block.id }}"
+  {% unless show_stocks %}
+    hidden
+  {% endunless %}
+  style="
+    {% render 'typography-style', settings: block_settings, preset: type_preset, type: text_type %}
+    {% render 'spacing-style', settings: block_settings %}
+    {% render 'border-override', settings: block_settings %}
+    --product-stocks-icon-size: {{ block_settings.icon_size }}px;
+    {% if block_settings.icon_color != blank %}
+      --product-stocks-icon-color: {{ block_settings.icon_color }};
+    {% endif %}
+    {% if block_settings.font_size != blank %}
+      --font-size: {{ block_settings.font_size }};
+      --product-stocks-font-size: {{ block_settings.font_size }};
+    {% endif %}
+    {% if block_settings.weight != blank %}
+      --font-weight: {{ block_settings.weight }};
+    {% endif %}
+    {% if block_settings.text_color != blank %}
+      --color: {{ block_settings.text_color }};
+    {% endif %}
+  "
+  {{ block.shopify_attributes }}
+>
+  {% if block_settings.show_icon %}
+    <span class="product-stocks__icon" aria-hidden="true">
+      {{ 'icon-zap.svg' | inline_asset_content }}
+    </span>
+  {% endif %}
+  <span
+    class="product-stocks__value"
+    role="status"
+    aria-label="{{ 'accessibility.product_stocks' | t: count: inventory_quantity }}"
+  >
+    {{ 'content.product_stocks' | t: count: inventory_quantity }}
+  </span>
+</product-stocks>
+
+{% stylesheet %}
+  .product-stocks {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    width: fit-content;
+    max-width: 100%;
+    color: var(--color, inherit);
+    box-sizing: border-box;
+  }
+
+  .product-stocks[hidden] {
+    display: none;
+  }
+
+  .product-stocks__icon,
+  .product-stocks__icon svg {
+    display: block;
+    flex-shrink: 0;
+    width: var(--product-stocks-icon-size, 14px);
+    height: var(--product-stocks-icon-size, 14px);
+    color: var(--product-stocks-icon-color, #c4541a);
+  }
+
+  .product-stocks__value {
+    margin: 0;
+    white-space: nowrap;
+  }
+
+  .product-stocks.custom-font-size,
+  .product-stocks.custom-font-size .product-stocks__value {
+    font-size: var(--product-stocks-font-size, var(--font-size));
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:names.product_stocks",
+  "tag": null,
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:content.resource_reference_product_stocks"
+    },
+    {
+      "type": "header",
+      "content": "t:content.typography"
+    },
+    {
+      "type": "select",
+      "id": "type_preset",
+      "label": "t:settings.preset",
+      "options": [
+        {
+          "value": "paragraph",
+          "label": "t:options.paragraph"
+        },
+        {
+          "value": "h4",
+          "label": "t:options.h4"
+        },
+        {
+          "value": "h5",
+          "label": "t:options.h5"
+        },
+        {
+          "value": "h6",
+          "label": "t:options.h6"
+        },
+        {
+          "value": "custom",
+          "label": "t:options.custom"
+        }
+      ],
+      "default": "paragraph",
+      "info": "t:info.edit_presets_in_theme_settings"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "t:settings.text_color",
+      "placeholder": "t:settings.default"
+    },
+    {
+      "type": "select",
+      "id": "font",
+      "label": "t:settings.font",
+      "options": [
+        {
+          "value": "var(--font-body--family)",
+          "label": "t:options.body"
+        },
+        {
+          "value": "var(--font-subheading--family)",
+          "label": "t:options.subheading"
+        },
+        {
+          "value": "var(--font-heading--family)",
+          "label": "t:options.heading"
+        },
+        {
+          "value": "var(--font-accent--family)",
+          "label": "t:options.accent"
+        }
+      ],
+      "default": "var(--font-body--family)",
+      "visible_if": "{{ block.settings.type_preset == 'custom' }}"
+    },
+    {
+      "type": "select",
+      "id": "font_size",
+      "label": "t:settings.font_size",
+      "options": [
+        {
+          "value": "",
+          "label": "t:options.default"
+        },
+        {
+          "value": "0.625rem",
+          "label": "10px"
+        },
+        {
+          "value": "0.75rem",
+          "label": "12px"
+        },
+        {
+          "value": "0.875rem",
+          "label": "14px"
+        },
+        {
+          "value": "1rem",
+          "label": "16px"
+        },
+        {
+          "value": "1.125rem",
+          "label": "18px"
+        },
+        {
+          "value": "1.25rem",
+          "label": "20px"
+        },
+        {
+          "value": "1.5rem",
+          "label": "24px"
+        }
+      ],
+      "default": ""
+    },
+    {
+      "type": "select",
+      "id": "weight",
+      "label": "t:settings.weight",
+      "options": [
+        {
+          "value": "",
+          "label": "t:options.default"
+        },
+        {
+          "value": "100",
+          "label": "t:options.thin"
+        },
+        {
+          "value": "300",
+          "label": "t:options.light"
+        },
+        {
+          "value": "400",
+          "label": "t:options.regular"
+        },
+        {
+          "value": "500",
+          "label": "t:options.medium"
+        },
+        {
+          "value": "600",
+          "label": "t:options.semibold"
+        },
+        {
+          "value": "700",
+          "label": "t:options.bold"
+        },
+        {
+          "value": "900",
+          "label": "t:options.black"
+        }
+      ],
+      "default": "",
+      "visible_if": "{{ block.settings.type_preset == 'custom' }}"
+    },
+    {
+      "type": "select",
+      "id": "line_height",
+      "label": "t:settings.line_height",
+      "options": [
+        {
+          "value": "tight",
+          "label": "t:options.tight"
+        },
+        {
+          "value": "normal",
+          "label": "t:options.normal"
+        },
+        {
+          "value": "loose",
+          "label": "t:options.loose"
+        }
+      ],
+      "default": "normal",
+      "visible_if": "{{ block.settings.type_preset == 'custom' }}"
+    },
+    {
+      "type": "select",
+      "id": "letter_spacing",
+      "label": "t:settings.letter_spacing",
+      "options": [
+        {
+          "value": "tight",
+          "label": "t:options.tight"
+        },
+        {
+          "value": "normal",
+          "label": "t:options.normal"
+        },
+        {
+          "value": "loose",
+          "label": "t:options.loose"
+        }
+      ],
+      "default": "normal",
+      "visible_if": "{{ block.settings.type_preset == 'custom' }}"
+    },
+    {
+      "type": "select",
+      "id": "case",
+      "label": "t:settings.case",
+      "options": [
+        {
+          "value": "none",
+          "label": "t:options.default"
+        },
+        {
+          "value": "uppercase",
+          "label": "t:options.uppercase"
+        }
+      ],
+      "default": "none",
+      "visible_if": "{{ block.settings.type_preset == 'custom' }}"
+    },
+    {
+      "type": "header",
+      "content": "t:content.icon"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_icon",
+      "label": "t:settings.show",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "icon_size",
+      "label": "t:settings.size",
+      "min": 10,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "default": 14,
+      "visible_if": "{{ block.settings.show_icon }}"
+    },
+    {
+      "type": "color",
+      "id": "icon_color",
+      "label": "t:settings.icon_color",
+      "default": "#C4541A",
+      "visible_if": "{{ block.settings.show_icon }}"
+    },
+    {
+      "type": "header",
+      "content": "t:content.background"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "t:settings.background_color",
+      "placeholder": "t:settings.default"
+    },
+    {
+      "type": "header",
+      "content": "t:content.borders"
+    },
+    {
+      "type": "select",
+      "id": "border",
+      "label": "t:settings.style",
+      "options": [
+        {
+          "value": "none",
+          "label": "t:options.none"
+        },
+        {
+          "value": "solid",
+          "label": "t:options.solid"
+        }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "range",
+      "id": "border_width",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "t:settings.thickness",
+      "default": 1,
+      "visible_if": "{{ block.settings.border != 'none' }}"
+    },
+    {
+      "type": "range",
+      "id": "border_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "label": "t:settings.opacity",
+      "default": 100,
+      "visible_if": "{{ block.settings.border != 'none' }}"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "t:settings.color",
+      "placeholder": "t:settings.default",
+      "visible_if": "{{ block.settings.border != 'none' }}"
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "label": "t:settings.border_radius",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "t:content.padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "t:settings.top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "t:settings.bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-start",
+      "label": "t:settings.left",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-end",
+      "label": "t:settings.right",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:names.product_stocks",
+      "category": "t:categories.product"
+    }
+  ]
+}
+{% endschema %}

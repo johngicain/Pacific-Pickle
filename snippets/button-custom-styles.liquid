@@ -9,18 +9,30 @@
   {% render 'button-custom-styles', block_settings: block_settings, block_id: block.id %}
 {% enddoc %}
 
-{% if block_settings.style_class == 'button-unstyled' and block_settings.link_text_color != blank %}
-  {% style %}
-    .button-unstyled--{{ block_id }},
-    .email-signup__button.button-unstyled.button-unstyled--{{ block_id }} {
-      color: rgb({{ block_settings.link_text_color.rgba }});
-    }
+{% if block_settings.style_class == 'button-unstyled' %}
+  {% if block_settings.link_text_color != blank or block_settings.font_weight != blank %}
+    {% style %}
+      a.button-unstyled.button-unstyled--{{ block_id }},
+      .button-unstyled--{{ block_id }},
+      .email-signup__button.button-unstyled.button-unstyled--{{ block_id }} {
+        {% if block_settings.link_text_color != blank %}
+          color: rgb({{ block_settings.link_text_color.rgba }});
+        {% endif %}
+        {% if block_settings.font_weight != blank %}
+          --button-font-weight: {{ block_settings.font_weight }};
+          font-weight: {{ block_settings.font_weight }};
+        {% endif %}
+      }
 
-    .button-unstyled--{{ block_id }}:hover,
-    .email-signup__button.button-unstyled.button-unstyled--{{ block_id }}:hover {
-      color: rgb({{ block_settings.link_text_color.rgb }} / var(--opacity-70));
-    }
-  {% endstyle %}
+      {% if block_settings.link_text_color != blank %}
+        a.button-unstyled.button-unstyled--{{ block_id }}:hover,
+        .button-unstyled--{{ block_id }}:hover,
+        .email-signup__button.button-unstyled.button-unstyled--{{ block_id }}:hover {
+          color: rgb({{ block_settings.link_text_color.rgb }} / var(--opacity-70));
+        }
+      {% endif %}
+    {% endstyle %}
+  {% endif %}
 {% endif %}
 
 {% if block_settings.style_class == 'button-custom' %}

@@ -34,6 +34,7 @@
     "home_logo_alt": "{{ store_name }} - Home",
     "increase_quantity": "Increase quantity",
     "inventory_status": "Inventory status",
+    "product_stocks": "{{ count }} in stock",
     "localization_region_and_language": "Region and language selector",
     "menu": "Menu",
     // This is the label for the header navigation menu when using screen readers, it will read "Primary navigation"
@@ -208,6 +209,10 @@
     "inventory_low_stock_show_count": {
       "one": "{{ count }} left",
       "other": "{{ count }} left"
+    },
+    "product_stocks": {
+      "one": "{{ count }} in stock",
+      "other": "{{ count }} in stock"
     },
     "inventory_low_stock": "Low stock",
     "inventory_in_stock": "In stock",
