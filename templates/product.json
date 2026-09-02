@@ -3649,7 +3649,7 @@
                     "style_class": "button-unstyled",
                     "box_shadow": false,
                     "font_size": "0.875rem",
-                    "font_weight": "",
+                    "font_weight": "600",
                     "custom_button_background": "{{ settings.color_palette.foreground }}",
                     "custom_button_text": "{{ settings.color_palette.background }}",
                     "custom_button_border": "{{ settings.color_palette.background }}",
