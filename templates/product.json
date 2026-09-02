@@ -3368,7 +3368,7 @@
               "settings": {
                 "content_direction": "row",
                 "vertical_on_mobile": true,
-                "horizontal_alignment": "space-between",
+                "horizontal_alignment": "flex-start",
                 "vertical_alignment": "center",
                 "align_baseline": false,
                 "horizontal_alignment_flex_direction_column": "flex-start",
@@ -3410,7 +3410,7 @@
                   "type": "text",
                   "name": "t:names.text",
                   "settings": {
-                    "text": "<p>Cocktails & Drinks</p>",
+                    "text": "<p>{{ closest.article.metafields.custom.category.value }}</p>",
                     "narrow_width": false,
                     "width": "fit-content",
                     "max_width": "normal",
@@ -3442,7 +3442,7 @@
                   "type": "text",
                   "name": "t:names.text",
                   "settings": {
-                    "text": "",
+                    "text": "<p>{{ closest.article.metafields.custom.duration_hour | metafield_tag }} {{ closest.article.metafields.custom.duration_min | metafield_tag }}</p>",
                     "narrow_width": false,
                     "width": "fit-content",
                     "max_width": "normal",
@@ -3575,7 +3575,7 @@
                   "type": "text",
                   "name": "t:names.text",
                   "settings": {
-                    "text": "<p><strong>Easy</strong></p>",
+                    "text": "<p>{{ closest.article.metafields.custom.difficulty.value }}</p>",
                     "narrow_width": false,
                     "width": "fit-content",
                     "max_width": "normal",
