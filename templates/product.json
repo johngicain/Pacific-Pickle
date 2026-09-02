@@ -497,7 +497,7 @@
               "type": "product-stocks",
               "settings": {
                 "type_preset": "paragraph",
-                "text_color": "#C4541A",
+                "text_color": "#c4541a",
                 "font": "var(--font-body--family)",
                 "font_size": "0.75rem",
                 "weight": "",
@@ -509,11 +509,11 @@
                 "show_icon": true,
                 "icon_size": 14,
                 "icon_color": "#c4541a",
-                "background_color": "#FFF5F0",
+                "background_color": "#fff5f0",
                 "border": "solid",
                 "border_width": 1,
                 "border_opacity": 100,
-                "border_color": "#C4541A",
+                "border_color": "#c4541a",
                 "border_radius": 0,
                 "padding-block-start": 5,
                 "padding-block-end": 5,
@@ -4205,7 +4205,7 @@
                       "settings": {
                         "stars_style": "shaded",
                         "show_number": true,
-                        "text_color": "",
+                        "text_color": "{{ settings.color_palette.color3 }}",
                         "type_preset": "paragraph",
                         "width": "100%",
                         "alignment": "left"
@@ -4215,6 +4215,7 @@
                     "ratings_XgBC66": {
                       "type": "ratings",
                       "name": "t:names.ratings",
+                      "disabled": true,
                       "settings": {
                         "icon_size": 16,
                         "icon_gap": 0,
