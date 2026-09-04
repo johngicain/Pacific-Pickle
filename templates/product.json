@@ -314,6 +314,10 @@
               },
               "blocks": {}
             },
+            "recharge_subscriptions_subscription_widget_v2_8aMDpx": {
+              "type": "shopify://apps/recharge-subscriptions/blocks/subscription-widget-v2/371eed76-0b44-4869-9813-730372ea378e",
+              "settings": {}
+            },
             "price": {
               "type": "price",
               "disabled": true,
@@ -498,7 +502,7 @@
               "settings": {
                 "text": "people have this in their cart right now",
                 "type_preset": "paragraph",
-                "text_color": "#3D6B35",
+                "text_color": "#3d6b35",
                 "font": "var(--font-body--family)",
                 "font_size": "0.75rem",
                 "weight": "600",
@@ -510,12 +514,12 @@
                 "gap": 8,
                 "show_icon": true,
                 "icon_size": 14,
-                "icon_color": "#3D6B35",
-                "background_color": "#F0F7EE",
+                "icon_color": "#3d6b35",
+                "background_color": "#f0f7ee",
                 "border": "solid",
                 "border_width": 1,
                 "border_opacity": 100,
-                "border_color": "#3D6B35",
+                "border_color": "#3d6b35",
                 "border_radius": 0,
                 "padding-block-start": 8,
                 "padding-block-end": 7,
@@ -1489,6 +1493,7 @@
             "title",
             "subtitle",
             "heat",
+            "recharge_subscriptions_subscription_widget_v2_8aMDpx",
             "price",
             "variant_picker",
             "buy_buttons",
