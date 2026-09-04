@@ -1889,7 +1889,7 @@
                     "case": "none",
                     "wrap": "pretty",
                     "text_color": "{{ settings.color_palette.foreground }}",
-                    "bold_color": "#3D6B35",
+                    "bold_color": "#3d6b35",
                     "italic_color": "",
                     "italic_font_size": "",
                     "text_shadow": false,
@@ -1954,8 +1954,8 @@
         "border_opacity": 100,
         "border_color": "",
         "border_radius": 0,
-        "padding-block-start": 0,
-        "padding-block-end": 0
+        "padding-block-start": 100,
+        "padding-block-end": 60
       }
     },
     "reviews_ppw": {
