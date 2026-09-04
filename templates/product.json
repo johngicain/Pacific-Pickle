@@ -1876,7 +1876,7 @@
                   "type": "text",
                   "name": "t:names.heading",
                   "settings": {
-                    "text": "<h2>WHAT PEOPLE<br/><strong>ARE SAYING</strong></h2>",
+                    "text": "<h2>WHAT PEOPLE <strong>ARE SAYING</strong></h2>",
                     "narrow_width": false,
                     "width": "fit-content",
                     "max_width": "normal",
