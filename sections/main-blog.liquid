@@ -37,7 +37,21 @@
 
     <div
       ref="grid"
-      class="blog-posts-container"
+      class="
+        blog-posts-container
+        {% if section.settings.card_box_shadow %}blog-posts-container--box-shadow{% endif %}
+        {% if section.settings.reveal_on_hover %}blog-posts-container--hover-reveal{% endif %}
+      "
+      style="
+        --blog-columns: {{ section.settings.columns }};
+        --blog-columns-mobile: {{ section.settings.mobile_columns }};
+        --columns-gap: {{ section.settings.columns_gap }}px;
+        --rows-gap: {{ section.settings.rows_gap }}px;
+        --featured-gap: {{ section.settings.featured_gap }}px;
+        {% if section.settings.hover_title_color != blank %}
+          --blog-hover-title-color: {{ section.settings.hover_title_color }};
+        {% endif %}
+      "
     >
       {% for article in blog.articles %}
         {% liquid
@@ -52,12 +66,21 @@
           data-blog-index="{{ section.id }}-{{ forloop.index }}"
           data-category="{{ article.metafields.custom.category.value | handleize }}"
         >
-          {% content_for 'block',
-            id: 'static-blog-post-card',
-            type: '_featured-blog-posts-card',
-            article: article,
-            closest.article: article
-          %}
+          {% if is_featured %}
+            {% content_for 'block',
+              id: 'static-featured-post-card',
+              type: '_featured-blog-posts-card',
+              article: article,
+              closest.article: article
+            %}
+          {% else %}
+            {% content_for 'block',
+              id: 'static-blog-post-card',
+              type: '_featured-blog-posts-card',
+              article: article,
+              closest.article: article
+            %}
+          {% endif %}
         </div>
       {% else %}
         <div class="blog-posts-empty">
@@ -72,32 +95,78 @@
   .blog-posts {
     --page-content-width: var(--normal-page-width);
     --page-width: calc(var(--page-content-width) + (var(--page-margin) * 2));
-    --columns-gap: 24px;
-    --rows-gap: 24px;
   }
 
   .blog-posts-container {
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    gap: 1rem;
+    grid-template-columns: repeat(var(--blog-columns, 2), minmax(0, 1fr));
     width: 100%;
-    column-gap: var(--columns-gap);
-    row-gap: var(--rows-gap);
+    column-gap: var(--columns-gap, 24px);
+    row-gap: var(--rows-gap, 24px);
   }
 
   .blog-post-item {
-    grid-column: span 3;
     min-width: 0;
   }
 
+  .blog-post-item .featured-blog-posts-card {
+    transition:
+      top var(--hover-transition-duration) var(--hover-transition-timing),
+      box-shadow var(--hover-transition-duration) var(--hover-transition-timing),
+      border-color var(--hover-transition-duration) var(--hover-transition-timing);
+  }
+
+  .blog-post-item .text-block:is(.h1, .h2, .h3, .h4, .h5, .h6) {
+    transition: color var(--hover-transition-duration) var(--hover-transition-timing);
+  }
+
+  .blog-posts-container--box-shadow .blog-post-item .featured-blog-posts-card {
+    box-shadow: 3px 3px var(--color-foreground);
+  }
+
+  .blog-posts-container:not(.blog-posts-container--box-shadow) .blog-post-item .featured-blog-posts-card {
+    box-shadow: none;
+  }
+
+  .blog-posts-container--hover-reveal .blog-post-item .featured-blog-posts-card--hover-lift:hover {
+    top: 0;
+  }
+
+  .blog-posts-container--hover-reveal .blog-post-item a.button-unstyled {
+    display: none;
+    opacity: 0;
+    translate: 0 4px;
+    transition:
+      opacity var(--hover-transition-duration) var(--hover-transition-timing),
+      translate var(--hover-transition-duration) var(--hover-transition-timing),
+      display var(--hover-transition-duration) allow-discrete;
+  }
+
+  .blog-posts-container--hover-reveal .blog-post-item:hover a.button-unstyled {
+    display: block;
+    opacity: 1;
+    translate: 0 0;
+  }
+
+  @starting-style {
+    .blog-posts-container--hover-reveal .blog-post-item:hover a.button-unstyled {
+      opacity: 0;
+      translate: 0 4px;
+    }
+  }
+
+  .blog-posts-container--hover-reveal .blog-post-item:hover .text-block:is(.h1, .h2, .h3, .h4, .h5, .h6) {
+    color: var(--blog-hover-title-color, var(--color-foreground-subdued));
+  }
+
   .blog-post-item--featured {
-    grid-column: span 6;
+    grid-column: 1 / -1;
+    margin-block-end: max(0px, calc(var(--featured-gap, 24px) - var(--rows-gap, 24px)));
   }
 
   @media screen and (max-width: 749px) {
-    .blog-post-item,
-    .blog-post-item--featured {
-      grid-column: span 6;
+    .blog-posts-container {
+      grid-template-columns: repeat(var(--blog-columns-mobile, 1), minmax(0, 1fr));
     }
   }
 
@@ -151,38 +220,31 @@
     pointer-events: none;
   }
 
-  .blog-post-item--featured .featured-blog-posts-card {
-    background-color: #1c1c1a;
-    border-color: #1c1c1a;
-  }
-
-  .blog-post-item--featured .featured-blog-posts-card__inner > .group-block {
-    background-color: #1c1c1a;
-    color: #ffffff;
-    --color-foreground: #ffffff;
-    --color-foreground-rgb: 255 255 255;
-    padding: 2rem !important;
-  }
-
   .blog-post-item--featured .featured-blog-posts-card .text-block:is(.h1, .h2, .h3, .h4, .h5, .h6),
   .blog-post-item--featured .featured-blog-posts-card .text-block:is(.h1, .h2, .h3, .h4, .h5, .h6) > * {
-    color: #ffffff !important;
     white-space: normal;
     overflow: visible;
     text-overflow: unset;
     -webkit-line-clamp: unset;
     line-clamp: unset;
-    font-size: clamp(1.75rem, 3vw, 2.75rem);
-    line-height: 1.05;
   }
 
   .blog-post-item--featured .blog-post-card__content-text,
   .blog-post-item--featured .blog-post-card__content-text * {
-    color: #ffffff !important;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
   }
 
-  .blog-post-item--featured .button-unstyled {
-    color: #e8821a !important;
+  .blog-posts-container--hover-reveal .blog-post-item--featured:hover .text-block:is(.h1, .h2, .h3, .h4, .h5, .h6) {
+    color: var(--blog-hover-title-color, var(--color-foreground-subdued));
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .blog-post-item .featured-blog-posts-card,
+    .blog-post-item .text-block:is(.h1, .h2, .h3, .h4, .h5, .h6),
+    .blog-posts-container--hover-reveal .blog-post-item a.button-unstyled {
+      transition: none;
+    }
   }
 
   .blog-posts-empty {
@@ -272,6 +334,82 @@
       "label": "t:settings.link_unstyled_buttons_to_article",
       "info": "t:info.link_unstyled_buttons_to_article",
       "default": true
+    },
+    {
+      "type": "range",
+      "id": "columns",
+      "label": "t:settings.columns",
+      "min": 1,
+      "max": 4,
+      "step": 1,
+      "default": 2
+    },
+    {
+      "type": "select",
+      "id": "mobile_columns",
+      "label": "t:settings.mobile_columns",
+      "options": [
+        {
+          "value": "1",
+          "label": "t:options.one_number"
+        },
+        {
+          "value": "2",
+          "label": "t:options.two_number"
+        }
+      ],
+      "default": "1"
+    },
+    {
+      "type": "range",
+      "id": "columns_gap",
+      "label": "t:settings.horizontal_gap",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "rows_gap",
+      "label": "t:settings.vertical_gap",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "checkbox",
+      "id": "card_box_shadow",
+      "label": "t:settings.box_shadow",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "reveal_on_hover",
+      "label": "Reveal actions on hover",
+      "info": "Hides the card button until hover and disables the card lift. Image zoom is kept.",
+      "default": false
+    },
+    {
+      "type": "color",
+      "id": "hover_title_color",
+      "label": "Title hover color",
+      "placeholder": "t:settings.default",
+      "visible_if": "{{ section.settings.reveal_on_hover }}"
+    },
+    {
+      "type": "range",
+      "id": "featured_gap",
+      "label": "Featured recipe vertical gap",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 24,
+      "visible_if": "{{ section.settings.show_featured }}"
     },
     {
       "type": "select",
