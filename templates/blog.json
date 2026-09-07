@@ -741,7 +741,7 @@
                     "show_caret": false,
                     "box_shadow": false,
                     "reveal_on_hover": false,
-                    "font_size": "0.875rem",
+                    "font_size": "1rem",
                     "font_weight": "600",
                     "custom_button_background": "{{ settings.color_palette.foreground }}",
                     "custom_button_text": "{{ settings.color_palette.background }}",
