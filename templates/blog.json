@@ -988,7 +988,7 @@
                   "name": "t:names.group",
                   "settings": {
                     "content_direction": "row",
-                    "content_direction_mobile": "column",
+                    "content_direction_mobile": "row",
                     "vertical_on_mobile": true,
                     "horizontal_alignment": "space-between",
                     "vertical_alignment": "center",
@@ -1033,7 +1033,7 @@
                       "name": "t:names.group",
                       "settings": {
                         "content_direction": "row",
-                        "content_direction_mobile": "column",
+                        "content_direction_mobile": "row",
                         "vertical_on_mobile": true,
                         "horizontal_alignment": "flex-start",
                         "vertical_alignment": "center",
@@ -1078,7 +1078,7 @@
                           "name": "t:names.group",
                           "settings": {
                             "content_direction": "row",
-                            "content_direction_mobile": "column",
+                            "content_direction_mobile": "row",
                             "vertical_on_mobile": true,
                             "horizontal_alignment": "flex-start",
                             "vertical_alignment": "center",
@@ -1090,7 +1090,7 @@
                             "narrow_width": false,
                             "width": "fit-content",
                             "custom_width": 100,
-                            "width_mobile": "fill",
+                            "width_mobile": "fit-content",
                             "custom_width_mobile": 100,
                             "height": "fit",
                             "custom_height": 100,
@@ -1178,7 +1178,7 @@
                           "name": "t:names.group",
                           "settings": {
                             "content_direction": "row",
-                            "content_direction_mobile": "column",
+                            "content_direction_mobile": "row",
                             "vertical_on_mobile": true,
                             "horizontal_alignment": "flex-start",
                             "vertical_alignment": "center",
@@ -1190,7 +1190,7 @@
                             "narrow_width": false,
                             "width": "fit-content",
                             "custom_width": 100,
-                            "width_mobile": "fill",
+                            "width_mobile": "fit-content",
                             "custom_width_mobile": 100,
                             "height": "fit",
                             "custom_height": 100,
