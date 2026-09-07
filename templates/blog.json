@@ -733,8 +733,8 @@
                       "settings": {
                         "text": "<p><strong>{{ closest.article.metafields.custom.difficulty.value }}</strong></p>",
                         "narrow_width": false,
-                        "width": "100%",
-                        "max_width": "none",
+                        "width": "fit-content",
+                        "max_width": "narrow",
                         "alignment": "center",
                         "type_preset": "custom",
                         "font": "var(--font-body--family)",
