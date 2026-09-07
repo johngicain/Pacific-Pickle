@@ -50,6 +50,9 @@
     if block_settings.background
       echo ' text-block--background '
     endif
+    if block_settings.border != blank and block_settings.border != 'none'
+      echo ' border-style text-block--border '
+    endif
     if block_settings.text_shadow
       echo ' text-block--text-shadow '
     endif
@@ -97,6 +100,10 @@
       --text-background-color: {{ block_settings.background_color | default: 'rgb(255 255 255 / 1.0)' }};
       --text-corner-radius: {{ block_settings.corner_radius }}px;
       --text-padding: max(var(--padding-2xs), calc((var(--text-corner-radius) + var(--padding-xs)) * (1 - cos(45deg))));
+    {% endif %}
+    {% if block_settings.border != blank and block_settings.border != 'none' %}
+      {% render 'border-override', settings: block_settings %}
+      --text-border-padding: max(var(--padding-2xs), calc((var(--border-radius) + var(--padding-xs)) * (1 - cos(45deg))));
     {% endif %}
     {% if block_settings.text_shadow %}
       --text-shadow-color: {{ block_settings.text_shadow_color | default: '#00000080' }};
@@ -203,6 +210,13 @@
 
   .text-block--text-shadow {
     text-shadow: 0 1px 2px var(--text-shadow-color);
+  }
+
+  .text-block--border {
+    padding-block-start: max(var(--text-border-padding), var(--padding-block-start, 0px));
+    padding-block-end: max(var(--text-border-padding), var(--padding-block-end, 0px));
+    padding-inline-start: max(var(--text-border-padding), var(--padding-inline-start, 0px));
+    padding-inline-end: max(var(--text-border-padding), var(--padding-inline-end, 0px));
   }
 
   .text-block.custom-typography.text-block--bold-color,

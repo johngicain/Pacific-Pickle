@@ -265,7 +265,8 @@
     "delivery_days": "Number of days added to today's date",
     "pills_usage": "Used for applied filters, discount codes, and search suggestions",
     "media_type_info": "Features are populated from your menu links",
-    "link_unstyled_buttons_to_article": "Sets unstyled button links to each blog post page"
+    "link_unstyled_buttons_to_article": "Sets unstyled button links to each blog post page",
+    "custom_icon": "Replaces the selected icon"
   },
   "names": {
     "column": "Column",
@@ -519,6 +520,7 @@
     "dairy": "Dairy",
     // Icon option for dietary restriction indication
     "dairy_free": "Dairy free",
+    "dashed": "Dashed",
     "default": "Default",
     "diamond": "Diamond",
     "dissolve": "Dissolve",
@@ -956,7 +958,9 @@
     "hover_text": "Hover text",
     "icon": "Icon",
     "icon_style": "Icon style",
+    "icon_size": "Icon size",
     "icon_background": "Icon background",
+    "custom_icon": "Custom icon",
     "icons": "Icons",
     "image": "Image",
     "image_1": "Image 1",

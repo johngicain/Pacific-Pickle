@@ -51,6 +51,18 @@
         {% if section.settings.hover_title_color != blank %}
           --blog-hover-title-color: {{ section.settings.hover_title_color }};
         {% endif %}
+        {% if section.settings.category_tag_background != blank %}
+          --category-tag-background: {{ section.settings.category_tag_background }};
+        {% endif %}
+        {% if section.settings.category_tag_text != blank %}
+          --category-tag-text: {{ section.settings.category_tag_text }};
+        {% endif %}
+        {% if section.settings.featured_category_tag_background != blank %}
+          --featured-category-tag-background: {{ section.settings.featured_category_tag_background }};
+        {% endif %}
+        {% if section.settings.featured_category_tag_text != blank %}
+          --featured-category-tag-text: {{ section.settings.featured_category_tag_text }};
+        {% endif %}
       "
     >
       {% for article in blog.articles %}
@@ -59,6 +71,11 @@
           if show_featured and forloop.first
             assign is_featured = true
           endif
+
+          assign show_category_tag = section.settings.show_category_tag
+          if is_featured
+            assign show_category_tag = section.settings.show_featured_category_tag
+          endif
         %}
         <div
           class="blog-post-item{% if is_featured %} blog-post-item--horizontal blog-post-item--featured{% endif %}"
@@ -66,6 +83,12 @@
           data-blog-index="{{ section.id }}-{{ forloop.index }}"
           data-category="{{ article.metafields.custom.category.value | handleize }}"
         >
+          {% if show_category_tag and article.metafields.custom.category.value != blank %}
+            <span class="blog-post-item__category-tag">
+              {{- article.metafields.custom.category.value -}}
+            </span>
+          {% endif %}
+
           {% if is_featured %}
             {% content_for 'block',
               id: 'static-featured-post-card',
@@ -107,6 +130,32 @@
 
   .blog-post-item {
     min-width: 0;
+    position: relative;
+  }
+
+  .blog-post-item__category-tag {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    z-index: 2;
+    pointer-events: none;
+    background-color: var(--category-tag-background, var(--color-background));
+    color: var(--category-tag-text, var(--color-foreground));
+    border: 1px solid var(--category-tag-text, var(--color-foreground));
+    font-family: var(--font-body--family);
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    line-height: 1;
+    text-transform: uppercase;
+    padding: 0.4rem 0.6rem;
+  }
+
+  .blog-post-item--featured .blog-post-item__category-tag {
+    top: 4rem;
+    background-color: var(--featured-category-tag-background, var(--color-background));
+    color: var(--featured-category-tag-text, var(--color-foreground));
+    border-color: var(--featured-category-tag-text, var(--color-foreground));
   }
 
   .blog-post-item .featured-blog-posts-card {
@@ -197,10 +246,6 @@
     flex: 1 1 50%;
     min-width: 0;
     justify-content: center;
-  }
-
-  .blog-post-item--featured {
-    position: relative;
   }
 
   .blog-post-item--featured::before {
@@ -387,6 +432,53 @@
       "default": true
     },
     {
+      "type": "header",
+      "content": "Category tags"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_featured_category_tag",
+      "label": "Show category tag on Featured blog card",
+      "info": "Displays the article category metafield at the top left of the featured card image.",
+      "default": false,
+      "visible_if": "{{ section.settings.show_featured }}"
+    },
+    {
+      "type": "color",
+      "id": "featured_category_tag_background",
+      "label": "Featured tag background",
+      "placeholder": "t:settings.default",
+      "visible_if": "{{ section.settings.show_featured and section.settings.show_featured_category_tag }}"
+    },
+    {
+      "type": "color",
+      "id": "featured_category_tag_text",
+      "label": "Featured tag text",
+      "placeholder": "t:settings.default",
+      "visible_if": "{{ section.settings.show_featured and section.settings.show_featured_category_tag }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_category_tag",
+      "label": "Show category tag on blog cards",
+      "info": "Displays the article category metafield at the top left of each blog card image.",
+      "default": false
+    },
+    {
+      "type": "color",
+      "id": "category_tag_background",
+      "label": "Category tag background",
+      "placeholder": "t:settings.default",
+      "visible_if": "{{ section.settings.show_category_tag }}"
+    },
+    {
+      "type": "color",
+      "id": "category_tag_text",
+      "label": "Category tag text",
+      "placeholder": "t:settings.default",
+      "visible_if": "{{ section.settings.show_category_tag }}"
+    },
+    {
       "type": "checkbox",
       "id": "reveal_on_hover",
       "label": "Reveal actions on hover",
@@ -403,7 +495,8 @@
     {
       "type": "range",
       "id": "featured_gap",
-      "label": "Featured recipe vertical gap",
+      "label": "Gap below Featured blog card",
+      "info": "Vertical space between the Featured blog card and the blog grid below it.",
       "min": 0,
       "max": 100,
       "step": 1,

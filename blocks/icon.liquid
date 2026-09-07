@@ -1,15 +1,20 @@
-
+{% doc %}
+  Renders a selectable SVG icon or a custom uploaded image, with configurable color and size.
+  @example
+  {% content_for 'block', type: 'icon', id: 'icon' %}
+{% enddoc %}
 
 {% assign block_settings = block.settings %}
 {% assign icon_block_class = 'icon-block__media icon-block-' | append: block.id %}
 
-{% if block_settings.icon_color != blank %}
-  {% style %}
-    .icon-block-{{ block.id }} {
-      color: {{ block_settings.icon_color }};
-    }
-  {% endstyle %}
-{% endif %}
+{% style %}
+  .icon-block-{{ block.id }} {
+    --icon-block-size: {{ block_settings.width }}px;
+    {% if block_settings.icon_color != blank %}
+      --icon-block-color: {{ block_settings.icon_color }};
+    {% endif %}
+  }
+{% endstyle %}
 
 {% capture icon %}
   {% render 'icon-or-image',
@@ -24,9 +29,10 @@
 {%- if block_settings.link != blank -%}
   <a
     href="{{ block_settings.link }}"
-    class="text-inherit"
+    class="icon-block__link text-inherit"
     {% if block_settings.open_in_new_tab %}
-      target="_blank" rel="noopener"
+      target="_blank"
+      rel="noopener"
     {% endif %}
   >
     {{ icon }}
@@ -39,10 +45,20 @@
   .icon-block {
     display: flex;
     flex-shrink: 0;
+    color: var(--icon-block-color, inherit);
+  }
+
+  .icon-block__link {
+    display: flex;
+    color: inherit;
   }
 
   .icon-block__media {
-    height: auto;
+    display: block;
+    width: var(--icon-block-size, 24px);
+    height: var(--icon-block-size, 24px);
+    object-fit: contain;
+    color: var(--icon-block-color, inherit);
   }
 {% endstylesheet %}
 
@@ -51,6 +67,10 @@
   "name": "t:names.icon",
   "class": "icon-block",
   "settings": [
+    {
+      "type": "header",
+      "content": "t:content.icon"
+    },
     {
       "type": "select",
       "id": "icon",
@@ -302,17 +322,29 @@
     {
       "type": "image_picker",
       "id": "image_upload",
-      "label": "t:settings.image_icon"
+      "label": "t:settings.custom_icon",
+      "info": "t:info.custom_icon"
     },
     {
       "type": "range",
       "id": "width",
-      "label": "t:settings.width",
+      "label": "t:settings.icon_size",
       "min": 12,
       "max": 200,
       "step": 2,
       "unit": "px",
       "default": 24
+    },
+    {
+      "type": "color",
+      "id": "icon_color",
+      "label": "t:settings.icon_color",
+      "placeholder": "t:settings.default",
+      "visible_if": "{{ block.settings.image_upload == blank }}"
+    },
+    {
+      "type": "header",
+      "content": "t:content.link"
     },
     {
       "type": "url",
@@ -324,12 +356,6 @@
       "id": "open_in_new_tab",
       "label": "t:settings.open_new_tab",
       "default": false
-    },
-    {
-      "type": "color",
-      "id": "icon_color",
-      "label": "t:settings.color",
-      "placeholder": "t:settings.default"
     }
   ],
   "presets": [

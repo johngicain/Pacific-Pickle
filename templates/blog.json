@@ -1023,6 +1023,8 @@
         "columns_gap": 0,
         "rows_gap": 0,
         "card_box_shadow": true,
+        "show_featured_category_tag": true,
+        "show_category_tag": true,
         "reveal_on_hover": false,
         "hover_title_color": "{{ settings.color_palette.color3 }}",
         "featured_gap": 24,
