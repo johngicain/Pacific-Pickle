@@ -635,7 +635,7 @@
                           "type": "icon",
                           "name": "t:names.icon",
                           "settings": {
-                            "icon": "stopwatch",
+                            "icon": "users",
                             "width": 16,
                             "icon_color": "{{ settings.color_palette.color3 }}",
                             "link": "",
@@ -1176,7 +1176,7 @@
                               "type": "icon",
                               "name": "t:names.icon",
                               "settings": {
-                                "icon": "stopwatch",
+                                "icon": "users",
                                 "width": 14,
                                 "icon_color": "#aaaaaa",
                                 "link": "",
