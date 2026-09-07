@@ -253,6 +253,7 @@
     "hide_logo_on_home_page_help": "Logo will remain visible when sticky header is active",
     "hover_effects": "Applies to product and collection cards",
     "product_card_hover": "Rotates the card, adds a shadow, and zooms the product image",
+    "reveal_on_hover": "Hides the button until the parent card is hovered",
     "logo_font": "Applies only when a logo is not selected",
     "logo_height": "Only affects header logo",
     "page_text_color_default_info": "Default for theme sections",
@@ -540,6 +541,7 @@
     "end": "End",
     "extra_large": "Extra large",
     "extra_small": "Extra small",
+    "external_link": "External link",
     // Icon option for decorative eye symbol
     "envelope": "Envelope",
     "eye": "Eye",
@@ -1138,6 +1140,7 @@
     // Font weight option (400 weight, not bold or light)
     "regular": "Regular",
     "review_count": "Review count",
+    "reveal_on_hover": "Reveal on hover",
     "right": "Right",
     "right_padding": "Right padding",
     "row": "Row",

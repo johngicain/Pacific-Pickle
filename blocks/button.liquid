@@ -67,6 +67,23 @@
       "visible_if": "{{ block.settings.style_class == 'button-unstyled' }}"
     },
     {
+      "type": "select",
+      "id": "link_icon",
+      "label": "t:settings.icon",
+      "options": [
+        {
+          "value": "caret",
+          "label": "t:options.caret"
+        },
+        {
+          "value": "external_link",
+          "label": "t:options.external_link"
+        }
+      ],
+      "default": "caret",
+      "visible_if": "{{ block.settings.style_class == 'button-unstyled' and block.settings.show_caret == true }}"
+    },
+    {
       "type": "checkbox",
       "id": "box_shadow",
       "label": "t:settings.box_shadow",

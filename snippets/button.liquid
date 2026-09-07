@@ -14,6 +14,7 @@
   if block_settings.show_caret and block_settings.style_class == 'button-unstyled'
     assign show_caret = true
   endif
+  assign link_icon = block_settings.link_icon | default: 'caret'
 %}
 {% render 'button-custom-styles', block_settings: block_settings, block_id: block.id %}
 
@@ -41,21 +42,32 @@
 >
   {{ block_settings.label }}
   {%- if show_caret -%}
-    <span class="svg-wrapper icon-caret" aria-hidden="true">
-      {{- 'icon-caret.svg' | inline_asset_content -}}
-    </span>
+    {%- if link_icon == 'external_link' -%}
+      <span class="svg-wrapper icon-external-link" aria-hidden="true">
+        {{- 'icon-external-link.svg' | inline_asset_content -}}
+      </span>
+    {%- else -%}
+      <span class="svg-wrapper icon-caret" aria-hidden="true">
+        {{- 'icon-caret.svg' | inline_asset_content -}}
+      </span>
+    {%- endif -%}
   {%- endif -%}
 </a>
 
 {% stylesheet %}
-  .button-unstyled--with-icon .icon-caret {
+  .button-unstyled--with-icon .icon-caret,
+  .button-unstyled--with-icon .icon-external-link {
+    width: var(--icon-size-xs);
+    height: var(--icon-size-xs);
+  }
+
+  .button-unstyled--with-icon .icon-caret svg,
+  .button-unstyled--with-icon .icon-external-link svg {
     width: var(--icon-size-xs);
     height: var(--icon-size-xs);
   }
 
   .button-unstyled--with-icon .icon-caret svg {
-    width: var(--icon-size-xs);
-    height: var(--icon-size-xs);
     transform: rotate(-90deg);
   }
 {% endstylesheet %}
