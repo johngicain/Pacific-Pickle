@@ -208,51 +208,6 @@
         "padding-block-end": 64
       }
     },
-    "recipe_filters": {
-      "type": "blog-filters",
-      "blocks": {
-        "filter-1": {
-          "type": "_blog-filter",
-          "settings": {
-            "title": "Cocktails & Drinks"
-          },
-          "blocks": {}
-        },
-        "filter-2": {
-          "type": "_blog-filter",
-          "settings": {
-            "title": "Mains & Sides"
-          },
-          "blocks": {}
-        },
-        "filter-3": {
-          "type": "_blog-filter",
-          "settings": {
-            "title": "Snacks & Apps"
-          },
-          "blocks": {}
-        }
-      },
-      "block_order": [
-        "filter-1",
-        "filter-2",
-        "filter-3"
-      ],
-      "name": "Blog filters",
-      "settings": {
-        "alignment": "center",
-        "font_size": "0.875rem",
-        "background_color": "#1c1c1a",
-        "color": "#ffffff",
-        "active_color": "#e8821a",
-        "active_border_bottom": 3,
-        "active_border_bottom_color": "#e8821a",
-        "padding-block-start": 0,
-        "padding-block-end": 0,
-        "padding-inline-start": 24,
-        "padding-inline-end": 24
-      }
-    },
     "blog_filters_wh6QmN": {
       "type": "blog-filters",
       "blocks": {
@@ -286,13 +241,13 @@
       "name": "t:names.blog_filters",
       "settings": {
         "alignment": "left",
-        "font_size": "0.875rem",
+        "font_size": "1rem",
         "background_color": "#1c1c1a",
         "color": "#ffffff",
         "active_color": "#e8821a",
-        "active_border_bottom": 3,
+        "active_border_bottom": 4,
         "active_border_bottom_color": "#e8821a",
-        "padding-block-start": 0,
+        "padding-block-start": 15,
         "padding-block-end": 0,
         "padding-inline-start": 24,
         "padding-inline-end": 24
@@ -1585,7 +1540,6 @@
   },
   "order": [
     "hero",
-    "recipe_filters",
     "blog_filters_wh6QmN",
     "main",
     "divider_zGk4Xb",
