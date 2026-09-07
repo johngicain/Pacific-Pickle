@@ -1282,7 +1282,7 @@
         "columns_gap": 0,
         "rows_gap": 0,
         "card_box_shadow": true,
-        "show_featured_category_tag": true,
+        "show_featured_category_tag": false,
         "featured_category_tag_background": "",
         "featured_category_tag_text": "",
         "show_category_tag": true,
