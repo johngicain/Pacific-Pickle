@@ -238,6 +238,7 @@
       ],
       "settings": {
         "alignment": "center",
+        "section_width": "page-width",
         "font_size": "0.875rem",
         "background_color": "#1c1c1a",
         "color": "#ffffff",

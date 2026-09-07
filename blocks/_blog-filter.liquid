@@ -17,10 +17,13 @@
 {% if matches or request.design_mode %}
   <button
     type="button"
-    class="blog-filters__item{% if matches == false %} blog-filters__item--unmatched{% endif %}"
+    class="blog-filters__item{% if section.settings.font_size != blank %} custom-font-size{% endif %}{% if matches == false %} blog-filters__item--unmatched{% endif %}"
     data-category="{{ filter_handle }}"
     aria-pressed="false"
     on:click="/selectFilter"
+    {% if section.settings.font_size != blank %}
+      style="--font-size: {{ section.settings.font_size }}; font-size: {{ section.settings.font_size }};"
+    {% endif %}
     {{ block.shopify_attributes }}
   >
     {%- if filter_title != blank -%}

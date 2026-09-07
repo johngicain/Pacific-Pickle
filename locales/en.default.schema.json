@@ -893,6 +893,7 @@
     "desktop_height": "Desktop height",
     "desktop_pagination": "Desktop pagination",
     "direction": "Direction",
+    "direction_mobile": "Mobile layout direction",
     // Button appearance for email signup form
     "display": "Display",
     "divider": "Divider",

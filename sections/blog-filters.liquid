@@ -23,7 +23,7 @@
 <div
   class="
     section
-    section--full-width
+    section--{{ section.settings.section_width }}
     spacing-style
     blog-filters
     {% if section.settings.background_color != blank %}color-custom-{{ section.id }}{% endif %}
@@ -42,6 +42,7 @@
       --blog-filters-active-border-color: {{ section.settings.active_border_bottom_color }};
     {% endif %}
     {% if section.settings.font_size != blank %}
+      --font-size: {{ section.settings.font_size }};
       --blog-filters-font-size: {{ section.settings.font_size }};
     {% endif %}
   "
@@ -53,10 +54,13 @@
   >
     <button
       type="button"
-      class="blog-filters__item is-active"
+      class="blog-filters__item{% if section.settings.font_size != blank %} custom-font-size{% endif %} is-active"
       data-category=""
       aria-pressed="true"
       on:click="/selectFilter"
+      {% if section.settings.font_size != blank %}
+        style="--font-size: {{ section.settings.font_size }}; font-size: {{ section.settings.font_size }};"
+      {% endif %}
     >
       {{ 'actions.view_all' | t }}
     </button>
@@ -72,8 +76,6 @@
     align-items: stretch;
     gap: 0.5rem 2rem;
     width: 100%;
-    max-width: var(--page-width);
-    margin-inline: auto;
   }
 
   .blog-filters__item {
@@ -88,7 +90,7 @@
     cursor: pointer;
     color: var(--blog-filters-color, var(--color-foreground));
     font-family: var(--font-body--family);
-    font-size: var(--blog-filters-font-size, 0.875rem);
+    font-size: var(--font-size, var(--blog-filters-font-size, 0.875rem));
     font-weight: 700;
     letter-spacing: 0.08em;
     line-height: 1;
@@ -166,6 +168,22 @@
         }
       ],
       "default": "center"
+    },
+    {
+      "type": "select",
+      "id": "section_width",
+      "label": "t:settings.width",
+      "options": [
+        {
+          "value": "page-width",
+          "label": "t:options.page"
+        },
+        {
+          "value": "full-width",
+          "label": "t:options.full"
+        }
+      ],
+      "default": "page-width"
     },
     {
       "type": "select",
@@ -329,6 +347,7 @@
       "block_order": ["filter-1", "filter-2", "filter-3"],
       "settings": {
         "alignment": "center",
+        "section_width": "page-width",
         "font_size": "0.875rem",
         "background_color": "#1c1c1a",
         "color": "#ffffff",

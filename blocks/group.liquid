@@ -49,11 +49,26 @@
       "default": "column"
     },
     {
+      "type": "select",
+      "id": "content_direction_mobile",
+      "label": "t:settings.direction_mobile",
+      "options": [
+        {
+          "value": "column",
+          "label": "t:options.vertical"
+        },
+        {
+          "value": "row",
+          "label": "t:options.horizontal"
+        }
+      ]
+    },
+    {
       "type": "checkbox",
       "id": "vertical_on_mobile",
       "label": "t:settings.vertical_on_mobile",
       "default": true,
-      "visible_if": "{{ block.settings.content_direction == 'row' }}"
+      "visible_if": "{{ false }}"
     },
     {
       "type": "select",
@@ -546,7 +561,10 @@
   "presets": [
     {
       "name": "t:names.group",
-      "category": "t:categories.layout"
+      "category": "t:categories.layout",
+      "settings": {
+        "content_direction_mobile": "column"
+      }
     }
   ]
 }

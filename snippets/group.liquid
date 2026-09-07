@@ -18,6 +18,15 @@
   if settings.background_media != blank and settings.background_media != 'none'
     assign skip_contrast = true
   endif
+
+  assign mobile_direction = settings.content_direction_mobile
+  if mobile_direction != 'row' and mobile_direction != 'column'
+    if settings.vertical_on_mobile == false
+      assign mobile_direction = 'row'
+    else
+      assign mobile_direction = 'column'
+    endif
+  endif
 %}
 {% render 'contrast-override', background_color: background_color, section_id: block_id, skip_contrast: skip_contrast %}
 
@@ -83,7 +92,8 @@
       {% if request.design_mode %}group-block-content--design-mode{% endif %}
       layout-panel-flex
       layout-panel-flex--{{ settings.content_direction | default: 'column' }}
-      {% if settings.vertical_on_mobile %} mobile-column{% endif %}
+      {% if mobile_direction == 'column' %} mobile-column{% endif %}
+      {% if mobile_direction == 'row' %} mobile-row{% endif %}
     "
     style="{% render 'layout-panel-style', settings: settings %}"
   >

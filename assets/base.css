@@ -1336,7 +1336,15 @@ summary:hover {
     justify-content: var(--vertical-alignment-mobile);
   }
 
-  .layout-panel-flex--row:not(.mobile-column) {
+  .mobile-row {
+    flex-flow: row wrap;
+    justify-content: var(--horizontal-alignment);
+    align-items: var(--vertical-alignment);
+    height: auto;
+  }
+
+  .layout-panel-flex--row:not(.mobile-column),
+  .mobile-row {
     flex-wrap: var(--flex-wrap-mobile);
     height: auto;
 

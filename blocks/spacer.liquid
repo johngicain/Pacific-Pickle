@@ -56,24 +56,26 @@
   /* Mobile */
   @media screen and (max-width: 749px) {
     /* Percent */
-    .layout-panel-flex--row:not(.mobile-column) > .spacer-block--size-mobile-percent {
+    .layout-panel-flex--row:not(.mobile-column) > .spacer-block--size-mobile-percent,
+    .mobile-row > .spacer-block--size-mobile-percent {
       flex: var(--spacer-size-mobile);
       height: 100%;
     }
 
-    .layout-panel-flex--column > .spacer-block--size-mobile-percent,
+    .layout-panel-flex--column:not(.mobile-row) > .spacer-block--size-mobile-percent,
     .mobile-column > .spacer-block--size-percent:not(.spacer-block--size-mobile-pixel) {
       width: 100%;
       flex: var(--spacer-size-mobile);
     }
 
     /* Pixel */
-    .layout-panel-flex--row:not(.mobile-column) > .spacer-block--size-mobile-pixel {
+    .layout-panel-flex--row:not(.mobile-column) > .spacer-block--size-mobile-pixel,
+    .mobile-row > .spacer-block--size-mobile-pixel {
       width: var(--spacer-size-mobile);
       height: 100%;
     }
 
-    .layout-panel-flex--column > .spacer-block--size-mobile-pixel,
+    .layout-panel-flex--column:not(.mobile-row) > .spacer-block--size-mobile-pixel,
     .mobile-column > .spacer-block--size-mobile-pixel {
       width: 100%;
       flex: 0 0 auto;

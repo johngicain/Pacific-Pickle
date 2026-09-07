@@ -19,8 +19,16 @@
   endunless
 
   assign vertical_alignment_mobile = vertical_alignment
+  assign mobile_direction = settings.content_direction_mobile
+  if mobile_direction != 'row' and mobile_direction != 'column'
+    if settings.vertical_on_mobile == false
+      assign mobile_direction = 'row'
+    else
+      assign mobile_direction = 'column'
+    endif
+  endif
 
-  if settings.vertical_on_mobile and vertical_alignment == 'last baseline'
+  if mobile_direction == 'column' and vertical_alignment == 'last baseline'
     assign vertical_alignment_mobile = 'flex-end'
   endif
 -%}
