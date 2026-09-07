@@ -1,0 +1,346 @@
+<script
+  src="{{ 'blog-filters.js' | asset_url }}"
+  type="module"
+  fetchpriority="low"
+></script>
+
+{% liquid
+  if section.settings.background_color != blank
+    render 'contrast-override', background_color: section.settings.background_color, text_color: section.settings.color, section_id: section.id
+  endif
+
+  case section.settings.alignment
+    when 'center'
+      assign alignment_value = 'center'
+    when 'right'
+      assign alignment_value = 'flex-end'
+    else
+      assign alignment_value = 'flex-start'
+  endcase
+%}
+
+<div class="section-background{% if section.settings.background_color != blank %} color-custom-{{ section.id }}{% endif %}"></div>
+<div
+  class="
+    section
+    section--full-width
+    spacing-style
+    blog-filters
+    {% if section.settings.background_color != blank %}color-custom-{{ section.id }}{% endif %}
+  "
+  style="
+    {% render 'spacing-style', settings: section.settings %}
+    --blog-filters-alignment: {{ alignment_value }};
+    {% if section.settings.color != blank %}
+      --blog-filters-color: {{ section.settings.color }};
+    {% endif %}
+    {% if section.settings.active_color != blank %}
+      --blog-filters-active-color: {{ section.settings.active_color }};
+    {% endif %}
+    --blog-filters-active-border-width: {{ section.settings.active_border_bottom }}px;
+    {% if section.settings.active_border_bottom_color != blank %}
+      --blog-filters-active-border-color: {{ section.settings.active_border_bottom_color }};
+    {% endif %}
+    {% if section.settings.font_size != blank %}
+      --blog-filters-font-size: {{ section.settings.font_size }};
+    {% endif %}
+  "
+>
+  <blog-filters-component
+    class="blog-filters__list"
+    role="navigation"
+    aria-label="{{ 'accessibility.filters' | t }}"
+  >
+    <button
+      type="button"
+      class="blog-filters__item is-active"
+      data-category=""
+      aria-pressed="true"
+      on:click="/selectFilter"
+    >
+      {{ 'actions.view_all' | t }}
+    </button>
+    {% content_for 'blocks' %}
+  </blog-filters-component>
+</div>
+
+{% stylesheet %}
+  .blog-filters__list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: var(--blog-filters-alignment, center);
+    align-items: stretch;
+    gap: 0.5rem 2rem;
+    width: 100%;
+    max-width: var(--page-width);
+    margin-inline: auto;
+  }
+
+  .blog-filters__item {
+    appearance: none;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    margin: 0;
+    padding: 1rem 0;
+    border: 0;
+    background: none;
+    cursor: pointer;
+    color: var(--blog-filters-color, var(--color-foreground));
+    font-family: var(--font-body--family);
+    font-size: var(--blog-filters-font-size, 0.875rem);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    line-height: 1;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+
+  .blog-filters__item.is-active {
+    color: var(--blog-filters-active-color, var(--blog-filters-color, var(--color-foreground)));
+  }
+
+  .blog-filters__item.is-active::after {
+    content: '';
+    position: absolute;
+    inset-inline: 0;
+    bottom: 0;
+    height: var(--blog-filters-active-border-width, 3px);
+    background: var(--blog-filters-active-border-color, var(--blog-filters-active-color, var(--color-foreground)));
+  }
+
+  .blog-filters__item--unmatched {
+    opacity: 0.45;
+  }
+
+  .blog-post-item.is-filter-hidden {
+    display: none;
+  }
+
+  @media screen and (max-width: 749px) {
+    .blog-filters__list {
+      flex-wrap: nowrap;
+      justify-content: flex-start;
+      gap: 0 1rem;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .blog-filters__item {
+      flex: 0 0 auto;
+      padding-block: 0.875rem;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:names.blog_filters",
+  "tag": "section",
+  "class": "blog-filters-section",
+  "enabled_on": {
+    "templates": ["blog"]
+  },
+  "blocks": [
+    {
+      "type": "_blog-filter"
+    }
+  ],
+  "settings": [
+    {
+      "type": "select",
+      "id": "alignment",
+      "label": "t:settings.alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "t:options.left"
+        },
+        {
+          "value": "center",
+          "label": "t:options.center"
+        },
+        {
+          "value": "right",
+          "label": "t:options.right"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "select",
+      "id": "font_size",
+      "label": "t:settings.font_size",
+      "options": [
+        {
+          "value": "",
+          "label": "t:options.default"
+        },
+        {
+          "value": "0.625rem",
+          "label": "10px"
+        },
+        {
+          "value": "0.75rem",
+          "label": "12px"
+        },
+        {
+          "value": "0.8125rem",
+          "label": "13px"
+        },
+        {
+          "value": "0.875rem",
+          "label": "14px"
+        },
+        {
+          "value": "1rem",
+          "label": "16px"
+        },
+        {
+          "value": "1.125rem",
+          "label": "18px"
+        },
+        {
+          "value": "1.25rem",
+          "label": "20px"
+        },
+        {
+          "value": "1.5rem",
+          "label": "24px"
+        },
+        {
+          "value": "2rem",
+          "label": "32px"
+        }
+      ],
+      "default": "0.875rem"
+    },
+    {
+      "type": "header",
+      "content": "t:content.colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "t:settings.background_color",
+      "placeholder": "t:settings.default"
+    },
+    {
+      "type": "color",
+      "id": "color",
+      "label": "t:settings.color",
+      "placeholder": "t:settings.default"
+    },
+    {
+      "type": "color",
+      "id": "active_color",
+      "label": "t:settings.active_text",
+      "placeholder": "t:settings.default"
+    },
+    {
+      "type": "header",
+      "content": "t:settings.bottom_border"
+    },
+    {
+      "type": "range",
+      "id": "active_border_bottom",
+      "label": "t:settings.thickness",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "unit": "px",
+      "default": 3
+    },
+    {
+      "type": "color",
+      "id": "active_border_bottom_color",
+      "label": "t:settings.bottom_border_color",
+      "placeholder": "t:settings.default"
+    },
+    {
+      "type": "header",
+      "content": "t:content.padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "t:settings.top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "t:settings.bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-start",
+      "label": "t:settings.left",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-end",
+      "label": "t:settings.right",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 24
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:names.blog_filters",
+      "category": "t:categories.blog_post",
+      "blocks": {
+        "filter-1": {
+          "type": "_blog-filter",
+          "settings": {
+            "title": "Cocktails & Drinks"
+          }
+        },
+        "filter-2": {
+          "type": "_blog-filter",
+          "settings": {
+            "title": "Mains & Sides"
+          }
+        },
+        "filter-3": {
+          "type": "_blog-filter",
+          "settings": {
+            "title": "Snacks & Apps"
+          }
+        }
+      },
+      "block_order": ["filter-1", "filter-2", "filter-3"],
+      "settings": {
+        "alignment": "center",
+        "font_size": "0.875rem",
+        "background_color": "#1c1c1a",
+        "color": "#ffffff",
+        "active_color": "#e8821a",
+        "active_border_bottom": 3,
+        "active_border_bottom_color": "#e8821a",
+        "padding-block-start": 0,
+        "padding-block-end": 0,
+        "padding-inline-start": 24,
+        "padding-inline-end": 24
+      }
+    }
+  ]
+}
+{% endschema %}

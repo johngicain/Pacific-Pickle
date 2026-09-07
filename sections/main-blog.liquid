@@ -41,6 +41,7 @@
         blog-posts-container
         {% if section.settings.card_box_shadow %}blog-posts-container--box-shadow{% endif %}
         {% if section.settings.reveal_on_hover %}blog-posts-container--hover-reveal{% endif %}
+        {% if section.settings.show_button_on_hover %}blog-posts-container--hover-button{% endif %}
       "
       style="
         --blog-columns: {{ section.settings.columns }};
@@ -110,6 +111,13 @@
           <p>No recipes found.</p>
         </div>
       {% endfor %}
+      <div
+        class="blog-posts-empty"
+        data-blog-filter-empty
+        hidden
+      >
+        <p>No recipes found.</p>
+      </div>
     </div>
   </div>
 </blog-posts-list>
@@ -181,7 +189,9 @@
     top: 0;
   }
 
-  .blog-posts-container--hover-reveal .blog-post-item a.button-unstyled {
+  .blog-posts-container--hover-button
+    .blog-post-item
+    :is(a.button, a.button-secondary, a.button-custom, a.button-unstyled) {
     display: none;
     opacity: 0;
     translate: 0 4px;
@@ -191,14 +201,29 @@
       display var(--hover-transition-duration) allow-discrete;
   }
 
-  .blog-posts-container--hover-reveal .blog-post-item:hover a.button-unstyled {
-    display: block;
+  .blog-posts-container--hover-button
+    .blog-post-item:hover
+    :is(a.button, a.button-secondary, a.button-custom, a.button-unstyled) {
     opacity: 1;
     translate: 0 0;
   }
 
+  .blog-posts-container--hover-button .blog-post-item:hover :is(a.button, a.button-secondary, a.button-custom) {
+    display: grid;
+  }
+
+  .blog-posts-container--hover-button .blog-post-item:hover a.button-unstyled {
+    display: block;
+  }
+
+  .blog-posts-container--hover-button .blog-post-item:hover a.button-unstyled--with-icon {
+    display: flex;
+  }
+
   @starting-style {
-    .blog-posts-container--hover-reveal .blog-post-item:hover a.button-unstyled {
+    .blog-posts-container--hover-button
+      .blog-post-item:hover
+      :is(a.button, a.button-secondary, a.button-custom, a.button-unstyled) {
       opacity: 0;
       translate: 0 4px;
     }
@@ -287,7 +312,9 @@
   @media (prefers-reduced-motion: reduce) {
     .blog-post-item .featured-blog-posts-card,
     .blog-post-item .text-block:is(.h1, .h2, .h3, .h4, .h5, .h6),
-    .blog-posts-container--hover-reveal .blog-post-item a.button-unstyled {
+    .blog-posts-container--hover-button
+      .blog-post-item
+      :is(a.button, a.button-secondary, a.button-custom, a.button-unstyled) {
       transition: none;
     }
   }
@@ -480,9 +507,16 @@
     },
     {
       "type": "checkbox",
+      "id": "show_button_on_hover",
+      "label": "Show button on hover",
+      "info": "Hides the card button and reveals it when hovering the blog card.",
+      "default": false
+    },
+    {
+      "type": "checkbox",
       "id": "reveal_on_hover",
       "label": "Reveal actions on hover",
-      "info": "Hides the card button until hover and disables the card lift. Image zoom is kept.",
+      "info": "Disables the card lift and applies the title hover color. Image zoom is kept.",
       "default": false
     },
     {

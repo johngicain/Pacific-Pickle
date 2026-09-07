@@ -267,7 +267,7 @@
     "media_type_info": "Features are populated from your menu links",
     "link_unstyled_buttons_to_article": "Sets unstyled button links to each blog post page",
     "custom_icon": "Replaces the selected icon",
-    "reveal_on_hover": "Hidden until the blog card is hovered. Only applies to buttons inside blog cards."
+    "blog_filter_title": "Shown when the title matches a blog article category tag"
   },
   "names": {
     "column": "Column",
@@ -283,6 +283,8 @@
     "announcement_bar": "Announcement bar",
     "badges": "Badges",
     "blog_card": "Blog card",
+    "blog_filter": "Filter",
+    "blog_filters": "Blog filters",
     "blog_post": "Blog post",
     "blog_posts": "Blog posts",
     "blog_posts_grid": "Blog posts: Grid",
@@ -1134,7 +1136,6 @@
     "reflection_opacity": "Reflection opacity",
     // Font weight option (400 weight, not bold or light)
     "regular": "Regular",
-    "reveal_on_hover": "Reveal on card hover",
     "review_count": "Review count",
     "right": "Right",
     "right_padding": "Right padding",

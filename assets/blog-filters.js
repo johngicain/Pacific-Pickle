@@ -26,9 +26,11 @@ class BlogFiltersComponent extends Component {
   #onBlockSelect = (event) => {
     const target = /** @type {HTMLElement} */ (event.target);
     if (!(target instanceof HTMLElement) || !this.contains(target)) return;
-    if (!target.hasAttribute('data-category')) return;
 
-    this.#applyFilter(target, target.getAttribute('data-category') ?? '');
+    const button = target.closest('[data-category]');
+    if (!(button instanceof HTMLElement) || !this.contains(button)) return;
+
+    this.#applyFilter(button, button.getAttribute('data-category') ?? '');
   };
 
   /**

@@ -1,44 +1,32 @@
 {% liquid
   assign filter_title = block.settings.title | strip
   assign filter_handle = filter_title | handleize
-  assign has_match = false
+  assign matches = false
 
-  if filter_title != blank and blog != blank
+  if filter_handle != blank
     for article in blog.articles
       assign category_handle = article.metafields.custom.category.value | handleize
       if category_handle == filter_handle
-        assign has_match = true
-      endif
-
-      unless has_match
-        for tag in article.tags
-          assign tag_handle = tag | handleize
-          if tag_handle == filter_handle
-            assign has_match = true
-          endif
-        endfor
-      endunless
-
-      if has_match
+        assign matches = true
         break
       endif
     endfor
   endif
 %}
 
-{% if has_match or request.design_mode %}
+{% if matches or request.design_mode %}
   <button
     type="button"
-    class="blog-filters__item{% unless has_match %}{% unless request.design_mode %} blog-filters__item--empty{% endunless %}{% endunless %}"
+    class="blog-filters__item{% if matches == false %} blog-filters__item--unmatched{% endif %}"
     data-category="{{ filter_handle }}"
     aria-pressed="false"
     on:click="/selectFilter"
     {{ block.shopify_attributes }}
   >
     {%- if filter_title != blank -%}
-      {{ filter_title | escape }}
+      {{- filter_title -}}
     {%- else -%}
-      {{ 'blocks.filter' | t }}
+      {{- 'blocks.filter' | t -}}
     {%- endif -%}
   </button>
 {% endif %}
@@ -51,7 +39,8 @@
     {
       "type": "text",
       "id": "title",
-      "label": "t:settings.title"
+      "label": "t:settings.title",
+      "info": "t:info.blog_filter_title"
     }
   ]
 }

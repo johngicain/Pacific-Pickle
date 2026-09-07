@@ -209,14 +209,45 @@
       }
     },
     "recipe_filters": {
-      "type": "custom-liquid",
-      "name": "Recipe filters",
+      "type": "blog-filters",
+      "name": "Blog filters",
+      "blocks": {
+        "filter-1": {
+          "type": "_blog-filter",
+          "settings": {
+            "title": "Cocktails & Drinks"
+          }
+        },
+        "filter-2": {
+          "type": "_blog-filter",
+          "settings": {
+            "title": "Mains & Sides"
+          }
+        },
+        "filter-3": {
+          "type": "_blog-filter",
+          "settings": {
+            "title": "Snacks & Apps"
+          }
+        }
+      },
+      "block_order": [
+        "filter-1",
+        "filter-2",
+        "filter-3"
+      ],
       "settings": {
-        "custom_liquid": "<nav class=\"ppw-recipe-filters\" aria-label=\"Recipe categories\" data-ppw-recipe-filters>\n  <div class=\"ppw-recipe-filters__inner\">\n    <button type=\"button\" class=\"ppw-recipe-filters__link is-active\" data-filter=\"all\">View All</button>\n    <button type=\"button\" class=\"ppw-recipe-filters__link\" data-filter=\"cocktails-drinks\">Cocktails &amp; Drinks</button>\n    <button type=\"button\" class=\"ppw-recipe-filters__link\" data-filter=\"mains-sides\">Mains &amp; Sides</button>\n    <button type=\"button\" class=\"ppw-recipe-filters__link\" data-filter=\"snacks-apps\">Snacks &amp; Apps</button>\n  </div>\n</nav>\n<style>\n  .ppw-recipe-filters {\n    width: 100%;\n    background: #1c1c1a;\n  }\n  .ppw-recipe-filters__inner {\n    display: flex;\n    flex-wrap: wrap;\n    justify-content: center;\n    gap: 0.5rem 2rem;\n    max-width: var(--page-width);\n    margin: 0 auto;\n    padding: 0 1.5rem;\n  }\n  .ppw-recipe-filters__link {\n    position: relative;\n    appearance: none;\n    background: none;\n    border: 0;\n    cursor: pointer;\n    display: inline-flex;\n    align-items: center;\n    padding: 1rem 0;\n    color: #ffffff;\n    font-family: var(--font-body--family);\n    font-size: 0.875rem;\n    font-weight: 700;\n    letter-spacing: 0.08em;\n    text-decoration: none;\n    text-transform: uppercase;\n  }\n  .ppw-recipe-filters__link.is-active {\n    color: #e8821a;\n  }\n  .ppw-recipe-filters__link.is-active::after {\n    content: '';\n    position: absolute;\n    left: 0;\n    right: 0;\n    bottom: 0;\n    height: 3px;\n    background: #e8821a;\n  }\n  .blog-post-item.is-filter-hidden {\n    display: none !important;\n  }\n  @media screen and (max-width: 749px) {\n    .ppw-recipe-filters__inner {\n      gap: 0 1rem;\n      justify-content: flex-start;\n      overflow-x: auto;\n      -webkit-overflow-scrolling: touch;\n    }\n    .ppw-recipe-filters__link {\n      flex: 0 0 auto;\n      font-size: 0.75rem;\n      padding: 0.875rem 0;\n    }\n  }\n</style>\n<script>\n  (function () {\n    function initRecipeFilters() {\n      var nav = document.querySelector('[data-ppw-recipe-filters]');\n      if (!nav || nav.dataset.bound === 'true') return;\n      nav.dataset.bound = 'true';\n      var buttons = nav.querySelectorAll('[data-filter]');\n      function applyFilter(value) {\n        var items = document.querySelectorAll('.blog-posts-container .blog-post-item');\n        buttons.forEach(function (btn) {\n          btn.classList.toggle('is-active', btn.getAttribute('data-filter') === value);\n        });\n        var visibleIndex = 0;\n        items.forEach(function (item) {\n          var category = item.getAttribute('data-category') || '';\n          var match = value === 'all' || category === value;\n          item.classList.toggle('is-filter-hidden', !match);\n          if (!match) {\n            item.classList.remove('blog-post-item--horizontal', 'blog-post-item--featured');\n            return;\n          }\n          var isFeatured = value === 'all' && visibleIndex === 0;\n          item.classList.toggle('blog-post-item--horizontal', isFeatured);\n          item.classList.toggle('blog-post-item--featured', isFeatured);\n          visibleIndex += 1;\n        });\n      }\n      buttons.forEach(function (btn) {\n        btn.addEventListener('click', function () {\n          applyFilter(btn.getAttribute('data-filter'));\n        });\n      });\n    }\n    if (document.readyState === 'loading') {\n      document.addEventListener('DOMContentLoaded', initRecipeFilters);\n    } else {\n      initRecipeFilters();\n    }\n  })();\n</script>",
+        "alignment": "center",
+        "font_size": "0.875rem",
         "background_color": "#1c1c1a",
-        "section_width": "full-width",
+        "color": "#ffffff",
+        "active_color": "#e8821a",
+        "active_border_bottom": 3,
+        "active_border_bottom_color": "#e8821a",
         "padding-block-start": 0,
-        "padding-block-end": 0
+        "padding-block-end": 0,
+        "padding-inline-start": 24,
+        "padding-inline-end": 24
       }
     },
     "main": {
