@@ -210,25 +210,27 @@
     },
     "recipe_filters": {
       "type": "blog-filters",
-      "name": "Blog filters",
       "blocks": {
         "filter-1": {
           "type": "_blog-filter",
           "settings": {
             "title": "Cocktails & Drinks"
-          }
+          },
+          "blocks": {}
         },
         "filter-2": {
           "type": "_blog-filter",
           "settings": {
             "title": "Mains & Sides"
-          }
+          },
+          "blocks": {}
         },
         "filter-3": {
           "type": "_blog-filter",
           "settings": {
             "title": "Snacks & Apps"
-          }
+          },
+          "blocks": {}
         }
       },
       "block_order": [
@@ -236,8 +238,54 @@
         "filter-2",
         "filter-3"
       ],
+      "name": "Blog filters",
       "settings": {
         "alignment": "center",
+        "font_size": "0.875rem",
+        "background_color": "#1c1c1a",
+        "color": "#ffffff",
+        "active_color": "#e8821a",
+        "active_border_bottom": 3,
+        "active_border_bottom_color": "#e8821a",
+        "padding-block-start": 0,
+        "padding-block-end": 0,
+        "padding-inline-start": 24,
+        "padding-inline-end": 24
+      }
+    },
+    "blog_filters_wh6QmN": {
+      "type": "blog-filters",
+      "blocks": {
+        "blog_filter_bwtQb7": {
+          "type": "_blog-filter",
+          "settings": {
+            "title": "Cocktails & Drinks"
+          },
+          "blocks": {}
+        },
+        "blog_filter_cP79eJ": {
+          "type": "_blog-filter",
+          "settings": {
+            "title": "Mains & Sides"
+          },
+          "blocks": {}
+        },
+        "blog_filter_ULjHiw": {
+          "type": "_blog-filter",
+          "settings": {
+            "title": "Snacks & Apps"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "blog_filter_bwtQb7",
+        "blog_filter_cP79eJ",
+        "blog_filter_ULjHiw"
+      ],
+      "name": "t:names.blog_filters",
+      "settings": {
+        "alignment": "left",
         "font_size": "0.875rem",
         "background_color": "#1c1c1a",
         "color": "#ffffff",
@@ -1323,6 +1371,7 @@
         "show_category_tag": true,
         "category_tag_background": "",
         "category_tag_text": "",
+        "show_button_on_hover": false,
         "reveal_on_hover": false,
         "hover_title_color": "{{ settings.color_palette.color3 }}",
         "featured_gap": 60,
@@ -1537,6 +1586,7 @@
   "order": [
     "hero",
     "recipe_filters",
+    "blog_filters_wh6QmN",
     "main",
     "divider_zGk4Xb",
     "pantry_cta"
