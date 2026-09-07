@@ -17,6 +17,7 @@
           "name": "t:names.heading",
           "settings": {
             "content_direction": "column",
+            "content_direction_mobile": "column",
             "vertical_on_mobile": true,
             "horizontal_alignment": "flex-start",
             "vertical_alignment": "center",
@@ -240,14 +241,9 @@
       ],
       "name": "t:names.blog_filters",
       "settings": {
-<<<<<<< HEAD
         "alignment": "center",
         "section_width": "page-width",
-        "font_size": "0.875rem",
-=======
-        "alignment": "left",
         "font_size": "1rem",
->>>>>>> 7781a905c948a4cef4af280db3c629813c352ed0
         "background_color": "#1c1c1a",
         "color": "#ffffff",
         "active_color": "#e8821a",
@@ -303,6 +299,7 @@
               "name": "t:names.group",
               "settings": {
                 "content_direction": "column",
+                "content_direction_mobile": "column",
                 "vertical_on_mobile": true,
                 "horizontal_alignment": "flex-start",
                 "vertical_alignment": "center",
@@ -347,6 +344,7 @@
                   "name": "t:names.group",
                   "settings": {
                     "content_direction": "row",
+                    "content_direction_mobile": "column",
                     "vertical_on_mobile": true,
                     "horizontal_alignment": "flex-start",
                     "vertical_alignment": "center",
@@ -489,6 +487,7 @@
                   "name": "t:names.group",
                   "settings": {
                     "content_direction": "row",
+                    "content_direction_mobile": "column",
                     "vertical_on_mobile": true,
                     "horizontal_alignment": "flex-start",
                     "vertical_alignment": "center",
@@ -533,6 +532,7 @@
                       "name": "t:names.group",
                       "settings": {
                         "content_direction": "row",
+                        "content_direction_mobile": "column",
                         "vertical_on_mobile": true,
                         "horizontal_alignment": "flex-start",
                         "vertical_alignment": "center",
@@ -632,6 +632,7 @@
                       "name": "t:names.group",
                       "settings": {
                         "content_direction": "row",
+                        "content_direction_mobile": "column",
                         "vertical_on_mobile": true,
                         "horizontal_alignment": "flex-start",
                         "vertical_alignment": "center",
@@ -849,6 +850,7 @@
               "name": "t:names.group",
               "settings": {
                 "content_direction": "column",
+                "content_direction_mobile": "column",
                 "vertical_on_mobile": true,
                 "horizontal_alignment": "flex-start",
                 "vertical_alignment": "flex-start",
@@ -986,6 +988,7 @@
                   "name": "t:names.group",
                   "settings": {
                     "content_direction": "row",
+                    "content_direction_mobile": "column",
                     "vertical_on_mobile": true,
                     "horizontal_alignment": "space-between",
                     "vertical_alignment": "center",
@@ -1030,6 +1033,7 @@
                       "name": "t:names.group",
                       "settings": {
                         "content_direction": "row",
+                        "content_direction_mobile": "column",
                         "vertical_on_mobile": true,
                         "horizontal_alignment": "flex-start",
                         "vertical_alignment": "center",
@@ -1074,6 +1078,7 @@
                           "name": "t:names.group",
                           "settings": {
                             "content_direction": "row",
+                            "content_direction_mobile": "column",
                             "vertical_on_mobile": true,
                             "horizontal_alignment": "flex-start",
                             "vertical_alignment": "center",
@@ -1173,6 +1178,7 @@
                           "name": "t:names.group",
                           "settings": {
                             "content_direction": "row",
+                            "content_direction_mobile": "column",
                             "vertical_on_mobile": true,
                             "horizontal_alignment": "flex-start",
                             "vertical_alignment": "center",
@@ -1365,6 +1371,7 @@
           "name": "t:names.group",
           "settings": {
             "content_direction": "column",
+            "content_direction_mobile": "column",
             "vertical_on_mobile": true,
             "horizontal_alignment": "flex-start",
             "vertical_alignment": "center",
