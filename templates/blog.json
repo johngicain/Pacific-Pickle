@@ -775,7 +775,7 @@
             "gap": 12,
             "background_color": "#ffffff",
             "border": "solid",
-            "border_width": 4,
+            "border_width": 3,
             "border_opacity": 100,
             "border_color": "#1c1c1a",
             "border_radius": 0,
@@ -1281,7 +1281,7 @@
         "mobile_columns": "1",
         "columns_gap": 0,
         "rows_gap": 0,
-        "card_box_shadow": true,
+        "card_box_shadow": false,
         "show_featured_category_tag": false,
         "featured_category_tag_background": "",
         "featured_category_tag_text": "",
@@ -1290,29 +1290,44 @@
         "category_tag_text": "",
         "reveal_on_hover": false,
         "hover_title_color": "{{ settings.color_palette.color3 }}",
-        "featured_gap": 24,
+        "featured_gap": 60,
         "section_width": "page-width",
         "background_color": "{{ settings.color_palette.background }}",
         "padding-block-start": 40,
         "padding-block-end": 64
       }
     },
+    "divider_zGk4Xb": {
+      "type": "divider",
+      "name": "t:names.divider_section",
+      "settings": {
+        "background_color": "",
+        "divider_color": "",
+        "section_width": "full-width",
+        "thickness": 5,
+        "corner_radius": "square",
+        "width_percent": 100,
+        "alignment_horizontal": "center",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    },
     "pantry_cta": {
       "type": "section",
       "blocks": {
-        "copy": {
+        "group_dU3hPp": {
           "type": "group",
-          "name": "t:names.heading",
+          "name": "t:names.group",
           "settings": {
             "content_direction": "column",
             "vertical_on_mobile": true,
             "horizontal_alignment": "flex-start",
             "vertical_alignment": "center",
             "align_baseline": false,
-            "horizontal_alignment_flex_direction_column": "center",
+            "horizontal_alignment_flex_direction_column": "flex-start",
             "vertical_alignment_flex_direction_column": "center",
-            "gap": 16,
-            "gap_mobile": 16,
+            "gap": 12,
+            "gap_mobile": 12,
             "narrow_width": false,
             "width": "fill",
             "custom_width": 100,
@@ -1344,7 +1359,7 @@
             "padding-inline-end": 0
           },
           "blocks": {
-            "eyebrow": {
+            "text_rcWjiD": {
               "type": "text",
               "name": "t:names.caption",
               "settings": {
@@ -1360,7 +1375,7 @@
                 "letter_spacing": "loose",
                 "case": "uppercase",
                 "wrap": "pretty",
-                "text_color": "#e8821a",
+                "text_color": "#AAAAAA",
                 "bold_color": "#e8821a",
                 "italic_color": "",
                 "italic_font_size": "",
@@ -1381,11 +1396,11 @@
               },
               "blocks": {}
             },
-            "title": {
+            "text_xbXb4G": {
               "type": "text",
               "name": "t:names.title",
               "settings": {
-                "text": "<h2>STOCK YOUR PANTRY.<br/>UNLOCK EVERY RECIPE.</h2>",
+                "text": "<h2>STOCK YOUR PANTRY.<br/><strong>UNLOCK EVERY RECIPE.</strong></h2>",
                 "narrow_width": false,
                 "width": "fit-content",
                 "max_width": "normal",
@@ -1398,7 +1413,7 @@
                 "case": "uppercase",
                 "wrap": "balance",
                 "text_color": "#ffffff",
-                "bold_color": "#ffffff",
+                "bold_color": "{{ settings.color_palette.color3 }}",
                 "italic_color": "",
                 "italic_font_size": "",
                 "text_shadow": false,
@@ -1417,43 +1432,43 @@
                 "padding-inline-end": 0
               },
               "blocks": {}
-            },
-            "cta": {
-              "type": "button",
-              "name": "t:names.button",
-              "settings": {
-                "label": "Shop All Products →",
-                "link": "shopify://collections/all",
-                "open_in_new_tab": false,
-                "style_class": "button",
-                "box_shadow": true,
-                "font_size": "",
-                "font_weight": "",
-                "custom_button_background": "#e8821a",
-                "custom_button_text": "#ffffff",
-                "custom_button_border": "#e8821a",
-                "link_text_color": "",
-                "width": "fit-content",
-                "custom_width": 100,
-                "width_mobile": "fit-content",
-                "custom_width_mobile": 100
-              },
-              "blocks": {}
             }
           },
           "block_order": [
-            "eyebrow",
-            "title",
-            "cta"
+            "text_rcWjiD",
+            "text_xbXb4G"
           ]
+        },
+        "button_Fbiih7": {
+          "type": "button",
+          "name": "t:names.button",
+          "settings": {
+            "label": "Shop All Products →",
+            "link": "shopify://collections/all",
+            "open_in_new_tab": false,
+            "style_class": "button",
+            "box_shadow": true,
+            "font_size": "1.25rem",
+            "font_weight": "",
+            "custom_button_background": "#e8821a",
+            "custom_button_text": "#ffffff",
+            "custom_button_border": "#e8821a",
+            "link_text_color": "",
+            "width": "fit-content",
+            "custom_width": 100,
+            "width_mobile": "fit-content",
+            "custom_width_mobile": 100
+          },
+          "blocks": {}
         }
       },
       "block_order": [
-        "copy"
+        "group_dU3hPp",
+        "button_Fbiih7"
       ],
       "name": "Pantry CTA",
       "settings": {
-        "content_direction": "column",
+        "content_direction": "row",
         "vertical_on_mobile": true,
         "horizontal_alignment": "center",
         "vertical_alignment": "center",
@@ -1465,7 +1480,7 @@
         "section_height": "",
         "section_height_custom": 0,
         "background_media": "none",
-        "background_color": "#1c1c1a",
+        "background_color": "#3D6B35",
         "video_position": "cover",
         "background_image_position": "cover",
         "toggle_overlay": false,
@@ -1477,8 +1492,8 @@
         "border_opacity": 100,
         "border_color": "",
         "border_radius": 0,
-        "padding-block-start": 80,
-        "padding-block-end": 80
+        "padding-block-start": 60,
+        "padding-block-end": 60
       }
     }
   },
@@ -1486,6 +1501,7 @@
     "hero",
     "recipe_filters",
     "main",
+    "divider_zGk4Xb",
     "pantry_cta"
   ]
 }
