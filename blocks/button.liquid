@@ -61,10 +61,24 @@
     },
     {
       "type": "checkbox",
+      "id": "show_caret",
+      "label": "t:settings.show_caret",
+      "default": false,
+      "visible_if": "{{ block.settings.style_class == 'button-unstyled' }}"
+    },
+    {
+      "type": "checkbox",
       "id": "box_shadow",
       "label": "t:settings.box_shadow",
       "default": false,
       "visible_if": "{{ block.settings.style_class != 'button-unstyled' }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "reveal_on_hover",
+      "label": "t:settings.reveal_on_hover",
+      "info": "t:info.reveal_on_hover",
+      "default": false
     },
     {
       "type": "select",

@@ -8,7 +8,13 @@
   {% render 'button', link: '/collections/all' %}
 {%- enddoc -%}
 
-{% assign block_settings = block.settings %}
+{% liquid
+  assign block_settings = block.settings
+  assign show_caret = false
+  if block_settings.show_caret and block_settings.style_class == 'button-unstyled'
+    assign show_caret = true
+  endif
+%}
 {% render 'button-custom-styles', block_settings: block_settings, block_id: block.id %}
 
 <a
@@ -23,6 +29,8 @@
     {{ block_settings.style_class }}
     {{ block_settings.style_class }}--{{ block.id }}
     {% if block_settings.box_shadow and block_settings.style_class != 'button-unstyled' %}button--box-shadow{% endif %}
+    {% if block_settings.reveal_on_hover %}button--reveal-on-hover{% endif %}
+    {% if show_caret %}button-unstyled--with-icon{% endif %}
   "
   style="{% render 'size-style', settings: block_settings %}"
   {%- if block_settings.open_in_new_tab -%}
@@ -32,4 +40,22 @@
   {{ block.shopify_attributes }}
 >
   {{ block_settings.label }}
+  {%- if show_caret -%}
+    <span class="svg-wrapper icon-caret" aria-hidden="true">
+      {{- 'icon-caret.svg' | inline_asset_content -}}
+    </span>
+  {%- endif -%}
 </a>
+
+{% stylesheet %}
+  .button-unstyled--with-icon .icon-caret {
+    width: var(--icon-size-xs);
+    height: var(--icon-size-xs);
+  }
+
+  .button-unstyled--with-icon .icon-caret svg {
+    width: var(--icon-size-xs);
+    height: var(--icon-size-xs);
+    transform: rotate(-90deg);
+  }
+{% endstylesheet %}

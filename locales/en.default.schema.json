@@ -266,7 +266,8 @@
     "pills_usage": "Used for applied filters, discount codes, and search suggestions",
     "media_type_info": "Features are populated from your menu links",
     "link_unstyled_buttons_to_article": "Sets unstyled button links to each blog post page",
-    "custom_icon": "Replaces the selected icon"
+    "custom_icon": "Replaces the selected icon",
+    "reveal_on_hover": "Hidden until the blog card is hovered. Only applies to buttons inside blog cards."
   },
   "names": {
     "column": "Column",
@@ -760,6 +761,7 @@
     "top_left": "Top left",
     "top_right": "Top right",
     "truck": "Truck",
+    "users": "Users",
     "tumblr": "Tumblr",
     "twitter": "X (Twitter)",
     "two_number": "2",
@@ -1132,6 +1134,7 @@
     "reflection_opacity": "Reflection opacity",
     // Font weight option (400 weight, not bold or light)
     "regular": "Regular",
+    "reveal_on_hover": "Reveal on card hover",
     "review_count": "Review count",
     "right": "Right",
     "right_padding": "Right padding",
@@ -1160,6 +1163,7 @@
     "show_author": "Author",
     "show_alignment": "Show alignment",
     "show_count": "Show count",
+    "show_caret": "Show caret",
     "show_icon": "Show cart icon",
     "show_icon_text": "Show icon text",
     "all_prefix": "All products prefix",

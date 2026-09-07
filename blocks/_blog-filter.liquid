@@ -1,0 +1,58 @@
+{% liquid
+  assign filter_title = block.settings.title | strip
+  assign filter_handle = filter_title | handleize
+  assign has_match = false
+
+  if filter_title != blank and blog != blank
+    for article in blog.articles
+      assign category_handle = article.metafields.custom.category.value | handleize
+      if category_handle == filter_handle
+        assign has_match = true
+      endif
+
+      unless has_match
+        for tag in article.tags
+          assign tag_handle = tag | handleize
+          if tag_handle == filter_handle
+            assign has_match = true
+          endif
+        endfor
+      endunless
+
+      if has_match
+        break
+      endif
+    endfor
+  endif
+%}
+
+{% if has_match or request.design_mode %}
+  <button
+    type="button"
+    class="blog-filters__item{% unless has_match %}{% unless request.design_mode %} blog-filters__item--empty{% endunless %}{% endunless %}"
+    data-category="{{ filter_handle }}"
+    aria-pressed="false"
+    on:click="/selectFilter"
+    {{ block.shopify_attributes }}
+  >
+    {%- if filter_title != blank -%}
+      {{ filter_title | escape }}
+    {%- else -%}
+      {{ 'blocks.filter' | t }}
+    {%- endif -%}
+  </button>
+{% endif %}
+
+{% schema %}
+{
+  "name": "t:names.blog_filter",
+  "tag": null,
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "t:settings.title"
+    }
+  ]
+}
+{% endschema %}

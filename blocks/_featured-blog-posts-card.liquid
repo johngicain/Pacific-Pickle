@@ -205,6 +205,26 @@
   .featured-blog-posts-card a.button-unstyled {
     font-weight: var(--button-font-weight, inherit);
   }
+
+  .featured-blog-posts-card .button--reveal-on-hover {
+    visibility: hidden;
+    opacity: 0;
+    transition:
+      opacity var(--hover-transition-duration) var(--hover-transition-timing),
+      visibility var(--hover-transition-duration) var(--hover-transition-timing);
+  }
+
+  .featured-blog-posts-card:hover .button--reveal-on-hover,
+  .featured-blog-posts-card:focus-within .button--reveal-on-hover {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .featured-blog-posts-card .button--reveal-on-hover {
+      transition: none;
+    }
+  }
 {% endstylesheet %}
 
 {% javascript %}
