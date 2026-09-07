@@ -1332,8 +1332,8 @@
         "featured_gap": 60,
         "section_width": "page-width",
         "background_color": "{{ settings.color_palette.background }}",
-        "padding-block-start": 40,
-        "padding-block-end": 64
+        "padding-block-start": 60,
+        "padding-block-end": 60
       }
     },
     "divider_zGk4Xb": {
