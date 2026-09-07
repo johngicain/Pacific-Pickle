@@ -846,7 +846,7 @@
                 "padding-inline-end": 16
               },
               "blocks": {
-                "text_f3qJ63": {
+                "text_V6H79g": {
                   "type": "text",
                   "name": "t:names.text",
                   "settings": {
@@ -868,8 +868,8 @@
                     "italic_font_size": "",
                     "text_shadow": false,
                     "text_shadow_color": "#00000080",
-                    "background": true,
-                    "background_color": "rgba(0,0,0,0)",
+                    "background": false,
+                    "background_color": "#00000026",
                     "corner_radius": 0,
                     "border": "none",
                     "border_width": 1,
@@ -1261,7 +1261,7 @@
                 }
               },
               "block_order": [
-                "text_f3qJ63",
+                "text_V6H79g",
                 "title",
                 "description",
                 "footer"
