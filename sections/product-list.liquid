@@ -86,6 +86,53 @@
   </div>
 </div>
 
+{% stylesheet %}
+  .section-resource-list .product-card .group-block .text-block {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .section-resource-list .product-card .text-block:has([role='heading']) {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .section-resource-list .product-card .text-block:has([role='heading']) > * {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 1;
+    line-clamp: 1;
+    max-inline-size: 100%;
+    width: 100%;
+    text-wrap: unset;
+    overflow-wrap: anywhere;
+  }
+
+  .section-resource-list .product-card .text-block:not(:has([role='heading'])):not(product-price) {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .section-resource-list .product-card .text-block:not(:has([role='heading'])):not(product-price) > *:not(:first-child) {
+    display: none;
+  }
+
+  .section-resource-list .product-card .text-block:not(:has([role='heading'])):not(product-price) > :first-child {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    max-inline-size: 100%;
+    width: 100%;
+    text-wrap: unset;
+    overflow-wrap: anywhere;
+  }
+{% endstylesheet %}
+
 {% schema %}
 {
   "name": "t:names.product_list",

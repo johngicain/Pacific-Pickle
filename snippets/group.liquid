@@ -42,6 +42,7 @@
     {% if background_color != blank %} color-custom-{{ block_id }}{% endif %}
     {% if settings.border_left > 0 %} group-block--border-left{% endif %}
     {% if settings.narrow_width %} group-block--narrow{% endif %}
+    {% if settings.box_shadow %} group-block--box-shadow{% endif %}
   "
   style="
     {% render 'border-override', settings: settings %}
@@ -114,6 +115,10 @@
     border-inline-start-width: var(--border-left-width);
     border-inline-start-style: solid;
     border-inline-start-color: var(--border-left-color);
+  }
+
+  .group-block--box-shadow {
+    box-shadow: 3px 3px rgb(var(--color-foreground-rgb));
   }
 
   .group-block__link {

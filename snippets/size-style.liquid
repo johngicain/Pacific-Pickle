@@ -31,11 +31,19 @@
 {%- elsif settings.width_mobile == 'fit-content' -%}
   --size-style-width-mobile: {{ settings.width_mobile }}; --size-style-width-mobile-min: {{ settings.width_mobile }};
 {%- endif -%}
+{%- if settings.font != blank -%}
+  --button-font-family-primary: {{ settings.font }};
+  --button-font-family-secondary: {{ settings.font }};
+  font-family: {{ settings.font }};
+{%- endif -%}
 {%- if settings.font_size != blank -%}
   --button-font-size: {{ settings.font_size }};
   font-size: {{ settings.font_size }};
 {%- endif -%}
-{%- if settings.style_class == 'button-unstyled' and settings.font_weight != blank -%}
+{%- if settings.font_weight != blank -%}
   --button-font-weight: {{ settings.font_weight }};
   font-weight: {{ settings.font_weight }};
+{%- endif -%}
+{%- if settings.border_width != blank and settings.style_class != blank and settings.style_class != 'button-unstyled' -%}
+  --button-border-width: {{ settings.border_width }}px;
 {%- endif -%}

@@ -8,6 +8,10 @@
       endif
     endif
   endif
+
+  if button_link == blank and closest.product.url != blank
+    assign button_link = closest.product.url
+  endif
 %}
 
 {% render 'button', link: button_link %}
@@ -63,8 +67,7 @@
       "type": "checkbox",
       "id": "show_caret",
       "label": "t:settings.show_caret",
-      "default": false,
-      "visible_if": "{{ block.settings.style_class == 'button-unstyled' }}"
+      "default": false
     },
     {
       "type": "select",
@@ -81,7 +84,7 @@
         }
       ],
       "default": "caret",
-      "visible_if": "{{ block.settings.style_class == 'button-unstyled' and block.settings.show_caret == true }}"
+      "visible_if": "{{ block.settings.show_caret }}"
     },
     {
       "type": "checkbox",
@@ -91,11 +94,72 @@
       "visible_if": "{{ block.settings.style_class != 'button-unstyled' }}"
     },
     {
+      "type": "select",
+      "id": "border_width",
+      "label": "t:settings.border_width",
+      "options": [
+        {
+          "value": "",
+          "label": "t:options.default"
+        },
+        {
+          "value": "0",
+          "label": "0px"
+        },
+        {
+          "value": "1",
+          "label": "1px"
+        },
+        {
+          "value": "2",
+          "label": "2px"
+        },
+        {
+          "value": "3",
+          "label": "3px"
+        },
+        {
+          "value": "4",
+          "label": "4px"
+        }
+      ],
+      "default": "",
+      "visible_if": "{{ block.settings.style_class != 'button-unstyled' }}"
+    },
+    {
       "type": "checkbox",
       "id": "reveal_on_hover",
       "label": "t:settings.reveal_on_hover",
       "info": "t:info.reveal_on_hover",
       "default": false
+    },
+    {
+      "type": "select",
+      "id": "font",
+      "label": "t:settings.font",
+      "options": [
+        {
+          "value": "",
+          "label": "t:options.default"
+        },
+        {
+          "value": "var(--font-body--family)",
+          "label": "t:options.body"
+        },
+        {
+          "value": "var(--font-subheading--family)",
+          "label": "t:options.subheading"
+        },
+        {
+          "value": "var(--font-heading--family)",
+          "label": "t:options.heading"
+        },
+        {
+          "value": "var(--font-accent--family)",
+          "label": "t:options.accent"
+        }
+      ],
+      "default": ""
     },
     {
       "type": "select",
@@ -179,8 +243,7 @@
           "label": "t:options.black"
         }
       ],
-      "default": "",
-      "visible_if": "{{ block.settings.style_class == 'button-unstyled' }}"
+      "default": ""
     },
     {
       "type": "header",
