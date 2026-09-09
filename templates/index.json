@@ -1197,13 +1197,41 @@
                     "padding-inline-end": 0
                   },
                   "blocks": {}
+                },
+                "button_zxNt3d": {
+                  "type": "button",
+                  "name": "t:names.button",
+                  "settings": {
+                    "label": "VIEW PRODUCT",
+                    "link": "shopify://collections/all",
+                    "open_in_new_tab": false,
+                    "style_class": "button-custom",
+                    "show_caret": false,
+                    "link_icon": "caret",
+                    "box_shadow": false,
+                    "border_width": "",
+                    "reveal_on_hover": false,
+                    "font": "var(--font-body--family)",
+                    "font_size": "0.875rem",
+                    "font_weight": "600",
+                    "custom_button_background": "#1C1C1A00",
+                    "custom_button_text": "{{ settings.color_palette.foreground }}",
+                    "custom_button_border": "{{ settings.color_palette.foreground }}",
+                    "link_text_color": "",
+                    "width": "custom",
+                    "custom_width": 100,
+                    "width_mobile": "custom",
+                    "custom_width_mobile": 100
+                  },
+                  "blocks": {}
                 }
               },
               "block_order": [
                 "product_card_group_zGe3df",
                 "heat_level_kibzeG",
                 "judge_me_reviews_preview_badge_wPEbj6",
-                "text_Ri4XhE"
+                "text_Ri4XhE",
+                "button_zxNt3d"
               ]
             }
           },
