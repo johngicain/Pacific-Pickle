@@ -1139,7 +1139,7 @@
                   "name": "t:names.heat_level",
                   "settings": {
                     "icon_style": "chilli",
-                    "icon_size": 12,
+                    "icon_size": 14,
                     "icon_gap": 2,
                     "max_level": 5,
                     "default_icon_color": "#cecbc5",
