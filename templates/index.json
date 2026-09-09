@@ -1180,7 +1180,7 @@
                     "icon_size": 14,
                     "icon_gap": 2,
                     "max_level": 5,
-                    "default_icon_color": "{{ settings.color_palette.foreground }}",
+                    "default_icon_color": "#AAAAAA",
                     "mild_icon_color": "{{ settings.color_palette.foreground }}",
                     "medium_icon_color": "{{ settings.color_palette.foreground }}",
                     "spicy_icon_color": "{{ settings.color_palette.foreground }}",
