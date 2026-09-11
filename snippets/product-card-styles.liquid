@@ -11,12 +11,37 @@
     display: flex;
     flex-flow: column nowrap;
     gap: var(--product-card-gap);
-    align-items: var(--product-card-alignment);
+    align-items: var(--product-card-alignment, flex-start);
+    text-align: var(--product-card-text-align, start);
     text-decoration: none;
     color: var(--color, var(--color-foreground));
     padding-block: var(--padding-block-start) var(--padding-block-end);
     padding-inline: var(--padding-inline-start) var(--padding-inline-end);
     overflow: hidden;
+  }
+
+  .product-grid__card[style*='--product-card-alignment: center'] .layout-panel-flex--column {
+    align-items: center;
+  }
+
+  .product-grid__card[style*='--product-card-alignment: flex-end'] .layout-panel-flex--column {
+    align-items: flex-end;
+  }
+
+  .product-grid__card[style*='--product-card-text-align: center'] .text-block,
+  .product-grid__card[style*='--product-card-text-align: center'] .text-block > *,
+  .product-grid__card[style*='--product-card-text-align: center'] product-price {
+    --text-align: center;
+
+    text-align: center;
+  }
+
+  .product-grid__card[style*='--product-card-text-align: right'] .text-block,
+  .product-grid__card[style*='--product-card-text-align: right'] .text-block > *,
+  .product-grid__card[style*='--product-card-text-align: right'] product-price {
+    --text-align: right;
+
+    text-align: right;
   }
 
   .product-grid__card .group-block > * {

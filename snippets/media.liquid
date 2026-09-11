@@ -28,6 +28,8 @@
     assign show_tag = true
   endif
 
+  assign tag_position = block_settings.tag_position | default: 'top-left'
+
   if show_tag and block_settings.tag_background_color != blank
     render 'contrast-override', background_color: block_settings.tag_background_color, border_color: block_settings.tag_border_color, section_id: tag_id, preset: 'ui'
   endif
@@ -93,7 +95,7 @@
     <div
       class="
         media-block__tag
-        media-block__tag--{{ block_settings.tag_position }}
+        media-block__tag--{{ tag_position }}
         {% if block_settings.tag_background_color != blank %}color-custom-{{ tag_id }}{% endif %}
       "
       style="
@@ -158,25 +160,25 @@
   .media-block__tag--top-left {
     top: 0;
     left: 0;
-    translate: -60% -60%;
+    translate: -25% -25%;
   }
 
   .media-block__tag--top-right {
     top: 0;
     right: 0;
-    translate: 60% -60%;
+    translate: 25% -25%;
   }
 
   .media-block__tag--bottom-left {
     bottom: 0;
     left: 0;
-    translate: -60% 60%;
+    translate: -25% 25%;
   }
 
   .media-block__tag--bottom-right {
     bottom: 0;
     right: 0;
-    translate: 60% 60%;
+    translate: 25% 25%;
   }
 
   .media-block__tag-heading,

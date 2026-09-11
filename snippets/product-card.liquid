@@ -34,6 +34,16 @@
 
   assign product_card_id = 'product-card-link-' | append: block.id | append: '-' | append: product.id
   assign product_card_gap_value = product_card_gap | default: block_settings.product_card_gap
+  assign product_card_alignment = 'flex-start'
+  assign product_card_text_align = 'left'
+
+  if block_settings.alignment == 'center'
+    assign product_card_alignment = 'center'
+    assign product_card_text_align = 'center'
+  elsif block_settings.alignment == 'right'
+    assign product_card_alignment = 'flex-end'
+    assign product_card_text_align = 'right'
+  endif
 
   # variant_to_link drives the featured image used by the main-product view transition.
   assign variant_to_link = product.selected_or_first_available_variant
@@ -104,6 +114,9 @@
       {% render 'layout-panel-style', settings: block_settings %}
       {% render 'spacing-style', settings: block_settings %}
       {% render 'gap-style', value: product_card_gap_value, name: 'product-card-gap' %}
+      --product-card-alignment: {{ product_card_alignment }};
+      --product-card-text-align: {{ product_card_text_align }};
+      --horizontal-alignment: {{ product_card_alignment }};
       --quick-add-display: {% if has_quick_add %}flex{% else %}none{% endif %};
       --quick-add-mobile-display: {% if has_mobile_quick_add %}flex{% else %}none{% endif %};
       --quick-add-mobile-opacity: {% if has_mobile_quick_add %}1{% else %}0{% endif %};

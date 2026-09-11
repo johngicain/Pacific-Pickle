@@ -217,6 +217,31 @@
       "default": "paragraph"
     },
     {
+      "type": "select",
+      "id": "tag_position",
+      "label": "t:settings.tag_position",
+      "options": [
+        {
+          "value": "top-left",
+          "label": "t:options.top_left"
+        },
+        {
+          "value": "top-right",
+          "label": "t:options.top_right"
+        },
+        {
+          "value": "bottom-left",
+          "label": "t:options.bottom_left"
+        },
+        {
+          "value": "bottom-right",
+          "label": "t:options.bottom_right"
+        }
+      ],
+      "default": "top-left",
+      "visible_if": "{{ block.settings.tag_heading != blank or block.settings.tag_subheading != blank }}"
+    },
+    {
       "type": "color",
       "id": "tag_background_color",
       "label": "t:settings.background_color",
@@ -320,30 +345,6 @@
       "step": 1,
       "unit": "px",
       "default": 16
-    },
-    {
-      "type": "select",
-      "id": "tag_position",
-      "label": "t:settings.position",
-      "options": [
-        {
-          "value": "top-left",
-          "label": "t:options.top_left"
-        },
-        {
-          "value": "top-right",
-          "label": "t:options.top_right"
-        },
-        {
-          "value": "bottom-left",
-          "label": "t:options.bottom_left"
-        },
-        {
-          "value": "bottom-right",
-          "label": "t:options.bottom_right"
-        }
-      ],
-      "default": "top-left"
     }
   ],
   "presets": [
