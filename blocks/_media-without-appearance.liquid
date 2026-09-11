@@ -160,35 +160,6 @@
     },
     {
       "type": "text",
-      "id": "tag_heading",
-      "label": "t:settings.heading"
-    },
-    {
-      "type": "select",
-      "id": "tag_heading_preset",
-      "label": "t:settings.heading_preset",
-      "options": [
-        {
-          "value": "paragraph",
-          "label": "t:options.paragraph"
-        },
-        {
-          "value": "h4",
-          "label": "t:options.h4"
-        },
-        {
-          "value": "h5",
-          "label": "t:options.h5"
-        },
-        {
-          "value": "h6",
-          "label": "t:options.h6"
-        }
-      ],
-      "default": "h5"
-    },
-    {
-      "type": "text",
       "id": "tag_subheading",
       "label": "t:settings.subheading"
     },
@@ -214,7 +185,142 @@
           "label": "t:options.h6"
         }
       ],
-      "default": "paragraph"
+      "default": "paragraph",
+      "visible_if": "{{ block.settings.tag_subheading != blank }}"
+    },
+    {
+      "type": "select",
+      "id": "tag_subheading_font_size",
+      "label": "t:settings.font_size",
+      "options": [
+        {
+          "value": "",
+          "label": "t:options.default"
+        },
+        {
+          "value": "0.625rem",
+          "label": "10px"
+        },
+        {
+          "value": "0.75rem",
+          "label": "12px"
+        },
+        {
+          "value": "0.875rem",
+          "label": "14px"
+        },
+        {
+          "value": "1rem",
+          "label": "16px"
+        },
+        {
+          "value": "1.125rem",
+          "label": "18px"
+        },
+        {
+          "value": "1.25rem",
+          "label": "20px"
+        },
+        {
+          "value": "1.5rem",
+          "label": "24px"
+        },
+        {
+          "value": "2rem",
+          "label": "32px"
+        }
+      ],
+      "default": "",
+      "visible_if": "{{ block.settings.tag_subheading != blank }}"
+    },
+    {
+      "type": "color",
+      "id": "tag_subheading_text_color",
+      "label": "t:settings.text_color",
+      "placeholder": "t:settings.default",
+      "visible_if": "{{ block.settings.tag_subheading != blank }}"
+    },
+    {
+      "type": "text",
+      "id": "tag_heading",
+      "label": "t:settings.heading"
+    },
+    {
+      "type": "select",
+      "id": "tag_heading_preset",
+      "label": "t:settings.heading_preset",
+      "options": [
+        {
+          "value": "paragraph",
+          "label": "t:options.paragraph"
+        },
+        {
+          "value": "h4",
+          "label": "t:options.h4"
+        },
+        {
+          "value": "h5",
+          "label": "t:options.h5"
+        },
+        {
+          "value": "h6",
+          "label": "t:options.h6"
+        }
+      ],
+      "default": "h5",
+      "visible_if": "{{ block.settings.tag_heading != blank }}"
+    },
+    {
+      "type": "select",
+      "id": "tag_heading_font_size",
+      "label": "t:settings.font_size",
+      "options": [
+        {
+          "value": "",
+          "label": "t:options.default"
+        },
+        {
+          "value": "0.625rem",
+          "label": "10px"
+        },
+        {
+          "value": "0.75rem",
+          "label": "12px"
+        },
+        {
+          "value": "0.875rem",
+          "label": "14px"
+        },
+        {
+          "value": "1rem",
+          "label": "16px"
+        },
+        {
+          "value": "1.125rem",
+          "label": "18px"
+        },
+        {
+          "value": "1.25rem",
+          "label": "20px"
+        },
+        {
+          "value": "1.5rem",
+          "label": "24px"
+        },
+        {
+          "value": "2rem",
+          "label": "32px"
+        }
+      ],
+      "default": "",
+      "visible_if": "{{ block.settings.tag_heading != blank }}"
+    },
+    {
+      "type": "color",
+      "id": "tag_heading_text_color",
+      "label": "t:settings.text_color",
+      "placeholder": "t:settings.default",
+      "visible_if": "{{ block.settings.tag_heading != blank }}"
     },
     {
       "type": "select",
