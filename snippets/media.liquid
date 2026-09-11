@@ -9,6 +9,7 @@
   assign block_settings = block.settings
   assign show_image = false
   assign show_video = false
+  assign show_text = false
   assign show_tag = false
   assign tag_id = block.id | append: '-tag'
 
@@ -24,11 +25,39 @@
     assign show_video = true
   endif
 
+  if block_settings.heading != blank or block_settings.subheading != blank
+    assign show_text = true
+  endif
+
   if block_settings.tag_heading != blank or block_settings.tag_subheading != blank
     assign show_tag = true
   endif
 
   assign tag_position = block_settings.tag_position | default: 'top-left'
+  assign text_direction = block_settings.text_direction | default: 'column'
+  assign text_alignment = block_settings.text_alignment | default: 'flex-start'
+  assign text_position = block_settings.text_position | default: 'flex-end'
+
+  if text_direction == 'row'
+    assign text_justify = text_alignment
+    assign text_align_items = text_position
+  else
+    assign text_justify = text_position
+    assign text_align_items = text_alignment
+  endif
+
+  if text_align_items == 'space-between'
+    assign text_align_items = 'stretch'
+  endif
+
+  case text_alignment
+    when 'center'
+      assign text_text_align = 'center'
+    when 'flex-end'
+      assign text_text_align = 'end'
+    else
+      assign text_text_align = 'start'
+  endcase
 
   if show_tag and block_settings.tag_background_color != blank
     render 'contrast-override', background_color: block_settings.tag_background_color, border_color: block_settings.tag_border_color, section_id: tag_id, preset: 'ui'
@@ -44,12 +73,37 @@
       media-block--contain
     {% endif %}
     {% if show_tag %}media-block--has-tag{% endif %}
+    {% if show_text %}media-block--has-text{% endif %}
   "
   style="
     {% render 'border-override', settings: block_settings %}
     {% render 'spacing-style', settings: block_settings %}
     --image-position: {{ block_settings.image_position }};
     --video-position: {{ block_settings.video_position }};
+    {% if show_text %}
+      --media-block-text-direction: {{ text_direction }};
+      --media-block-text-justify: {{ text_justify }};
+      --media-block-text-align: {{ text_align_items }};
+      --media-block-text-text-align: {{ text_text_align }};
+      {% if block_settings.heading_font_size != blank %}
+        --media-block-heading-font-size: {{ block_settings.heading_font_size }};
+      {% endif %}
+      {% if block_settings.heading_text_color != blank %}
+        --media-block-heading-color: {{ block_settings.heading_text_color }};
+      {% endif %}
+      {% if block_settings.heading_letter_spacing != blank %}
+        --media-block-heading-letter-spacing: var(--letter-spacing--heading-{{ block_settings.heading_letter_spacing }});
+      {% endif %}
+      {% if block_settings.subheading_font_size != blank %}
+        --media-block-subheading-font-size: {{ block_settings.subheading_font_size }};
+      {% endif %}
+      {% if block_settings.subheading_text_color != blank %}
+        --media-block-subheading-color: {{ block_settings.subheading_text_color }};
+      {% endif %}
+      {% if block_settings.subheading_letter_spacing != blank %}
+        --media-block-subheading-letter-spacing: var(--letter-spacing--body-{{ block_settings.subheading_letter_spacing }});
+      {% endif %}
+    {% endif %}
   "
   {{ block.shopify_attributes }}
 >
@@ -88,6 +142,33 @@
   {%- else -%}
     <div class="media-block__media border-style">
       {{ 'hero-apparel-3' | placeholder_svg_tag }}
+    </div>
+  {%- endif -%}
+
+  {%- if show_text -%}
+    <div class="media-block__text">
+      {%- if block_settings.heading != blank -%}
+        <p class="
+          media-block__heading
+          h3
+          {% if block_settings.heading_font_size != blank %}media-block__heading--custom-size{% endif %}
+          {% if block_settings.heading_text_color != blank %}media-block__heading--custom-color{% endif %}
+          {% if block_settings.heading_letter_spacing != blank %}media-block__heading--custom-letter-spacing{% endif %}
+        ">
+          {{ block_settings.heading }}
+        </p>
+      {%- endif -%}
+      {%- if block_settings.subheading != blank -%}
+        <p class="
+          media-block__subheading
+          paragraph
+          {% if block_settings.subheading_font_size != blank %}media-block__subheading--custom-size{% endif %}
+          {% if block_settings.subheading_text_color != blank %}media-block__subheading--custom-color{% endif %}
+          {% if block_settings.subheading_letter_spacing != blank %}media-block__subheading--custom-letter-spacing{% endif %}
+        ">
+          {{ block_settings.subheading }}
+        </p>
+      {%- endif -%}
     </div>
   {%- endif -%}
 
@@ -222,6 +303,50 @@
 
   .media-block__tag-subheading--custom-color {
     color: var(--media-block-tag-subheading-color);
+  }
+
+  .media-block__text {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    display: flex;
+    flex-direction: var(--media-block-text-direction, column);
+    justify-content: var(--media-block-text-justify, flex-end);
+    align-items: var(--media-block-text-align, flex-start);
+    gap: var(--padding-xs);
+    padding: var(--padding-lg);
+    pointer-events: none;
+    text-align: var(--media-block-text-text-align, start);
+  }
+
+  .media-block__heading,
+  .media-block__subheading {
+    margin: 0;
+    max-width: 100%;
+  }
+
+  .media-block .media-block__heading--custom-size {
+    font-size: var(--media-block-heading-font-size);
+  }
+
+  .media-block .media-block__heading--custom-color {
+    color: var(--media-block-heading-color);
+  }
+
+  .media-block .media-block__heading--custom-letter-spacing {
+    letter-spacing: var(--media-block-heading-letter-spacing);
+  }
+
+  .media-block .media-block__subheading--custom-size {
+    font-size: var(--media-block-subheading-font-size);
+  }
+
+  .media-block .media-block__subheading--custom-color {
+    color: var(--media-block-subheading-color);
+  }
+
+  .media-block .media-block__subheading--custom-letter-spacing {
+    letter-spacing: var(--media-block-subheading-letter-spacing);
   }
 
   .media-block__media {
