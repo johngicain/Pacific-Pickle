@@ -11,8 +11,8 @@
   "current": {
     "logo": "shopify://shop_images/ppw_logo-SB-black-600.png",
     "logo_inverse": "shopify://shop_images/pacificpickle-logo.png",
-    "logo_height": 44,
-    "logo_height_mobile": 32,
+    "logo_height": 60,
+    "logo_height_mobile": 50,
     "favicon": "shopify://shop_images/ppw_logo-SB-black-600.png",
     "page_text_color": "{{ settings.color_palette.foreground }}",
     "type_body_font": "dm_sans_n4",
