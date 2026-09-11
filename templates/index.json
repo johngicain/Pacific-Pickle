@@ -867,6 +867,7 @@
           "static": true,
           "settings": {
             "product_card_gap": 0,
+            "alignment": "left",
             "background_color": "#ffffff",
             "border": "solid",
             "border_width": 2,
@@ -1071,7 +1072,7 @@
                             "letter_spacing": "loose",
                             "case": "uppercase",
                             "wrap": "pretty",
-                            "text_color": "#AAAAAA",
+                            "text_color": "#aaaaaa",
                             "bold_color": "",
                             "italic_color": "",
                             "italic_font_size": "",
@@ -1180,7 +1181,7 @@
                     "icon_size": 14,
                     "icon_gap": 2,
                     "max_level": 5,
-                    "default_icon_color": "#AAAAAA",
+                    "default_icon_color": "#aaaaaa",
                     "mild_icon_color": "{{ settings.color_palette.foreground }}",
                     "medium_icon_color": "{{ settings.color_palette.foreground }}",
                     "spicy_icon_color": "{{ settings.color_palette.foreground }}",
@@ -1252,7 +1253,7 @@
                     "font": "var(--font-body--family)",
                     "font_size": "0.875rem",
                     "font_weight": "600",
-                    "custom_button_background": "#1C1C1A00",
+                    "custom_button_background": "rgba(0,0,0,0)",
                     "custom_button_text": "{{ settings.color_palette.foreground }}",
                     "custom_button_border": "{{ settings.color_palette.foreground }}",
                     "link_text_color": "",
@@ -1598,6 +1599,7 @@
             "tag_heading_preset": "h5",
             "tag_subheading": "",
             "tag_subheading_preset": "paragraph",
+            "tag_position": "top-left",
             "tag_background_color": "",
             "tag_border": "none",
             "tag_border_width": 1,
@@ -1607,8 +1609,7 @@
             "tag_padding_block_start": 12,
             "tag_padding_block_end": 12,
             "tag_padding_inline_start": 16,
-            "tag_padding_inline_end": 16,
-            "tag_position": "top-left"
+            "tag_padding_inline_end": 16
           },
           "blocks": {}
         },
@@ -2281,7 +2282,8 @@
             "tag_heading": "$30",
             "tag_heading_preset": "h4",
             "tag_subheading": "FROM",
-            "tag_subheading_preset": "h6",
+            "tag_subheading_preset": "h5",
+            "tag_position": "top-right",
             "tag_background_color": "{{ settings.color_palette.color3 }}",
             "tag_border": "solid",
             "tag_border_width": 4,
@@ -2291,8 +2293,7 @@
             "tag_padding_block_start": 12,
             "tag_padding_block_end": 12,
             "tag_padding_inline_start": 16,
-            "tag_padding_inline_end": 16,
-            "tag_position": "top-right"
+            "tag_padding_inline_end": 16
           },
           "blocks": {}
         },
@@ -4679,6 +4680,7 @@
             "tag_heading_preset": "h5",
             "tag_subheading": "",
             "tag_subheading_preset": "paragraph",
+            "tag_position": "top-left",
             "tag_background_color": "",
             "tag_border": "none",
             "tag_border_width": 1,
@@ -4688,8 +4690,7 @@
             "tag_padding_block_start": 12,
             "tag_padding_block_end": 12,
             "tag_padding_inline_start": 16,
-            "tag_padding_inline_end": 16,
-            "tag_position": "top-left"
+            "tag_padding_inline_end": 16
           },
           "blocks": {}
         },
