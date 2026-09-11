@@ -3,10 +3,15 @@
 
   @param {object} [block] - The block object
   @param {boolean} [unset_image_tag] - if true, ignores the image focal point in the image
+  @param {object} [fallback_image] - Image to render when the block image setting is blank
 {%- enddoc -%}
 
 {% liquid
   assign block_settings = block.settings
+  assign media_image = fallback_image
+  if block_settings.image != blank
+    assign media_image = block_settings.image
+  endif
   assign show_image = false
   assign show_video = false
   assign show_text = false
@@ -37,6 +42,10 @@
   assign text_direction = block_settings.text_direction | default: 'column'
   assign text_alignment = block_settings.text_alignment | default: 'flex-start'
   assign text_position = block_settings.text_position | default: 'flex-end'
+  assign heading_font = block_settings.heading_font
+  assign heading_font_weight = block_settings.heading_font_weight
+  assign subheading_family = block_settings.subheading_family
+  assign subheading_weight = block_settings.subheading_weight
 
   if text_direction == 'row'
     assign text_justify = text_alignment
@@ -85,6 +94,12 @@
       --media-block-text-justify: {{ text_justify }};
       --media-block-text-align: {{ text_align_items }};
       --media-block-text-text-align: {{ text_text_align }};
+      {% if heading_font != blank %}
+        --media-block-heading-font: {{ heading_font }};
+      {% endif %}
+      {% if heading_font_weight != blank %}
+        --media-block-heading-font-weight: {{ heading_font_weight }};
+      {% endif %}
       {% if block_settings.heading_font_size != blank %}
         --media-block-heading-font-size: {{ block_settings.heading_font_size }};
       {% endif %}
@@ -93,6 +108,12 @@
       {% endif %}
       {% if block_settings.heading_letter_spacing != blank %}
         --media-block-heading-letter-spacing: var(--letter-spacing--heading-{{ block_settings.heading_letter_spacing }});
+      {% endif %}
+      {% if subheading_family != blank %}
+        --media-block-subheading-font: {{ subheading_family }};
+      {% endif %}
+      {% if subheading_weight != blank %}
+        --media-block-subheading-font-weight: {{ subheading_weight }};
       {% endif %}
       {% if block_settings.subheading_font_size != blank %}
         --media-block-subheading-font-size: {{ block_settings.subheading_font_size }};
@@ -109,9 +130,9 @@
 >
   {%- if show_image -%}
     {% capture image_tag %}
-      {% if block_settings.image != blank %}
+      {% if media_image != blank %}
         {% render 'image',
-          image: block_settings.image,
+          image: media_image,
           class: 'media-block__media border-style',
           unset_image_tag: unset_image_tag
         %}
@@ -151,6 +172,8 @@
         <p class="
           media-block__heading
           h3
+          {% if heading_font != blank %}media-block__heading--custom-font{% endif %}
+          {% if heading_font_weight != blank %}media-block__heading--custom-weight{% endif %}
           {% if block_settings.heading_font_size != blank %}media-block__heading--custom-size{% endif %}
           {% if block_settings.heading_text_color != blank %}media-block__heading--custom-color{% endif %}
           {% if block_settings.heading_letter_spacing != blank %}media-block__heading--custom-letter-spacing{% endif %}
@@ -162,6 +185,8 @@
         <p class="
           media-block__subheading
           paragraph
+          {% if subheading_family != blank %}media-block__subheading--custom-font{% endif %}
+          {% if subheading_weight != blank %}media-block__subheading--custom-weight{% endif %}
           {% if block_settings.subheading_font_size != blank %}media-block__subheading--custom-size{% endif %}
           {% if block_settings.subheading_text_color != blank %}media-block__subheading--custom-color{% endif %}
           {% if block_settings.subheading_letter_spacing != blank %}media-block__subheading--custom-letter-spacing{% endif %}
@@ -200,25 +225,41 @@
         {% if block_settings.tag_subheading_text_color != blank %}
           --media-block-tag-subheading-color: {{ block_settings.tag_subheading_text_color }};
         {% endif %}
+        --media-block-tag-heading-align: {{ block_settings.tag_heading_alignment | default: 'left' }};
+        --media-block-tag-subheading-align: {{ block_settings.tag_subheading_alignment | default: 'left' }};
       "
     >
       {%- if block_settings.tag_subheading != blank -%}
-        <p class="
-          media-block__tag-subheading
-          {{ block_settings.tag_subheading_preset }}
-          {% if block_settings.tag_subheading_font_size != blank %}media-block__tag-subheading--custom-size{% endif %}
-          {% if block_settings.tag_subheading_text_color != blank %}media-block__tag-subheading--custom-color{% endif %}
-        ">
+        <p
+          class="
+            media-block__tag-subheading
+            {{ block_settings.tag_subheading_preset }}
+            {% if block_settings.tag_subheading_font_size != blank %}media-block__tag-subheading--custom-size{% endif %}
+            {% if block_settings.tag_subheading_text_color != blank %}media-block__tag-subheading--custom-color{% endif %}
+          "
+          style="
+            {% if block_settings.tag_subheading_font_size != blank %}font-size: {{ block_settings.tag_subheading_font_size }};{% endif %}
+            {% if block_settings.tag_subheading_text_color != blank %}color: {{ block_settings.tag_subheading_text_color }};{% endif %}
+            text-align: {{ block_settings.tag_subheading_alignment | default: 'left' }};
+          "
+        >
           {{ block_settings.tag_subheading }}
         </p>
       {%- endif -%}
       {%- if block_settings.tag_heading != blank -%}
-        <p class="
-          media-block__tag-heading
-          {{ block_settings.tag_heading_preset }}
-          {% if block_settings.tag_heading_font_size != blank %}media-block__tag-heading--custom-size{% endif %}
-          {% if block_settings.tag_heading_text_color != blank %}media-block__tag-heading--custom-color{% endif %}
-        ">
+        <p
+          class="
+            media-block__tag-heading
+            {{ block_settings.tag_heading_preset }}
+            {% if block_settings.tag_heading_font_size != blank %}media-block__tag-heading--custom-size{% endif %}
+            {% if block_settings.tag_heading_text_color != blank %}media-block__tag-heading--custom-color{% endif %}
+          "
+          style="
+            {% if block_settings.tag_heading_font_size != blank %}font-size: {{ block_settings.tag_heading_font_size }};{% endif %}
+            {% if block_settings.tag_heading_text_color != blank %}color: {{ block_settings.tag_heading_text_color }};{% endif %}
+            text-align: {{ block_settings.tag_heading_alignment | default: 'left' }};
+          "
+        >
           {{ block_settings.tag_heading }}
         </p>
       {%- endif -%}
@@ -287,21 +328,50 @@
   .media-block__tag-heading,
   .media-block__tag-subheading {
     margin: 0;
+    width: 100%;
   }
 
-  .media-block__tag-heading--custom-size {
+  .media-block .media-block__tag-heading {
+    text-align: var(--media-block-tag-heading-align, left);
+  }
+
+  .media-block .media-block__tag-subheading {
+    text-align: var(--media-block-tag-subheading-align, left);
+  }
+
+  .media-block .media-block__tag-heading--custom-size,
+  .media-block .media-block__tag-heading--custom-size.h4,
+  .media-block .media-block__tag-heading--custom-size.h5,
+  .media-block .media-block__tag-heading--custom-size.h6,
+  .media-block .media-block__tag-heading--custom-size.paragraph,
+  .media-block .media-block__tag-heading--custom-size.paragraph:not(.button) {
     font-size: var(--media-block-tag-heading-font-size);
   }
 
-  .media-block__tag-heading--custom-color {
+  .media-block .media-block__tag-heading--custom-color,
+  .media-block .media-block__tag-heading--custom-color.h4,
+  .media-block .media-block__tag-heading--custom-color.h5,
+  .media-block .media-block__tag-heading--custom-color.h6,
+  .media-block .media-block__tag-heading--custom-color.paragraph,
+  .media-block .media-block__tag-heading--custom-color.paragraph:not(.button) {
     color: var(--media-block-tag-heading-color);
   }
 
-  .media-block__tag-subheading--custom-size {
+  .media-block .media-block__tag-subheading--custom-size,
+  .media-block .media-block__tag-subheading--custom-size.h4,
+  .media-block .media-block__tag-subheading--custom-size.h5,
+  .media-block .media-block__tag-subheading--custom-size.h6,
+  .media-block .media-block__tag-subheading--custom-size.paragraph,
+  .media-block .media-block__tag-subheading--custom-size.paragraph:not(.button) {
     font-size: var(--media-block-tag-subheading-font-size);
   }
 
-  .media-block__tag-subheading--custom-color {
+  .media-block .media-block__tag-subheading--custom-color,
+  .media-block .media-block__tag-subheading--custom-color.h4,
+  .media-block .media-block__tag-subheading--custom-color.h5,
+  .media-block .media-block__tag-subheading--custom-color.h6,
+  .media-block .media-block__tag-subheading--custom-color.paragraph,
+  .media-block .media-block__tag-subheading--custom-color.paragraph:not(.button) {
     color: var(--media-block-tag-subheading-color);
   }
 
@@ -325,6 +395,16 @@
     max-width: 100%;
   }
 
+  .media-block .media-block__heading--custom-font,
+  .media-block .media-block__heading--custom-font.h3 {
+    font-family: var(--media-block-heading-font);
+  }
+
+  .media-block .media-block__heading--custom-weight,
+  .media-block .media-block__heading--custom-weight.h3 {
+    font-weight: var(--media-block-heading-font-weight);
+  }
+
   .media-block .media-block__heading--custom-size {
     font-size: var(--media-block-heading-font-size);
   }
@@ -335,6 +415,18 @@
 
   .media-block .media-block__heading--custom-letter-spacing {
     letter-spacing: var(--media-block-heading-letter-spacing);
+  }
+
+  .media-block .media-block__subheading--custom-font,
+  .media-block .media-block__subheading--custom-font.paragraph,
+  .media-block .media-block__subheading--custom-font.paragraph:not(.button) {
+    font-family: var(--media-block-subheading-font);
+  }
+
+  .media-block .media-block__subheading--custom-weight,
+  .media-block .media-block__subheading--custom-weight.paragraph,
+  .media-block .media-block__subheading--custom-weight.paragraph:not(.button) {
+    font-weight: var(--media-block-subheading-font-weight);
   }
 
   .media-block .media-block__subheading--custom-size {

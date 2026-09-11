@@ -13,14 +13,14 @@
 
 {% capture product_card_children %}
   <div class="featured-product-content-top">
-    {% content_for 'block', type: 'product-title', id: 'featured-product-title' %}
+    {% content_for 'block', type: 'product-title', id: 'featured-product-title', closest.product: closest.product %}
 
-    {% content_for 'block', type: '_featured-product-price', id: 'featured-product-price' %}
+    {% content_for 'block', type: '_featured-product-price', id: 'featured-product-price', closest.product: closest.product %}
   </div>
-  {% content_for 'block', type: '_featured-product-gallery', id: 'featured-product-gallery' %}
+  {% content_for 'block', type: '_featured-product-gallery', id: 'featured-product-gallery', closest.product: closest.product %}
   {% if product_has_swatches %}
     <div class="featured-product-content-bottom">
-      {%- content_for 'block', type: 'swatches', id: 'featured-product-swatches' -%}
+      {%- content_for 'block', type: 'swatches', id: 'featured-product-swatches', closest.product: closest.product -%}
     </div>
   {% endif %}
 {% endcapture %}

@@ -12,7 +12,7 @@
   {% endunless %}
 {% endcapture %}
 
-{% render 'card-gallery', children: children %}
+{% render 'card-gallery', children: children, block: block %}
 
 {% stylesheet %}
   .featured-product-section .card-gallery .quick-add__button {
@@ -24,7 +24,7 @@
 
 {% schema %}
 {
-  "name": "t:names.product_media",
+  "name": "t:names.product_media", 
   "tag": null,
   "settings": [
     {

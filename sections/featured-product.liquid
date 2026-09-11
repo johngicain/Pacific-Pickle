@@ -1,5 +1,4 @@
 
-
 <script type="application/ld+json">
   {{ section.settings.product | structured_data }}
 </script>
@@ -31,6 +30,7 @@
     {% if section.settings.background_color != blank %}color-custom-{{ section.id }}{% endif %}
   "
   style="--gallery-aspect-ratio: {{ gallery_aspect_ratio }};"
+  data-layout="{{ section.settings.layout }}"
   data-testid="featured-product-{{ section.id }}"
 >
   <h2 class="visually-hidden">{{ 'accessibility.featured_product' | t }}</h2>
@@ -44,21 +44,8 @@
       {% endif %}
     "
   >
-    {% capture featured_product_media %}
-      {% content_for 'block', type: '_media-without-appearance', id: 'media', closest.product: section.settings.product %}
-    {% endcapture %}
-
-    {% capture featured_product_content %}
-      {% content_for 'block', type: '_featured-product', id: 'featured-product', closest.product: section.settings.product %}
-    {% endcapture %}
-
-    {% if section.settings.layout == 'media-left' %}
-      {{ featured_product_media }}
-      {{ featured_product_content }}
-    {% else %}
-      {{ featured_product_content }}
-      {{ featured_product_media }}
-    {% endif %}
+    {% content_for 'block', type: '_media-without-appearance', id: 'media', closest.product: section.settings.product %}
+    {% content_for 'block', type: '_featured-product', id: 'featured-product', closest.product: section.settings.product %}
   </div>
 </div>
 
@@ -70,6 +57,12 @@
 
     @media screen and (min-width: 750px) {
       grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .featured-product-section[data-layout='media-right'] .media-block {
+    @media screen and (min-width: 750px) {
+      order: 1;
     }
   }
 
@@ -91,6 +84,34 @@
       --padding-block: 40px;
       --padding-inline: 40px;
     }
+  }
+
+  .featured-product-section .media-block {
+    position: relative;
+    width: 100%;
+    min-height: var(--media-height);
+    aspect-ratio: var(--gallery-aspect-ratio, 1);
+  }
+
+  .featured-product-section .media-block__media-link {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  .featured-product-section .media-block__media {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: var(--image-position, cover);
+  }
+
+  .featured-product-section .card-gallery {
+    flex-shrink: 0;
+    width: 100%;
+    aspect-ratio: var(--gallery-aspect-ratio, 1);
   }
 
   @media screen and (max-width: 749px) {
@@ -177,7 +198,10 @@
         "media": {
           "type": "_media-without-appearance",
           "static": true,
-          "name": "t:names.product_media"
+          "name": "t:names.product_media",
+          "settings": {
+            "image": "{{ closest.product.featured_image }}"
+          }
         },
         "featured-product": {
           "type": "_featured-product",

@@ -4,9 +4,18 @@
   if block.settings.image_position == 'contain'
     assign unset_image_tag = true
   endif
+
+  assign fallback_image = closest.product.featured_image
+  if fallback_image == blank and closest.product.featured_media != blank
+    assign fallback_image = closest.product.featured_media.preview_image
+  endif
 %}
 
-{% render 'media', unset_image_tag: unset_image_tag %}
+{% render 'media',
+  block: block,
+  unset_image_tag: unset_image_tag,
+  fallback_image: fallback_image
+%}
 
 {% schema %}
 {
@@ -106,6 +115,76 @@
     },
     {
       "type": "select",
+      "id": "heading_font",
+      "label": "t:settings.font",
+      "options": [
+        {
+          "value": "",
+          "label": "t:options.default"
+        },
+        {
+          "value": "var(--font-body--family)",
+          "label": "t:options.body"
+        },
+        {
+          "value": "var(--font-subheading--family)",
+          "label": "t:options.subheading"
+        },
+        {
+          "value": "var(--font-heading--family)",
+          "label": "t:options.heading"
+        },
+        {
+          "value": "var(--font-accent--family)",
+          "label": "t:options.accent"
+        }
+      ],
+      "default": "",
+      "visible_if": "{{ block.settings.heading != blank }}"
+    },
+    {
+      "type": "select",
+      "id": "heading_font_weight",
+      "label": "t:settings.font_weight",
+      "options": [
+        {
+          "value": "",
+          "label": "t:options.default"
+        },
+        {
+          "value": "100",
+          "label": "t:options.thin"
+        },
+        {
+          "value": "300",
+          "label": "t:options.light"
+        },
+        {
+          "value": "400",
+          "label": "t:options.regular"
+        },
+        {
+          "value": "500",
+          "label": "t:options.medium"
+        },
+        {
+          "value": "600",
+          "label": "t:options.semibold"
+        },
+        {
+          "value": "700",
+          "label": "t:options.bold"
+        },
+        {
+          "value": "900",
+          "label": "t:options.black"
+        }
+      ],
+      "default": "",
+      "visible_if": "{{ block.settings.heading != blank }}"
+    },
+    {
+      "type": "select",
       "id": "heading_font_size",
       "label": "t:settings.font_size",
       "options": [
@@ -193,6 +272,76 @@
       "type": "text",
       "id": "subheading",
       "label": "t:settings.subheading"
+    },
+    {
+      "type": "select",
+      "id": "subheading_family",
+      "label": "t:settings.font",
+      "options": [
+        {
+          "value": "",
+          "label": "t:options.default"
+        },
+        {
+          "value": "var(--font-body--family)",
+          "label": "t:options.body"
+        },
+        {
+          "value": "var(--font-subheading--family)",
+          "label": "t:options.subheading"
+        },
+        {
+          "value": "var(--font-heading--family)",
+          "label": "t:options.heading"
+        },
+        {
+          "value": "var(--font-accent--family)",
+          "label": "t:options.accent"
+        }
+      ],
+      "default": "",
+      "visible_if": "{{ block.settings.subheading != blank }}"
+    },
+    {
+      "type": "select",
+      "id": "subheading_weight",
+      "label": "t:settings.font_weight",
+      "options": [
+        {
+          "value": "",
+          "label": "t:options.default"
+        },
+        {
+          "value": "100",
+          "label": "t:options.thin"
+        },
+        {
+          "value": "300",
+          "label": "t:options.light"
+        },
+        {
+          "value": "400",
+          "label": "t:options.regular"
+        },
+        {
+          "value": "500",
+          "label": "t:options.medium"
+        },
+        {
+          "value": "600",
+          "label": "t:options.semibold"
+        },
+        {
+          "value": "700",
+          "label": "t:options.bold"
+        },
+        {
+          "value": "900",
+          "label": "t:options.black"
+        }
+      ],
+      "default": "",
+      "visible_if": "{{ block.settings.subheading != blank }}"
     },
     {
       "type": "select",
@@ -493,6 +642,13 @@
       "visible_if": "{{ block.settings.tag_subheading != blank }}"
     },
     {
+      "type": "text_alignment",
+      "id": "tag_subheading_alignment",
+      "label": "t:settings.alignment",
+      "default": "left",
+      "visible_if": "{{ block.settings.tag_subheading != blank }}"
+    },
+    {
       "type": "text",
       "id": "tag_heading",
       "label": "t:settings.heading"
@@ -572,6 +728,13 @@
       "id": "tag_heading_text_color",
       "label": "t:settings.text_color",
       "placeholder": "t:settings.default",
+      "visible_if": "{{ block.settings.tag_heading != blank }}"
+    },
+    {
+      "type": "text_alignment",
+      "id": "tag_heading_alignment",
+      "label": "t:settings.alignment",
+      "default": "left",
       "visible_if": "{{ block.settings.tag_heading != blank }}"
     },
     {
