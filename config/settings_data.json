@@ -152,6 +152,11 @@
         "type": "shopify://apps/klaviyo-email-marketing-sms/blocks/klaviyo-onsite-embed/2632fe16-c075-4321-a88b-50b567f42507",
         "disabled": false,
         "settings": {}
+      },
+      "12254500371210674976": {
+        "type": "shopify://apps/casa-subscriptions-bundles/blocks/subscription-casa/c33bc020-eed2-4bc0-9cdc-326fb2a1c573",
+        "disabled": false,
+        "settings": {}
       }
     },
     "color_palette": {
