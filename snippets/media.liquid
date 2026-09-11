@@ -44,8 +44,24 @@
   assign text_position = block_settings.text_position | default: 'flex-end'
   assign heading_font = block_settings.heading_font
   assign heading_font_weight = block_settings.heading_font_weight
+  assign heading_letter_spacing = block_settings.heading_letter_spacing
+  assign heading_letter_spacing_custom = block_settings.heading_letter_spacing_custom
   assign subheading_family = block_settings.subheading_family
   assign subheading_weight = block_settings.subheading_weight
+  assign subheading_letter_spacing = block_settings.subheading_letter_spacing
+  assign subheading_letter_spacing_custom = block_settings.subheading_letter_spacing_custom
+
+  if heading_letter_spacing == 'custom'
+    assign heading_letter_spacing_value = heading_letter_spacing_custom | append: 'px'
+  elsif heading_letter_spacing != blank
+    assign heading_letter_spacing_value = 'var(--letter-spacing--heading-' | append: heading_letter_spacing | append: ')'
+  endif
+
+  if subheading_letter_spacing == 'custom'
+    assign subheading_letter_spacing_value = subheading_letter_spacing_custom | append: 'px'
+  elsif subheading_letter_spacing != blank
+    assign subheading_letter_spacing_value = 'var(--letter-spacing--body-' | append: subheading_letter_spacing | append: ')'
+  endif
 
   if text_direction == 'row'
     assign text_justify = text_alignment
@@ -106,8 +122,8 @@
       {% if block_settings.heading_text_color != blank %}
         --media-block-heading-color: {{ block_settings.heading_text_color }};
       {% endif %}
-      {% if block_settings.heading_letter_spacing != blank %}
-        --media-block-heading-letter-spacing: var(--letter-spacing--heading-{{ block_settings.heading_letter_spacing }});
+      {% if heading_letter_spacing_value != blank %}
+        --media-block-heading-letter-spacing: {{ heading_letter_spacing_value }};
       {% endif %}
       {% if subheading_family != blank %}
         --media-block-subheading-font: {{ subheading_family }};
@@ -121,8 +137,8 @@
       {% if block_settings.subheading_text_color != blank %}
         --media-block-subheading-color: {{ block_settings.subheading_text_color }};
       {% endif %}
-      {% if block_settings.subheading_letter_spacing != blank %}
-        --media-block-subheading-letter-spacing: var(--letter-spacing--body-{{ block_settings.subheading_letter_spacing }});
+      {% if subheading_letter_spacing_value != blank %}
+        --media-block-subheading-letter-spacing: {{ subheading_letter_spacing_value }};
       {% endif %}
     {% endif %}
   "
@@ -176,7 +192,7 @@
           {% if heading_font_weight != blank %}media-block__heading--custom-weight{% endif %}
           {% if block_settings.heading_font_size != blank %}media-block__heading--custom-size{% endif %}
           {% if block_settings.heading_text_color != blank %}media-block__heading--custom-color{% endif %}
-          {% if block_settings.heading_letter_spacing != blank %}media-block__heading--custom-letter-spacing{% endif %}
+          {% if heading_letter_spacing_value != blank %}media-block__heading--custom-letter-spacing{% endif %}
         ">
           {{ block_settings.heading }}
         </p>
@@ -189,7 +205,7 @@
           {% if subheading_weight != blank %}media-block__subheading--custom-weight{% endif %}
           {% if block_settings.subheading_font_size != blank %}media-block__subheading--custom-size{% endif %}
           {% if block_settings.subheading_text_color != blank %}media-block__subheading--custom-color{% endif %}
-          {% if block_settings.subheading_letter_spacing != blank %}media-block__subheading--custom-letter-spacing{% endif %}
+          {% if subheading_letter_spacing_value != blank %}media-block__subheading--custom-letter-spacing{% endif %}
         ">
           {{ block_settings.subheading }}
         </p>
@@ -413,7 +429,8 @@
     color: var(--media-block-heading-color);
   }
 
-  .media-block .media-block__heading--custom-letter-spacing {
+  .media-block .media-block__heading--custom-letter-spacing,
+  .media-block .media-block__heading--custom-letter-spacing.h3 {
     letter-spacing: var(--media-block-heading-letter-spacing);
   }
 
@@ -437,7 +454,9 @@
     color: var(--media-block-subheading-color);
   }
 
-  .media-block .media-block__subheading--custom-letter-spacing {
+  .media-block .media-block__subheading--custom-letter-spacing,
+  .media-block .media-block__subheading--custom-letter-spacing.paragraph,
+  .media-block .media-block__subheading--custom-letter-spacing.paragraph:not(.button) {
     letter-spacing: var(--media-block-subheading-letter-spacing);
   }
 

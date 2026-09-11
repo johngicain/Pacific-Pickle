@@ -252,10 +252,25 @@
         {
           "value": "loose",
           "label": "t:options.loose"
+        },
+        {
+          "value": "custom",
+          "label": "t:options.custom"
         }
       ],
       "default": "normal",
       "visible_if": "{{ block.settings.heading != blank }}"
+    },
+    {
+      "type": "range",
+      "id": "heading_letter_spacing_custom",
+      "min": -10,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "t:options.custom",
+      "default": 0,
+      "visible_if": "{{ block.settings.heading != blank and block.settings.heading_letter_spacing == 'custom' }}"
     },
     {
       "type": "color",
@@ -412,10 +427,25 @@
         {
           "value": "loose",
           "label": "t:options.loose"
+        },
+        {
+          "value": "custom",
+          "label": "t:options.custom"
         }
       ],
       "default": "normal",
       "visible_if": "{{ block.settings.subheading != blank }}"
+    },
+    {
+      "type": "range",
+      "id": "subheading_letter_spacing_custom",
+      "min": -10,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "t:options.custom",
+      "default": 0,
+      "visible_if": "{{ block.settings.subheading != blank and block.settings.subheading_letter_spacing == 'custom' }}"
     },
     {
       "type": "color",
