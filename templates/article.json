@@ -682,7 +682,7 @@
                 "height": "fit",
                 "custom_height": 100,
                 "background_media": "none",
-                "background_color": "#FFFFFF",
+                "background_color": "#ffffff",
                 "video_position": "cover",
                 "background_image_position": "cover",
                 "toggle_overlay": false,
@@ -838,7 +838,7 @@
                   "settings": {
                     "thickness": 1,
                     "corner_radius": "square",
-                    "divider_color": "#EAEAEA",
+                    "divider_color": "#eaeaea",
                     "width_percent": 100,
                     "padding-block-start": 0,
                     "padding-block-end": 0
@@ -977,7 +977,7 @@
                   "settings": {
                     "thickness": 1,
                     "corner_radius": "square",
-                    "divider_color": "#EAEAEA",
+                    "divider_color": "#eaeaea",
                     "width_percent": 100,
                     "padding-block-start": 0,
                     "padding-block-end": 0
@@ -1116,7 +1116,7 @@
                   "settings": {
                     "thickness": 1,
                     "corner_radius": "square",
-                    "divider_color": "#EAEAEA",
+                    "divider_color": "#eaeaea",
                     "width_percent": 100,
                     "padding-block-start": 0,
                     "padding-block-end": 0
@@ -1210,7 +1210,7 @@
                       "type": "text",
                       "name": "t:names.text",
                       "settings": {
-                        "text": "<p><strong>{{ article.metafields.custom.difficulty.value }}</strong></p>",
+                        "text": "",
                         "narrow_width": false,
                         "width": "fit-content",
                         "max_width": "normal",
