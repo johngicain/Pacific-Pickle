@@ -1,0 +1,304 @@
+{% liquid
+  assign block_settings = block.settings
+  assign ingredients = block_settings.content
+  if ingredients == blank
+    assign ingredients = article.metafields.custom.ingredients.value
+  endif
+  if ingredients == blank
+    assign ingredients = article.metafields.custom.ingredients | metafield_tag
+  endif
+%}
+
+{% liquid
+  assign hoist_from_content = false
+  if ingredients == blank and request.page_type == 'article'
+    assign hoist_from_content = true
+  endif
+%}
+
+{% if ingredients != blank or hoist_from_content or request.design_mode %}
+  <div
+    class="blog-post-ingredients spacing-style"
+    {% if hoist_from_content %}
+      hidden
+      data-hoist-ingredients="true"
+    {% endif %}
+    style="
+      {% render 'spacing-style', settings: block_settings %}
+      {% if block_settings.heading_color != blank %}
+        --blog-post-ingredients-heading: {{ block_settings.heading_color }};
+      {% endif %}
+      {% if block_settings.group_color != blank %}
+        --blog-post-ingredients-group: {{ block_settings.group_color }};
+      {% endif %}
+      {% if block_settings.text_color != blank %}
+        --blog-post-ingredients-text: {{ block_settings.text_color }};
+      {% endif %}
+      {% if block_settings.checkbox_color != blank %}
+        --blog-post-ingredients-check: {{ block_settings.checkbox_color }};
+      {% endif %}
+    "
+    {{ block.shopify_attributes }}
+  >
+    {% if block_settings.heading != blank %}
+      <h2 class="blog-post-ingredients__heading">{{ block_settings.heading }}</h2>
+    {% endif %}
+    <div class="blog-post-ingredients__body rte">
+      {% if ingredients != blank %}
+        {{ ingredients }}
+      {% elsif request.design_mode %}
+        <h3>{{ 'blogs.article.ingredient_group' | t }}</h3>
+        <ul>
+          <li>{{ 'blogs.article.ingredient_placeholder' | t }}</li>
+        </ul>
+      {% endif %}
+    </div>
+  </div>
+{% endif %}
+
+{% stylesheet %}
+  @media screen and (min-width: 750px) {
+    .group-block:has(.blog-post-ingredients) {
+      position: sticky;
+      top: 5rem;
+      align-self: flex-start;
+    }
+  }
+
+  .blog-post-ingredients {
+    width: 100%;
+    padding: 1.25rem;
+    border: 2px solid #1c1c1a;
+  }
+
+  .blog-post-ingredients__heading {
+    margin: 0 0 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid currentcolor;
+    font-family: var(--font-heading--family);
+    font-size: 0.875rem;
+    font-weight: 900;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--blog-post-ingredients-heading, var(--color-foreground));
+  }
+
+  .blog-post-ingredients__body {
+    color: var(--blog-post-ingredients-text, var(--color-foreground));
+  }
+
+  .blog-post-ingredients__body :is(h2, h3, h4, h5, h6) {
+    margin: 1.25rem 0 0.5rem;
+    font-family: var(--font-body--family);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--blog-post-ingredients-group, #e8821a);
+  }
+
+  .blog-post-ingredients__body p {
+    margin: 1.25rem 0 0.5rem;
+    font-family: var(--font-body--family);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--blog-post-ingredients-group, #e8821a);
+  }
+
+  .blog-post-ingredients__body p:first-child {
+    margin-top: 0;
+  }
+
+  .blog-post-ingredients__body ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .blog-post-ingredients__body li {
+    margin: 0 0 0.375rem;
+  }
+
+  .blog-post-ingredients__item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    cursor: pointer;
+    font-size: 0.875rem;
+    line-height: 1.35;
+  }
+
+  .blog-post-ingredients__item input {
+    appearance: none;
+    flex-shrink: 0;
+    width: 1rem;
+    height: 1rem;
+    margin: 0.15rem 0 0;
+    border: 2px solid color-mix(in srgb, var(--blog-post-ingredients-check, var(--color-foreground)) 30%, transparent);
+    background: transparent;
+    cursor: pointer;
+  }
+
+  .blog-post-ingredients__item input:checked {
+    border-color: var(--blog-post-ingredients-check, #e8821a);
+    background: var(--blog-post-ingredients-check, #e8821a);
+  }
+
+  .blog-post-ingredients__item:has(input:checked) {
+    color: color-mix(in srgb, currentcolor 45%, transparent);
+    text-decoration: line-through;
+  }
+{% endstylesheet %}
+
+{% javascript %}
+  function enhanceBlogPostIngredients(root = document) {
+    root.querySelectorAll('.blog-post-ingredients__body li').forEach((item, index) => {
+      if (item.querySelector('input')) return;
+
+      const label = document.createElement('label');
+      label.className = 'blog-post-ingredients__item';
+
+      const input = document.createElement('input');
+      input.type = 'checkbox';
+      input.name = `ingredient-${index}`;
+
+      label.append(input);
+      const text = document.createElement('span');
+      while (item.firstChild) {
+        text.append(item.firstChild);
+      }
+      label.append(text);
+      item.append(label);
+    });
+  }
+
+  function isIngredientHeading(node) {
+    return node && node.nodeType === 1 && /^H[1-6]$/.test(node.tagName) && /ingredient/i.test(node.textContent || '');
+  }
+
+  function hoistBlogPostIngredients(root = document) {
+    const containers = root.querySelectorAll('[data-hoist-ingredients="true"]');
+    containers.forEach((container) => {
+      const body = container.querySelector('.blog-post-ingredients__body');
+      const source = document.querySelector('.blog-post-content rte-formatter') || document.querySelector('.blog-post-content');
+      if (!body || !source) return;
+
+      const heading = [...source.querySelectorAll('h1, h2, h3')].find((node) => isIngredientHeading(node));
+      if (!heading) return;
+
+      const fragment = document.createDocumentFragment();
+      let node = heading.nextSibling;
+      heading.remove();
+      while (node) {
+        const next = node.nextSibling;
+        if (node.nodeType === 1 && /^H[1-6]$/.test(node.tagName)) break;
+        fragment.appendChild(node);
+        node = next;
+      }
+      body.innerHTML = '';
+      body.appendChild(fragment);
+      container.hidden = false;
+    });
+
+    enhanceBlogPostIngredients(root);
+  }
+
+  hoistBlogPostIngredients();
+  document.addEventListener('shopify:section:load', (event) => hoistBlogPostIngredients(event.target));
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "t:names.ingredients",
+  "tag": null,
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:settings.heading",
+      "default": "t:text_defaults.ingredients"
+    },
+    {
+      "type": "richtext",
+      "id": "content",
+      "label": "t:settings.content"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "t:settings.heading_color",
+      "placeholder": "t:settings.default"
+    },
+    {
+      "type": "color",
+      "id": "group_color",
+      "label": "t:settings.highlight_color",
+      "placeholder": "t:settings.default"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "t:settings.text_color",
+      "placeholder": "t:settings.default"
+    },
+    {
+      "type": "color",
+      "id": "checkbox_color",
+      "label": "t:settings.color",
+      "placeholder": "t:settings.default"
+    },
+    {
+      "type": "header",
+      "content": "t:content.padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "t:settings.top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "t:settings.bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-start",
+      "label": "t:settings.left",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-end",
+      "label": "t:settings.right",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:names.ingredients",
+      "category": "t:categories.blog_post"
+    }
+  ]
+}
+{% endschema %}

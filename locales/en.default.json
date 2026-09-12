@@ -156,7 +156,15 @@
         "one": "{{ count }} comment",
         "other": "{{ count }} comments"
       },
-      "comment_author_separator": "•"
+      "comment_author_separator": "•",
+      "share": "Share",
+      "print": "Print",
+      "link_copied": "Link copied",
+      "ingredient_group": "Ingredients",
+      "ingredient_placeholder": "Add recipe ingredients",
+      "tag_placeholder": "Tag",
+      "pro_tip_placeholder": "Add a helpful cooking tip",
+      "featured_badge": "★ Featured recipe"
     },
     "comment_form": {
       "email": "Email",

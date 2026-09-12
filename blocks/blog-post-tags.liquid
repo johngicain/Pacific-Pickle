@@ -1,0 +1,137 @@
+{% liquid
+  assign tags = article.tags
+%}
+
+{% if tags.size > 0 or request.design_mode %}
+  <div
+    class="blog-post-tags spacing-style"
+    style="
+      {% render 'spacing-style', settings: block.settings %}
+      {% if block.settings.text_color != blank %}
+        --blog-post-tags-text: {{ block.settings.text_color }};
+      {% endif %}
+      {% if block.settings.background_color != blank %}
+        --blog-post-tags-background: {{ block.settings.background_color }};
+      {% endif %}
+      {% if block.settings.border_color != blank %}
+        --blog-post-tags-border: {{ block.settings.border_color }};
+      {% endif %}
+    "
+    {{ block.shopify_attributes }}
+  >
+    {% if tags.size > 0 %}
+      {% for tag in tags %}
+        <a class="blog-post-tags__item" href="{{ blog.url }}/tagged/{{ tag | handle }}">{{ tag }}</a>
+      {% endfor %}
+    {% elsif request.design_mode %}
+      <span class="blog-post-tags__item">{{ 'blogs.article.tag_placeholder' | t }}</span>
+    {% endif %}
+  </div>
+{% endif %}
+
+{% stylesheet %}
+  .blog-post-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    width: 100%;
+  }
+
+  .blog-post-tags__item {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25rem 0.625rem;
+    border: 1px solid var(--blog-post-tags-border, rgb(var(--color-foreground-rgb) / 0.2));
+    background: var(--blog-post-tags-background, transparent);
+    color: var(--blog-post-tags-text, var(--color-foreground));
+    font-family: var(--font-body--family);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    line-height: 1.4;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+
+  a.blog-post-tags__item:hover {
+    color: #e8821a;
+    border-color: #e8821a;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:names.article_tags",
+  "tag": null,
+  "settings": [
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "t:settings.text_color",
+      "placeholder": "t:settings.default"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "t:settings.background_color",
+      "placeholder": "t:settings.default"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "t:settings.border",
+      "placeholder": "t:settings.default"
+    },
+    {
+      "type": "header",
+      "content": "t:content.padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "t:settings.top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "t:settings.bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-start",
+      "label": "t:settings.left",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-end",
+      "label": "t:settings.right",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:names.article_tags",
+      "category": "t:categories.blog_post"
+    }
+  ]
+}
+{% endschema %}

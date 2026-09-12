@@ -9,7 +9,7 @@
 {%- enddoc -%}
 
 {% assign block_settings = block.settings %}
-{% assign article = article | default: closest.article %}
+{% assign article = closest.article | default: article %}
 {% assign alignment = alignment | default: block_settings.alignment %}
 
 {% liquid

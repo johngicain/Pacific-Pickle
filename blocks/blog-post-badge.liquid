@@ -1,0 +1,135 @@
+{% liquid
+  assign badge_text = block.settings.text
+  if badge_text == blank
+    assign badge_text = 'blogs.article.featured_badge' | t
+  endif
+
+  assign match_tag = block.settings.match_tag | strip | downcase
+  assign show_badge = true
+
+  if match_tag != blank
+    assign show_badge = false
+    for tag in article.tags
+      assign tag_value = tag | downcase
+      if tag_value == match_tag
+        assign show_badge = true
+        break
+      endif
+    endfor
+  endif
+%}
+
+{% if show_badge or request.design_mode %}
+  <div
+    class="blog-post-badge spacing-style"
+    style="
+      {% render 'spacing-style', settings: block.settings %}
+      {% if block.settings.text_color != blank %}
+        --blog-post-badge-text: {{ block.settings.text_color }};
+      {% endif %}
+      {% if block.settings.background_color != blank %}
+        --blog-post-badge-background: {{ block.settings.background_color }};
+      {% endif %}
+    "
+    {{ block.shopify_attributes }}
+  >
+    {{ badge_text }}
+  </div>
+{% endif %}
+
+{% stylesheet %}
+  .blog-post-badge {
+    width: fit-content;
+    max-width: 100%;
+    color: var(--blog-post-badge-text, #ffffff);
+    background: var(--blog-post-badge-background, #e8821a);
+    font-family: var(--font-body--family);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    line-height: 1.3;
+    text-transform: uppercase;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:names.featured_badge",
+  "tag": null,
+  "settings": [
+    {
+      "type": "text",
+      "id": "text",
+      "label": "t:settings.text",
+      "default": "t:text_defaults.featured_badge"
+    },
+    {
+      "type": "text",
+      "id": "match_tag",
+      "label": "t:settings.match_tag"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "t:settings.text_color",
+      "placeholder": "t:settings.default"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "t:settings.background_color",
+      "placeholder": "t:settings.default"
+    },
+    {
+      "type": "header",
+      "content": "t:content.padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "t:settings.top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "t:settings.bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-start",
+      "label": "t:settings.left",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-end",
+      "label": "t:settings.right",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:names.featured_badge",
+      "category": "t:categories.blog_post"
+    }
+  ]
+}
+{% endschema %}

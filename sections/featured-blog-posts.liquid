@@ -2,6 +2,11 @@
 
 {% liquid
   assign max_items = section.settings.post_limit
+  assign skip_article_id = article.id
+  assign fetch_count = max_items
+  if skip_article_id != blank
+    assign fetch_count = max_items | plus: 1
+  endif
 %}
 
 {% liquid
@@ -33,7 +38,7 @@
   </div>
 
   {% if section.settings.blog != blank and section.settings.blog.articles_count > 0 %}
-    {% paginate section.settings.blog.articles by max_items %}
+    {% paginate section.settings.blog.articles by fetch_count %}
       {% assign section_articles = section.settings.blog.articles %}
     {% endpaginate %}
   {% else %}
@@ -45,13 +50,21 @@
   {% endif %}
 
   {% capture list_items %}
-    {% for article in section_articles limit: max_items %}
+    {% assign shown_posts = 0 %}
+    {% for article in section_articles %}
+      {% if skip_article_id != blank and article.id == skip_article_id %}
+        {% continue %}
+      {% endif %}
+      {% if shown_posts >= max_items %}
+        {% break %}
+      {% endif %}
+      {% if shown_posts > 0 %}
+        <!--@list/split-->
+      {% endif %}
       <div class="resource-list__item">
         {% content_for 'block', id: 'static-blog-post-card', type: '_featured-blog-posts-card', article: article, closest.article: article %}
       </div>
-      {% unless forloop.last %}
-        <!--@list/split-->
-      {% endunless %}
+      {% assign shown_posts = shown_posts | plus: 1 %}
     {% endfor %}
   {% endcapture %}
 

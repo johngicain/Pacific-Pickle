@@ -7,6 +7,9 @@
       --color: {{ block.settings.text_color }};
       --color-rgb: {{ block.settings.text_color.rgb }};
     {% endif %}
+    {% if block.settings.accent_color != blank %}
+      --blog-post-content-accent: {{ block.settings.accent_color }};
+    {% endif %}
   "
 >
   <rte-formatter>
@@ -16,15 +19,109 @@
 
 {% stylesheet %}
   .blog-post-content {
-    max-width: var(--normal-content-width);
-    margin: 0 auto;
+    width: 100%;
+    max-width: 100%;
     color: var(--color, inherit);
   }
 
   .blog-post-content a {
     color: currentcolor;
   }
+
+  .blog-post-content :is(h2, h3) {
+    margin: 0 0 1.25rem;
+    font-family: var(--font-heading--family);
+    font-size: 0.875rem;
+    font-weight: 900;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
+  .blog-post-content p {
+    margin: 0 0 1rem;
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+
+  .blog-post-content ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    counter-reset: recipe-step;
+  }
+
+  .blog-post-content ol > li {
+    counter-increment: recipe-step;
+    display: grid;
+    grid-template-columns: 2.5rem minmax(0, 1fr);
+    gap: 1rem;
+    margin: 0 0 1.5rem;
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+
+  .blog-post-content ol > li::before {
+    content: counter(recipe-step);
+    font-family: var(--font-heading--family);
+    font-size: 2rem;
+    font-weight: 900;
+    line-height: 1;
+    color: var(--blog-post-content-accent, #e8821a);
+  }
 {% endstylesheet %}
+
+{% javascript %}
+  function isNumberedStep(node) {
+    return node && node.nodeType === 1 && node.tagName === 'P' && /^\d+\.\s+\S/.test((node.textContent || '').trim());
+  }
+
+  function isSkippableNode(node) {
+    if (!node) return false;
+    if (node.nodeType === 3) return !(node.textContent || '').trim();
+    if (node.nodeType !== 1) return true;
+    if (node.tagName === 'META') return true;
+    return node.tagName === 'P' && !(node.textContent || '').trim();
+  }
+
+  function formatBlogPostSteps(root = document) {
+    root.querySelectorAll('.blog-post-content rte-formatter').forEach((content) => {
+      if (content.dataset.stepsFormatted === 'true') return;
+      if (!content.querySelector) return;
+
+      const children = [...content.childNodes];
+      let run = [];
+      const flush = () => {
+        if (run.length < 2) {
+          run = [];
+          return;
+        }
+        const ol = document.createElement('ol');
+        run.forEach((paragraph) => {
+          const item = document.createElement('li');
+          item.innerHTML = paragraph.innerHTML.replace(/^(\s*<span[^>]*>)?\s*\d+\.\s+/i, '$1');
+          ol.appendChild(item);
+        });
+        run[0].replaceWith(ol);
+        run.slice(1).forEach((paragraph) => paragraph.remove());
+        run = [];
+      };
+
+      children.forEach((node) => {
+        if (isNumberedStep(node)) {
+          run.push(node);
+          return;
+        }
+        if (run.length && isSkippableNode(node)) return;
+        flush();
+      });
+      flush();
+      content.dataset.stepsFormatted = 'true';
+    });
+  }
+
+  formatBlogPostSteps();
+  document.addEventListener('shopify:section:load', (event) => formatBlogPostSteps(event.target));
+{% endjavascript %}
 
 {% schema %}
 {
@@ -34,6 +131,12 @@
       "type": "color",
       "id": "text_color",
       "label": "t:settings.text_color",
+      "placeholder": "t:settings.default"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "t:settings.highlight_color",
       "placeholder": "t:settings.default"
     }
   ],
