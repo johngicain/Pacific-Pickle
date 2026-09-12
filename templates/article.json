@@ -496,7 +496,7 @@
                       "type": "text",
                       "name": "t:names.text",
                       "settings": {
-                        "text": "<p><strong>{{ article.metafields.custom.difficulty.value }}</strong></p>",
+                        "text": "",
                         "narrow_width": false,
                         "width": "fit-content",
                         "max_width": "normal",
