@@ -1,0 +1,1372 @@
+{% liquid
+  assign block_settings = block.settings
+  assign heading = block_settings.heading | strip
+  assign subheading = block_settings.subheading | strip
+  assign list_data = block_settings.list_content
+  assign list_string = blank
+  assign has_items = false
+  assign has_nested = false
+  assign show_placeholders = false
+
+  if block.blocks.size > 0
+    assign has_nested = true
+  endif
+
+  if list_data.value != blank
+    if list_data.type contains 'list.'
+      assign list_string = list_data.value | join: '~~'
+    else
+      assign list_string = list_data | metafield_tag
+      if list_string == blank
+        assign list_string = list_data.value
+      endif
+    endif
+  elsif list_data != blank
+    assign list_string = list_data
+  endif
+
+  if list_string != blank
+    assign list_string = list_string | replace: '</li>', '~~' | replace: '</p>', '~~'
+    assign list_string = list_string | replace: '<br />', '~~' | replace: '<br/>', '~~' | replace: '<br>', '~~'
+    assign list_string = list_string | newline_to_br | replace: '<br />', '~~' | strip_html
+    assign list_items = list_string | split: '~~'
+
+    for item in list_items
+      assign item_text = item | strip
+      if item_text != blank
+        assign has_items = true
+      endif
+    endfor
+  endif
+
+  if has_items == false
+    if request.visual_preview_mode or request.design_mode
+      assign show_placeholders = true
+    endif
+  endif
+
+  assign heading_preset = block_settings.heading_preset | default: 'h5'
+  assign heading_classes = 'metafield-list__heading'
+  if heading_preset != blank
+    assign heading_classes = heading_classes | append: ' ' | append: heading_preset
+  endif
+
+  assign subheading_preset = block_settings.subheading_preset | default: 'paragraph'
+  assign subheading_classes = 'metafield-list__subheading'
+  if subheading_preset != blank
+    assign subheading_classes = subheading_classes | append: ' ' | append: subheading_preset
+  endif
+
+  assign item_classes = 'metafield-list__item'
+  if block_settings.enable_border
+    assign item_classes = item_classes | append: ' metafield-list__item--border'
+  endif
+
+  assign number_classes = 'metafield-list__number'
+  if block_settings.enable_number_border
+    assign number_classes = number_classes | append: ' metafield-list__number--border'
+  endif
+
+  if block_settings.show_numbers
+    assign list_tag = 'ol'
+  else
+    assign list_tag = 'ul'
+  endif
+
+  assign clickable = false
+  if block_settings.show_numbers and block_settings.enable_clickable
+    assign clickable = true
+    assign item_classes = item_classes | append: ' metafield-list__item--clickable'
+    assign control_style = 'gap: ' | append: block_settings.control_gap | append: 'px; align-items: ' | append: block_settings.control_alignment | append: ';'
+  endif
+
+  assign show_block = false
+  if heading != blank or subheading != blank or has_items or show_placeholders or has_nested
+    assign show_block = true
+  endif
+
+  assign number_box_width = block_settings.number_size | plus: block_settings.number_padding_left | plus: block_settings.number_padding_right
+  assign number_box_height = block_settings.number_size | plus: block_settings.number_padding_top | plus: block_settings.number_padding_bottom
+%}
+
+{% if show_block %}
+  <div
+    class="metafield-list metafield-list--{{ block.id }} spacing-style"
+    style="
+      {% render 'spacing-style', settings: block_settings %}
+      --metafield-list-gap: {{ block_settings.gap }}px;
+      --metafield-list-vertical-gap: {{ block_settings.vertical_gap }}px;
+      --metafield-list-control-gap: {{ block_settings.control_gap }}px;
+      --metafield-list-control-align: {{ block_settings.control_alignment }};
+      --metafield-list-item-padding-block-start: {{ block_settings.item_padding_top }}px;
+      --metafield-list-item-padding-block-end: {{ block_settings.item_padding_bottom }}px;
+      --metafield-list-item-padding-inline-start: {{ block_settings.item_padding_left }}px;
+      --metafield-list-item-padding-inline-end: {{ block_settings.item_padding_right }}px;
+      --metafield-list-padding-block-start: {{ block_settings.items_padding_top }}px;
+      --metafield-list-padding-block-end: {{ block_settings.items_padding_bottom }}px;
+      --metafield-list-padding-inline-start: {{ block_settings.items_padding_left }}px;
+      --metafield-list-padding-inline-end: {{ block_settings.items_padding_right }}px;
+      --metafield-list-number-size: {{ block_settings.number_size }}px;
+      --metafield-list-number-box-width: {{ number_box_width }}px;
+      --metafield-list-number-box-height: {{ number_box_height }}px;
+      --metafield-list-number-padding-block-start: {{ block_settings.number_padding_top }}px;
+      --metafield-list-number-padding-block-end: {{ block_settings.number_padding_bottom }}px;
+      --metafield-list-number-padding-inline-start: {{ block_settings.number_padding_left }}px;
+      --metafield-list-number-padding-inline-end: {{ block_settings.number_padding_right }}px;
+      --metafield-list-check-size: {{ block_settings.check_icon_size }}px;
+      {% if block_settings.index_font_size != blank %}
+        --metafield-list-index-font-size: {{ block_settings.index_font_size }};
+      {% endif %}
+      {% if block_settings.index_weight != blank %}
+        --metafield-list-index-weight: {{ block_settings.index_weight }};
+      {% endif %}
+      {% if block_settings.text_font_size != blank %}
+        --metafield-list-text-font-size: {{ block_settings.text_font_size }};
+      {% endif %}
+      {% if block_settings.text_color != blank %}
+        --metafield-list-text-color: {{ block_settings.text_color }};
+      {% endif %}
+      {% if block_settings.show_numbers == false and block_settings.arrow_icon_color != blank %}
+        --metafield-list-arrow-color: {{ block_settings.arrow_icon_color }};
+      {% endif %}
+      {% if block_settings.heading_font != blank %}
+        --metafield-list-heading-font-family: {{ block_settings.heading_font }};
+      {% endif %}
+      {% if block_settings.heading_font_size != blank %}
+        --metafield-list-heading-font-size: {{ block_settings.heading_font_size }};
+      {% endif %}
+      {% if block_settings.heading_weight != blank %}
+        --metafield-list-heading-font-weight: {{ block_settings.heading_weight }};
+      {% endif %}
+      {% if block_settings.heading_color != blank %}
+        --metafield-list-heading-color: {{ block_settings.heading_color }};
+      {% endif %}
+      {% if block_settings.subheading_color != blank %}
+        --metafield-list-subheading-color: {{ block_settings.subheading_color }};
+      {% endif %}
+      {% if block_settings.background_color != blank %}
+        --metafield-list-item-background: {{ block_settings.background_color }};
+      {% endif %}
+      --metafield-list-item-border-radius: {{ block_settings.border_radius }}px;
+      {% if block_settings.enable_border %}
+        --metafield-list-item-border-width: {{ block_settings.border_width }}px;
+        --metafield-list-item-border-style: solid;
+        --metafield-list-item-border-color:
+        {% if block_settings.border_color != blank %}
+          rgb({{ block_settings.border_color.rgba }})
+        {% else %}
+          rgb(var(--color-border-rgb) / {{ block_settings.border_opacity | divided_by: 100.0 }})
+        {% endif %}
+        ;
+      {% else %}
+        --metafield-list-item-border-width: 0px;
+        --metafield-list-item-border-style: none;
+      {% endif %}
+      {% if block_settings.enable_border_left %}
+        --metafield-list-border-left-width: {{ block_settings.border_left }}px;
+        --metafield-list-border-left-style: solid;
+        --metafield-list-border-left-color:
+        {% if block_settings.border_left_color != blank %}
+          rgb({{ block_settings.border_left_color.rgba }})
+        {% else %}
+          rgb(var(--color-border-rgb))
+        {% endif %}
+        ;
+      {% else %}
+        --metafield-list-border-left-width: 0px;
+        --metafield-list-border-left-style: none;
+      {% endif %}
+      {% if block_settings.number_background_color != blank %}
+        --metafield-list-number-background: {{ block_settings.number_background_color }};
+      {% endif %}
+      {% if block_settings.number_text_color != blank %}
+        --metafield-list-number-color: {{ block_settings.number_text_color }};
+      {% endif %}
+      --metafield-list-number-border-radius: {{ block_settings.number_border_radius }}px;
+      {% if block_settings.show_numbers and block_settings.enable_number_border %}
+        --metafield-list-number-border-width: {{ block_settings.number_border_width }}px;
+        --metafield-list-number-border-style: solid;
+        --metafield-list-number-border-color:
+        {% if block_settings.number_border_color != blank %}
+          rgb({{ block_settings.number_border_color.rgba }})
+        {% else %}
+          rgb(var(--color-border-rgb) / {{ block_settings.number_border_opacity | divided_by: 100.0 }})
+        {% endif %}
+        ;
+      {% else %}
+        --metafield-list-number-border-width: 0px;
+        --metafield-list-number-border-style: none;
+      {% endif %}
+      {% if clickable %}
+        {% unless block_settings.enable_border %}
+          --metafield-list-item-border-width: {{ block_settings.border_width | default: 1 }}px;
+          --metafield-list-item-border-style: solid;
+          --metafield-list-item-border-color: transparent;
+        {% endunless %}
+        {% if block_settings.hover_border_color != blank %}
+          --metafield-list-hover-border-color: rgb({{ block_settings.hover_border_color.rgba }});
+        {% endif %}
+        {% if block_settings.clicked_border_color != blank %}
+          --metafield-list-clicked-border-color: rgb({{ block_settings.clicked_border_color.rgba }});
+        {% endif %}
+        {% if block_settings.clicked_item_background_color != blank %}
+          --metafield-list-clicked-item-background: {{ block_settings.clicked_item_background_color }};
+        {% endif %}
+        {% if block_settings.clicked_number_background_color != blank %}
+          --metafield-list-clicked-number-background: {{ block_settings.clicked_number_background_color }};
+        {% endif %}
+      {% endif %}
+    "
+    {{ block.shopify_attributes }}
+  >
+    {% if heading != blank %}
+      <p
+        class="{{ heading_classes }}"
+        {% if block_settings.heading_color != blank %}
+          style="--color: {{ block_settings.heading_color }}; color: {{ block_settings.heading_color }};"
+        {% endif %}
+      >
+        {{ heading | escape }}
+      </p>
+    {% endif %}
+
+    {% if subheading != blank %}
+      <p
+        class="{{ subheading_classes }}"
+        {% if block_settings.subheading_color != blank %}
+          style="--color: {{ block_settings.subheading_color }}; color: {{ block_settings.subheading_color }};"
+        {% endif %}
+      >
+        {{ subheading | escape }}
+      </p>
+    {% endif %}
+
+    <div class="metafield-list__blocks">
+      {% content_for 'blocks' %}
+    </div>
+
+    {% if has_items or show_placeholders %}
+      {% if clickable %}
+        {% capture metafield_list_check %}
+          {{ 'icon-checkmark.svg' | inline_asset_content }}
+        {% endcapture %}
+      {% endif %}
+      {% unless block_settings.show_numbers %}
+        {% capture metafield_list_arrow %}
+          {{ 'icon-arrow.svg' | inline_asset_content }}
+        {% endcapture %}
+      {% endunless %}
+      <{{ list_tag }} class="metafield-list__items">
+        {% if has_items %}
+          {% assign list_index = 0 %}
+          {% for item in list_items %}
+            {% assign item_text = item | strip %}
+            {% if item_text != blank %}
+              {% assign list_index = list_index | plus: 1 %}
+              <li class="{{ item_classes }}">
+                {% if clickable %}
+                  <label
+                    class="metafield-list__control"
+                    style="{{ control_style }}"
+                  >
+                    <input
+                      class="metafield-list__checkbox"
+                      type="checkbox"
+                    >
+                    <span class="{{ number_classes }}" aria-hidden="true">
+                      <span class="metafield-list__index">{{ list_index }}</span>
+                      <span class="metafield-list__check">{{ metafield_list_check }}</span>
+                    </span>
+                    <span class="metafield-list__text">{{ item_text | escape }}</span>
+                  </label>
+                {% else %}
+                  {% if block_settings.show_numbers %}
+                    <span class="{{ number_classes }}" aria-hidden="true">
+                      <span class="metafield-list__index">{{ list_index }}</span>
+                    </span>
+                  {% else %}
+                    <span class="metafield-list__arrow" aria-hidden="true">{{ metafield_list_arrow }}</span>
+                  {% endif %}
+                  <span class="metafield-list__text">{{ item_text | escape }}</span>
+                {% endif %}
+              </li>
+            {% endif %}
+          {% endfor %}
+        {% else %}
+          {% for i in (1..3) %}
+            <li class="{{ item_classes }}">
+              {% if clickable %}
+                <label
+                  class="metafield-list__control"
+                  style="{{ control_style }}"
+                >
+                  <input
+                    class="metafield-list__checkbox"
+                    type="checkbox"
+                  >
+                  <span class="{{ number_classes }}" aria-hidden="true">
+                    <span class="metafield-list__index">{{ i }}</span>
+                    <span class="metafield-list__check">{{ metafield_list_check }}</span>
+                  </span>
+                  <span class="metafield-list__text">{{ 'blocks.metafield_list.placeholder_item' | t }}</span>
+                </label>
+              {% else %}
+                {% if block_settings.show_numbers %}
+                  <span class="{{ number_classes }}" aria-hidden="true">
+                    <span class="metafield-list__index">{{ i }}</span>
+                  </span>
+                {% else %}
+                  <span class="metafield-list__arrow" aria-hidden="true">{{ metafield_list_arrow }}</span>
+                {% endif %}
+                <span class="metafield-list__text">{{ 'blocks.metafield_list.placeholder_item' | t }}</span>
+              {% endif %}
+            </li>
+          {% endfor %}
+        {% endif %}
+      </{{ list_tag }}>
+    {% endif %}
+  </div>
+{% endif %}
+
+{% stylesheet %}
+  .metafield-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--metafield-list-gap, 12px);
+    box-sizing: border-box;
+    width: 100%;
+    padding-block-start: calc(
+      var(--padding-block-start, 0px) + var(--section-top-offset, 0px) + var(--metafield-list-padding-block-start, 0px)
+    );
+    padding-block-end: calc(var(--padding-block-end, 0px) + var(--metafield-list-padding-block-end, 0px));
+    padding-inline-start: calc(var(--padding-inline-start, 0px) + var(--metafield-list-padding-inline-start, 0px));
+    padding-inline-end: calc(var(--padding-inline-end, 0px) + var(--metafield-list-padding-inline-end, 0px));
+    border-left-width: var(--metafield-list-border-left-width, 0);
+    border-left-style: var(--metafield-list-border-left-style, none);
+    border-left-color: var(--metafield-list-border-left-color, transparent);
+  }
+
+  .metafield-list > * {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .metafield-list .metafield-list__heading,
+  .metafield-list .metafield-list__heading.h4,
+  .metafield-list .metafield-list__heading.h5,
+  .metafield-list .metafield-list__heading.h6,
+  .metafield-list .metafield-list__heading.paragraph,
+  .metafield-list .metafield-list__heading.paragraph:not(.button) {
+    margin: 0;
+    color: var(--metafield-list-heading-color, var(--color, inherit));
+    font-family: var(--metafield-list-heading-font-family);
+    font-size: var(--metafield-list-heading-font-size);
+    font-weight: var(--metafield-list-heading-font-weight);
+  }
+
+  .metafield-list .metafield-list__subheading,
+  .metafield-list .metafield-list__subheading.h4,
+  .metafield-list .metafield-list__subheading.h5,
+  .metafield-list .metafield-list__subheading.h6,
+  .metafield-list .metafield-list__subheading.paragraph,
+  .metafield-list .metafield-list__subheading.paragraph:not(.button) {
+    margin: 0;
+    color: var(--metafield-list-subheading-color, var(--color, inherit));
+  }
+
+  .metafield-list__blocks:not(:has(*)) {
+    display: none;
+  }
+
+  .metafield-list__items {
+    display: flex;
+    flex-direction: column;
+    gap: var(--metafield-list-vertical-gap, 8px);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+  }
+
+  .metafield-list__item {
+    box-sizing: border-box;
+    display: flex;
+    align-items: var(--metafield-list-control-align, center);
+    gap: var(--metafield-list-control-gap, 12px);
+    width: 100%;
+    margin: 0;
+    list-style: none;
+    color: var(--metafield-list-text-color, inherit);
+    background-color: var(--metafield-list-item-background, transparent);
+    padding-block-start: var(--metafield-list-item-padding-block-start, 0);
+    padding-block-end: var(--metafield-list-item-padding-block-end, 0);
+    padding-inline-start: var(--metafield-list-item-padding-inline-start, 0);
+    padding-inline-end: var(--metafield-list-item-padding-inline-end, 0);
+    border-width: var(--metafield-list-item-border-width, 0);
+    border-style: var(--metafield-list-item-border-style, none);
+    border-color: var(--metafield-list-item-border-color, transparent);
+    border-radius: var(--metafield-list-item-border-radius, 0);
+  }
+
+  .metafield-list__text {
+    min-width: 0;
+    flex: 1 1 auto;
+    font-size: var(--metafield-list-text-font-size, inherit);
+  }
+
+  .metafield-list__arrow {
+    display: inline-flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    width: 1em;
+    height: 1em;
+    color: var(--metafield-list-arrow-color, currentColor);
+    --icon-stroke-width: 1.5px;
+  }
+
+  .metafield-list__arrow svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  .metafield-list__number {
+    box-sizing: border-box;
+    display: inline-flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    width: var(--metafield-list-number-box-width, var(--metafield-list-number-size, 28px));
+    height: var(--metafield-list-number-box-height, var(--metafield-list-number-size, 28px));
+    min-width: var(--metafield-list-number-box-width, var(--metafield-list-number-size, 28px));
+    min-height: var(--metafield-list-number-box-height, var(--metafield-list-number-size, 28px));
+    padding-block-start: var(--metafield-list-number-padding-block-start, 0px);
+    padding-block-end: var(--metafield-list-number-padding-block-end, 0px);
+    padding-inline-start: var(--metafield-list-number-padding-inline-start, 0px);
+    padding-inline-end: var(--metafield-list-number-padding-inline-end, 0px);
+    color: var(--metafield-list-number-color, inherit);
+    background-color: var(--metafield-list-number-background, transparent);
+    border-width: var(--metafield-list-number-border-width, 0);
+    border-style: var(--metafield-list-number-border-style, none);
+    border-color: var(--metafield-list-number-border-color, transparent);
+    border-radius: var(--metafield-list-number-border-radius, 0);
+    font-family: var(--font-heading--family);
+    font-style: var(--font-heading--style);
+    font-variant-numeric: tabular-nums;
+    line-height: 1;
+  }
+
+  .metafield-list__index {
+    font-size: var(--metafield-list-index-font-size, inherit);
+    font-weight: var(--metafield-list-index-weight, inherit);
+  }
+
+  .metafield-list__check {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: var(--metafield-list-check-size, 16px);
+    height: var(--metafield-list-check-size, 16px);
+    max-width: 100%;
+    max-height: 100%;
+    color: #ffffff;
+    --icon-stroke-width: 1.75px;
+  }
+
+  .metafield-list__check svg,
+  .metafield-list__check .icon-checkmark {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  .metafield-list label.metafield-list__control {
+    display: flex;
+    align-items: var(--metafield-list-control-align, center);
+    gap: var(--metafield-list-control-gap, 12px);
+    width: 100%;
+    min-width: 0;
+    cursor: pointer;
+  }
+
+  .metafield-list__checkbox {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .metafield-list__item--clickable {
+    position: relative;
+    cursor: pointer;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+  }
+
+  .metafield-list__item--clickable:hover {
+    border-color: var(--metafield-list-hover-border-color, var(--color-foreground));
+  }
+
+  .metafield-list__item--clickable:has(.metafield-list__checkbox:focus-visible) {
+    outline: 2px solid var(--metafield-list-hover-border-color, var(--color-foreground));
+    outline-offset: 2px;
+  }
+
+  .metafield-list__item--clickable:has(.metafield-list__checkbox:checked) {
+    border-color: var(
+      --metafield-list-clicked-border-color,
+      var(--metafield-list-hover-border-color, var(--color-foreground))
+    );
+    background-color: var(
+      --metafield-list-clicked-item-background,
+      var(--metafield-list-item-background, transparent)
+    );
+  }
+
+  .metafield-list__item--clickable:has(.metafield-list__checkbox:checked) .metafield-list__number {
+    width: var(--metafield-list-number-box-width, var(--metafield-list-number-size, 28px));
+    height: var(--metafield-list-number-box-height, var(--metafield-list-number-size, 28px));
+    min-width: var(--metafield-list-number-box-width, var(--metafield-list-number-size, 28px));
+    min-height: var(--metafield-list-number-box-height, var(--metafield-list-number-size, 28px));
+    padding-block-start: var(--metafield-list-number-padding-block-start, 0px);
+    padding-block-end: var(--metafield-list-number-padding-block-end, 0px);
+    padding-inline-start: var(--metafield-list-number-padding-inline-start, 0px);
+    padding-inline-end: var(--metafield-list-number-padding-inline-end, 0px);
+    color: #ffffff;
+    background-color: var(--metafield-list-clicked-number-background, var(--color-foreground));
+    border-color: var(
+      --metafield-list-clicked-border-color,
+      var(--metafield-list-hover-border-color, var(--color-foreground))
+    );
+  }
+
+  .metafield-list__item--clickable:has(.metafield-list__checkbox:checked) .metafield-list__index {
+    display: none;
+  }
+
+  .metafield-list__item--clickable:has(.metafield-list__checkbox:checked) .metafield-list__check {
+    display: flex;
+  }
+
+  .metafield-list__item--clickable:has(.metafield-list__checkbox:checked) .metafield-list__text {
+    text-decoration: line-through;
+    opacity: 0.45;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:names.metafield_list",
+  "tag": null,
+  "blocks": [
+    {
+      "type": "_divider"
+    }
+  ],
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:content.heading"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:settings.heading"
+    },
+    {
+      "type": "select",
+      "id": "heading_preset",
+      "label": "t:settings.heading_preset",
+      "options": [
+        {
+          "value": "paragraph",
+          "label": "t:options.paragraph"
+        },
+        {
+          "value": "h4",
+          "label": "t:options.h4"
+        },
+        {
+          "value": "h5",
+          "label": "t:options.h5"
+        },
+        {
+          "value": "h6",
+          "label": "t:options.h6"
+        }
+      ],
+      "default": "h5"
+    },
+    {
+      "type": "select",
+      "id": "heading_font",
+      "label": "t:settings.font",
+      "options": [
+        {
+          "value": "",
+          "label": "t:options.default"
+        },
+        {
+          "value": "var(--font-body--family)",
+          "label": "t:options.body"
+        },
+        {
+          "value": "var(--font-subheading--family)",
+          "label": "t:options.subheading"
+        },
+        {
+          "value": "var(--font-heading--family)",
+          "label": "t:options.heading"
+        },
+        {
+          "value": "var(--font-accent--family)",
+          "label": "t:options.accent"
+        }
+      ],
+      "default": ""
+    },
+    {
+      "type": "select",
+      "id": "heading_font_size",
+      "label": "t:settings.font_size",
+      "options": [
+        {
+          "value": "",
+          "label": "t:options.default"
+        },
+        {
+          "value": "0.625rem",
+          "label": "10px"
+        },
+        {
+          "value": "0.75rem",
+          "label": "12px"
+        },
+        {
+          "value": "0.875rem",
+          "label": "14px"
+        },
+        {
+          "value": "1rem",
+          "label": "16px"
+        },
+        {
+          "value": "1.125rem",
+          "label": "18px"
+        },
+        {
+          "value": "1.25rem",
+          "label": "20px"
+        },
+        {
+          "value": "1.5rem",
+          "label": "24px"
+        },
+        {
+          "value": "2rem",
+          "label": "32px"
+        },
+        {
+          "value": "2.5rem",
+          "label": "40px"
+        }
+      ],
+      "default": ""
+    },
+    {
+      "type": "select",
+      "id": "heading_weight",
+      "label": "t:settings.weight",
+      "options": [
+        {
+          "value": "",
+          "label": "t:options.default"
+        },
+        {
+          "value": "100",
+          "label": "t:options.thin"
+        },
+        {
+          "value": "300",
+          "label": "t:options.light"
+        },
+        {
+          "value": "400",
+          "label": "t:options.regular"
+        },
+        {
+          "value": "500",
+          "label": "t:options.medium"
+        },
+        {
+          "value": "600",
+          "label": "t:options.semibold"
+        },
+        {
+          "value": "700",
+          "label": "t:options.bold"
+        },
+        {
+          "value": "900",
+          "label": "t:options.black"
+        }
+      ],
+      "default": ""
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "t:settings.heading_color",
+      "placeholder": "t:settings.default"
+    },
+    {
+      "type": "header",
+      "content": "t:settings.subheading"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "t:settings.subheading"
+    },
+    {
+      "type": "select",
+      "id": "subheading_preset",
+      "label": "t:settings.subheading_preset",
+      "options": [
+        {
+          "value": "paragraph",
+          "label": "t:options.paragraph"
+        },
+        {
+          "value": "h4",
+          "label": "t:options.h4"
+        },
+        {
+          "value": "h5",
+          "label": "t:options.h5"
+        },
+        {
+          "value": "h6",
+          "label": "t:options.h6"
+        }
+      ],
+      "default": "paragraph"
+    },
+    {
+      "type": "color",
+      "id": "subheading_color",
+      "label": "t:settings.color",
+      "placeholder": "t:settings.default"
+    },
+    {
+      "type": "header",
+      "content": "t:content.list"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:content.metafield_list_info"
+    },
+    {
+      "type": "richtext",
+      "id": "list_content",
+      "label": "t:settings.metafield"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "t:settings.text_color",
+      "placeholder": "t:settings.default"
+    },
+    {
+      "type": "select",
+      "id": "text_font_size",
+      "label": "t:settings.font_size",
+      "options": [
+        {
+          "value": "",
+          "label": "t:options.default"
+        },
+        {
+          "value": "0.625rem",
+          "label": "10px"
+        },
+        {
+          "value": "0.75rem",
+          "label": "12px"
+        },
+        {
+          "value": "0.875rem",
+          "label": "14px"
+        },
+        {
+          "value": "1rem",
+          "label": "16px"
+        },
+        {
+          "value": "1.125rem",
+          "label": "18px"
+        },
+        {
+          "value": "1.25rem",
+          "label": "20px"
+        },
+        {
+          "value": "1.5rem",
+          "label": "24px"
+        }
+      ],
+      "default": ""
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "t:settings.background_color",
+      "placeholder": "t:settings.default"
+    },
+    {
+      "type": "range",
+      "id": "item_padding_top",
+      "label": "t:settings.padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "item_padding_bottom",
+      "label": "t:settings.padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "item_padding_left",
+      "label": "t:settings.padding_left",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "item_padding_right",
+      "label": "t:settings.padding_right",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "header",
+      "content": "t:content.borders"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_border",
+      "label": "t:settings.border",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "border_width",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "t:settings.thickness",
+      "default": 1,
+      "visible_if": "{{ block.settings.enable_border }}"
+    },
+    {
+      "type": "range",
+      "id": "border_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "label": "t:settings.opacity",
+      "default": 100,
+      "visible_if": "{{ block.settings.enable_border }}"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "t:settings.color",
+      "placeholder": "t:settings.default",
+      "visible_if": "{{ block.settings.enable_border }}"
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "label": "t:settings.border_radius",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_border_left",
+      "label": "t:settings.border_left",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "border_left",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "t:settings.thickness",
+      "default": 1,
+      "visible_if": "{{ block.settings.enable_border_left }}"
+    },
+    {
+      "type": "color",
+      "id": "border_left_color",
+      "label": "t:settings.border_left_color",
+      "placeholder": "t:settings.default",
+      "visible_if": "{{ block.settings.enable_border_left }}"
+    },
+    {
+      "type": "header",
+      "content": "t:content.numbering"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_numbers",
+      "label": "t:settings.show_numbers",
+      "default": false
+    },
+    {
+      "type": "color",
+      "id": "arrow_icon_color",
+      "label": "t:settings.icon_color",
+      "placeholder": "t:settings.default",
+      "visible_if": "{{ block.settings.show_numbers == false }}"
+    },
+    {
+      "type": "range",
+      "id": "number_size",
+      "label": "t:settings.size",
+      "min": 16,
+      "max": 80,
+      "step": 1,
+      "unit": "px",
+      "default": 28,
+      "visible_if": "{{ block.settings.show_numbers }}"
+    },
+    {
+      "type": "range",
+      "id": "number_padding_top",
+      "label": "t:settings.padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0,
+      "visible_if": "{{ block.settings.show_numbers }}"
+    },
+    {
+      "type": "range",
+      "id": "number_padding_bottom",
+      "label": "t:settings.padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0,
+      "visible_if": "{{ block.settings.show_numbers }}"
+    },
+    {
+      "type": "range",
+      "id": "number_padding_left",
+      "label": "t:settings.padding_left",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0,
+      "visible_if": "{{ block.settings.show_numbers }}"
+    },
+    {
+      "type": "range",
+      "id": "number_padding_right",
+      "label": "t:settings.padding_right",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0,
+      "visible_if": "{{ block.settings.show_numbers }}"
+    },
+    {
+      "type": "select",
+      "id": "index_font_size",
+      "label": "t:settings.font_size",
+      "options": [
+        {
+          "value": "",
+          "label": "t:options.default"
+        },
+        {
+          "value": "0.625rem",
+          "label": "10px"
+        },
+        {
+          "value": "0.75rem",
+          "label": "12px"
+        },
+        {
+          "value": "0.875rem",
+          "label": "14px"
+        },
+        {
+          "value": "1rem",
+          "label": "16px"
+        },
+        {
+          "value": "1.125rem",
+          "label": "18px"
+        },
+        {
+          "value": "1.25rem",
+          "label": "20px"
+        },
+        {
+          "value": "1.5rem",
+          "label": "24px"
+        }
+      ],
+      "default": "",
+      "visible_if": "{{ block.settings.show_numbers }}"
+    },
+    {
+      "type": "select",
+      "id": "index_weight",
+      "label": "t:settings.weight",
+      "options": [
+        {
+          "value": "",
+          "label": "t:options.default"
+        },
+        {
+          "value": "100",
+          "label": "t:options.thin"
+        },
+        {
+          "value": "300",
+          "label": "t:options.light"
+        },
+        {
+          "value": "400",
+          "label": "t:options.regular"
+        },
+        {
+          "value": "500",
+          "label": "t:options.medium"
+        },
+        {
+          "value": "600",
+          "label": "t:options.semibold"
+        },
+        {
+          "value": "700",
+          "label": "t:options.bold"
+        },
+        {
+          "value": "900",
+          "label": "t:options.black"
+        }
+      ],
+      "default": "",
+      "visible_if": "{{ block.settings.show_numbers }}"
+    },
+    {
+      "type": "color",
+      "id": "number_text_color",
+      "label": "t:settings.text_color",
+      "placeholder": "t:settings.default",
+      "visible_if": "{{ block.settings.show_numbers }}"
+    },
+    {
+      "type": "color",
+      "id": "number_background_color",
+      "label": "t:settings.background_color",
+      "placeholder": "t:settings.default",
+      "visible_if": "{{ block.settings.show_numbers }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_number_border",
+      "label": "t:settings.border",
+      "default": false,
+      "visible_if": "{{ block.settings.show_numbers }}"
+    },
+    {
+      "type": "range",
+      "id": "number_border_width",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "t:settings.thickness",
+      "default": 1,
+      "visible_if": "{{ block.settings.show_numbers and block.settings.enable_number_border }}"
+    },
+    {
+      "type": "range",
+      "id": "number_border_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "label": "t:settings.opacity",
+      "default": 100,
+      "visible_if": "{{ block.settings.show_numbers and block.settings.enable_number_border }}"
+    },
+    {
+      "type": "color",
+      "id": "number_border_color",
+      "label": "t:settings.color",
+      "placeholder": "t:settings.default",
+      "visible_if": "{{ block.settings.show_numbers and block.settings.enable_number_border }}"
+    },
+    {
+      "type": "range",
+      "id": "number_border_radius",
+      "label": "t:settings.border_radius",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0,
+      "visible_if": "{{ block.settings.show_numbers }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_clickable",
+      "label": "t:settings.clickable_items",
+      "default": false,
+      "visible_if": "{{ block.settings.show_numbers }}"
+    },
+    {
+      "type": "header",
+      "content": "t:content.hover",
+      "visible_if": "{{ block.settings.show_numbers and block.settings.enable_clickable }}"
+    },
+    {
+      "type": "color",
+      "id": "hover_border_color",
+      "label": "t:settings.border_color",
+      "placeholder": "t:settings.default",
+      "visible_if": "{{ block.settings.show_numbers and block.settings.enable_clickable }}"
+    },
+    {
+      "type": "header",
+      "content": "t:content.clicked",
+      "visible_if": "{{ block.settings.show_numbers and block.settings.enable_clickable }}"
+    },
+    {
+      "type": "range",
+      "id": "check_icon_size",
+      "label": "t:settings.icon_size",
+      "min": 8,
+      "max": 80,
+      "step": 1,
+      "unit": "px",
+      "default": 16,
+      "visible_if": "{{ block.settings.show_numbers and block.settings.enable_clickable }}"
+    },
+    {
+      "type": "color",
+      "id": "clicked_border_color",
+      "label": "t:settings.border_color",
+      "placeholder": "t:settings.default",
+      "visible_if": "{{ block.settings.show_numbers and block.settings.enable_clickable }}"
+    },
+    {
+      "type": "color",
+      "id": "clicked_item_background_color",
+      "label": "t:settings.item_background",
+      "placeholder": "t:settings.default",
+      "visible_if": "{{ block.settings.show_numbers and block.settings.enable_clickable }}"
+    },
+    {
+      "type": "color",
+      "id": "clicked_number_background_color",
+      "label": "t:settings.number_background",
+      "placeholder": "t:settings.default",
+      "visible_if": "{{ block.settings.show_numbers and block.settings.enable_clickable }}"
+    },
+    {
+      "type": "header",
+      "content": "t:content.layout"
+    },
+    {
+      "type": "range",
+      "id": "gap",
+      "label": "t:settings.gap",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "vertical_gap",
+      "label": "t:settings.vertical_gap",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "control_gap",
+      "label": "t:settings.horizontal_gap",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "select",
+      "id": "control_alignment",
+      "label": "t:settings.alignment",
+      "options": [
+        {
+          "value": "flex-start",
+          "label": "t:options.top"
+        },
+        {
+          "value": "center",
+          "label": "t:options.middle"
+        },
+        {
+          "value": "flex-end",
+          "label": "t:options.bottom"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "range",
+      "id": "items_padding_top",
+      "label": "t:settings.padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "items_padding_bottom",
+      "label": "t:settings.padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "items_padding_left",
+      "label": "t:settings.padding_left",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "items_padding_right",
+      "label": "t:settings.padding_right",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "t:content.padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "t:settings.top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "t:settings.bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-start",
+      "label": "t:settings.left",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-end",
+      "label": "t:settings.right",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:names.metafield_list",
+      "category": "t:categories.text",
+      "blocks": {
+        "divider": {
+          "type": "_divider",
+          "settings": {
+            "thickness": 1,
+            "width_percent": 100
+          }
+        }
+      },
+      "block_order": ["divider"]
+    }
+  ]
+}
+{% endschema %}

@@ -148,7 +148,10 @@
     "load_video": "Load video: {{ description }}",
     "sold_out": "Sold out",
     "payment_methods": "Payment methods",
-    "slider_label": "Slider"
+    "slider_label": "Slider",
+    "metafield_list": {
+      "placeholder_item": "List item"
+    }
   },
   "blogs": {
     "article": {
