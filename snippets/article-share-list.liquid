@@ -1,0 +1,56 @@
+{% doc %}
+  Renders a metafield, metaobject field, or HTML string as a list.
+
+  @param {object} [source] - A metafield, metaobject field, or HTML/text value
+  @param {string} [tag] - The list tag: ul or ol
+  @param {string} [class] - Optional class for the list element
+
+  @example
+  {% render 'article-share-list', source: article.metafields.custom.instructions, tag: 'ol' %}
+{% enddoc %}
+
+{% liquid
+  assign list_tag = tag | default: 'ul'
+  assign list_class = class | default: 'blog-post-share__list'
+  assign list_string = blank
+
+  if source.type != blank
+    if source.list? or source.type contains 'list.'
+      assign list_string = source.value | join: '~~'
+    else
+      assign list_string = source | metafield_tag
+      if list_string == blank
+        assign list_string = source.value
+      endif
+    endif
+  elsif source != blank
+    assign list_string = source
+  endif
+
+  if list_string != blank
+    assign list_string = list_string | replace: '</li>', '~~' | replace: '</p>', '~~'
+    assign list_string = list_string | replace: '<br />', '~~' | replace: '<br/>', '~~' | replace: '<br>', '~~'
+    assign list_string = list_string | newline_to_br | replace: '<br />', '~~' | strip_html
+    assign list_items = list_string | split: '~~'
+  endif
+
+  assign has_items = false
+  for item in list_items
+    assign item_text = item | strip
+    if item_text != blank
+      assign has_items = true
+      break
+    endif
+  endfor
+%}
+
+{% if has_items %}
+  <{{ list_tag }} class="{{ list_class }}">
+    {% for item in list_items %}
+      {% assign item_text = item | strip %}
+      {% if item_text != blank %}
+        <li>{{ item_text | escape }}</li>
+      {% endif %}
+    {% endfor %}
+  </{{ list_tag }}>
+{% endif %}

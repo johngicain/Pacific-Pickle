@@ -1,0 +1,34 @@
+{% doc %}
+  Renders one labeled ingredient group for the article share sheet.
+
+  @param {object} [group] - Ingredient list metaobject
+  @param {string} [fallback_label] - Heading when the group has no category
+
+  @example
+  {% render 'article-share-group', group: article.metafields.custom.ingredient_list_1.value, fallback_label: ingredients_heading %}
+{% enddoc %}
+
+{% liquid
+  assign group_label = group.category.value | strip
+  if group_label == blank
+    assign group_label = group.category | metafield_text | strip
+  endif
+  if group_label == blank
+    assign group_label = fallback_label
+  endif
+%}
+
+{% if group != blank %}
+  {% capture group_list %}
+    {% render 'article-share-list', source: group.ingredients %}
+  {% endcapture %}
+  {% assign group_list = group_list | strip %}
+  {% if group_list != blank %}
+    <div class="blog-post-share__group">
+      {% if group_label != blank %}
+        <h3 class="blog-post-share__group-label">{{ group_label | escape }}</h3>
+      {% endif %}
+      {{ group_list }}
+    </div>
+  {% endif %}
+{% endif %}
