@@ -12,16 +12,20 @@
   assign font_key = prefix | append: '_font'
   assign font_size_key = prefix | append: '_font_size'
   assign font_style_key = prefix | append: '_font_style'
+  assign font_weight_key = prefix | append: '_font_weight'
   assign hover_background_key = prefix | append: '_hover_background'
   assign hover_text_key = prefix | append: '_hover_text'
+  assign hover_border_key = prefix | append: '_hover_border'
   assign max_width_key = prefix | append: '_max_width'
   assign max_width_mobile_key = prefix | append: '_max_width_mobile'
 
   assign font = settings[font_key]
   assign font_size = settings[font_size_key]
   assign font_style = settings[font_style_key]
+  assign font_weight = settings[font_weight_key]
   assign hover_background = settings[hover_background_key]
   assign hover_text = settings[hover_text_key]
+  assign hover_border = settings[hover_border_key]
 
   assign max_width = settings[max_width_key]
   assign flex = '0 0 auto'
@@ -53,11 +57,17 @@
 {%- if font_style != blank -%}
   font-style: {{ font_style }};
 {%- endif -%}
+{%- if font_weight != blank -%}
+  --button-font-weight: {{ font_weight }}; font-weight: {{ font_weight }};
+{%- endif -%}
 {%- if hover_background != blank -%}
   --blog-post-share-hover-background: rgb({{ hover_background.rgba }});
 {%- endif -%}
 {%- if hover_text != blank -%}
   --blog-post-share-hover-text: rgb({{ hover_text.rgba }});
+{%- endif -%}
+{%- if hover_border != blank -%}
+  --blog-post-share-hover-border: rgb({{ hover_border.rgba }});
 {%- endif -%}
 {%- if max_width != blank -%}
   --blog-post-share-max-width: {{ max_width }}; --blog-post-share-flex: {{ flex }};
