@@ -1719,23 +1719,7 @@
                 "padding-inline-start": 0,
                 "padding-inline-end": 0
               },
-              "blocks": {
-                "divider_PT7nYc": {
-                  "type": "_divider",
-                  "settings": {
-                    "thickness": 1,
-                    "corner_radius": "square",
-                    "divider_color": "",
-                    "width_percent": 100,
-                    "padding-block-start": 0,
-                    "padding-block-end": 0
-                  },
-                  "blocks": {}
-                }
-              },
-              "block_order": [
-                "divider_PT7nYc"
-              ]
+              "blocks": {}
             },
             "tags": {
               "type": "blog-post-tags",
