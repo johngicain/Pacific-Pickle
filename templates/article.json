@@ -1715,7 +1715,7 @@
                 "items_padding_left": 0,
                 "items_padding_right": 0,
                 "padding-block-start": 0,
-                "padding-block-end": 0,
+                "padding-block-end": 20,
                 "padding-inline-start": 0,
                 "padding-inline-end": 0
               },
