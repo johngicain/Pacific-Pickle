@@ -1810,7 +1810,7 @@
                 "text_color": "#1c1c1a",
                 "background_color": "",
                 "border_color": "#999999",
-                "padding-block-start": 0,
+                "padding-block-start": 15,
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
                 "padding-inline-end": 0
