@@ -21,7 +21,7 @@
   >
     {% if tags.size > 0 %}
       {% for tag in tags %}
-        <a class="blog-post-tags__item" href="{{ blog.url }}/tagged/{{ tag | handle }}">{{ tag }}</a>
+        <span class="blog-post-tags__item">{{ tag }}</span>
       {% endfor %}
     {% elsif request.design_mode %}
       <span class="blog-post-tags__item">{{ 'blogs.article.tag_placeholder' | t }}</span>
@@ -53,7 +53,7 @@
     text-transform: uppercase;
   }
 
-  a.blog-post-tags__item:hover {
+  .blog-post-tags__item:hover {
     color: #e8821a;
     border-color: #e8821a;
   }
