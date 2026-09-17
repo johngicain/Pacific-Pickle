@@ -496,7 +496,7 @@
                       "type": "text",
                       "name": "t:names.text",
                       "settings": {
-                        "text": "",
+                        "text": "<p>{{ closest.article.metafields.custom.difficulty.value.label.value }}</p>",
                         "narrow_width": false,
                         "width": "fit-content",
                         "max_width": "normal",
@@ -520,7 +520,7 @@
                         "border": "solid",
                         "border_width": 1,
                         "border_opacity": 50,
-                        "border_color": "#ffffff",
+                        "border_color": "#888888",
                         "border_radius": 0,
                         "padding-block-start": 2,
                         "padding-block-end": 2,
