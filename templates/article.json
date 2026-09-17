@@ -551,7 +551,7 @@
                         "text": "<p>{{ closest.article.metafields.custom.difficulty.value.label.value }}</p>",
                         "narrow_width": false,
                         "width": "fit-content",
-                        "max_width": "normal",
+                        "max_width": "none",
                         "alignment": "left",
                         "type_preset": "custom",
                         "font": "var(--font-body--family)",
