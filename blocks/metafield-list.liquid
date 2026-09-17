@@ -126,9 +126,11 @@
       {% if block_settings.text_color != blank %}
         --metafield-list-text-color: {{ block_settings.text_color }};
       {% endif %}
-      {% if block_settings.show_numbers == false and block_settings.arrow_icon_color != blank %}
-        --metafield-list-arrow-color: {{ block_settings.arrow_icon_color }};
-      {% endif %}
+      {% unless block_settings.show_numbers %}
+        {% if block_settings.arrow_icon_color != blank %}
+          --metafield-list-arrow-color: rgb({{ block_settings.arrow_icon_color.rgba }});
+        {% endif %}
+      {% endunless %}
       {% if block_settings.heading_font != blank %}
         --metafield-list-heading-font-family: {{ block_settings.heading_font }};
       {% endif %}
@@ -285,7 +287,15 @@
                       <span class="metafield-list__index">{{ list_index }}</span>
                     </span>
                   {% else %}
-                    <span class="metafield-list__arrow" aria-hidden="true">{{ metafield_list_arrow }}</span>
+                    <span
+                      class="metafield-list__arrow"
+                      aria-hidden="true"
+                      {% if block_settings.arrow_icon_color != blank %}
+                        style="color: rgb({{ block_settings.arrow_icon_color.rgba }});"
+                      {% endif %}
+                    >
+                      {{ metafield_list_arrow }}
+                    </span>
                   {% endif %}
                   <span class="metafield-list__text">{{ item_text | escape }}</span>
                 {% endif %}
@@ -316,7 +326,15 @@
                     <span class="metafield-list__index">{{ i }}</span>
                   </span>
                 {% else %}
-                  <span class="metafield-list__arrow" aria-hidden="true">{{ metafield_list_arrow }}</span>
+                  <span
+                    class="metafield-list__arrow"
+                    aria-hidden="true"
+                    {% if block_settings.arrow_icon_color != blank %}
+                      style="color: rgb({{ block_settings.arrow_icon_color.rgba }});"
+                    {% endif %}
+                  >
+                    {{ metafield_list_arrow }}
+                  </span>
                 {% endif %}
                 <span class="metafield-list__text">{{ 'blocks.metafield_list.placeholder_item' | t }}</span>
               {% endif %}
@@ -414,7 +432,7 @@
     font-size: var(--metafield-list-text-font-size, inherit);
   }
 
-  .metafield-list__arrow {
+  .metafield-list .metafield-list__arrow {
     display: inline-flex;
     flex-shrink: 0;
     align-items: center;
@@ -425,10 +443,15 @@
     --icon-stroke-width: 1.5px;
   }
 
-  .metafield-list__arrow svg {
+  .metafield-list .metafield-list__arrow svg {
     display: block;
     width: 100%;
     height: 100%;
+  }
+
+  .metafield-list .metafield-list__arrow path {
+    fill: none;
+    stroke: currentColor;
   }
 
   .metafield-list__number {
@@ -957,7 +980,7 @@
       "id": "arrow_icon_color",
       "label": "t:settings.icon_color",
       "placeholder": "t:settings.default",
-      "visible_if": "{{ block.settings.show_numbers == false }}"
+      "visible_if": "{{ block.settings.show_numbers != true }}"
     },
     {
       "type": "range",
