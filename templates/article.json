@@ -58,6 +58,29 @@
             "padding-inline-end": 40
           },
           "blocks": {
+            "check_with_text_F6UGpa": {
+              "type": "check-with-text",
+              "name": "t:names.check_with_text",
+              "settings": {
+                "text": "Free shipping",
+                "type_preset": "paragraph",
+                "text_color": "",
+                "icon_style": "circle",
+                "width": 20,
+                "icon_color": "",
+                "icon_fill": "",
+                "block_width": "fit-content",
+                "vertical_alignment": "center",
+                "gap": 8,
+                "link": "",
+                "open_in_new_tab": false,
+                "padding-block-start": 90,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
             "badge": {
               "type": "blog-post-badge",
               "name": "t:names.featured_badge",
@@ -545,6 +568,7 @@
             }
           },
           "block_order": [
+            "check_with_text_F6UGpa",
             "badge",
             "copy"
           ]
