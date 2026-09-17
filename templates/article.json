@@ -12,6 +12,72 @@
     "hero": {
       "type": "section",
       "blocks": {
+        "group_V7aaaM": {
+          "type": "group",
+          "name": "t:names.group",
+          "settings": {
+            "content_direction": "column",
+            "content_direction_mobile": "column",
+            "vertical_on_mobile": true,
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "center",
+            "align_baseline": false,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 12,
+            "gap_mobile": 12,
+            "narrow_width": false,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "custom_height": 100,
+            "background_media": "none",
+            "background_color": "",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "toggle_overlay": false,
+            "overlay_color": "#00000026",
+            "overlay_style": "solid",
+            "gradient_direction": "to top",
+            "box_shadow": false,
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_color": "",
+            "border_left": 0,
+            "border_left_color": "",
+            "border_radius": 0,
+            "link": "",
+            "open_in_new_tab": false,
+            "placeholder": "",
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 40,
+            "padding-inline-end": 40
+          },
+          "blocks": {
+            "blog_post_badge_tDfMHq": {
+              "type": "blog-post-badge",
+              "name": "t:names.featured_badge",
+              "settings": {
+                "text": "★ FEATURED RECIPE",
+                "match_tag": "featured recipe",
+                "text_color": "#ffffff",
+                "background_color": "#e8821a",
+                "padding-block-start": 4,
+                "padding-block-end": 4,
+                "padding-inline-start": 12,
+                "padding-inline-end": 12
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "blog_post_badge_tDfMHq"
+          ]
+        },
         "shell": {
           "type": "group",
           "name": "t:names.group",
@@ -23,7 +89,7 @@
             "vertical_alignment": "flex-start",
             "align_baseline": false,
             "horizontal_alignment_flex_direction_column": "flex-start",
-            "vertical_alignment_flex_direction_column": "space-between",
+            "vertical_alignment_flex_direction_column": "flex-end",
             "gap": 24,
             "gap_mobile": 20,
             "narrow_width": false,
@@ -58,21 +124,6 @@
             "padding-inline-end": 40
           },
           "blocks": {
-            "badge": {
-              "type": "blog-post-badge",
-              "name": "t:names.featured_badge",
-              "settings": {
-                "text": "★ FEATURED RECIPE",
-                "match_tag": "featured recipe",
-                "text_color": "#ffffff",
-                "background_color": "#e8821a",
-                "padding-block-start": 4,
-                "padding-block-end": 4,
-                "padding-inline-start": 12,
-                "padding-inline-end": 12
-              },
-              "blocks": {}
-            },
             "copy": {
               "type": "group",
               "name": "t:names.heading",
@@ -545,12 +596,12 @@
             }
           },
           "block_order": [
-            "badge",
             "copy"
           ]
         }
       },
       "block_order": [
+        "group_V7aaaM",
         "shell"
       ],
       "name": "t:names.heading",
