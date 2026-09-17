@@ -115,7 +115,7 @@
 
 {% if show_block %}
   <div
-    class="metafield-list metafield-list--{{ block.id }} spacing-style"
+    class="metafield-list metafield-list--{{ block.id }} spacing-style{% if show_checkbox %} metafield-list--checkbox{% endif %}"
     style="
       {% render 'spacing-style', settings: block_settings %}
       --metafield-list-gap: {{ block_settings.gap }}px;
@@ -243,8 +243,23 @@
         {% if block_settings.clicked_item_background_color != blank %}
           --metafield-list-clicked-item-background: {{ block_settings.clicked_item_background_color }};
         {% endif %}
-        {% if block_settings.clicked_number_background_color != blank %}
+        {% if show_checkbox and block_settings.clicked_check_background_color != blank %}
+          --metafield-list-clicked-number-background: {{ block_settings.clicked_check_background_color }};
+        {% elsif block_settings.clicked_number_background_color != blank %}
           --metafield-list-clicked-number-background: {{ block_settings.clicked_number_background_color }};
+        {% endif %}
+        {% if show_checkbox %}
+          {% unless block_settings.enable_number_border %}
+            --metafield-list-number-border-width: 1px;
+            --metafield-list-number-border-style: solid;
+            --metafield-list-number-border-color: transparent;
+          {% endunless %}
+          {% if block_settings.hover_check_border_color != blank %}
+            --metafield-list-hover-check-border-color: rgb({{ block_settings.hover_check_border_color.rgba }});
+          {% endif %}
+          {% if block_settings.hover_text_color != blank %}
+            --metafield-list-hover-text-color: {{ block_settings.hover_text_color }};
+          {% endif %}
         {% endif %}
       {% endif %}
     "
@@ -463,6 +478,7 @@
     min-width: 0;
     flex: 1 1 auto;
     font-size: var(--metafield-list-text-font-size, inherit);
+    transition: color 0.2s ease;
   }
 
   .metafield-list .metafield-list__arrow {
@@ -511,6 +527,7 @@
     font-style: var(--font-heading--style);
     font-variant-numeric: tabular-nums;
     line-height: 1;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
   }
 
   .metafield-list__index {
@@ -567,6 +584,17 @@
 
   .metafield-list__item--clickable:hover {
     border-color: var(--metafield-list-hover-border-color, var(--color-foreground));
+  }
+
+  .metafield-list--checkbox .metafield-list__item--clickable:hover:not(:has(.metafield-list__checkbox:checked)) .metafield-list__number {
+    border-color: var(
+      --metafield-list-hover-check-border-color,
+      var(--metafield-list-hover-border-color, var(--color-foreground))
+    );
+  }
+
+  .metafield-list--checkbox .metafield-list__item--clickable:hover:not(:has(.metafield-list__checkbox:checked)) .metafield-list__text {
+    color: var(--metafield-list-hover-text-color, var(--metafield-list-text-color, inherit));
   }
 
   .metafield-list__item--clickable:has(.metafield-list__checkbox:focus-visible) {
@@ -1247,6 +1275,20 @@
       "visible_if": "{{ block.settings.list_style == 'checkbox' or block.settings.enable_clickable }}"
     },
     {
+      "type": "color",
+      "id": "hover_check_border_color",
+      "label": "t:settings.check_border_color",
+      "placeholder": "t:settings.default",
+      "visible_if": "{{ block.settings.list_style == 'checkbox' }}"
+    },
+    {
+      "type": "color",
+      "id": "hover_text_color",
+      "label": "t:settings.list_color",
+      "placeholder": "t:settings.default",
+      "visible_if": "{{ block.settings.list_style == 'checkbox' }}"
+    },
+    {
       "type": "header",
       "content": "t:content.clicked",
       "visible_if": "{{ block.settings.list_style == 'checkbox' or block.settings.enable_clickable }}"
@@ -1281,7 +1323,14 @@
       "id": "clicked_number_background_color",
       "label": "t:settings.number_background",
       "placeholder": "t:settings.default",
-      "visible_if": "{{ block.settings.list_style == 'checkbox' or block.settings.enable_clickable }}"
+      "visible_if": "{{ block.settings.enable_clickable and block.settings.list_style == 'numbering' }}"
+    },
+    {
+      "type": "color",
+      "id": "clicked_check_background_color",
+      "label": "t:settings.check_background",
+      "placeholder": "t:settings.default",
+      "visible_if": "{{ block.settings.list_style == 'checkbox' }}"
     },
     {
       "type": "header",
