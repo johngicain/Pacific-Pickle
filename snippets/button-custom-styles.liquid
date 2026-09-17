@@ -4,45 +4,71 @@
 
   @param {object} block_settings - The block's settings object
   @param {string} block_id - The block ID used to scope the CSS
+  @param {string} [prefix] - Optional setting id prefix for multiple buttons in one block
 
   @example
   {% render 'button-custom-styles', block_settings: block_settings, block_id: block.id %}
 {% enddoc %}
 
-{% if block_settings.style_class == 'button-unstyled' %}
-  {% if block_settings.link_text_color != blank or block_settings.font_weight != blank %}
+{% liquid
+  assign style_class_key = 'style_class'
+  assign link_text_color_key = 'link_text_color'
+  assign font_weight_key = 'font_weight'
+  assign custom_background_key = 'custom_button_background'
+  assign custom_text_key = 'custom_button_text'
+  assign custom_border_key = 'custom_button_border'
+
+  if prefix != blank
+    assign style_class_key = prefix | append: '_style_class'
+    assign link_text_color_key = prefix | append: '_link_text_color'
+    assign font_weight_key = prefix | append: '_font_weight'
+    assign custom_background_key = prefix | append: '_custom_button_background'
+    assign custom_text_key = prefix | append: '_custom_button_text'
+    assign custom_border_key = prefix | append: '_custom_button_border'
+  endif
+
+  assign resolved_style_class = block_settings[style_class_key]
+  assign resolved_link_text_color = block_settings[link_text_color_key]
+  assign resolved_font_weight = block_settings[font_weight_key]
+  assign resolved_custom_background = block_settings[custom_background_key]
+  assign resolved_custom_text = block_settings[custom_text_key]
+  assign resolved_custom_border = block_settings[custom_border_key]
+%}
+
+{% if resolved_style_class == 'button-unstyled' %}
+  {% if resolved_link_text_color != blank or resolved_font_weight != blank %}
     {% style %}
       a.button-unstyled.button-unstyled--{{ block_id }},
       .button-unstyled--{{ block_id }},
       .email-signup__button.button-unstyled.button-unstyled--{{ block_id }} {
-        {% if block_settings.link_text_color != blank %}
-          color: rgb({{ block_settings.link_text_color.rgba }});
+        {% if resolved_link_text_color != blank %}
+          color: rgb({{ resolved_link_text_color.rgba }});
         {% endif %}
-        {% if block_settings.font_weight != blank %}
-          --button-font-weight: {{ block_settings.font_weight }};
-          font-weight: {{ block_settings.font_weight }};
+        {% if resolved_font_weight != blank %}
+          --button-font-weight: {{ resolved_font_weight }};
+          font-weight: {{ resolved_font_weight }};
         {% endif %}
       }
 
-      {% if block_settings.link_text_color != blank %}
+      {% if resolved_link_text_color != blank %}
         a.button-unstyled.button-unstyled--{{ block_id }}:hover,
         .button-unstyled--{{ block_id }}:hover,
         .email-signup__button.button-unstyled.button-unstyled--{{ block_id }}:hover {
-          color: rgb({{ block_settings.link_text_color.rgb }} / var(--opacity-70));
+          color: rgb({{ resolved_link_text_color.rgb }} / var(--opacity-70));
         }
       {% endif %}
     {% endstyle %}
   {% endif %}
 {% endif %}
 
-{% if block_settings.style_class == 'button-custom' %}
-  {%- assign effective_background_color = block_settings.custom_button_background
+{% if resolved_style_class == 'button-custom' %}
+  {%- assign effective_background_color = resolved_custom_background
     | default: settings.palette_primary_button_background
   %}
-  {%- assign effective_text_color = block_settings.custom_button_text
+  {%- assign effective_text_color = resolved_custom_text
     | default: settings.palette_primary_button_text
   -%}
-  {%- assign effective_border_color = block_settings.custom_button_border
+  {%- assign effective_border_color = resolved_custom_border
     | default: settings.palette_primary_button_border
   -%}
   {%- if effective_background_color.alpha == 0 -%}

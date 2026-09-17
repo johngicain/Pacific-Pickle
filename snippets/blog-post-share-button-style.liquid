@@ -1,0 +1,34 @@
+{%- doc -%}
+  Outputs inline typography and hover custom properties for a blog post share button.
+
+  @param {object} settings - The block's settings object
+  @param {string} prefix - Setting id prefix, either 'share' or 'print'
+
+  @example
+  {% render 'blog-post-share-button-style', settings: block.settings, prefix: 'share' %}
+{%- enddoc -%}
+
+{%- liquid
+  assign font_size_key = prefix | append: '_font_size'
+  assign font_style_key = prefix | append: '_font_style'
+  assign hover_background_key = prefix | append: '_hover_background'
+  assign hover_text_key = prefix | append: '_hover_text'
+
+  assign font_size = settings[font_size_key]
+  assign font_style = settings[font_style_key]
+  assign hover_background = settings[hover_background_key]
+  assign hover_text = settings[hover_text_key]
+-%}
+
+{%- if font_size != blank -%}
+  --button-font-size: {{ font_size }}; font-size: {{ font_size }};
+{%- endif -%}
+{%- if font_style != blank -%}
+  font-style: {{ font_style }};
+{%- endif -%}
+{%- if hover_background != blank -%}
+  --blog-post-share-hover-background: rgb({{ hover_background.rgba }});
+{%- endif -%}
+{%- if hover_text != blank -%}
+  --blog-post-share-hover-text: rgb({{ hover_text.rgba }});
+{%- endif -%}

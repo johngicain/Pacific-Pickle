@@ -9,36 +9,74 @@
   endif
   assign share_url = canonical_url | default: article.url
   assign share_title = article.title | escape
+  assign share_style_class = block.settings.share_style_class | default: 'button-unstyled'
+  assign print_style_class = block.settings.print_style_class | default: 'button-unstyled'
+  assign share_style_id = block.id | append: '-share'
+  assign print_style_id = block.id | append: '-print'
+  assign share_button_class = 'blog-post-share__button ' | append: share_style_class | append: ' ' | append: share_style_class | append: '--' | append: share_style_id
+  if block.settings.share_box_shadow and share_style_class != 'button-unstyled'
+    assign share_button_class = share_button_class | append: ' button--box-shadow'
+  endif
+  assign print_button_class = 'blog-post-share__button ' | append: print_style_class | append: ' ' | append: print_style_class | append: '--' | append: print_style_id
+  if block.settings.print_box_shadow and print_style_class != 'button-unstyled'
+    assign print_button_class = print_button_class | append: ' button--box-shadow'
+  endif
+
+  assign share_icon = blank
+  if block.settings.share_show_icon
+    assign share_icon = block.settings.share_icon
+    assign share_button_class = share_button_class | append: ' blog-post-share__button--with-icon'
+  endif
+  assign print_icon = blank
+  if block.settings.print_show_icon
+    assign print_icon = block.settings.print_icon
+    assign print_button_class = print_button_class | append: ' blog-post-share__button--with-icon'
+  endif
+%}
+
+{% render 'button-custom-styles',
+  block_settings: block.settings,
+  block_id: share_style_id,
+  prefix: 'share'
+%}
+{% render 'button-custom-styles',
+  block_settings: block.settings,
+  block_id: print_style_id,
+  prefix: 'print'
 %}
 
 <div
   class="blog-post-share spacing-style"
-  style="
-    {% render 'spacing-style', settings: block.settings %}
-    {% if block.settings.text_color != blank %}
-      --blog-post-share-text: {{ block.settings.text_color }};
-    {% endif %}
-    {% if block.settings.border_color != blank %}
-      --blog-post-share-border: {{ block.settings.border_color }};
-    {% endif %}
-  "
+  style="{% render 'spacing-style', settings: block.settings %}"
   {{ block.shopify_attributes }}
 >
   <button
     type="button"
-    class="blog-post-share__button"
+    class="{{ share_button_class }}"
+    style="{% render 'blog-post-share-button-style', settings: block.settings, prefix: 'share' %}"
     data-share-url="{{ share_url }}"
     data-share-title="{{ share_title }}"
     data-copied-label="{{ 'blogs.article.link_copied' | t | escape }}"
   >
-    {{ share_label }}
+    {%- if share_icon != blank -%}
+      <span class="blog-post-share__icon" aria-hidden="true">
+        {{- share_icon | inline_asset_content -}}
+      </span>
+    {%- endif -%}
+    <span class="blog-post-share__label">{{ share_label }}</span>
   </button>
   <button
     type="button"
-    class="blog-post-share__button"
+    class="{{ print_button_class }}"
+    style="{% render 'blog-post-share-button-style', settings: block.settings, prefix: 'print' %}"
     data-print
   >
-    {{ print_label }}
+    {%- if print_icon != blank -%}
+      <span class="blog-post-share__icon" aria-hidden="true">
+        {{- print_icon | inline_asset_content -}}
+      </span>
+    {%- endif -%}
+    <span class="blog-post-share__label">{{ print_label }}</span>
   </button>
 </div>
 
@@ -58,12 +96,11 @@
     width: 100%;
   }
 
-  .blog-post-share__button {
+  .blog-post-share__button.button-unstyled {
     padding: 0;
     border: 0;
-    border-bottom: 2px solid var(--blog-post-share-border, var(--color-foreground));
+    border-bottom: 2px solid currentColor;
     background: transparent;
-    color: var(--blog-post-share-text, var(--color-foreground));
     font-family: var(--font-body--family);
     font-size: 0.75rem;
     font-weight: 700;
@@ -73,9 +110,38 @@
     cursor: pointer;
   }
 
+  .blog-post-share .blog-post-share__button--with-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.375rem;
+  }
+
+  .blog-post-share__icon {
+    display: inline-flex;
+    flex-shrink: 0;
+    width: 1em;
+    height: 1em;
+    pointer-events: none;
+  }
+
+  .blog-post-share__icon > svg {
+    width: 100%;
+    height: 100%;
+  }
+
   .blog-post-share__button:hover {
-    color: #e8821a;
-    border-bottom-color: #e8821a;
+    background-color: var(
+      --blog-post-share-hover-background,
+      var(--button-background-color)
+    );
+    color: var(--blog-post-share-hover-text, var(--button-color));
+  }
+
+  .blog-post-share__button.button-unstyled:hover {
+    background-color: var(--blog-post-share-hover-background, transparent);
+    color: var(--blog-post-share-hover-text, #e8821a);
+    border-bottom-color: var(--blog-post-share-hover-text, #e8821a);
   }
 {% endstylesheet %}
 
@@ -84,7 +150,8 @@
     root.querySelectorAll('.blog-post-share__button[data-share-url]').forEach((button) => {
       if (button.dataset.bound === 'true') return;
       button.dataset.bound = 'true';
-      const originalLabel = button.textContent;
+      const label = button.querySelector('.blog-post-share__label');
+      const originalLabel = label.textContent;
 
       button.addEventListener('click', async () => {
         const shareData = {
@@ -103,9 +170,9 @@
 
         try {
           await navigator.clipboard.writeText(shareData.url);
-          button.textContent = button.dataset.copiedLabel;
+          label.textContent = button.dataset.copiedLabel;
           setTimeout(() => {
-            button.textContent = originalLabel;
+            label.textContent = originalLabel;
           }, 2000);
         } catch (error) {
           window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareData.url)}`, '_blank', 'noopener');
@@ -136,22 +203,364 @@
       "default": "t:text_defaults.share"
     },
     {
+      "type": "select",
+      "id": "share_style_class",
+      "label": "t:settings.button_style",
+      "options": [
+        {
+          "value": "button",
+          "label": "t:options.primary"
+        },
+        {
+          "value": "button-secondary",
+          "label": "t:options.secondary"
+        },
+        {
+          "value": "button-unstyled",
+          "label": "t:options.link"
+        },
+        {
+          "value": "button-custom",
+          "label": "t:options.custom"
+        }
+      ],
+      "default": "button-unstyled",
+      "info": "t:info.edit_button_style_in_theme_settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "share_box_shadow",
+      "label": "t:settings.box_shadow",
+      "default": false,
+      "visible_if": "{{ block.settings.share_style_class != 'button-unstyled' }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "share_show_icon",
+      "label": "t:settings.show_button_icon",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "share_icon",
+      "label": "t:settings.icon",
+      "options": [
+        {
+          "value": "icon-share.svg",
+          "label": "t:options.share"
+        },
+        {
+          "value": "icon-printer.svg",
+          "label": "t:options.printer"
+        },
+        {
+          "value": "icon-arrow.svg",
+          "label": "t:options.arrow"
+        },
+        {
+          "value": "icon-external-link.svg",
+          "label": "t:options.external_link"
+        }
+      ],
+      "default": "icon-share.svg",
+      "visible_if": "{{ block.settings.share_show_icon }}"
+    },
+    {
+      "type": "select",
+      "id": "share_font_size",
+      "label": "t:settings.font_size",
+      "options": [
+        {
+          "value": "",
+          "label": "t:options.default"
+        },
+        {
+          "value": "0.625rem",
+          "label": "10px"
+        },
+        {
+          "value": "0.75rem",
+          "label": "12px"
+        },
+        {
+          "value": "0.875rem",
+          "label": "14px"
+        },
+        {
+          "value": "1rem",
+          "label": "16px"
+        },
+        {
+          "value": "1.125rem",
+          "label": "18px"
+        },
+        {
+          "value": "1.25rem",
+          "label": "20px"
+        },
+        {
+          "value": "1.5rem",
+          "label": "24px"
+        },
+        {
+          "value": "2rem",
+          "label": "32px"
+        }
+      ],
+      "default": ""
+    },
+    {
+      "type": "select",
+      "id": "share_font_style",
+      "label": "t:settings.font_style",
+      "options": [
+        {
+          "value": "",
+          "label": "t:options.default"
+        },
+        {
+          "value": "normal",
+          "label": "t:options.normal"
+        },
+        {
+          "value": "italic",
+          "label": "t:options.italic"
+        }
+      ],
+      "default": ""
+    },
+    {
+      "type": "header",
+      "content": "t:content.button_colors",
+      "visible_if": "{{ block.settings.share_style_class == 'button-custom' }}"
+    },
+    {
+      "type": "color",
+      "id": "share_custom_button_background",
+      "label": "t:settings.background",
+      "default": "{{ settings.color_palette.foreground }}",
+      "alpha": true,
+      "visible_if": "{{ block.settings.share_style_class == 'button-custom' }}"
+    },
+    {
+      "type": "color",
+      "id": "share_custom_button_text",
+      "label": "t:settings.text",
+      "default": "{{ settings.color_palette.background }}",
+      "alpha": true,
+      "visible_if": "{{ block.settings.share_style_class == 'button-custom' }}"
+    },
+    {
+      "type": "color",
+      "id": "share_custom_button_border",
+      "label": "t:settings.borders",
+      "default": "{{ settings.color_palette.background }}",
+      "alpha": true,
+      "visible_if": "{{ block.settings.share_style_class == 'button-custom' }}"
+    },
+    {
+      "type": "color",
+      "id": "share_link_text_color",
+      "label": "t:settings.link_text_color",
+      "placeholder": "t:settings.default",
+      "visible_if": "{{ block.settings.share_style_class == 'button-unstyled' }}"
+    },
+    {
+      "type": "color",
+      "id": "share_hover_background",
+      "label": "t:settings.hover_background",
+      "placeholder": "t:settings.default",
+      "alpha": true
+    },
+    {
+      "type": "color",
+      "id": "share_hover_text",
+      "label": "t:settings.hover_text",
+      "placeholder": "t:settings.default",
+      "alpha": true
+    },
+    {
       "type": "text",
       "id": "print_label",
       "label": "t:settings.print_label",
       "default": "t:text_defaults.print"
     },
     {
-      "type": "color",
-      "id": "text_color",
-      "label": "t:settings.text_color",
-      "placeholder": "t:settings.default"
+      "type": "select",
+      "id": "print_style_class",
+      "label": "t:settings.button_style",
+      "options": [
+        {
+          "value": "button",
+          "label": "t:options.primary"
+        },
+        {
+          "value": "button-secondary",
+          "label": "t:options.secondary"
+        },
+        {
+          "value": "button-unstyled",
+          "label": "t:options.link"
+        },
+        {
+          "value": "button-custom",
+          "label": "t:options.custom"
+        }
+      ],
+      "default": "button-unstyled",
+      "info": "t:info.edit_button_style_in_theme_settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "print_box_shadow",
+      "label": "t:settings.box_shadow",
+      "default": false,
+      "visible_if": "{{ block.settings.print_style_class != 'button-unstyled' }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "print_show_icon",
+      "label": "t:settings.show_button_icon",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "print_icon",
+      "label": "t:settings.icon",
+      "options": [
+        {
+          "value": "icon-printer.svg",
+          "label": "t:options.printer"
+        },
+        {
+          "value": "icon-share.svg",
+          "label": "t:options.share"
+        },
+        {
+          "value": "icon-arrow.svg",
+          "label": "t:options.arrow"
+        },
+        {
+          "value": "icon-external-link.svg",
+          "label": "t:options.external_link"
+        }
+      ],
+      "default": "icon-printer.svg",
+      "visible_if": "{{ block.settings.print_show_icon }}"
+    },
+    {
+      "type": "select",
+      "id": "print_font_size",
+      "label": "t:settings.font_size",
+      "options": [
+        {
+          "value": "",
+          "label": "t:options.default"
+        },
+        {
+          "value": "0.625rem",
+          "label": "10px"
+        },
+        {
+          "value": "0.75rem",
+          "label": "12px"
+        },
+        {
+          "value": "0.875rem",
+          "label": "14px"
+        },
+        {
+          "value": "1rem",
+          "label": "16px"
+        },
+        {
+          "value": "1.125rem",
+          "label": "18px"
+        },
+        {
+          "value": "1.25rem",
+          "label": "20px"
+        },
+        {
+          "value": "1.5rem",
+          "label": "24px"
+        },
+        {
+          "value": "2rem",
+          "label": "32px"
+        }
+      ],
+      "default": ""
+    },
+    {
+      "type": "select",
+      "id": "print_font_style",
+      "label": "t:settings.font_style",
+      "options": [
+        {
+          "value": "",
+          "label": "t:options.default"
+        },
+        {
+          "value": "normal",
+          "label": "t:options.normal"
+        },
+        {
+          "value": "italic",
+          "label": "t:options.italic"
+        }
+      ],
+      "default": ""
+    },
+    {
+      "type": "header",
+      "content": "t:content.button_colors",
+      "visible_if": "{{ block.settings.print_style_class == 'button-custom' }}"
     },
     {
       "type": "color",
-      "id": "border_color",
-      "label": "t:settings.border",
-      "placeholder": "t:settings.default"
+      "id": "print_custom_button_background",
+      "label": "t:settings.background",
+      "default": "{{ settings.color_palette.foreground }}",
+      "alpha": true,
+      "visible_if": "{{ block.settings.print_style_class == 'button-custom' }}"
+    },
+    {
+      "type": "color",
+      "id": "print_custom_button_text",
+      "label": "t:settings.text",
+      "default": "{{ settings.color_palette.background }}",
+      "alpha": true,
+      "visible_if": "{{ block.settings.print_style_class == 'button-custom' }}"
+    },
+    {
+      "type": "color",
+      "id": "print_custom_button_border",
+      "label": "t:settings.borders",
+      "default": "{{ settings.color_palette.background }}",
+      "alpha": true,
+      "visible_if": "{{ block.settings.print_style_class == 'button-custom' }}"
+    },
+    {
+      "type": "color",
+      "id": "print_link_text_color",
+      "label": "t:settings.link_text_color",
+      "placeholder": "t:settings.default",
+      "visible_if": "{{ block.settings.print_style_class == 'button-unstyled' }}"
+    },
+    {
+      "type": "color",
+      "id": "print_hover_background",
+      "label": "t:settings.hover_background",
+      "placeholder": "t:settings.default",
+      "alpha": true
+    },
+    {
+      "type": "color",
+      "id": "print_hover_text",
+      "label": "t:settings.hover_text",
+      "placeholder": "t:settings.default",
+      "alpha": true
     },
     {
       "type": "header",

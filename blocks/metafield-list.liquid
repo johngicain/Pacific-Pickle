@@ -67,15 +67,39 @@
     assign number_classes = number_classes | append: ' metafield-list__number--border'
   endif
 
-  if block_settings.show_numbers
+  assign list_style = block_settings.list_style
+  if list_style == blank
+    if block_settings.show_numbers
+      assign list_style = 'numbering'
+    else
+      assign list_style = 'arrow'
+    endif
+  endif
+
+  assign show_arrow = false
+  assign show_numbers = false
+  assign show_checkbox = false
+  if list_style == 'numbering'
+    assign show_numbers = true
+  elsif list_style == 'checkbox'
+    assign show_checkbox = true
+  else
+    assign show_arrow = true
+  endif
+
+  if show_numbers
     assign list_tag = 'ol'
   else
     assign list_tag = 'ul'
   endif
 
   assign clickable = false
-  if block_settings.show_numbers and block_settings.enable_clickable
+  if show_checkbox
     assign clickable = true
+  elsif show_numbers and block_settings.enable_clickable
+    assign clickable = true
+  endif
+  if clickable
     assign item_classes = item_classes | append: ' metafield-list__item--clickable'
     assign control_style = 'gap: ' | append: block_settings.control_gap | append: 'px; align-items: ' | append: block_settings.control_alignment | append: ';'
   endif
@@ -126,11 +150,11 @@
       {% if block_settings.text_color != blank %}
         --metafield-list-text-color: {{ block_settings.text_color }};
       {% endif %}
-      {% unless block_settings.show_numbers %}
+      {% if show_arrow %}
         {% if block_settings.arrow_icon_color != blank %}
           --metafield-list-arrow-color: rgb({{ block_settings.arrow_icon_color.rgba }});
         {% endif %}
-      {% endunless %}
+      {% endif %}
       {% if block_settings.heading_font != blank %}
         --metafield-list-heading-font-family: {{ block_settings.heading_font }};
       {% endif %}
@@ -185,16 +209,21 @@
         --metafield-list-number-color: {{ block_settings.number_text_color }};
       {% endif %}
       --metafield-list-number-border-radius: {{ block_settings.number_border_radius }}px;
-      {% if block_settings.show_numbers and block_settings.enable_number_border %}
-        --metafield-list-number-border-width: {{ block_settings.number_border_width }}px;
-        --metafield-list-number-border-style: solid;
-        --metafield-list-number-border-color:
-        {% if block_settings.number_border_color != blank %}
-          rgb({{ block_settings.number_border_color.rgba }})
+      {% if show_numbers or show_checkbox %}
+        {% if block_settings.enable_number_border %}
+          --metafield-list-number-border-width: {{ block_settings.number_border_width }}px;
+          --metafield-list-number-border-style: solid;
+          --metafield-list-number-border-color:
+          {% if block_settings.number_border_color != blank %}
+            rgb({{ block_settings.number_border_color.rgba }})
+          {% else %}
+            rgb(var(--color-border-rgb) / {{ block_settings.number_border_opacity | divided_by: 100.0 }})
+          {% endif %}
+          ;
         {% else %}
-          rgb(var(--color-border-rgb) / {{ block_settings.number_border_opacity | divided_by: 100.0 }})
+          --metafield-list-number-border-width: 0px;
+          --metafield-list-number-border-style: none;
         {% endif %}
-        ;
       {% else %}
         --metafield-list-number-border-width: 0px;
         --metafield-list-number-border-style: none;
@@ -253,11 +282,11 @@
           {{ 'icon-checkmark.svg' | inline_asset_content }}
         {% endcapture %}
       {% endif %}
-      {% unless block_settings.show_numbers %}
+      {% if show_arrow %}
         {% capture metafield_list_arrow %}
           {{ 'icon-arrow.svg' | inline_asset_content }}
         {% endcapture %}
-      {% endunless %}
+      {% endif %}
       <{{ list_tag }} class="metafield-list__items">
         {% if has_items %}
           {% assign list_index = 0 %}
@@ -276,17 +305,19 @@
                       type="checkbox"
                     >
                     <span class="{{ number_classes }}" aria-hidden="true">
-                      <span class="metafield-list__index">{{ list_index }}</span>
+                      {% if show_numbers %}
+                        <span class="metafield-list__index">{{ list_index }}</span>
+                      {% endif %}
                       <span class="metafield-list__check">{{ metafield_list_check }}</span>
                     </span>
                     <span class="metafield-list__text">{{ item_text | escape }}</span>
                   </label>
                 {% else %}
-                  {% if block_settings.show_numbers %}
+                  {% if show_numbers %}
                     <span class="{{ number_classes }}" aria-hidden="true">
                       <span class="metafield-list__index">{{ list_index }}</span>
                     </span>
-                  {% else %}
+                  {% elsif show_arrow %}
                     <span
                       class="metafield-list__arrow"
                       aria-hidden="true"
@@ -315,17 +346,19 @@
                     type="checkbox"
                   >
                   <span class="{{ number_classes }}" aria-hidden="true">
-                    <span class="metafield-list__index">{{ i }}</span>
+                    {% if show_numbers %}
+                      <span class="metafield-list__index">{{ i }}</span>
+                    {% endif %}
                     <span class="metafield-list__check">{{ metafield_list_check }}</span>
                   </span>
                   <span class="metafield-list__text">{{ 'blocks.metafield_list.placeholder_item' | t }}</span>
                 </label>
               {% else %}
-                {% if block_settings.show_numbers %}
+                {% if show_numbers %}
                   <span class="{{ number_classes }}" aria-hidden="true">
                     <span class="metafield-list__index">{{ i }}</span>
                   </span>
-                {% else %}
+                {% elsif show_arrow %}
                   <span
                     class="metafield-list__arrow"
                     aria-hidden="true"
@@ -967,20 +1000,34 @@
     },
     {
       "type": "header",
-      "content": "t:content.numbering"
+      "content": "t:content.list_style"
     },
     {
-      "type": "checkbox",
-      "id": "show_numbers",
-      "label": "t:settings.show_numbers",
-      "default": false
+      "type": "select",
+      "id": "list_style",
+      "label": "t:settings.style",
+      "options": [
+        {
+          "value": "arrow",
+          "label": "t:options.default_arrow"
+        },
+        {
+          "value": "numbering",
+          "label": "t:options.numbering"
+        },
+        {
+          "value": "checkbox",
+          "label": "t:options.checkbox"
+        }
+      ],
+      "default": "arrow"
     },
     {
       "type": "color",
       "id": "arrow_icon_color",
       "label": "t:settings.icon_color",
       "placeholder": "t:settings.default",
-      "visible_if": "{{ block.settings.show_numbers != true }}"
+      "visible_if": "{{ block.settings.list_style == 'arrow' }}"
     },
     {
       "type": "range",
@@ -991,7 +1038,7 @@
       "step": 1,
       "unit": "px",
       "default": 28,
-      "visible_if": "{{ block.settings.show_numbers }}"
+      "visible_if": "{{ block.settings.list_style == 'numbering' or block.settings.list_style == 'checkbox' }}"
     },
     {
       "type": "range",
@@ -1002,7 +1049,7 @@
       "step": 1,
       "unit": "px",
       "default": 0,
-      "visible_if": "{{ block.settings.show_numbers }}"
+      "visible_if": "{{ block.settings.list_style == 'numbering' or block.settings.list_style == 'checkbox' }}"
     },
     {
       "type": "range",
@@ -1013,7 +1060,7 @@
       "step": 1,
       "unit": "px",
       "default": 0,
-      "visible_if": "{{ block.settings.show_numbers }}"
+      "visible_if": "{{ block.settings.list_style == 'numbering' or block.settings.list_style == 'checkbox' }}"
     },
     {
       "type": "range",
@@ -1024,7 +1071,7 @@
       "step": 1,
       "unit": "px",
       "default": 0,
-      "visible_if": "{{ block.settings.show_numbers }}"
+      "visible_if": "{{ block.settings.list_style == 'numbering' or block.settings.list_style == 'checkbox' }}"
     },
     {
       "type": "range",
@@ -1035,7 +1082,7 @@
       "step": 1,
       "unit": "px",
       "default": 0,
-      "visible_if": "{{ block.settings.show_numbers }}"
+      "visible_if": "{{ block.settings.list_style == 'numbering' or block.settings.list_style == 'checkbox' }}"
     },
     {
       "type": "select",
@@ -1076,7 +1123,7 @@
         }
       ],
       "default": "",
-      "visible_if": "{{ block.settings.show_numbers }}"
+      "visible_if": "{{ block.settings.list_style == 'numbering' }}"
     },
     {
       "type": "select",
@@ -1117,28 +1164,28 @@
         }
       ],
       "default": "",
-      "visible_if": "{{ block.settings.show_numbers }}"
+      "visible_if": "{{ block.settings.list_style == 'numbering' }}"
     },
     {
       "type": "color",
       "id": "number_text_color",
       "label": "t:settings.text_color",
       "placeholder": "t:settings.default",
-      "visible_if": "{{ block.settings.show_numbers }}"
+      "visible_if": "{{ block.settings.list_style == 'numbering' }}"
     },
     {
       "type": "color",
       "id": "number_background_color",
       "label": "t:settings.background_color",
       "placeholder": "t:settings.default",
-      "visible_if": "{{ block.settings.show_numbers }}"
+      "visible_if": "{{ block.settings.list_style == 'numbering' or block.settings.list_style == 'checkbox' }}"
     },
     {
       "type": "checkbox",
       "id": "enable_number_border",
       "label": "t:settings.border",
       "default": false,
-      "visible_if": "{{ block.settings.show_numbers }}"
+      "visible_if": "{{ block.settings.list_style == 'numbering' or block.settings.list_style == 'checkbox' }}"
     },
     {
       "type": "range",
@@ -1149,7 +1196,7 @@
       "unit": "px",
       "label": "t:settings.thickness",
       "default": 1,
-      "visible_if": "{{ block.settings.show_numbers and block.settings.enable_number_border }}"
+      "visible_if": "{{ block.settings.enable_number_border and block.settings.list_style == 'numbering' or block.settings.list_style == 'checkbox' }}"
     },
     {
       "type": "range",
@@ -1160,14 +1207,14 @@
       "unit": "%",
       "label": "t:settings.opacity",
       "default": 100,
-      "visible_if": "{{ block.settings.show_numbers and block.settings.enable_number_border }}"
+      "visible_if": "{{ block.settings.enable_number_border and block.settings.list_style == 'numbering' or block.settings.list_style == 'checkbox' }}"
     },
     {
       "type": "color",
       "id": "number_border_color",
       "label": "t:settings.color",
       "placeholder": "t:settings.default",
-      "visible_if": "{{ block.settings.show_numbers and block.settings.enable_number_border }}"
+      "visible_if": "{{ block.settings.enable_number_border and block.settings.list_style == 'numbering' or block.settings.list_style == 'checkbox' }}"
     },
     {
       "type": "range",
@@ -1178,31 +1225,31 @@
       "step": 1,
       "unit": "px",
       "default": 0,
-      "visible_if": "{{ block.settings.show_numbers }}"
+      "visible_if": "{{ block.settings.list_style == 'numbering' or block.settings.list_style == 'checkbox' }}"
     },
     {
       "type": "checkbox",
       "id": "enable_clickable",
       "label": "t:settings.clickable_items",
       "default": false,
-      "visible_if": "{{ block.settings.show_numbers }}"
+      "visible_if": "{{ block.settings.list_style == 'numbering' }}"
     },
     {
       "type": "header",
       "content": "t:content.hover",
-      "visible_if": "{{ block.settings.show_numbers and block.settings.enable_clickable }}"
+      "visible_if": "{{ block.settings.enable_clickable and block.settings.list_style == 'numbering' or block.settings.list_style == 'checkbox' }}"
     },
     {
       "type": "color",
       "id": "hover_border_color",
       "label": "t:settings.border_color",
       "placeholder": "t:settings.default",
-      "visible_if": "{{ block.settings.show_numbers and block.settings.enable_clickable }}"
+      "visible_if": "{{ block.settings.enable_clickable and block.settings.list_style == 'numbering' or block.settings.list_style == 'checkbox' }}"
     },
     {
       "type": "header",
       "content": "t:content.clicked",
-      "visible_if": "{{ block.settings.show_numbers and block.settings.enable_clickable }}"
+      "visible_if": "{{ block.settings.enable_clickable and block.settings.list_style == 'numbering' or block.settings.list_style == 'checkbox' }}"
     },
     {
       "type": "range",
@@ -1213,28 +1260,28 @@
       "step": 1,
       "unit": "px",
       "default": 16,
-      "visible_if": "{{ block.settings.show_numbers and block.settings.enable_clickable }}"
+      "visible_if": "{{ block.settings.enable_clickable and block.settings.list_style == 'numbering' or block.settings.list_style == 'checkbox' }}"
     },
     {
       "type": "color",
       "id": "clicked_border_color",
       "label": "t:settings.border_color",
       "placeholder": "t:settings.default",
-      "visible_if": "{{ block.settings.show_numbers and block.settings.enable_clickable }}"
+      "visible_if": "{{ block.settings.enable_clickable and block.settings.list_style == 'numbering' or block.settings.list_style == 'checkbox' }}"
     },
     {
       "type": "color",
       "id": "clicked_item_background_color",
       "label": "t:settings.item_background",
       "placeholder": "t:settings.default",
-      "visible_if": "{{ block.settings.show_numbers and block.settings.enable_clickable }}"
+      "visible_if": "{{ block.settings.enable_clickable and block.settings.list_style == 'numbering' or block.settings.list_style == 'checkbox' }}"
     },
     {
       "type": "color",
       "id": "clicked_number_background_color",
       "label": "t:settings.number_background",
       "placeholder": "t:settings.default",
-      "visible_if": "{{ block.settings.show_numbers and block.settings.enable_clickable }}"
+      "visible_if": "{{ block.settings.enable_clickable and block.settings.list_style == 'numbering' or block.settings.list_style == 'checkbox' }}"
     },
     {
       "type": "header",
