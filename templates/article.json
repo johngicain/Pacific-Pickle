@@ -1510,7 +1510,7 @@
                     "divider_rhKjkF"
                   ]
                 },
-                "group_UHrrmY": {
+                "group_bBbyPy": {
                   "type": "group",
                   "name": "t:names.group",
                   "settings": {
@@ -1556,90 +1556,97 @@
                     "padding-inline-end": 0
                   },
                   "blocks": {
-                    "text_UMAgHD": {
-                      "type": "text",
-                      "name": "t:names.heading",
+                    "metafield_list_xzHVeT": {
+                      "type": "metafield-list",
+                      "name": "t:names.metafield_list",
                       "settings": {
-                        "text": "<p>{{ closest.article.metafields.custom.ingredients.value.category.value }}</p>",
-                        "narrow_width": false,
-                        "width": "fit-content",
-                        "max_width": "normal",
-                        "alignment": "left",
-                        "type_preset": "rte",
-                        "font": "var(--font-body--family)",
-                        "font_size": "1rem",
-                        "line_height": "normal",
-                        "letter_spacing": "normal",
-                        "case": "none",
-                        "wrap": "pretty",
+                        "heading": "",
+                        "heading_preset": "h5",
+                        "heading_font": "",
+                        "heading_font_size": "",
+                        "heading_weight": "",
+                        "heading_color": "",
+                        "subheading": "",
+                        "subheading_preset": "paragraph",
+                        "subheading_color": "",
+                        "list_content": "",
                         "text_color": "",
-                        "bold_color": "",
-                        "italic_color": "",
-                        "italic_font_size": "",
-                        "text_shadow": false,
-                        "text_shadow_color": "#00000080",
-                        "background": false,
-                        "background_color": "#00000026",
-                        "corner_radius": 0,
-                        "border": "none",
+                        "text_font_size": "",
+                        "background_color": "",
+                        "item_padding_top": 12,
+                        "item_padding_bottom": 12,
+                        "item_padding_left": 12,
+                        "item_padding_right": 12,
+                        "enable_border": false,
                         "border_width": 1,
                         "border_opacity": 100,
                         "border_color": "",
                         "border_radius": 0,
+                        "enable_border_left": false,
+                        "border_left": 1,
+                        "border_left_color": "",
+                        "show_numbers": false,
+                        "arrow_icon_color": "",
+                        "number_size": 28,
+                        "number_padding_top": 0,
+                        "number_padding_bottom": 0,
+                        "number_padding_left": 0,
+                        "number_padding_right": 0,
+                        "index_font_size": "",
+                        "index_weight": "",
+                        "number_text_color": "",
+                        "number_background_color": "",
+                        "enable_number_border": false,
+                        "number_border_width": 1,
+                        "number_border_opacity": 100,
+                        "number_border_color": "",
+                        "number_border_radius": 0,
+                        "enable_clickable": false,
+                        "hover_border_color": "",
+                        "check_icon_size": 16,
+                        "clicked_border_color": "",
+                        "clicked_item_background_color": "",
+                        "clicked_number_background_color": "",
+                        "gap": 12,
+                        "vertical_gap": 8,
+                        "control_gap": 12,
+                        "control_alignment": "center",
+                        "items_padding_top": 0,
+                        "items_padding_bottom": 0,
+                        "items_padding_left": 0,
+                        "items_padding_right": 0,
                         "padding-block-start": 0,
                         "padding-block-end": 0,
                         "padding-inline-start": 0,
                         "padding-inline-end": 0
                       },
-                      "blocks": {}
-                    },
-                    "text_VXKbDU": {
-                      "type": "text",
-                      "name": "t:names.text",
-                      "settings": {
-                        "text": "<p>{{ closest.article.metafields.custom.ingredients.value.ingredients | metafield_tag }}</p>",
-                        "narrow_width": false,
-                        "width": "fit-content",
-                        "max_width": "normal",
-                        "alignment": "left",
-                        "type_preset": "rte",
-                        "font": "var(--font-body--family)",
-                        "font_size": "1rem",
-                        "line_height": "normal",
-                        "letter_spacing": "normal",
-                        "case": "none",
-                        "wrap": "pretty",
-                        "text_color": "",
-                        "bold_color": "",
-                        "italic_color": "",
-                        "italic_font_size": "",
-                        "text_shadow": false,
-                        "text_shadow_color": "#00000080",
-                        "background": false,
-                        "background_color": "#00000026",
-                        "corner_radius": 0,
-                        "border": "none",
-                        "border_width": 1,
-                        "border_opacity": 100,
-                        "border_color": "",
-                        "border_radius": 0,
-                        "padding-block-start": 0,
-                        "padding-block-end": 0,
-                        "padding-inline-start": 0,
-                        "padding-inline-end": 0
+                      "blocks": {
+                        "divider_EkE3cJ": {
+                          "type": "_divider",
+                          "settings": {
+                            "thickness": 1,
+                            "corner_radius": "square",
+                            "divider_color": "",
+                            "width_percent": 100,
+                            "padding-block-start": 0,
+                            "padding-block-end": 0
+                          },
+                          "blocks": {}
+                        }
                       },
-                      "blocks": {}
+                      "block_order": [
+                        "divider_EkE3cJ"
+                      ]
                     }
                   },
                   "block_order": [
-                    "text_UMAgHD",
-                    "text_VXKbDU"
+                    "metafield_list_xzHVeT"
                   ]
                 }
               },
               "block_order": [
                 "group_BbHCk4",
-                "group_UHrrmY"
+                "group_bBbyPy"
               ]
             },
             "share": {
