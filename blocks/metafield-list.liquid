@@ -1237,19 +1237,19 @@
     {
       "type": "header",
       "content": "t:content.hover",
-      "visible_if": "{{ block.settings.enable_clickable and block.settings.list_style == 'numbering' or block.settings.list_style == 'checkbox' }}"
+      "visible_if": "{{ block.settings.list_style == 'checkbox' or block.settings.enable_clickable }}"
     },
     {
       "type": "color",
       "id": "hover_border_color",
       "label": "t:settings.border_color",
       "placeholder": "t:settings.default",
-      "visible_if": "{{ block.settings.enable_clickable and block.settings.list_style == 'numbering' or block.settings.list_style == 'checkbox' }}"
+      "visible_if": "{{ block.settings.list_style == 'checkbox' or block.settings.enable_clickable }}"
     },
     {
       "type": "header",
       "content": "t:content.clicked",
-      "visible_if": "{{ block.settings.enable_clickable and block.settings.list_style == 'numbering' or block.settings.list_style == 'checkbox' }}"
+      "visible_if": "{{ block.settings.list_style == 'checkbox' or block.settings.enable_clickable }}"
     },
     {
       "type": "range",
@@ -1260,28 +1260,28 @@
       "step": 1,
       "unit": "px",
       "default": 16,
-      "visible_if": "{{ block.settings.enable_clickable and block.settings.list_style == 'numbering' or block.settings.list_style == 'checkbox' }}"
+      "visible_if": "{{ block.settings.list_style == 'checkbox' or block.settings.enable_clickable }}"
     },
     {
       "type": "color",
       "id": "clicked_border_color",
       "label": "t:settings.border_color",
       "placeholder": "t:settings.default",
-      "visible_if": "{{ block.settings.enable_clickable and block.settings.list_style == 'numbering' or block.settings.list_style == 'checkbox' }}"
+      "visible_if": "{{ block.settings.list_style == 'checkbox' or block.settings.enable_clickable }}"
     },
     {
       "type": "color",
       "id": "clicked_item_background_color",
       "label": "t:settings.item_background",
       "placeholder": "t:settings.default",
-      "visible_if": "{{ block.settings.enable_clickable and block.settings.list_style == 'numbering' or block.settings.list_style == 'checkbox' }}"
+      "visible_if": "{{ block.settings.list_style == 'checkbox' or block.settings.enable_clickable }}"
     },
     {
       "type": "color",
       "id": "clicked_number_background_color",
       "label": "t:settings.number_background",
       "placeholder": "t:settings.default",
-      "visible_if": "{{ block.settings.enable_clickable and block.settings.list_style == 'numbering' or block.settings.list_style == 'checkbox' }}"
+      "visible_if": "{{ block.settings.list_style == 'checkbox' or block.settings.enable_clickable }}"
     },
     {
       "type": "header",

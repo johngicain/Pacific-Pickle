@@ -1038,6 +1038,9 @@
     "make_details_sticky_desktop": "Sticky on desktop",
     "make_section_full_width": "Make section full width",
     "max_width": "Max width",
+    "max_width_desktop": "Desktop max width",
+    "max_width_mobile": "Mobile max width",
+    "custom_max_width": "Custom max width",
     "max_level": "Max icons",
     "default_icon_color": "Inactive icon",
     "active_icon_color": "Active icon",
@@ -1269,6 +1272,7 @@
     // Label for dropdown to select type/category
     "type": "Type",
     "type_preset": "Text preset",
+    "typography_preset": "Typography preset",
     "underline_thickness": "Underline thickness",
     // Measurement unit selector (pixel vs percent)
     "unit": "Unit",

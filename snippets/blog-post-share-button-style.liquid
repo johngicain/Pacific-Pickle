@@ -9,17 +9,36 @@
 {%- enddoc -%}
 
 {%- liquid
+  assign font_key = prefix | append: '_font'
   assign font_size_key = prefix | append: '_font_size'
   assign font_style_key = prefix | append: '_font_style'
   assign hover_background_key = prefix | append: '_hover_background'
   assign hover_text_key = prefix | append: '_hover_text'
+  assign max_width_key = prefix | append: '_max_width'
+  assign max_width_mobile_key = prefix | append: '_max_width_mobile'
 
+  assign font = settings[font_key]
   assign font_size = settings[font_size_key]
   assign font_style = settings[font_style_key]
   assign hover_background = settings[hover_background_key]
   assign hover_text = settings[hover_text_key]
+
+  assign max_width = settings[max_width_key]
+  if max_width == 'custom'
+    assign custom_max_width_key = prefix | append: '_custom_max_width'
+    assign max_width = settings[custom_max_width_key] | append: '%'
+  endif
+
+  assign max_width_mobile = settings[max_width_mobile_key]
+  if max_width_mobile == 'custom'
+    assign custom_max_width_mobile_key = prefix | append: '_custom_max_width_mobile'
+    assign max_width_mobile = settings[custom_max_width_mobile_key] | append: '%'
+  endif
 -%}
 
+{%- if font != blank -%}
+  --button-font-family-primary: {{ font }}; --button-font-family-secondary: {{ font }}; font-family: {{ font }};
+{%- endif -%}
 {%- if font_size != blank -%}
   --button-font-size: {{ font_size }}; font-size: {{ font_size }};
 {%- endif -%}
@@ -31,4 +50,10 @@
 {%- endif -%}
 {%- if hover_text != blank -%}
   --blog-post-share-hover-text: rgb({{ hover_text.rgba }});
+{%- endif -%}
+{%- if max_width != blank -%}
+  --blog-post-share-max-width: {{ max_width }};
+{%- endif -%}
+{%- if max_width_mobile != blank -%}
+  --blog-post-share-max-width-mobile: {{ max_width_mobile }};
 {%- endif -%}

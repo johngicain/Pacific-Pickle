@@ -32,6 +32,13 @@
     assign print_icon = block.settings.print_icon
     assign print_button_class = print_button_class | append: ' blog-post-share__button--with-icon'
   endif
+
+  if block.settings.share_type_preset != blank
+    assign share_button_class = share_button_class | append: ' blog-post-share__button--preset ' | append: block.settings.share_type_preset
+  endif
+  if block.settings.print_type_preset != blank
+    assign print_button_class = print_button_class | append: ' blog-post-share__button--preset ' | append: block.settings.print_type_preset
+  endif
 %}
 
 {% render 'button-custom-styles',
@@ -96,18 +103,34 @@
     width: 100%;
   }
 
+  .blog-post-share__button {
+    max-width: var(
+      --blog-post-share-max-width-mobile,
+      var(--blog-post-share-max-width, none)
+    );
+  }
+
+  @media screen and (min-width: 750px) {
+    .blog-post-share__button {
+      max-width: var(--blog-post-share-max-width, none);
+    }
+  }
+
   .blog-post-share__button.button-unstyled {
     padding: 0;
     border: 0;
     border-bottom: 2px solid currentColor;
     background: transparent;
+    cursor: pointer;
+  }
+
+  .blog-post-share__button.button-unstyled:not(.blog-post-share__button--preset) {
     font-family: var(--font-body--family);
     font-size: 0.75rem;
     font-weight: 700;
     letter-spacing: 0.16em;
     line-height: 1.4;
     text-transform: uppercase;
-    cursor: pointer;
   }
 
   .blog-post-share .blog-post-share__button--with-icon {
@@ -267,6 +290,75 @@
     },
     {
       "type": "select",
+      "id": "share_type_preset",
+      "label": "t:settings.typography_preset",
+      "options": [
+        {
+          "value": "",
+          "label": "t:options.default"
+        },
+        {
+          "value": "paragraph",
+          "label": "t:options.paragraph"
+        },
+        {
+          "value": "h1",
+          "label": "t:options.h1"
+        },
+        {
+          "value": "h2",
+          "label": "t:options.h2"
+        },
+        {
+          "value": "h3",
+          "label": "t:options.h3"
+        },
+        {
+          "value": "h4",
+          "label": "t:options.h4"
+        },
+        {
+          "value": "h5",
+          "label": "t:options.h5"
+        },
+        {
+          "value": "h6",
+          "label": "t:options.h6"
+        }
+      ],
+      "default": "",
+      "info": "t:info.edit_presets_in_theme_settings"
+    },
+    {
+      "type": "select",
+      "id": "share_font",
+      "label": "t:settings.font",
+      "options": [
+        {
+          "value": "",
+          "label": "t:options.default"
+        },
+        {
+          "value": "var(--font-body--family)",
+          "label": "t:options.body"
+        },
+        {
+          "value": "var(--font-subheading--family)",
+          "label": "t:options.subheading"
+        },
+        {
+          "value": "var(--font-heading--family)",
+          "label": "t:options.heading"
+        },
+        {
+          "value": "var(--font-accent--family)",
+          "label": "t:options.accent"
+        }
+      ],
+      "default": ""
+    },
+    {
+      "type": "select",
       "id": "share_font_size",
       "label": "t:settings.font_size",
       "options": [
@@ -380,6 +472,68 @@
       "alpha": true
     },
     {
+      "type": "select",
+      "id": "share_max_width",
+      "label": "t:settings.max_width_desktop",
+      "options": [
+        {
+          "value": "fit-content",
+          "label": "t:options.fit_content"
+        },
+        {
+          "value": "100%",
+          "label": "t:options.fill"
+        },
+        {
+          "value": "custom",
+          "label": "t:options.custom"
+        }
+      ],
+      "default": "fit-content"
+    },
+    {
+      "type": "range",
+      "id": "share_custom_max_width",
+      "label": "t:settings.custom_max_width",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "default": 100,
+      "visible_if": "{{ block.settings.share_max_width == 'custom' }}"
+    },
+    {
+      "type": "select",
+      "id": "share_max_width_mobile",
+      "label": "t:settings.max_width_mobile",
+      "options": [
+        {
+          "value": "fit-content",
+          "label": "t:options.fit_content"
+        },
+        {
+          "value": "100%",
+          "label": "t:options.fill"
+        },
+        {
+          "value": "custom",
+          "label": "t:options.custom"
+        }
+      ],
+      "default": "fit-content"
+    },
+    {
+      "type": "range",
+      "id": "share_custom_max_width_mobile",
+      "label": "t:settings.custom_max_width",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "default": 100,
+      "visible_if": "{{ block.settings.share_max_width_mobile == 'custom' }}"
+    },
+    {
       "type": "text",
       "id": "print_label",
       "label": "t:settings.print_label",
@@ -447,6 +601,75 @@
       ],
       "default": "icon-printer.svg",
       "visible_if": "{{ block.settings.print_show_icon }}"
+    },
+    {
+      "type": "select",
+      "id": "print_type_preset",
+      "label": "t:settings.typography_preset",
+      "options": [
+        {
+          "value": "",
+          "label": "t:options.default"
+        },
+        {
+          "value": "paragraph",
+          "label": "t:options.paragraph"
+        },
+        {
+          "value": "h1",
+          "label": "t:options.h1"
+        },
+        {
+          "value": "h2",
+          "label": "t:options.h2"
+        },
+        {
+          "value": "h3",
+          "label": "t:options.h3"
+        },
+        {
+          "value": "h4",
+          "label": "t:options.h4"
+        },
+        {
+          "value": "h5",
+          "label": "t:options.h5"
+        },
+        {
+          "value": "h6",
+          "label": "t:options.h6"
+        }
+      ],
+      "default": "",
+      "info": "t:info.edit_presets_in_theme_settings"
+    },
+    {
+      "type": "select",
+      "id": "print_font",
+      "label": "t:settings.font",
+      "options": [
+        {
+          "value": "",
+          "label": "t:options.default"
+        },
+        {
+          "value": "var(--font-body--family)",
+          "label": "t:options.body"
+        },
+        {
+          "value": "var(--font-subheading--family)",
+          "label": "t:options.subheading"
+        },
+        {
+          "value": "var(--font-heading--family)",
+          "label": "t:options.heading"
+        },
+        {
+          "value": "var(--font-accent--family)",
+          "label": "t:options.accent"
+        }
+      ],
+      "default": ""
     },
     {
       "type": "select",
@@ -561,6 +784,68 @@
       "label": "t:settings.hover_text",
       "placeholder": "t:settings.default",
       "alpha": true
+    },
+    {
+      "type": "select",
+      "id": "print_max_width",
+      "label": "t:settings.max_width_desktop",
+      "options": [
+        {
+          "value": "fit-content",
+          "label": "t:options.fit_content"
+        },
+        {
+          "value": "100%",
+          "label": "t:options.fill"
+        },
+        {
+          "value": "custom",
+          "label": "t:options.custom"
+        }
+      ],
+      "default": "fit-content"
+    },
+    {
+      "type": "range",
+      "id": "print_custom_max_width",
+      "label": "t:settings.custom_max_width",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "default": 100,
+      "visible_if": "{{ block.settings.print_max_width == 'custom' }}"
+    },
+    {
+      "type": "select",
+      "id": "print_max_width_mobile",
+      "label": "t:settings.max_width_mobile",
+      "options": [
+        {
+          "value": "fit-content",
+          "label": "t:options.fit_content"
+        },
+        {
+          "value": "100%",
+          "label": "t:options.fill"
+        },
+        {
+          "value": "custom",
+          "label": "t:options.custom"
+        }
+      ],
+      "default": "fit-content"
+    },
+    {
+      "type": "range",
+      "id": "print_custom_max_width_mobile",
+      "label": "t:settings.custom_max_width",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "default": 100,
+      "visible_if": "{{ block.settings.print_max_width_mobile == 'custom' }}"
     },
     {
       "type": "header",
