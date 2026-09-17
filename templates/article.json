@@ -356,7 +356,7 @@
                             "text": "<p>{{ article.metafields.custom.duration_hour | metafield_tag }} {{ article.metafields.custom.duration_min | metafield_tag }}</p>",
                             "narrow_width": false,
                             "width": "fit-content",
-                            "max_width": "narrow",
+                            "max_width": "normal",
                             "alignment": "left",
                             "type_preset": "custom",
                             "font": "var(--font-body--family)",
@@ -392,7 +392,7 @@
                         "value"
                       ]
                     },
-                    "servings": {
+                    "group_PULtAG": {
                       "type": "group",
                       "name": "t:names.group",
                       "settings": {
@@ -438,7 +438,7 @@
                         "padding-inline-end": 0
                       },
                       "blocks": {
-                        "icon": {
+                        "icon_VnMMXg": {
                           "type": "icon",
                           "name": "t:names.icon",
                           "settings": {
@@ -450,7 +450,7 @@
                           },
                           "blocks": {}
                         },
-                        "value": {
+                        "text_U6yiFa": {
                           "type": "text",
                           "name": "t:names.text",
                           "settings": {
@@ -489,8 +489,8 @@
                         }
                       },
                       "block_order": [
-                        "icon",
-                        "value"
+                        "icon_VnMMXg",
+                        "text_U6yiFa"
                       ]
                     },
                     "difficulty": {
@@ -533,7 +533,7 @@
                   },
                   "block_order": [
                     "duration",
-                    "servings",
+                    "group_PULtAG",
                     "difficulty"
                   ]
                 }
