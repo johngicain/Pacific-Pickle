@@ -104,6 +104,8 @@
   }
 
   .blog-post-share__button {
+    flex: var(--blog-post-share-flex-mobile, var(--blog-post-share-flex, 0 0 auto));
+    min-width: 0;
     max-width: var(
       --blog-post-share-max-width-mobile,
       var(--blog-post-share-max-width, none)
@@ -112,6 +114,7 @@
 
   @media screen and (min-width: 750px) {
     .blog-post-share__button {
+      flex: var(--blog-post-share-flex, 0 0 auto);
       max-width: var(--blog-post-share-max-width, none);
     }
   }
