@@ -1602,7 +1602,7 @@
                         "number_border_color": "#cdcdcd",
                         "number_border_radius": 0,
                         "enable_clickable": false,
-                        "hover_border_color": "",
+                        "hover_border_color": "rgba(0,0,0,0)",
                         "check_icon_size": 16,
                         "clicked_border_color": "",
                         "clicked_item_background_color": "",
