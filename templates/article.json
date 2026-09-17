@@ -1585,7 +1585,7 @@
                         "enable_border_left": false,
                         "border_left": 1,
                         "border_left_color": "",
-                        "list_style": "numbering",
+                        "list_style": "checkbox",
                         "arrow_icon_color": "",
                         "number_size": 20,
                         "number_padding_top": 0,
