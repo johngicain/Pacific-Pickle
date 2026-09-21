@@ -1,0 +1,79 @@
+{% liquid
+  assign alignment = block.settings.alignment | default: 'left'
+  assign icon = block.settings.icon
+  assign year = block.settings.year
+  assign heading = block.settings.heading
+  assign text = block.settings.text
+%}
+
+<article
+  class="ppw-timeline-item ppw-timeline-item--{{ alignment }}"
+  {{ block.shopify_attributes }}
+>
+  <div class="ppw-timeline-item__card">
+    {% if year != blank %}
+      <p class="ppw-timeline-item__year">{{ year }}</p>
+    {% endif %}
+    {% if heading != blank %}
+      <h3 class="ppw-timeline-item__heading">{{ heading }}</h3>
+    {% endif %}
+    {% if text != blank %}
+      <div class="ppw-timeline-item__text rte">{{ text }}</div>
+    {% endif %}
+  </div>
+  {% if icon != blank %}
+    <div class="ppw-timeline-item__icon" aria-hidden="true">{{ icon }}</div>
+  {% else %}
+    <div class="ppw-timeline-item__icon ppw-timeline-item__icon--empty" aria-hidden="true"></div>
+  {% endif %}
+  <div class="ppw-timeline-item__spacer"></div>
+</article>
+
+{% schema %}
+{
+  "name": "t:names.timeline_item",
+  "tag": null,
+  "settings": [
+    {
+      "type": "text",
+      "id": "year",
+      "label": "t:settings.year",
+      "default": "2001"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "t:settings.heading",
+      "default": "Born in a Santa Barbara Kitchen"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "t:settings.text",
+      "default": "<p>Bradley Bennett starts making his signature spicy pickle blend for friends and family from his home kitchen in Santa Barbara, CA.</p>"
+    },
+    {
+      "type": "text",
+      "id": "icon",
+      "label": "t:settings.icon",
+      "default": "🥒"
+    },
+    {
+      "type": "select",
+      "id": "alignment",
+      "label": "t:settings.alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "t:options.left"
+        },
+        {
+          "value": "right",
+          "label": "t:options.right"
+        }
+      ],
+      "default": "left"
+    }
+  ]
+}
+{% endschema %}

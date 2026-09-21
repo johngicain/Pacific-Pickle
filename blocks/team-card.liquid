@@ -1,0 +1,298 @@
+{% doc %}
+  Renders a team member card with a hover biography overlay.
+  @example
+  {% content_for 'block', type: 'team-card', id: 'team' %}
+{% enddoc %}
+
+{% liquid
+  assign block_settings = block.settings
+  assign image = block_settings.image
+  assign heading = block_settings.heading
+  assign role = block_settings.role
+  assign bio = block_settings.bio
+%}
+
+<article
+  class="ppw-team-card spacing-style"
+  style="
+    --team-role-color: {{ block_settings.role_color | default: '#e8821a' }};
+    --team-name-color: {{ block_settings.heading_color | default: '#1c1c1a' }};
+    --team-bio-color: {{ block_settings.bio_color | default: '#ffffff' }};
+    --team-overlay: {{ block_settings.overlay_color | default: '#1c1c1ad9' }};
+    {% render 'spacing-style', settings: block_settings %}
+    {% render 'border-override', settings: block_settings %}
+  "
+  {{ block.shopify_attributes }}
+>
+  <div class="ppw-team-card__media border-style">
+    {% if image != blank %}
+      {{
+        image
+        | image_url: width: 1200
+        | image_tag:
+          width: image.width,
+          widths: '240, 352, 832, 1200',
+          height: image.height,
+          class: 'ppw-team-card__image',
+          alt: image.alt | default: heading,
+          sizes: '(min-width: 750px) 25vw, 100vw'
+      }}
+    {% else %}
+      {{ 'detailed-apparel-1' | placeholder_svg_tag: 'ppw-team-card__image ppw-team-card__placeholder' }}
+    {% endif %}
+    {% if bio != blank %}
+      <div class="ppw-team-card__overlay">
+        <p class="ppw-team-card__bio">{{ bio }}</p>
+      </div>
+    {% endif %}
+  </div>
+  {% if heading != blank %}
+    <h3 class="ppw-team-card__name">{{ heading }}</h3>
+  {% endif %}
+  {% if role != blank %}
+    <p class="ppw-team-card__role">{{ role }}</p>
+  {% endif %}
+</article>
+
+{% stylesheet %}
+  .ppw-team-card {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-width: 0;
+  }
+
+  .layout-panel-flex--row > .ppw-team-card,
+  .layout-panel-flex--row > :has(> .ppw-team-card) {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+
+  .ppw-team-card__media {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 1;
+    margin-block-end: 1rem;
+  }
+
+  .ppw-team-card__image,
+  .ppw-team-card__placeholder {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+  }
+
+  .ppw-team-card__overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: flex-end;
+    padding: 1rem;
+    background: linear-gradient(to top, var(--team-overlay) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .ppw-team-card:hover .ppw-team-card__image,
+  .ppw-team-card:focus-within .ppw-team-card__image {
+    transform: scale(1.05);
+  }
+
+  .ppw-team-card:hover .ppw-team-card__overlay,
+  .ppw-team-card:focus-within .ppw-team-card__overlay {
+    opacity: 1;
+  }
+
+  .ppw-team-card__bio {
+    margin: 0;
+    color: var(--team-bio-color);
+    font-size: 0.75rem;
+    line-height: 1.5;
+  }
+
+  .ppw-team-card__name {
+    margin: 0;
+    font-family: var(--font-heading--family);
+    font-size: 1.2rem;
+    line-height: 1.1;
+    text-transform: uppercase;
+    color: var(--team-name-color);
+  }
+
+  .ppw-team-card__role {
+    margin: 0.25rem 0 0;
+    font-size: 0.875rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--team-role-color);
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:names.team_card",
+  "tag": null,
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "t:settings.image"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "t:settings.heading",
+      "default": "Bradley Bennett"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "t:settings.color",
+      "default": "#1c1c1a"
+    },
+    {
+      "type": "text",
+      "id": "role",
+      "label": "t:settings.role",
+      "default": "Principal Pickle"
+    },
+    {
+      "type": "color",
+      "id": "role_color",
+      "label": "t:settings.color",
+      "default": "#e8821a"
+    },
+    {
+      "type": "textarea",
+      "id": "bio",
+      "label": "t:settings.bio",
+      "default": "The man who started it all in 2001 with a spicy brine and a jar."
+    },
+    {
+      "type": "color",
+      "id": "bio_color",
+      "label": "t:settings.text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "overlay_color",
+      "label": "t:settings.overlay",
+      "alpha": true,
+      "default": "#1c1c1ad9"
+    },
+    {
+      "type": "header",
+      "content": "t:content.borders"
+    },
+    {
+      "type": "select",
+      "id": "border",
+      "label": "t:settings.style",
+      "options": [
+        {
+          "value": "none",
+          "label": "t:options.none"
+        },
+        {
+          "value": "solid",
+          "label": "t:options.solid"
+        }
+      ],
+      "default": "solid"
+    },
+    {
+      "type": "range",
+      "id": "border_width",
+      "min": 0,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "t:settings.thickness",
+      "default": 4,
+      "visible_if": "{{ block.settings.border != 'none' }}"
+    },
+    {
+      "type": "range",
+      "id": "border_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "label": "t:settings.opacity",
+      "default": 100,
+      "visible_if": "{{ block.settings.border != 'none' }}"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "t:settings.color",
+      "default": "#1c1c1a",
+      "visible_if": "{{ block.settings.border != 'none' }}"
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "label": "t:settings.border_radius",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "t:content.padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "t:settings.top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "t:settings.bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-start",
+      "label": "t:settings.left",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-end",
+      "label": "t:settings.right",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:names.team_card",
+      "category": "t:categories.storytelling"
+    }
+  ]
+}
+{% endschema %}

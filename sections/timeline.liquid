@@ -1,0 +1,444 @@
+{% liquid
+  assign section_settings = section.settings
+
+  if section_settings.background_color != blank
+    render 'contrast-override', background_color: section_settings.background_color, section_id: section.id
+  endif
+%}
+
+<div class="section-background{% if section_settings.background_color != blank %} color-custom-{{ section.id }}{% endif %}"></div>
+
+<div
+  class="section section--{{ section_settings.section_width }} spacing-style ppw-timeline-section{% if section_settings.background_color != blank %} color-custom-{{ section.id }}{% endif %}"
+  style="
+    --timeline-line: {{ section_settings.line_color | default: '#e8821a' }};
+    --timeline-card-bg: {{ section_settings.card_background | default: '#252522' }};
+    --timeline-card-border: {{ section_settings.card_border_color | default: '#e8821a' }};
+    --timeline-card-border-width: {{ section_settings.card_border_width }}px;
+    --timeline-year-color: {{ section_settings.year_color | default: '#e8821a' }};
+    --timeline-heading-color: {{ section_settings.item_heading_color | default: '#ffffff' }};
+    --timeline-text-color: {{ section_settings.item_text_color | default: '#ffffffb3' }};
+    --timeline-icon-bg: {{ section_settings.icon_background | default: '#1c1c1a' }};
+    --timeline-caption-color: {{ section_settings.caption_color | default: '#e8821a' }};
+    --timeline-title-color: {{ section_settings.heading_color | default: '#ffffff' }};
+    {% render 'gap-style', value: section_settings.gap %}
+    {% render 'spacing-style', settings: section_settings %}
+    {% render 'border-override', settings: section_settings %}
+  "
+>
+  {% if section_settings.caption != blank or section_settings.heading != blank %}
+    <div class="ppw-timeline__intro">
+      {% if section_settings.caption != blank %}
+        <p class="ppw-timeline__caption">{{ section_settings.caption }}</p>
+      {% endif %}
+      {% if section_settings.heading != blank %}
+        <h2 class="ppw-timeline__heading">{{ section_settings.heading }}</h2>
+      {% endif %}
+    </div>
+  {% endif %}
+
+  <div class="ppw-timeline border-style">
+    {% content_for 'blocks' %}
+  </div>
+</div>
+
+{% stylesheet %}
+  .ppw-timeline-section {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+  }
+
+  .ppw-timeline__intro {
+    text-align: center;
+  }
+
+  .ppw-timeline__caption {
+    margin: 0 0 0.75rem;
+    font-family: var(--font-heading--family);
+    font-size: 0.9rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--timeline-caption-color);
+  }
+
+  .ppw-timeline__heading {
+    margin: 0;
+    font-family: var(--font-heading--family);
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    line-height: 1;
+    text-transform: uppercase;
+    color: var(--timeline-title-color);
+  }
+
+  .ppw-timeline {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap, 3rem);
+  }
+
+  .ppw-timeline > * {
+    width: 100%;
+  }
+
+  .ppw-timeline::before {
+    content: '';
+    position: absolute;
+    inset-block: 0;
+    inset-inline-start: 50%;
+    width: 4px;
+    background: var(--timeline-line);
+    transform: translateX(-50%);
+  }
+
+  .ppw-timeline-item {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    width: 100%;
+    position: relative;
+  }
+
+  .ppw-timeline-item--right {
+    flex-direction: row-reverse;
+  }
+
+  .ppw-timeline-item__card,
+  .ppw-timeline-item__spacer {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+
+  .ppw-timeline-item--left .ppw-timeline-item__card {
+    text-align: end;
+  }
+
+  .ppw-timeline-item--right .ppw-timeline-item__card {
+    text-align: start;
+  }
+
+  .ppw-timeline-item__card {
+    border: var(--timeline-card-border-width) solid var(--timeline-card-border);
+    background: var(--timeline-card-bg);
+    padding: 1.5rem;
+  }
+
+  .ppw-timeline-item__year {
+    margin: 0 0 0.5rem;
+    font-family: var(--font-heading--family);
+    font-size: 2rem;
+    line-height: 1;
+    color: var(--timeline-year-color);
+  }
+
+  .ppw-timeline-item__heading {
+    margin: 0 0 0.75rem;
+    font-family: var(--font-heading--family);
+    font-size: 1.4rem;
+    line-height: 1.1;
+    text-transform: uppercase;
+    color: var(--timeline-heading-color);
+  }
+
+  .ppw-timeline-item__text,
+  .ppw-timeline-item__text p {
+    margin: 0;
+    color: var(--timeline-text-color);
+    line-height: 1.6;
+  }
+
+  .ppw-timeline-item__icon {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    width: 4rem;
+    height: 4rem;
+    border: 4px solid var(--timeline-line);
+    border-radius: 50%;
+    background: var(--timeline-icon-bg);
+    font-size: 1.5rem;
+    z-index: 1;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ppw-timeline::before {
+      display: none;
+    }
+
+    .ppw-timeline-item,
+    .ppw-timeline-item--right {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 1rem;
+    }
+
+    .ppw-timeline-item--left .ppw-timeline-item__card,
+    .ppw-timeline-item--right .ppw-timeline-item__card {
+      text-align: start;
+    }
+
+    .ppw-timeline-item__spacer {
+      display: none;
+    }
+
+    .ppw-timeline-item__icon {
+      width: 3rem;
+      height: 3rem;
+      font-size: 1.25rem;
+      align-self: flex-start;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:names.timeline",
+  "tag": "section",
+  "class": "section-wrapper",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "blocks": [
+    {
+      "type": "_timeline-item"
+    }
+  ],
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:content.heading"
+    },
+    {
+      "type": "text",
+      "id": "caption",
+      "label": "t:names.caption"
+    },
+    {
+      "type": "color",
+      "id": "caption_color",
+      "label": "t:settings.color",
+      "default": "#e8821a"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "t:settings.heading"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "t:settings.heading",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "t:content.layout"
+    },
+    {
+      "type": "select",
+      "id": "section_width",
+      "label": "t:settings.width",
+      "options": [
+        {
+          "value": "page-width",
+          "label": "t:options.page"
+        },
+        {
+          "value": "full-width",
+          "label": "t:options.full"
+        }
+      ],
+      "default": "page-width"
+    },
+    {
+      "type": "range",
+      "id": "gap",
+      "label": "t:settings.gap",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "header",
+      "content": "t:content.appearance"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "t:settings.background_color",
+      "default": "#1c1c1a"
+    },
+    {
+      "type": "color",
+      "id": "line_color",
+      "label": "t:settings.line_color",
+      "default": "#e8821a"
+    },
+    {
+      "type": "color",
+      "id": "card_background",
+      "label": "t:settings.background",
+      "default": "#252522"
+    },
+    {
+      "type": "color",
+      "id": "card_border_color",
+      "label": "t:settings.border_color",
+      "default": "#e8821a"
+    },
+    {
+      "type": "range",
+      "id": "card_border_width",
+      "min": 0,
+      "max": 12,
+      "step": 1,
+      "unit": "px",
+      "label": "t:settings.thickness",
+      "default": 4
+    },
+    {
+      "type": "color",
+      "id": "year_color",
+      "label": "t:settings.year",
+      "default": "#e8821a"
+    },
+    {
+      "type": "color",
+      "id": "item_heading_color",
+      "label": "t:settings.title",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "item_text_color",
+      "label": "t:settings.text",
+      "alpha": true,
+      "default": "#ffffffb3"
+    },
+    {
+      "type": "color",
+      "id": "icon_background",
+      "label": "t:settings.icon",
+      "default": "#1c1c1a"
+    },
+    {
+      "type": "header",
+      "content": "t:content.borders"
+    },
+    {
+      "type": "select",
+      "id": "border",
+      "label": "t:settings.style",
+      "options": [
+        {
+          "value": "none",
+          "label": "t:options.none"
+        },
+        {
+          "value": "solid",
+          "label": "t:options.solid"
+        }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "range",
+      "id": "border_width",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "t:settings.thickness",
+      "default": 1,
+      "visible_if": "{{ section.settings.border != 'none' }}"
+    },
+    {
+      "type": "range",
+      "id": "border_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "label": "t:settings.opacity",
+      "default": 100,
+      "visible_if": "{{ section.settings.border != 'none' }}"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "t:settings.color",
+      "placeholder": "t:settings.default",
+      "visible_if": "{{ section.settings.border != 'none' }}"
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "label": "t:settings.border_radius",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "t:content.padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "t:settings.top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "t:settings.bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 80
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:names.timeline",
+      "category": "t:categories.storytelling",
+      "settings": {
+        "caption": "The Journey",
+        "heading": "From kitchen to coast",
+        "background_color": "#1c1c1a"
+      },
+      "blocks": [
+        {
+          "type": "_timeline-item",
+          "settings": {
+            "year": "2001",
+            "heading": "Born in a Santa Barbara Kitchen",
+            "icon": "🥒",
+            "alignment": "left"
+          }
+        },
+        {
+          "type": "_timeline-item",
+          "settings": {
+            "year": "2010s",
+            "heading": "From Kitchen to Craft",
+            "icon": "🏪",
+            "alignment": "right"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
