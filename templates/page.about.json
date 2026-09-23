@@ -2808,7 +2808,7 @@
                     "width": "100%",
                     "max_width": "none",
                     "alignment": "left",
-                    "type_preset": "rte",
+                    "type_preset": "custom",
                     "font": "var(--font-body--family)",
                     "font_size": "1.125rem",
                     "line_height": "normal",
@@ -2923,20 +2923,20 @@
                         "placeholder": "",
                         "padding-block-start": 8,
                         "padding-block-end": 8,
-                        "padding-inline-start": 12,
-                        "padding-inline-end": 12
+                        "padding-inline-start": 14,
+                        "padding-inline-end": 14
                       },
                       "blocks": {
                         "initial_1": {
                           "type": "text",
                           "settings": {
-                            "text": "<p>R</p>",
+                            "text": "<p><strong>R</strong></p>",
                             "narrow_width": false,
                             "width": "fit-content",
                             "max_width": "normal",
                             "alignment": "left",
                             "type_preset": "custom",
-                            "font": "var(--font-heading--family)",
+                            "font": "var(--font-body--family)",
                             "font_size": "1rem",
                             "line_height": "normal",
                             "letter_spacing": "normal",
@@ -3193,7 +3193,7 @@
                     "width": "100%",
                     "max_width": "none",
                     "alignment": "left",
-                    "type_preset": "rte",
+                    "type_preset": "custom",
                     "font": "var(--font-body--family)",
                     "font_size": "1.125rem",
                     "line_height": "normal",
@@ -3308,20 +3308,20 @@
                         "placeholder": "",
                         "padding-block-start": 8,
                         "padding-block-end": 8,
-                        "padding-inline-start": 12,
-                        "padding-inline-end": 12
+                        "padding-inline-start": 14,
+                        "padding-inline-end": 14
                       },
                       "blocks": {
                         "initial_2": {
                           "type": "text",
                           "settings": {
-                            "text": "<p>B</p>",
+                            "text": "<p><strong>B</strong></p>",
                             "narrow_width": false,
                             "width": "fit-content",
                             "max_width": "normal",
                             "alignment": "left",
                             "type_preset": "custom",
-                            "font": "var(--font-heading--family)",
+                            "font": "var(--font-body--family)",
                             "font_size": "1rem",
                             "line_height": "normal",
                             "letter_spacing": "normal",
@@ -3629,7 +3629,7 @@
                     "width": "100%",
                     "max_width": "none",
                     "alignment": "left",
-                    "type_preset": "rte",
+                    "type_preset": "custom",
                     "font": "var(--font-body--family)",
                     "font_size": "1.125rem",
                     "line_height": "normal",
@@ -3744,20 +3744,20 @@
                         "placeholder": "",
                         "padding-block-start": 8,
                         "padding-block-end": 8,
-                        "padding-inline-start": 12,
-                        "padding-inline-end": 12
+                        "padding-inline-start": 14,
+                        "padding-inline-end": 14
                       },
                       "blocks": {
                         "initial_3": {
                           "type": "text",
                           "settings": {
-                            "text": "<p>A</p>",
+                            "text": "<p><strong>A</strong></p>",
                             "narrow_width": false,
                             "width": "fit-content",
                             "max_width": "normal",
                             "alignment": "left",
                             "type_preset": "custom",
-                            "font": "var(--font-heading--family)",
+                            "font": "var(--font-body--family)",
                             "font_size": "1rem",
                             "line_height": "normal",
                             "letter_spacing": "normal",
@@ -4014,7 +4014,7 @@
                     "width": "100%",
                     "max_width": "none",
                     "alignment": "left",
-                    "type_preset": "rte",
+                    "type_preset": "custom",
                     "font": "var(--font-body--family)",
                     "font_size": "1.125rem",
                     "line_height": "normal",
@@ -4129,20 +4129,20 @@
                         "placeholder": "",
                         "padding-block-start": 8,
                         "padding-block-end": 8,
-                        "padding-inline-start": 12,
-                        "padding-inline-end": 12
+                        "padding-inline-start": 14,
+                        "padding-inline-end": 14
                       },
                       "blocks": {
                         "initial_4": {
                           "type": "text",
                           "settings": {
-                            "text": "<p>N</p>",
+                            "text": "<p><strong>N</strong></p>",
                             "narrow_width": false,
                             "width": "fit-content",
                             "max_width": "normal",
                             "alignment": "left",
                             "type_preset": "custom",
-                            "font": "var(--font-heading--family)",
+                            "font": "var(--font-body--family)",
                             "font_size": "1rem",
                             "line_height": "normal",
                             "letter_spacing": "normal",
