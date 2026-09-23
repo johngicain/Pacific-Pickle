@@ -2225,7 +2225,7 @@
             "letter_spacing": "normal",
             "case": "uppercase",
             "wrap": "pretty",
-            "text_color": "{{ settings.color_palette.foreground }}",
+            "text_color": "{{ settings.color_palette.color3 }}",
             "bold_color": "",
             "italic_color": "",
             "italic_font_size": "",
@@ -2413,8 +2413,23 @@
         "border_opacity": 100,
         "border_color": "",
         "border_radius": 0,
-        "padding-block-start": 80,
-        "padding-block-end": 80
+        "padding-block-start": 100,
+        "padding-block-end": 100
+      }
+    },
+    "divider_MEKKaX": {
+      "type": "divider",
+      "name": "t:names.divider_section",
+      "settings": {
+        "background_color": "",
+        "divider_color": "{{ settings.color_palette.foreground }}",
+        "section_width": "full-width",
+        "thickness": 4,
+        "corner_radius": "square",
+        "width_percent": 100,
+        "alignment_horizontal": "center",
+        "padding-block-start": 0,
+        "padding-block-end": 0
       }
     },
     "press_story": {
@@ -2451,7 +2466,7 @@
             "border_color": "",
             "border_radius": 0,
             "padding-block-start": 0,
-            "padding-block-end": 0,
+            "padding-block-end": 20,
             "padding-inline-start": 0,
             "padding-inline-end": 0
           },
@@ -2506,13 +2521,28 @@
         "overlay_color": "#00000026",
         "overlay_style": "solid",
         "gradient_direction": "to top",
-        "border": "solid",
+        "border": "none",
         "border_width": 4,
         "border_opacity": 100,
         "border_color": "#1c1c1a",
         "border_radius": 0,
         "padding-block-start": 64,
         "padding-block-end": 64
+      }
+    },
+    "divider_xJCGEg": {
+      "type": "divider",
+      "name": "t:names.divider_section",
+      "settings": {
+        "background_color": "",
+        "divider_color": "{{ settings.color_palette.foreground }}",
+        "section_width": "full-width",
+        "thickness": 4,
+        "corner_radius": "square",
+        "width_percent": 100,
+        "alignment_horizontal": "center",
+        "padding-block-start": 0,
+        "padding-block-end": 0
       }
     },
     "letters_story": {
@@ -4596,7 +4626,9 @@
     "home_story",
     "promise_story",
     "team_story",
+    "divider_MEKKaX",
     "press_story",
+    "divider_xJCGEg",
     "letters_story",
     "cta_story"
   ]
