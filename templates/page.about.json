@@ -2357,7 +2357,7 @@
             "line_height": "normal",
             "letter_spacing": "normal",
             "case": "none",
-            "wrap": "pretty",
+            "wrap": "nowrap",
             "text_color": "{{ settings.color_palette.color1 }}",
             "bold_color": "",
             "italic_color": "",
