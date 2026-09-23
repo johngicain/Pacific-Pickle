@@ -44,9 +44,15 @@
 
 {% stylesheet %}
   .ppw-timeline-section {
-    display: flex;
-    flex-direction: column;
-    gap: 4rem;
+    row-gap: 4rem;
+  }
+
+  .ppw-timeline-section.section--page-width > * {
+    grid-column: 2;
+  }
+
+  .ppw-timeline-section.section--full-width > * {
+    grid-column: 1 / -1;
   }
 
   .ppw-timeline__intro {
@@ -72,6 +78,7 @@
   }
 
   .ppw-timeline {
+    --timeline-icon-size: 4rem;
     position: relative;
     display: flex;
     flex-direction: column;
@@ -93,21 +100,36 @@
   }
 
   .ppw-timeline-item {
-    display: flex;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) var(--timeline-icon-size) minmax(0, 1fr);
     align-items: center;
-    gap: 2rem;
+    column-gap: 2rem;
     width: 100%;
+    min-height: var(--timeline-icon-size);
     position: relative;
-  }
-
-  .ppw-timeline-item--right {
-    flex-direction: row-reverse;
   }
 
   .ppw-timeline-item__card,
   .ppw-timeline-item__spacer {
-    flex: 1 1 0;
     min-width: 0;
+  }
+
+  .ppw-timeline-item__card {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .ppw-timeline-item__spacer {
+    grid-column: 3;
+    grid-row: 1;
+  }
+
+  .ppw-timeline-item--right .ppw-timeline-item__card {
+    grid-column: 3;
+  }
+
+  .ppw-timeline-item--right .ppw-timeline-item__spacer {
+    grid-column: 1;
   }
 
   .ppw-timeline-item--left .ppw-timeline-item__card {
@@ -139,7 +161,7 @@
     line-height: 1.1;
     text-transform: uppercase;
     color: var(--timeline-heading-color);
-  }
+  } 
 
   .ppw-timeline-item__text,
   .ppw-timeline-item__text p {
@@ -149,12 +171,16 @@
   }
 
   .ppw-timeline-item__icon {
+    position: absolute;
+    inset-inline-start: 50%;
+    inset-block-start: 50%;
+    transform: translate(-50%, -50%);
     display: flex;
     flex-shrink: 0;
     align-items: center;
     justify-content: center;
-    width: 4rem;
-    height: 4rem;
+    width: var(--timeline-icon-size);
+    height: var(--timeline-icon-size);
     border: 4px solid var(--timeline-line);
     border-radius: 50%;
     background: var(--timeline-icon-bg);
@@ -169,7 +195,8 @@
 
     .ppw-timeline-item,
     .ppw-timeline-item--right {
-      flex-direction: column;
+      display: flex;
+      flex-direction: column-reverse;
       align-items: stretch;
       gap: 1rem;
     }
@@ -184,6 +211,8 @@
     }
 
     .ppw-timeline-item__icon {
+      position: static;
+      transform: none;
       width: 3rem;
       height: 3rem;
       font-size: 1.25rem;
