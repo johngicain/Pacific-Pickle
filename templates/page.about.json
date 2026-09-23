@@ -16,6 +16,7 @@
           "type": "text",
           "name": "t:names.caption",
           "settings": {
+            "text": "<p><strong>✦ Santa Barbara, California · Est. 2001 ✦</strong></p>",
             "narrow_width": false,
             "width": "fit-content",
             "max_width": "normal",
@@ -44,8 +45,7 @@
             "padding-block-start": 0,
             "padding-block-end": 0,
             "padding-inline-start": 0,
-            "padding-inline-end": 0,
-            "text": "<p><strong>✦ Santa Barbara, California · Est. 2001 ✦</strong></p>"
+            "padding-inline-end": 0
           },
           "blocks": {}
         },
@@ -53,6 +53,7 @@
           "type": "text",
           "name": "t:names.heading",
           "settings": {
+            "text": "<h1>THE STORY OF A <strong>PICKLE OBSESSION</strong></h1>",
             "narrow_width": false,
             "width": "100%",
             "max_width": "normal",
@@ -81,14 +82,14 @@
             "padding-block-start": 0,
             "padding-block-end": 0,
             "padding-inline-start": 0,
-            "padding-inline-end": 0,
-            "text": "<h1>THE STORY OF A <strong>PICKLE OBSESSION</strong></h1>"
+            "padding-inline-end": 0
           },
           "blocks": {}
         },
         "hero_text": {
           "type": "text",
           "settings": {
+            "text": "<p>It started in a home kitchen in 2001. A man, a brine, and a jar. Still hand-packed in Santa Barbara — and the recipe hasn't changed.</p>",
             "narrow_width": false,
             "width": "100%",
             "max_width": "normal",
@@ -117,8 +118,7 @@
             "padding-block-start": 0,
             "padding-block-end": 0,
             "padding-inline-start": 0,
-            "padding-inline-end": 0,
-            "text": "<p>It started in a home kitchen in 2001. A man, a brine, and a jar. Still hand-packed in Santa Barbara — and the recipe hasn't changed.</p>"
+            "padding-inline-end": 0
           },
           "blocks": {}
         }
@@ -210,7 +210,7 @@
             "tag_position": "bottom-right",
             "tag_background_color": "#2d5a27",
             "tag_border": "solid",
-            "tag_border_width": 4,
+            "tag_border_width": 3,
             "tag_border_opacity": 100,
             "tag_border_color": "#1c1c1a",
             "tag_border_radius": 0,
@@ -234,6 +234,7 @@
               "type": "text",
               "name": "t:names.caption",
               "settings": {
+                "text": "<p><strong>Where It All Began</strong></p>",
                 "narrow_width": false,
                 "width": "fit-content",
                 "max_width": "normal",
@@ -262,8 +263,7 @@
                 "padding-block-start": 0,
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
-                "padding-inline-end": 0,
-                "text": "<p><strong>Where It All Began</strong></p>"
+                "padding-inline-end": 0
               },
               "blocks": {}
             },
@@ -317,6 +317,7 @@
                   "type": "text",
                   "name": "t:names.heading",
                   "settings": {
+                    "text": "<h2><strong>A KITCHEN IN<br/>SANTA BARBARA</strong></h2>",
                     "narrow_width": false,
                     "width": "100%",
                     "max_width": "normal",
@@ -345,8 +346,7 @@
                     "padding-block-start": 0,
                     "padding-block-end": 0,
                     "padding-inline-start": 0,
-                    "padding-inline-end": 0,
-                    "text": "<h2>A KITCHEN IN<br/>SANTA BARBARA</h2>"
+                    "padding-inline-end": 0
                   },
                   "blocks": {}
                 }
@@ -358,6 +358,7 @@
             "kitchen_text": {
               "type": "text",
               "settings": {
+                "text": "<p>In 2001, Bradley Bennett started making his spicy blend of pickles for friends and family from his kitchen in Santa Barbara, California. The recipe was simple: peak-season produce, bold California flavors, and a brine that had been dialed in to perfection.</p><p>Friends kept asking for more. Then friends of friends. Then people at the farmers market. Then stores. The demand was undeniable — these weren't just pickles. They were the pickles people had been looking for their whole lives.</p><p>Bradley created Pacific Pickle Works so that everyone could enjoy them. The jars still leave Santa Barbara. The brine is still made the same way. The only thing that's changed is the scale — and even that, we've kept as small as we can.</p>",
                 "narrow_width": false,
                 "width": "100%",
                 "max_width": "normal",
@@ -386,8 +387,7 @@
                 "padding-block-start": 0,
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
-                "padding-inline-end": 0,
-                "text": "<p>In 2001, Bradley Bennett started making his spicy blend of pickles for friends and family from his kitchen in Santa Barbara, California. The recipe was simple: peak-season produce, bold California flavors, and a brine that had been dialed in to perfection.</p><p>Friends kept asking for more. Then friends of friends. Then people at the farmers market. Then stores. The demand was undeniable — these weren't just pickles. They were the pickles people had been looking for their whole lives.</p><p>Bradley created Pacific Pickle Works so that everyone could enjoy them. The jars still leave Santa Barbara. The brine is still made the same way. The only thing that's changed is the scale — and even that, we've kept as small as we can.</p>"
+                "padding-inline-end": 0
               },
               "blocks": {}
             }
@@ -424,7 +424,8 @@
             "text": "<p>Bradley Bennett starts making his signature spicy pickle blend for friends and family from his home kitchen in Santa Barbara, CA. Word spreads fast — people keep asking for more jars.</p>",
             "icon": "🥒",
             "alignment": "left"
-          }
+          },
+          "blocks": {}
         },
         "item_2010": {
           "type": "_timeline-item",
@@ -434,7 +435,8 @@
             "text": "<p>Demand outgrows the home kitchen. Bradley formalizes the recipes, sources peak-season California produce, and begins hand-packing jars for local farmers markets and specialty grocers.</p>",
             "icon": "🏪",
             "alignment": "right"
-          }
+          },
+          "blocks": {}
         },
         "item_2015": {
           "type": "_timeline-item",
@@ -444,7 +446,8 @@
             "text": "<p>The brand officially launches as Pacific Pickle Works. The bold label designs, punny product names, and unmistakable flavor profiles quickly earn a cult following up and down the California coast.</p>",
             "icon": "✦",
             "alignment": "left"
-          }
+          },
+          "blocks": {}
         },
         "item_2017": {
           "type": "_timeline-item",
@@ -454,7 +457,8 @@
             "text": "<p>The community rallies behind a Kickstarter campaign to fund a new production facility. The campaign is fully funded — proof that the pickle people are real and passionate.</p>",
             "icon": "🚀",
             "alignment": "right"
-          }
+          },
+          "blocks": {}
         },
         "item_2020": {
           "type": "_timeline-item",
@@ -464,7 +468,8 @@
             "text": "<p>Pacific Pickle Works ships coast to coast. Award-winning Bloody Mary Elixirs, 20+ pickle varieties, and gift packs land in homes across America. The jars are still hand-packed. The brine is still made in Santa Barbara.</p>",
             "icon": "🌎",
             "alignment": "left"
-          }
+          },
+          "blocks": {}
         }
       },
       "block_order": [
@@ -507,6 +512,7 @@
           "type": "text",
           "name": "t:names.caption",
           "settings": {
+            "text": "<p><strong>Our Home</strong></p>",
             "narrow_width": false,
             "width": "fit-content",
             "max_width": "normal",
@@ -535,8 +541,7 @@
             "padding-block-start": 0,
             "padding-block-end": 0,
             "padding-inline-start": 0,
-            "padding-inline-end": 0,
-            "text": "<p><strong>Our Home</strong></p>"
+            "padding-inline-end": 0
           },
           "blocks": {}
         },
@@ -590,6 +595,7 @@
               "type": "text",
               "name": "t:names.heading",
               "settings": {
+                "text": "<h2>SANTA BARBARA,<br/>CALIFORNIA</h2>",
                 "narrow_width": false,
                 "width": "100%",
                 "max_width": "normal",
@@ -618,8 +624,7 @@
                 "padding-block-start": 0,
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
-                "padding-inline-end": 0,
-                "text": "<h2>SANTA BARBARA,<br/>CALIFORNIA</h2>"
+                "padding-inline-end": 0
               },
               "blocks": {}
             }
@@ -631,6 +636,7 @@
         "home_text": {
           "type": "text",
           "settings": {
+            "text": "<p>The sunshine, the produce, the Pacific air — it's all in the jar. We're proud to be a Santa Barbara company, and we're not going anywhere.</p>",
             "narrow_width": false,
             "width": "100%",
             "max_width": "normal",
@@ -659,8 +665,7 @@
             "padding-block-start": 0,
             "padding-block-end": 0,
             "padding-inline-start": 0,
-            "padding-inline-end": 0,
-            "text": "<p>The sunshine, the produce, the Pacific air — it's all in the jar. We're proud to be a Santa Barbara company, and we're not going anywhere.</p>"
+            "padding-inline-end": 0
           },
           "blocks": {}
         }
@@ -686,6 +691,7 @@
         "background_media": "image",
         "background_color": "",
         "video_position": "cover",
+        "background_image": "shopify://shop_images/From_The_Farm_To_Your_Jar.webp",
         "background_image_position": "cover",
         "toggle_overlay": true,
         "overlay_color": "#1c1c1ae6",
@@ -697,8 +703,7 @@
         "border_color": "",
         "border_radius": 0,
         "padding-block-start": 80,
-        "padding-block-end": 64,
-        "background_image": "shopify://shop_images/From_The_Farm_To_Your_Jar.webp"
+        "padding-block-end": 64
       }
     },
     "promise_story": {
@@ -708,6 +713,7 @@
           "type": "text",
           "name": "t:names.caption",
           "settings": {
+            "text": "<p><strong>What We Stand For</strong></p>",
             "narrow_width": false,
             "width": "fit-content",
             "max_width": "normal",
@@ -736,8 +742,7 @@
             "padding-block-start": 0,
             "padding-block-end": 0,
             "padding-inline-start": 0,
-            "padding-inline-end": 0,
-            "text": "<p><strong>What We Stand For</strong></p>"
+            "padding-inline-end": 0
           },
           "blocks": {}
         },
@@ -791,6 +796,7 @@
               "type": "text",
               "name": "t:names.heading",
               "settings": {
+                "text": "<h2>THE PICKLE PROMISE</h2>",
                 "narrow_width": false,
                 "width": "100%",
                 "max_width": "normal",
@@ -819,8 +825,7 @@
                 "padding-block-start": 0,
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
-                "padding-inline-end": 0,
-                "text": "<h2>THE PICKLE PROMISE</h2>"
+                "padding-inline-end": 0
               },
               "blocks": {}
             }
@@ -922,6 +927,7 @@
                 "emoji_natural": {
                   "type": "text",
                   "settings": {
+                    "text": "<p>🌿</p>",
                     "narrow_width": false,
                     "width": "fit-content",
                     "max_width": "normal",
@@ -950,14 +956,14 @@
                     "padding-block-start": 0,
                     "padding-block-end": 0,
                     "padding-inline-start": 0,
-                    "padding-inline-end": 0,
-                    "text": "<p>🌿</p>"
+                    "padding-inline-end": 0
                   },
                   "blocks": {}
                 },
                 "title_natural": {
                   "type": "text",
                   "settings": {
+                    "text": "<p>All Natural</p>",
                     "narrow_width": false,
                     "width": "100%",
                     "max_width": "normal",
@@ -986,14 +992,14 @@
                     "padding-block-start": 0,
                     "padding-block-end": 0,
                     "padding-inline-start": 0,
-                    "padding-inline-end": 0,
-                    "text": "<p>All Natural</p>"
+                    "padding-inline-end": 0
                   },
                   "blocks": {}
                 },
                 "copy_natural": {
                   "type": "text",
                   "settings": {
+                    "text": "<p>No artificial preservatives, no shortcuts. Every ingredient is chosen for flavor and quality.</p>",
                     "narrow_width": false,
                     "width": "100%",
                     "max_width": "normal",
@@ -1022,8 +1028,7 @@
                     "padding-block-start": 0,
                     "padding-block-end": 0,
                     "padding-inline-start": 0,
-                    "padding-inline-end": 0,
-                    "text": "<p>No artificial preservatives, no shortcuts. Every ingredient is chosen for flavor and quality.</p>"
+                    "padding-inline-end": 0
                   },
                   "blocks": {}
                 }
@@ -1082,6 +1087,7 @@
                 "emoji_packed": {
                   "type": "text",
                   "settings": {
+                    "text": "<p>✋</p>",
                     "narrow_width": false,
                     "width": "fit-content",
                     "max_width": "normal",
@@ -1110,14 +1116,14 @@
                     "padding-block-start": 0,
                     "padding-block-end": 0,
                     "padding-inline-start": 0,
-                    "padding-inline-end": 0,
-                    "text": "<p>✋</p>"
+                    "padding-inline-end": 0
                   },
                   "blocks": {}
                 },
                 "title_packed": {
                   "type": "text",
                   "settings": {
+                    "text": "<p>Hand-Packed</p>",
                     "narrow_width": false,
                     "width": "100%",
                     "max_width": "normal",
@@ -1146,14 +1152,14 @@
                     "padding-block-start": 0,
                     "padding-block-end": 0,
                     "padding-inline-start": 0,
-                    "padding-inline-end": 0,
-                    "text": "<p>Hand-Packed</p>"
+                    "padding-inline-end": 0
                   },
                   "blocks": {}
                 },
                 "copy_packed": {
                   "type": "text",
                   "settings": {
+                    "text": "<p>Every jar is packed by hand in our Santa Barbara facility. You can taste the care in every crunch.</p>",
                     "narrow_width": false,
                     "width": "100%",
                     "max_width": "normal",
@@ -1182,8 +1188,7 @@
                     "padding-block-start": 0,
                     "padding-block-end": 0,
                     "padding-inline-start": 0,
-                    "padding-inline-end": 0,
-                    "text": "<p>Every jar is packed by hand in our Santa Barbara facility. You can taste the care in every crunch.</p>"
+                    "padding-inline-end": 0
                   },
                   "blocks": {}
                 }
@@ -1242,6 +1247,7 @@
                 "emoji_nongmo": {
                   "type": "text",
                   "settings": {
+                    "text": "<p>🌱</p>",
                     "narrow_width": false,
                     "width": "fit-content",
                     "max_width": "normal",
@@ -1270,14 +1276,14 @@
                     "padding-block-start": 0,
                     "padding-block-end": 0,
                     "padding-inline-start": 0,
-                    "padding-inline-end": 0,
-                    "text": "<p>🌱</p>"
+                    "padding-inline-end": 0
                   },
                   "blocks": {}
                 },
                 "title_nongmo": {
                   "type": "text",
                   "settings": {
+                    "text": "<p>Non-GMO</p>",
                     "narrow_width": false,
                     "width": "100%",
                     "max_width": "normal",
@@ -1306,14 +1312,14 @@
                     "padding-block-start": 0,
                     "padding-block-end": 0,
                     "padding-inline-start": 0,
-                    "padding-inline-end": 0,
-                    "text": "<p>Non-GMO</p>"
+                    "padding-inline-end": 0
                   },
                   "blocks": {}
                 },
                 "copy_nongmo": {
                   "type": "text",
                   "settings": {
+                    "text": "<p>We source peak-season, non-GMO produce from California farms. What goes in the jar matters.</p>",
                     "narrow_width": false,
                     "width": "100%",
                     "max_width": "normal",
@@ -1342,8 +1348,7 @@
                     "padding-block-start": 0,
                     "padding-block-end": 0,
                     "padding-inline-start": 0,
-                    "padding-inline-end": 0,
-                    "text": "<p>We source peak-season, non-GMO produce from California farms. What goes in the jar matters.</p>"
+                    "padding-inline-end": 0
                   },
                   "blocks": {}
                 }
@@ -1454,6 +1459,7 @@
                 "emoji_award": {
                   "type": "text",
                   "settings": {
+                    "text": "<p>🏆</p>",
                     "narrow_width": false,
                     "width": "fit-content",
                     "max_width": "normal",
@@ -1482,14 +1488,14 @@
                     "padding-block-start": 0,
                     "padding-block-end": 0,
                     "padding-inline-start": 0,
-                    "padding-inline-end": 0,
-                    "text": "<p>🏆</p>"
+                    "padding-inline-end": 0
                   },
                   "blocks": {}
                 },
                 "title_award": {
                   "type": "text",
                   "settings": {
+                    "text": "<p>Award-Winning</p>",
                     "narrow_width": false,
                     "width": "100%",
                     "max_width": "normal",
@@ -1518,14 +1524,14 @@
                     "padding-block-start": 0,
                     "padding-block-end": 0,
                     "padding-inline-start": 0,
-                    "padding-inline-end": 0,
-                    "text": "<p>Award-Winning</p>"
+                    "padding-inline-end": 0
                   },
                   "blocks": {}
                 },
                 "copy_award": {
                   "type": "text",
                   "settings": {
+                    "text": "<p>Our Bloody Mary Elixirs and pickle blends have earned recognition from food editors and pickle lovers alike.</p>",
                     "narrow_width": false,
                     "width": "100%",
                     "max_width": "normal",
@@ -1554,8 +1560,7 @@
                     "padding-block-start": 0,
                     "padding-block-end": 0,
                     "padding-inline-start": 0,
-                    "padding-inline-end": 0,
-                    "text": "<p>Our Bloody Mary Elixirs and pickle blends have earned recognition from food editors and pickle lovers alike.</p>"
+                    "padding-inline-end": 0
                   },
                   "blocks": {}
                 }
@@ -1614,6 +1619,7 @@
                 "emoji_west": {
                   "type": "text",
                   "settings": {
+                    "text": "<p>🌊</p>",
                     "narrow_width": false,
                     "width": "fit-content",
                     "max_width": "normal",
@@ -1642,14 +1648,14 @@
                     "padding-block-start": 0,
                     "padding-block-end": 0,
                     "padding-inline-start": 0,
-                    "padding-inline-end": 0,
-                    "text": "<p>🌊</p>"
+                    "padding-inline-end": 0
                   },
                   "blocks": {}
                 },
                 "title_west": {
                   "type": "text",
                   "settings": {
+                    "text": "<p>West Coast Roots</p>",
                     "narrow_width": false,
                     "width": "100%",
                     "max_width": "normal",
@@ -1678,14 +1684,14 @@
                     "padding-block-start": 0,
                     "padding-block-end": 0,
                     "padding-inline-start": 0,
-                    "padding-inline-end": 0,
-                    "text": "<p>West Coast Roots</p>"
+                    "padding-inline-end": 0
                   },
                   "blocks": {}
                 },
                 "copy_west": {
                   "type": "text",
                   "settings": {
+                    "text": "<p>Born and made in Santa Barbara, CA. The sunshine, the produce, and the Pacific spirit are in every jar.</p>",
                     "narrow_width": false,
                     "width": "100%",
                     "max_width": "normal",
@@ -1714,8 +1720,7 @@
                     "padding-block-start": 0,
                     "padding-block-end": 0,
                     "padding-inline-start": 0,
-                    "padding-inline-end": 0,
-                    "text": "<p>Born and made in Santa Barbara, CA. The sunshine, the produce, and the Pacific spirit are in every jar.</p>"
+                    "padding-inline-end": 0
                   },
                   "blocks": {}
                 }
@@ -1774,6 +1779,7 @@
                 "emoji_glass": {
                   "type": "text",
                   "settings": {
+                    "text": "<p>♻️</p>",
                     "narrow_width": false,
                     "width": "fit-content",
                     "max_width": "normal",
@@ -1802,14 +1808,14 @@
                     "padding-block-start": 0,
                     "padding-block-end": 0,
                     "padding-inline-start": 0,
-                    "padding-inline-end": 0,
-                    "text": "<p>♻️</p>"
+                    "padding-inline-end": 0
                   },
                   "blocks": {}
                 },
                 "title_glass": {
                   "type": "text",
                   "settings": {
+                    "text": "<p>Glass Jars Always</p>",
                     "narrow_width": false,
                     "width": "100%",
                     "max_width": "normal",
@@ -1838,14 +1844,14 @@
                     "padding-block-start": 0,
                     "padding-block-end": 0,
                     "padding-inline-start": 0,
-                    "padding-inline-end": 0,
-                    "text": "<p>Glass Jars Always</p>"
+                    "padding-inline-end": 0
                   },
                   "blocks": {}
                 },
                 "copy_glass": {
                   "type": "text",
                   "settings": {
+                    "text": "<p>We'll never switch to plastic. Glass keeps the brine pure, the crunch crisp, and the planet a little happier.</p>",
                     "narrow_width": false,
                     "width": "100%",
                     "max_width": "normal",
@@ -1874,8 +1880,7 @@
                     "padding-block-start": 0,
                     "padding-block-end": 0,
                     "padding-inline-start": 0,
-                    "padding-inline-end": 0,
-                    "text": "<p>We'll never switch to plastic. Glass keeps the brine pure, the crunch crisp, and the planet a little happier.</p>"
+                    "padding-inline-end": 0
                   },
                   "blocks": {}
                 }
@@ -1937,6 +1942,7 @@
           "type": "text",
           "name": "t:names.caption",
           "settings": {
+            "text": "<p><strong>The Humans Behind the Jars</strong></p>",
             "narrow_width": false,
             "width": "fit-content",
             "max_width": "normal",
@@ -1965,8 +1971,7 @@
             "padding-block-start": 0,
             "padding-block-end": 0,
             "padding-inline-start": 0,
-            "padding-inline-end": 0,
-            "text": "<p><strong>The Humans Behind the Jars</strong></p>"
+            "padding-inline-end": 0
           },
           "blocks": {}
         },
@@ -2020,6 +2025,7 @@
               "type": "text",
               "name": "t:names.heading",
               "settings": {
+                "text": "<h2>MEET THE PICKLE PEOPLE</h2>",
                 "narrow_width": false,
                 "width": "100%",
                 "max_width": "normal",
@@ -2048,8 +2054,7 @@
                 "padding-block-start": 0,
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
-                "padding-inline-end": 0,
-                "text": "<h2>MEET THE PICKLE PEOPLE</h2>"
+                "padding-inline-end": 0
               },
               "blocks": {}
             }
@@ -2106,7 +2111,6 @@
             "team_bradley": {
               "type": "team-card",
               "settings": {
-                "image": "",
                 "heading": "Bradley Bennett",
                 "heading_color": "#1c1c1a",
                 "role": "Principal Pickle",
@@ -2129,7 +2133,6 @@
             "team_andrew": {
               "type": "team-card",
               "settings": {
-                "image": "",
                 "heading": "Andrew Le",
                 "heading_color": "#1c1c1a",
                 "role": "Chief Growth Officer",
@@ -2152,7 +2155,6 @@
             "team_ron": {
               "type": "team-card",
               "settings": {
-                "image": "",
                 "heading": "Ron Rouch",
                 "heading_color": "#1c1c1a",
                 "role": "Production Manager",
@@ -2175,7 +2177,6 @@
             "team_allison": {
               "type": "team-card",
               "settings": {
-                "image": "",
                 "heading": "Allison Kay",
                 "heading_color": "#1c1c1a",
                 "role": "Dills With Everything",
@@ -2207,6 +2208,7 @@
           "type": "text",
           "name": "t:names.heading",
           "settings": {
+            "text": "<h3>Meet the Pickle Producers</h3>",
             "narrow_width": false,
             "width": "100%",
             "max_width": "normal",
@@ -2235,8 +2237,7 @@
             "padding-block-start": 24,
             "padding-block-end": 0,
             "padding-inline-start": 0,
-            "padding-inline-end": 0,
-            "text": "<h3>Meet the Pickle Producers</h3>"
+            "padding-inline-end": 0
           },
           "blocks": {}
         },
@@ -2288,7 +2289,6 @@
             "packing_photo": {
               "type": "image",
               "settings": {
-                "image": "",
                 "link": "",
                 "image_ratio": "landscape",
                 "width": "fill",
@@ -2311,7 +2311,6 @@
             "kitchen_photo": {
               "type": "image",
               "settings": {
-                "image": "",
                 "link": "",
                 "image_ratio": "landscape",
                 "width": "fill",
@@ -2340,6 +2339,7 @@
         "producers_caption": {
           "type": "text",
           "settings": {
+            "text": "<p>Our fulfillment and production teams at 116 N. Nopal St. and 718 Union Ave., Santa Barbara, CA</p>",
             "narrow_width": false,
             "width": "100%",
             "max_width": "normal",
@@ -2368,8 +2368,7 @@
             "padding-block-start": 0,
             "padding-block-end": 0,
             "padding-inline-start": 0,
-            "padding-inline-end": 0,
-            "text": "<p>Our fulfillment and production teams at 116 N. Nopal St. and 718 Union Ave., Santa Barbara, CA</p>"
+            "padding-inline-end": 0
           },
           "blocks": {}
         }
@@ -2419,6 +2418,7 @@
           "type": "text",
           "name": "t:names.caption",
           "settings": {
+            "text": "<p>As Featured In</p>",
             "narrow_width": false,
             "width": "100%",
             "max_width": "normal",
@@ -2447,15 +2447,13 @@
             "padding-block-start": 0,
             "padding-block-end": 0,
             "padding-inline-start": 0,
-            "padding-inline-end": 0,
-            "text": "<p>As Featured In</p>"
+            "padding-inline-end": 0
           },
           "blocks": {}
         },
         "press_logos": {
           "type": "image",
           "settings": {
-            "image": "",
             "link": "",
             "image_ratio": "adapt",
             "width": "custom",
@@ -2517,6 +2515,7 @@
           "type": "text",
           "name": "t:names.caption",
           "settings": {
+            "text": "<p><strong>What Our Customers Are Saying</strong></p>",
             "narrow_width": false,
             "width": "fit-content",
             "max_width": "normal",
@@ -2545,8 +2544,7 @@
             "padding-block-start": 0,
             "padding-block-end": 0,
             "padding-inline-start": 0,
-            "padding-inline-end": 0,
-            "text": "<p><strong>What Our Customers Are Saying</strong></p>"
+            "padding-inline-end": 0
           },
           "blocks": {}
         },
@@ -2600,6 +2598,7 @@
               "type": "text",
               "name": "t:names.heading",
               "settings": {
+                "text": "<h2>LETTERS TO THE<br/>PICKLE WORKS</h2>",
                 "narrow_width": false,
                 "width": "100%",
                 "max_width": "normal",
@@ -2628,8 +2627,7 @@
                 "padding-block-start": 0,
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
-                "padding-inline-end": 0,
-                "text": "<h2>LETTERS TO THE<br/>PICKLE WORKS</h2>"
+                "padding-inline-end": 0
               },
               "blocks": {}
             }
@@ -2731,6 +2729,7 @@
                 "mark_1": {
                   "type": "text",
                   "settings": {
+                    "text": "<p>\"</p>",
                     "narrow_width": false,
                     "width": "fit-content",
                     "max_width": "normal",
@@ -2759,14 +2758,14 @@
                     "padding-block-start": 0,
                     "padding-block-end": 0,
                     "padding-inline-start": 0,
-                    "padding-inline-end": 0,
-                    "text": "<p>\"</p>"
+                    "padding-inline-end": 0
                   },
                   "blocks": {}
                 },
                 "quote_1": {
                   "type": "text",
                   "settings": {
+                    "text": "<p><em>\"I have been eating and enjoying pickles for the past 60 years and your pickles are my absolute favorite! Super consistent and crunchy with the right amount of natural flavors.\"</em></p>",
                     "narrow_width": false,
                     "width": "100%",
                     "max_width": "none",
@@ -2795,8 +2794,7 @@
                     "padding-block-start": 0,
                     "padding-block-end": 0,
                     "padding-inline-start": 0,
-                    "padding-inline-end": 0,
-                    "text": "<p><em>\"I have been eating and enjoying pickles for the past 60 years and your pickles are my absolute favorite! Super consistent and crunchy with the right amount of natural flavors.\"</em></p>"
+                    "padding-inline-end": 0
                   },
                   "blocks": {}
                 },
@@ -2894,6 +2892,7 @@
                         "initial_1": {
                           "type": "text",
                           "settings": {
+                            "text": "<p>R</p>",
                             "narrow_width": false,
                             "width": "fit-content",
                             "max_width": "normal",
@@ -2922,8 +2921,7 @@
                             "padding-block-start": 0,
                             "padding-block-end": 0,
                             "padding-inline-start": 0,
-                            "padding-inline-end": 0,
-                            "text": "<p>R</p>"
+                            "padding-inline-end": 0
                           },
                           "blocks": {}
                         }
@@ -2980,6 +2978,7 @@
                         "name_1": {
                           "type": "text",
                           "settings": {
+                            "text": "<p>Ricardo</p>",
                             "narrow_width": false,
                             "width": "100%",
                             "max_width": "normal",
@@ -3008,14 +3007,14 @@
                             "padding-block-start": 0,
                             "padding-block-end": 0,
                             "padding-inline-start": 0,
-                            "padding-inline-end": 0,
-                            "text": "<p>Ricardo</p>"
+                            "padding-inline-end": 0
                           },
                           "blocks": {}
                         },
                         "loc_1": {
                           "type": "text",
                           "settings": {
+                            "text": "<p>Southern California</p>",
                             "narrow_width": false,
                             "width": "100%",
                             "max_width": "normal",
@@ -3044,8 +3043,7 @@
                             "padding-block-start": 0,
                             "padding-block-end": 0,
                             "padding-inline-start": 0,
-                            "padding-inline-end": 0,
-                            "text": "<p>Southern California</p>"
+                            "padding-inline-end": 0
                           },
                           "blocks": {}
                         }
@@ -3116,6 +3114,7 @@
                 "mark_2": {
                   "type": "text",
                   "settings": {
+                    "text": "<p>\"</p>",
                     "narrow_width": false,
                     "width": "fit-content",
                     "max_width": "normal",
@@ -3144,14 +3143,14 @@
                     "padding-block-start": 0,
                     "padding-block-end": 0,
                     "padding-inline-start": 0,
-                    "padding-inline-end": 0,
-                    "text": "<p>\"</p>"
+                    "padding-inline-end": 0
                   },
                   "blocks": {}
                 },
                 "quote_2": {
                   "type": "text",
                   "settings": {
+                    "text": "<p><em>\"I had no idea when that large cardboard box was delivered, that carefully packed inside was SUCH a beautiful moment and unexpected gift. Christmas 2022 will be tough to top!\"</em></p>",
                     "narrow_width": false,
                     "width": "100%",
                     "max_width": "none",
@@ -3180,8 +3179,7 @@
                     "padding-block-start": 0,
                     "padding-block-end": 0,
                     "padding-inline-start": 0,
-                    "padding-inline-end": 0,
-                    "text": "<p><em>\"I had no idea when that large cardboard box was delivered, that carefully packed inside was SUCH a beautiful moment and unexpected gift. Christmas 2022 will be tough to top!\"</em></p>"
+                    "padding-inline-end": 0
                   },
                   "blocks": {}
                 },
@@ -3279,6 +3277,7 @@
                         "initial_2": {
                           "type": "text",
                           "settings": {
+                            "text": "<p>B</p>",
                             "narrow_width": false,
                             "width": "fit-content",
                             "max_width": "normal",
@@ -3307,8 +3306,7 @@
                             "padding-block-start": 0,
                             "padding-block-end": 0,
                             "padding-inline-start": 0,
-                            "padding-inline-end": 0,
-                            "text": "<p>B</p>"
+                            "padding-inline-end": 0
                           },
                           "blocks": {}
                         }
@@ -3365,6 +3363,7 @@
                         "name_2": {
                           "type": "text",
                           "settings": {
+                            "text": "<p>Beth</p>",
                             "narrow_width": false,
                             "width": "100%",
                             "max_width": "normal",
@@ -3393,14 +3392,14 @@
                             "padding-block-start": 0,
                             "padding-block-end": 0,
                             "padding-inline-start": 0,
-                            "padding-inline-end": 0,
-                            "text": "<p>Beth</p>"
+                            "padding-inline-end": 0
                           },
                           "blocks": {}
                         },
                         "loc_2": {
                           "type": "text",
                           "settings": {
+                            "text": "<p>Pickle Lover</p>",
                             "narrow_width": false,
                             "width": "100%",
                             "max_width": "normal",
@@ -3429,8 +3428,7 @@
                             "padding-block-start": 0,
                             "padding-block-end": 0,
                             "padding-inline-start": 0,
-                            "padding-inline-end": 0,
-                            "text": "<p>Pickle Lover</p>"
+                            "padding-inline-end": 0
                           },
                           "blocks": {}
                         }
@@ -3552,6 +3550,7 @@
                 "mark_3": {
                   "type": "text",
                   "settings": {
+                    "text": "<p>\"</p>",
                     "narrow_width": false,
                     "width": "fit-content",
                     "max_width": "normal",
@@ -3580,14 +3579,14 @@
                     "padding-block-start": 0,
                     "padding-block-end": 0,
                     "padding-inline-start": 0,
-                    "padding-inline-end": 0,
-                    "text": "<p>\"</p>"
+                    "padding-inline-end": 0
                   },
                   "blocks": {}
                 },
                 "quote_3": {
                   "type": "text",
                   "settings": {
+                    "text": "<p><em>\"You have truly created the most perfect sour pickle ever. I just added three more jars to my grocery delivery. I am losing my mind over how good these are.\"</em></p>",
                     "narrow_width": false,
                     "width": "100%",
                     "max_width": "none",
@@ -3616,8 +3615,7 @@
                     "padding-block-start": 0,
                     "padding-block-end": 0,
                     "padding-inline-start": 0,
-                    "padding-inline-end": 0,
-                    "text": "<p><em>\"You have truly created the most perfect sour pickle ever. I just added three more jars to my grocery delivery. I am losing my mind over how good these are.\"</em></p>"
+                    "padding-inline-end": 0
                   },
                   "blocks": {}
                 },
@@ -3715,6 +3713,7 @@
                         "initial_3": {
                           "type": "text",
                           "settings": {
+                            "text": "<p>A</p>",
                             "narrow_width": false,
                             "width": "fit-content",
                             "max_width": "normal",
@@ -3743,8 +3742,7 @@
                             "padding-block-start": 0,
                             "padding-block-end": 0,
                             "padding-inline-start": 0,
-                            "padding-inline-end": 0,
-                            "text": "<p>A</p>"
+                            "padding-inline-end": 0
                           },
                           "blocks": {}
                         }
@@ -3801,6 +3799,7 @@
                         "name_3": {
                           "type": "text",
                           "settings": {
+                            "text": "<p>Anonymous</p>",
                             "narrow_width": false,
                             "width": "100%",
                             "max_width": "normal",
@@ -3829,14 +3828,14 @@
                             "padding-block-start": 0,
                             "padding-block-end": 0,
                             "padding-inline-start": 0,
-                            "padding-inline-end": 0,
-                            "text": "<p>Anonymous</p>"
+                            "padding-inline-end": 0
                           },
                           "blocks": {}
                         },
                         "loc_3": {
                           "type": "text",
                           "settings": {
+                            "text": "<p>California</p>",
                             "narrow_width": false,
                             "width": "100%",
                             "max_width": "normal",
@@ -3865,8 +3864,7 @@
                             "padding-block-start": 0,
                             "padding-block-end": 0,
                             "padding-inline-start": 0,
-                            "padding-inline-end": 0,
-                            "text": "<p>California</p>"
+                            "padding-inline-end": 0
                           },
                           "blocks": {}
                         }
@@ -3937,6 +3935,7 @@
                 "mark_4": {
                   "type": "text",
                   "settings": {
+                    "text": "<p>\"</p>",
                     "narrow_width": false,
                     "width": "fit-content",
                     "max_width": "normal",
@@ -3965,14 +3964,14 @@
                     "padding-block-start": 0,
                     "padding-block-end": 0,
                     "padding-inline-start": 0,
-                    "padding-inline-end": 0,
-                    "text": "<p>\"</p>"
+                    "padding-inline-end": 0
                   },
                   "blocks": {}
                 },
                 "quote_4": {
                   "type": "text",
                   "settings": {
+                    "text": "<p><em>\"It only took one pickle for my girlfriend to realize the pickles were worth the extra two dollars — they double as a delicious snack.\"</em></p>",
                     "narrow_width": false,
                     "width": "100%",
                     "max_width": "none",
@@ -4001,8 +4000,7 @@
                     "padding-block-start": 0,
                     "padding-block-end": 0,
                     "padding-inline-start": 0,
-                    "padding-inline-end": 0,
-                    "text": "<p><em>\"It only took one pickle for my girlfriend to realize the pickles were worth the extra two dollars — they double as a delicious snack.\"</em></p>"
+                    "padding-inline-end": 0
                   },
                   "blocks": {}
                 },
@@ -4100,6 +4098,7 @@
                         "initial_4": {
                           "type": "text",
                           "settings": {
+                            "text": "<p>N</p>",
                             "narrow_width": false,
                             "width": "fit-content",
                             "max_width": "normal",
@@ -4128,8 +4127,7 @@
                             "padding-block-start": 0,
                             "padding-block-end": 0,
                             "padding-inline-start": 0,
-                            "padding-inline-end": 0,
-                            "text": "<p>N</p>"
+                            "padding-inline-end": 0
                           },
                           "blocks": {}
                         }
@@ -4186,6 +4184,7 @@
                         "name_4": {
                           "type": "text",
                           "settings": {
+                            "text": "<p>Nolan</p>",
                             "narrow_width": false,
                             "width": "100%",
                             "max_width": "normal",
@@ -4214,14 +4213,14 @@
                             "padding-block-start": 0,
                             "padding-block-end": 0,
                             "padding-inline-start": 0,
-                            "padding-inline-end": 0,
-                            "text": "<p>Nolan</p>"
+                            "padding-inline-end": 0
                           },
                           "blocks": {}
                         },
                         "loc_4": {
                           "type": "text",
                           "settings": {
+                            "text": "<p>Sacramento</p>",
                             "narrow_width": false,
                             "width": "100%",
                             "max_width": "normal",
@@ -4250,8 +4249,7 @@
                             "padding-block-start": 0,
                             "padding-block-end": 0,
                             "padding-inline-start": 0,
-                            "padding-inline-end": 0,
-                            "text": "<p>Sacramento</p>"
+                            "padding-inline-end": 0
                           },
                           "blocks": {}
                         }
@@ -4370,6 +4368,7 @@
               "type": "text",
               "name": "t:names.heading",
               "settings": {
+                "text": "<h2>TASTE THE STORY<br/>FOR YOURSELF</h2>",
                 "narrow_width": false,
                 "width": "100%",
                 "max_width": "normal",
@@ -4398,8 +4397,7 @@
                 "padding-block-start": 0,
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
-                "padding-inline-end": 0,
-                "text": "<h2>TASTE THE STORY<br/>FOR YOURSELF</h2>"
+                "padding-inline-end": 0
               },
               "blocks": {}
             }
@@ -4411,6 +4409,7 @@
         "cta_text": {
           "type": "text",
           "settings": {
+            "text": "<p>Every jar is still hand-packed in Santa Barbara. The brine is still made the same way. The crunch is still perfect.</p>",
             "narrow_width": false,
             "width": "100%",
             "max_width": "narrow",
@@ -4439,8 +4438,7 @@
             "padding-block-start": 0,
             "padding-block-end": 0,
             "padding-inline-start": 0,
-            "padding-inline-end": 0,
-            "text": "<p>Every jar is still hand-packed in Santa Barbara. The brine is still made the same way. The crunch is still perfect.</p>"
+            "padding-inline-end": 0
           },
           "blocks": {}
         },
