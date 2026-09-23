@@ -2475,7 +2475,7 @@
         "press_logos": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/featured-brands.png",
+            "image": "shopify://shop_images/featured-brands.webp",
             "link": "",
             "image_ratio": "adapt",
             "width": "custom",
