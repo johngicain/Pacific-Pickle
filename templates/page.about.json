@@ -911,7 +911,7 @@
                 "border": "solid",
                 "border_width": 4,
                 "border_opacity": 20,
-                "border_color": "#73916F",
+                "border_color": "#73916f",
                 "border_left": 0,
                 "border_left_color": "",
                 "border_radius": 0,
@@ -1071,7 +1071,7 @@
                 "border": "solid",
                 "border_width": 4,
                 "border_opacity": 20,
-                "border_color": "#73916F",
+                "border_color": "#73916f",
                 "border_left": 0,
                 "border_left_color": "",
                 "border_radius": 0,
@@ -1231,7 +1231,7 @@
                 "border": "solid",
                 "border_width": 4,
                 "border_opacity": 20,
-                "border_color": "#73916F",
+                "border_color": "#73916f",
                 "border_left": 0,
                 "border_left_color": "",
                 "border_radius": 0,
@@ -1443,7 +1443,7 @@
                 "border": "solid",
                 "border_width": 4,
                 "border_opacity": 20,
-                "border_color": "#73916F",
+                "border_color": "#73916f",
                 "border_left": 0,
                 "border_left_color": "",
                 "border_radius": 0,
@@ -1603,7 +1603,7 @@
                 "border": "solid",
                 "border_width": 4,
                 "border_opacity": 20,
-                "border_color": "#73916F",
+                "border_color": "#73916f",
                 "border_left": 0,
                 "border_left_color": "",
                 "border_radius": 0,
@@ -1763,7 +1763,7 @@
                 "border": "solid",
                 "border_width": 4,
                 "border_opacity": 20,
-                "border_color": "#73916F",
+                "border_color": "#73916f",
                 "border_left": 0,
                 "border_left_color": "",
                 "border_radius": 0,
@@ -2112,6 +2112,7 @@
             "team_bradley": {
               "type": "team-card",
               "settings": {
+                "image": "shopify://shop_images/bradley-bennett_1.png",
                 "heading": "Bradley Bennett",
                 "heading_color": "#1c1c1a",
                 "role": "Principal Pickle",
@@ -2134,6 +2135,7 @@
             "team_andrew": {
               "type": "team-card",
               "settings": {
+                "image": "shopify://shop_images/andrew-le.webp",
                 "heading": "Andrew Le",
                 "heading_color": "#1c1c1a",
                 "role": "Chief Growth Officer",
@@ -2156,6 +2158,7 @@
             "team_ron": {
               "type": "team-card",
               "settings": {
+                "image": "shopify://shop_images/ron-rouch.png",
                 "heading": "Ron Rouch",
                 "heading_color": "#1c1c1a",
                 "role": "Production Manager",
@@ -2178,6 +2181,7 @@
             "team_allison": {
               "type": "team-card",
               "settings": {
+                "image": "shopify://shop_images/allison-kay.webp",
                 "heading": "Allison Kay",
                 "heading_color": "#1c1c1a",
                 "role": "Dills With Everything",
@@ -2290,6 +2294,7 @@
             "packing_photo": {
               "type": "image",
               "settings": {
+                "image": "shopify://shop_images/pickle-producers.webp",
                 "link": "",
                 "image_ratio": "landscape",
                 "width": "fill",
@@ -2312,6 +2317,7 @@
             "kitchen_photo": {
               "type": "image",
               "settings": {
+                "image": "shopify://shop_images/pickle-producers-2.webp",
                 "link": "",
                 "image_ratio": "landscape",
                 "width": "fill",
@@ -2342,17 +2348,17 @@
           "settings": {
             "text": "<p>Our fulfillment and production teams at 116 N. Nopal St. and 718 Union Ave., Santa Barbara, CA</p>",
             "narrow_width": false,
-            "width": "100%",
+            "width": "fit-content",
             "max_width": "normal",
             "alignment": "center",
-            "type_preset": "rte",
+            "type_preset": "custom",
             "font": "var(--font-body--family)",
             "font_size": "0.875rem",
             "line_height": "normal",
             "letter_spacing": "normal",
             "case": "none",
-            "wrap": "pretty",
-            "text_color": "#888888",
+            "wrap": "nowrap",
+            "text_color": "{{ settings.color_palette.color1 }}",
             "bold_color": "",
             "italic_color": "",
             "italic_font_size": "",
