@@ -2431,7 +2431,7 @@
             "alignment": "center",
             "type_preset": "custom",
             "font": "var(--font-heading--family)",
-            "font_size": "0.875rem",
+            "font_size": "1.125rem",
             "line_height": "normal",
             "letter_spacing": "loose",
             "case": "uppercase",
@@ -2460,6 +2460,7 @@
         "press_logos": {
           "type": "image",
           "settings": {
+            "image": "shopify://shop_images/featured-brands.png",
             "link": "",
             "image_ratio": "adapt",
             "width": "custom",
