@@ -317,7 +317,7 @@
                   "type": "text",
                   "name": "t:names.heading",
                   "settings": {
-                    "text": "<h2><strong>A KITCHEN IN<br/>SANTA BARBARA</strong></h2>",
+                    "text": "<h2>A KITCHEN IN<br/>SANTA BARBARA</h2>",
                     "narrow_width": false,
                     "width": "100%",
                     "max_width": "normal",
@@ -595,7 +595,7 @@
               "type": "text",
               "name": "t:names.heading",
               "settings": {
-                "text": "<h2><strong>SANTA BARBARA,<br/>CALIFORNIA</strong></h2>",
+                "text": "<h2>SANTA BARBARA,<br/>CALIFORNIA</h2>",
                 "narrow_width": false,
                 "width": "100%",
                 "max_width": "normal",
@@ -713,7 +713,7 @@
           "type": "text",
           "name": "t:names.caption",
           "settings": {
-            "text": "<p><strong>What We Stand For</strong></p>",
+            "text": "<p>What We Stand For</p>",
             "narrow_width": false,
             "width": "fit-content",
             "max_width": "normal",
@@ -796,7 +796,7 @@
               "type": "text",
               "name": "t:names.heading",
               "settings": {
-                "text": "<h2><strong>THE PICKLE PROMISE</strong></h2>",
+                "text": "<h2>THE PICKLE PROMISE</h2>",
                 "narrow_width": false,
                 "width": "100%",
                 "max_width": "normal",
@@ -2025,7 +2025,7 @@
               "type": "text",
               "name": "t:names.heading",
               "settings": {
-                "text": "<h2><strong>MEET THE PICKLE PEOPLE</strong></h2>",
+                "text": "<h2>MEET THE PICKLE PEOPLE</h2>",
                 "narrow_width": false,
                 "width": "100%",
                 "max_width": "normal",
@@ -2635,7 +2635,7 @@
               "type": "text",
               "name": "t:names.heading",
               "settings": {
-                "text": "<h2><strong>LETTERS TO THE<br/>PICKLE WORKS</strong></h2>",
+                "text": "<h2>LETTERS TO THE<br/>PICKLE WORKS</h2>",
                 "narrow_width": false,
                 "width": "100%",
                 "max_width": "normal",
@@ -4420,7 +4420,7 @@
               "type": "text",
               "name": "t:names.heading",
               "settings": {
-                "text": "<h2><strong>TASTE THE STORY<br/>FOR YOURSELF</strong></h2>",
+                "text": "<h2>TASTE THE STORY<br/>FOR YOURSELF</h2>",
                 "narrow_width": false,
                 "width": "100%",
                 "max_width": "normal",
