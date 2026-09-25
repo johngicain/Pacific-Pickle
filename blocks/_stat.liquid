@@ -1,0 +1,55 @@
+<div class="ppw-stat" {{ block.shopify_attributes }}>
+  {% if block.settings.value != blank %}
+    <p class="ppw-stat__value">{{ block.settings.value }}</p>
+  {% endif %}
+  {% if block.settings.label != blank %}
+    <p class="ppw-stat__label">{{ block.settings.label }}</p>
+  {% endif %}
+</div>
+
+{% stylesheet %}
+  .ppw-stat {
+    padding: 1.5rem;
+    text-align: center;
+  }
+
+  .ppw-stat__value {
+    margin: 0;
+    font-family: var(--font-heading--family);
+    font-size: 2.5rem;
+    font-weight: 400;
+    line-height: 1;
+    color: var(--stats-value-color, #ffffff);
+  }
+
+  .ppw-stat__label {
+    margin: 0.25rem 0 0;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    line-height: 1.35;
+    text-transform: uppercase;
+    color: var(--stats-label-color, #ffffffcc);
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:names.stat",
+  "tag": null,
+  "settings": [
+    {
+      "type": "text",
+      "id": "value",
+      "label": "t:settings.value",
+      "default": "2001"
+    },
+    {
+      "type": "text",
+      "id": "label",
+      "label": "t:settings.label",
+      "default": "Year Founded"
+    }
+  ]
+}
+{% endschema %}

@@ -466,6 +466,8 @@
     "compare_row": "Compare row",
     "timeline": "Timeline",
     "timeline_item": "Timeline item",
+    "stats_bar": "Stats bar",
+    "stat": "Stat",
     "team_card": "Team card",
     "tab": "Tab",
     "tabs": "Tabs"
@@ -1013,6 +1015,7 @@
     "integrated_button": "Integrated button",
     "items_to_show": "Items to show",
     "label": "Label",
+    "value": "Value",
     "year": "Year",
     "role": "Role",
     "bio": "Bio",

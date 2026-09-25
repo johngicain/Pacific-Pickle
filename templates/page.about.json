@@ -161,6 +161,57 @@
         "padding-block-end": 80
       }
     },
+    "stats_story": {
+      "type": "stats-bar",
+      "blocks": {
+        "stat_founded": {
+          "type": "_stat",
+          "settings": {
+            "value": "2001",
+            "label": "Year Founded"
+          },
+          "blocks": {}
+        },
+        "stat_varieties": {
+          "type": "_stat",
+          "settings": {
+            "value": "20+",
+            "label": "Pickle Varieties"
+          },
+          "blocks": {}
+        },
+        "stat_packed": {
+          "type": "_stat",
+          "settings": {
+            "value": "100%",
+            "label": "Hand-Packed"
+          },
+          "blocks": {}
+        },
+        "stat_place": {
+          "type": "_stat",
+          "settings": {
+            "value": "SB, CA",
+            "label": "Made Right Here"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "stat_founded",
+        "stat_varieties",
+        "stat_packed",
+        "stat_place"
+      ],
+      "name": "t:names.stats_bar",
+      "settings": {
+        "background_color": "#e8821a",
+        "rule_color": "#1c1c1a",
+        "rule_width": 4,
+        "value_color": "#ffffff",
+        "label_color": "#ffffffcc"
+      }
+    },
     "kitchen_story": {
       "type": "media-with-content",
       "blocks": {
@@ -4651,6 +4702,7 @@
   },
   "order": [
     "hero_story",
+    "stats_story",
     "kitchen_story",
     "timeline_story",
     "home_story",

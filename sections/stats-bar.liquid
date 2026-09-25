@@ -1,0 +1,148 @@
+{% liquid
+  assign section_settings = section.settings
+
+  if section_settings.background_color != blank
+    render 'contrast-override', background_color: section_settings.background_color, section_id: section.id
+  endif
+%}
+
+<div class="section-background{% if section_settings.background_color != blank %} color-custom-{{ section.id }}{% endif %}"></div>
+
+<div
+  class="section section--full-width ppw-stats-section{% if section_settings.background_color != blank %} color-custom-{{ section.id }}{% endif %}"
+  style="
+    --stats-rule: {{ section_settings.rule_width }}px;
+    --stats-rule-color: {{ section_settings.rule_color }};
+    --stats-value-color: {{ section_settings.value_color }};
+    --stats-label-color: {{ section_settings.label_color }};
+  "
+>
+  <div class="ppw-stats">
+    {% content_for 'blocks' %}
+  </div>
+</div>
+
+{% stylesheet %}
+  .ppw-stats-section {
+    border-block: var(--stats-rule, 4px) solid var(--stats-rule-color, #1c1c1a);
+  }
+
+  .ppw-stats {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: min(100%, 80rem);
+    margin-inline: auto;
+    padding-inline: 1rem;
+  }
+
+  .ppw-stats > .ppw-stat:nth-child(odd) {
+    border-inline-end: var(--stats-rule, 4px) solid var(--stats-rule-color, #1c1c1a);
+  }
+
+  @media screen and (min-width: 750px) {
+    .ppw-stats {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      padding-inline: 2rem;
+    }
+
+    .ppw-stats > .ppw-stat:not(:last-child) {
+      border-inline-end: var(--stats-rule, 4px) solid var(--stats-rule-color, #1c1c1a);
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:names.stats_bar",
+  "tag": "section",
+  "class": "section-wrapper",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "blocks": [
+    {
+      "type": "_stat"
+    }
+  ],
+  "settings": [
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "t:settings.background_color",
+      "default": "#e8821a"
+    },
+    {
+      "type": "color",
+      "id": "rule_color",
+      "label": "t:settings.border_color",
+      "default": "#1c1c1a"
+    },
+    {
+      "type": "range",
+      "id": "rule_width",
+      "label": "t:settings.thickness",
+      "min": 0,
+      "max": 12,
+      "step": 1,
+      "unit": "px",
+      "default": 4
+    },
+    {
+      "type": "color",
+      "id": "value_color",
+      "label": "t:settings.value",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "label_color",
+      "label": "t:settings.label",
+      "alpha": true,
+      "default": "#ffffffcc"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:names.stats_bar",
+      "category": "t:categories.storytelling",
+      "settings": {
+        "background_color": "#e8821a",
+        "rule_color": "#1c1c1a",
+        "rule_width": 4,
+        "value_color": "#ffffff",
+        "label_color": "#ffffffcc"
+      },
+      "blocks": [
+        {
+          "type": "_stat",
+          "settings": {
+            "value": "2001",
+            "label": "Year Founded"
+          }
+        },
+        {
+          "type": "_stat",
+          "settings": {
+            "value": "20+",
+            "label": "Pickle Varieties"
+          }
+        },
+        {
+          "type": "_stat",
+          "settings": {
+            "value": "100%",
+            "label": "Hand-Packed"
+          }
+        },
+        {
+          "type": "_stat",
+          "settings": {
+            "value": "SB, CA",
+            "label": "Made Right Here"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
