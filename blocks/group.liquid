@@ -506,6 +506,30 @@
     },
     {
       "type": "header",
+      "content": "t:content.hover"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_hover",
+      "label": "t:settings.enable_hover",
+      "default": false
+    },
+    {
+      "type": "color",
+      "id": "hover_background_color",
+      "label": "t:settings.background_color",
+      "placeholder": "t:settings.default",
+      "visible_if": "{{ block.settings.enable_hover }}"
+    },
+    {
+      "type": "color",
+      "id": "hover_border_color",
+      "label": "t:settings.border_color",
+      "placeholder": "t:settings.default",
+      "visible_if": "{{ block.settings.enable_hover }}"
+    },
+    {
+      "type": "header",
       "content": "t:content.block_link"
     },
     {

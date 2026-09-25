@@ -43,6 +43,7 @@
     {% if settings.border_left > 0 %} group-block--border-left{% endif %}
     {% if settings.narrow_width %} group-block--narrow{% endif %}
     {% if settings.box_shadow %} group-block--box-shadow{% endif %}
+    {% if settings.enable_hover %} group-block--hover{% endif %}
   "
   style="
     {% render 'border-override', settings: settings %}
@@ -57,6 +58,14 @@
         rgb(var(--color-border-rgb))
       {%- endif -%}
       ;
+    {% endif %}
+    {% if settings.enable_hover %}
+      {% if settings.hover_background_color != blank %}
+        --group-hover-background: rgb({{ settings.hover_background_color.rgba }});
+      {% endif %}
+      {% if settings.hover_border_color != blank %}
+        --group-hover-border: rgb({{ settings.hover_border_color.rgba }});
+      {% endif %}
     {% endif %}
     {{ style }}
   "
@@ -119,6 +128,23 @@
 
   .group-block--box-shadow {
     box-shadow: 3px 3px rgb(var(--color-foreground-rgb));
+  }
+
+  .group-block--hover {
+    transition:
+      background-color var(--hover-transition-duration) var(--hover-transition-timing),
+      border-color var(--hover-transition-duration) var(--hover-transition-timing);
+  }
+
+  .group-block--hover:is(:hover, :focus-within) {
+    background-color: var(--group-hover-background, var(--color-background));
+    border-color: var(--group-hover-border, var(--border-color));
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .group-block--hover {
+      transition: none;
+    }
   }
 
   .group-block__link {
