@@ -30,6 +30,11 @@
     assign show_video = true
   endif
 
+  assign grayscale_lightness = 1
+  if block_settings.grayscale
+    assign grayscale_lightness = block_settings.grayscale_lighter | times: 1.0 | divided_by: 200.0 | plus: 1
+  endif
+
   if block_settings.heading != blank or block_settings.subheading != blank
     assign show_text = true
   endif
@@ -99,12 +104,14 @@
     {% endif %}
     {% if show_tag %}media-block--has-tag{% endif %}
     {% if show_text %}media-block--has-text{% endif %}
+    {% if show_image and block_settings.grayscale %}media-block--grayscale{% endif %}
   "
   style="
     {% render 'border-override', settings: block_settings %}
     {% render 'spacing-style', settings: block_settings %}
     --image-position: {{ block_settings.image_position }};
     --video-position: {{ block_settings.video_position }};
+    --grayscale-lightness: {{ grayscale_lightness }};
     {% if show_text %}
       --media-block-text-direction: {{ text_direction }};
       --media-block-text-justify: {{ text_justify }};
@@ -502,6 +509,10 @@
     object-position: center center;
     overflow: hidden;
     position: relative;
+  }
+
+  .media-block--grayscale .media-block__media {
+    filter: grayscale(1) brightness(var(--grayscale-lightness, 1));
   }
 
   .media-block__media--video {

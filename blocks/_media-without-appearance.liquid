@@ -51,6 +51,24 @@
       "visible_if": "{{ block.settings.media_type == 'image'  }}"
     },
     {
+      "type": "checkbox",
+      "id": "grayscale",
+      "label": "t:settings.grayscale",
+      "default": false,
+      "visible_if": "{{ block.settings.media_type == 'image' }}"
+    },
+    {
+      "type": "range",
+      "id": "grayscale_lighter",
+      "label": "t:settings.grayscale_lighter",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 0,
+      "visible_if": "{{ block.settings.grayscale }}"
+    },
+    {
       "type": "video",
       "id": "video",
       "label": "t:settings.video",
