@@ -253,10 +253,25 @@
         {
           "value": "loose",
           "label": "t:options.loose"
+        },
+        {
+          "value": "custom",
+          "label": "t:options.custom"
         }
       ],
       "default": "normal",
       "visible_if": "{{ block.settings.type_preset == 'custom' }}"
+    },
+    {
+      "type": "range",
+      "id": "letter_spacing_custom",
+      "min": -10,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "t:settings.letter_spacing",
+      "default": 0,
+      "visible_if": "{{ block.settings.type_preset == 'custom' and block.settings.letter_spacing == 'custom' }}"
     },
     {
       "type": "select",

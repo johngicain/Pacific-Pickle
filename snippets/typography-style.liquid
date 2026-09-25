@@ -71,7 +71,11 @@
     {% else %}
       --line-height: var(--line-height--{{ type }}-{{ settings.line_height }});
     {% endif %}
-    --letter-spacing: var(--letter-spacing--{{ type }}-{{ settings.letter_spacing }});
+    {%- if settings.letter_spacing == 'custom' -%}
+      --letter-spacing: {{ settings.letter_spacing_custom | default: 0 }}px;
+    {%- else -%}
+      --letter-spacing: var(--letter-spacing--{{ type }}-{{ settings.letter_spacing }});
+    {%- endif -%}
   {%- endif -%}
 {%- endcapture -%}
 {{- variables | strip | strip_newlines -}}

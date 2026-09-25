@@ -4,6 +4,36 @@
   if section_settings.background_color != blank
     render 'contrast-override', background_color: section_settings.background_color, section_id: section.id
   endif
+
+  if section_settings.caption_letter_spacing == 'custom'
+    assign caption_letter_spacing = section_settings.caption_letter_spacing_custom | append: 'px'
+  elsif section_settings.caption_letter_spacing != blank
+    assign caption_letter_spacing = 'var(--letter-spacing--heading-' | append: section_settings.caption_letter_spacing | append: ')'
+  endif
+
+  if section_settings.heading_letter_spacing == 'custom'
+    assign heading_letter_spacing = section_settings.heading_letter_spacing_custom | append: 'px'
+  elsif section_settings.heading_letter_spacing != blank
+    assign heading_letter_spacing = 'var(--letter-spacing--heading-' | append: section_settings.heading_letter_spacing | append: ')'
+  endif
+
+  if section_settings.year_letter_spacing == 'custom'
+    assign year_letter_spacing = section_settings.year_letter_spacing_custom | append: 'px'
+  elsif section_settings.year_letter_spacing != blank
+    assign year_letter_spacing = 'var(--letter-spacing--heading-' | append: section_settings.year_letter_spacing | append: ')'
+  endif
+
+  if section_settings.item_heading_letter_spacing == 'custom'
+    assign item_heading_letter_spacing = section_settings.item_heading_letter_spacing_custom | append: 'px'
+  elsif section_settings.item_heading_letter_spacing != blank
+    assign item_heading_letter_spacing = 'var(--letter-spacing--heading-' | append: section_settings.item_heading_letter_spacing | append: ')'
+  endif
+
+  if section_settings.item_text_letter_spacing == 'custom'
+    assign item_text_letter_spacing = section_settings.item_text_letter_spacing_custom | append: 'px'
+  elsif section_settings.item_text_letter_spacing != blank
+    assign item_text_letter_spacing = 'var(--letter-spacing--body-' | append: section_settings.item_text_letter_spacing | append: ')'
+  endif
 %}
 
 <div class="section-background{% if section_settings.background_color != blank %} color-custom-{{ section.id }}{% endif %}"></div>
@@ -21,6 +51,21 @@
     --timeline-icon-bg: {{ section_settings.icon_background | default: '#1c1c1a' }};
     --timeline-caption-color: {{ section_settings.caption_color | default: '#e8821a' }};
     --timeline-title-color: {{ section_settings.heading_color | default: '#ffffff' }};
+    {% if caption_letter_spacing != blank %}
+      --timeline-caption-letter-spacing: {{ caption_letter_spacing }};
+    {% endif %}
+    {% if heading_letter_spacing != blank %}
+      --timeline-heading-letter-spacing: {{ heading_letter_spacing }};
+    {% endif %}
+    {% if year_letter_spacing != blank %}
+      --timeline-year-letter-spacing: {{ year_letter_spacing }};
+    {% endif %}
+    {% if item_heading_letter_spacing != blank %}
+      --timeline-item-heading-letter-spacing: {{ item_heading_letter_spacing }};
+    {% endif %}
+    {% if item_text_letter_spacing != blank %}
+      --timeline-text-letter-spacing: {{ item_text_letter_spacing }};
+    {% endif %}
     {% render 'gap-style', value: section_settings.gap %}
     {% render 'spacing-style', settings: section_settings %}
     {% render 'border-override', settings: section_settings %}
@@ -63,7 +108,7 @@
     margin: 0 0 0.75rem;
     font-family: var(--font-heading--family);
     font-size: 0.9rem;
-    letter-spacing: 0.2em;
+    letter-spacing: var(--timeline-caption-letter-spacing, 0.2em);
     text-transform: uppercase;
     color: var(--timeline-caption-color);
   }
@@ -73,6 +118,7 @@
     font-family: var(--font-heading--family);
     font-size: clamp(2.5rem, 5vw, 4rem);
     line-height: 1;
+    letter-spacing: var(--timeline-heading-letter-spacing, normal);
     text-transform: uppercase;
     color: var(--timeline-title-color);
   }
@@ -151,6 +197,7 @@
     font-family: var(--font-heading--family);
     font-size: 2rem;
     line-height: 1;
+    letter-spacing: var(--timeline-year-letter-spacing, normal);
     color: var(--timeline-year-color);
   }
 
@@ -159,6 +206,7 @@
     font-family: var(--font-heading--family);
     font-size: 1.4rem;
     line-height: 1.1;
+    letter-spacing: var(--timeline-item-heading-letter-spacing, normal);
     text-transform: uppercase;
     color: var(--timeline-heading-color);
   } 
@@ -168,6 +216,7 @@
     margin: 0;
     color: var(--timeline-text-color);
     line-height: 1.6;
+    letter-spacing: var(--timeline-text-letter-spacing, normal);
   }
 
   .ppw-timeline-item__icon {
@@ -259,6 +308,45 @@
       "default": "#e8821a"
     },
     {
+      "type": "select",
+      "id": "caption_letter_spacing",
+      "label": "t:settings.letter_spacing",
+      "options": [
+        {
+          "value": "",
+          "label": "t:options.default"
+        },
+        {
+          "value": "tight",
+          "label": "t:options.tight"
+        },
+        {
+          "value": "normal",
+          "label": "t:options.normal"
+        },
+        {
+          "value": "loose",
+          "label": "t:options.loose"
+        },
+        {
+          "value": "custom",
+          "label": "t:options.custom"
+        }
+      ],
+      "default": ""
+    },
+    {
+      "type": "range",
+      "id": "caption_letter_spacing_custom",
+      "min": -10,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "t:settings.letter_spacing",
+      "default": 0,
+      "visible_if": "{{ section.settings.caption_letter_spacing == 'custom' }}"
+    },
+    {
       "type": "inline_richtext",
       "id": "heading",
       "label": "t:settings.heading"
@@ -268,6 +356,45 @@
       "id": "heading_color",
       "label": "t:settings.heading",
       "default": "#ffffff"
+    },
+    {
+      "type": "select",
+      "id": "heading_letter_spacing",
+      "label": "t:settings.letter_spacing",
+      "options": [
+        {
+          "value": "",
+          "label": "t:options.default"
+        },
+        {
+          "value": "tight",
+          "label": "t:options.tight"
+        },
+        {
+          "value": "normal",
+          "label": "t:options.normal"
+        },
+        {
+          "value": "loose",
+          "label": "t:options.loose"
+        },
+        {
+          "value": "custom",
+          "label": "t:options.custom"
+        }
+      ],
+      "default": ""
+    },
+    {
+      "type": "range",
+      "id": "heading_letter_spacing_custom",
+      "min": -10,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "t:settings.letter_spacing",
+      "default": 0,
+      "visible_if": "{{ section.settings.heading_letter_spacing == 'custom' }}"
     },
     {
       "type": "header",
@@ -344,10 +471,88 @@
       "default": "#e8821a"
     },
     {
+      "type": "select",
+      "id": "year_letter_spacing",
+      "label": "t:settings.letter_spacing",
+      "options": [
+        {
+          "value": "",
+          "label": "t:options.default"
+        },
+        {
+          "value": "tight",
+          "label": "t:options.tight"
+        },
+        {
+          "value": "normal",
+          "label": "t:options.normal"
+        },
+        {
+          "value": "loose",
+          "label": "t:options.loose"
+        },
+        {
+          "value": "custom",
+          "label": "t:options.custom"
+        }
+      ],
+      "default": ""
+    },
+    {
+      "type": "range",
+      "id": "year_letter_spacing_custom",
+      "min": -10,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "t:settings.letter_spacing",
+      "default": 0,
+      "visible_if": "{{ section.settings.year_letter_spacing == 'custom' }}"
+    },
+    {
       "type": "color",
       "id": "item_heading_color",
       "label": "t:settings.title",
       "default": "#ffffff"
+    },
+    {
+      "type": "select",
+      "id": "item_heading_letter_spacing",
+      "label": "t:settings.letter_spacing",
+      "options": [
+        {
+          "value": "",
+          "label": "t:options.default"
+        },
+        {
+          "value": "tight",
+          "label": "t:options.tight"
+        },
+        {
+          "value": "normal",
+          "label": "t:options.normal"
+        },
+        {
+          "value": "loose",
+          "label": "t:options.loose"
+        },
+        {
+          "value": "custom",
+          "label": "t:options.custom"
+        }
+      ],
+      "default": ""
+    },
+    {
+      "type": "range",
+      "id": "item_heading_letter_spacing_custom",
+      "min": -10,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "t:settings.letter_spacing",
+      "default": 0,
+      "visible_if": "{{ section.settings.item_heading_letter_spacing == 'custom' }}"
     },
     {
       "type": "color",
@@ -355,6 +560,45 @@
       "label": "t:settings.text",
       "alpha": true,
       "default": "#ffffffb3"
+    },
+    {
+      "type": "select",
+      "id": "item_text_letter_spacing",
+      "label": "t:settings.letter_spacing",
+      "options": [
+        {
+          "value": "",
+          "label": "t:options.default"
+        },
+        {
+          "value": "tight",
+          "label": "t:options.tight"
+        },
+        {
+          "value": "normal",
+          "label": "t:options.normal"
+        },
+        {
+          "value": "loose",
+          "label": "t:options.loose"
+        },
+        {
+          "value": "custom",
+          "label": "t:options.custom"
+        }
+      ],
+      "default": ""
+    },
+    {
+      "type": "range",
+      "id": "item_text_letter_spacing_custom",
+      "min": -10,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "t:settings.letter_spacing",
+      "default": 0,
+      "visible_if": "{{ section.settings.item_text_letter_spacing == 'custom' }}"
     },
     {
       "type": "color",

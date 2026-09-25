@@ -965,7 +965,7 @@
             "label": "t:options.body"
           }
         ],
-        "default": "subheading"
+        "default": "heading"
       },
       {
         "type": "select",
