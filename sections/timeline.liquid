@@ -39,7 +39,7 @@
 <div class="section-background{% if section_settings.background_color != blank %} color-custom-{{ section.id }}{% endif %}"></div>
 
 <div
-  class="section section--{{ section_settings.section_width }} spacing-style ppw-timeline-section{% if section_settings.background_color != blank %} color-custom-{{ section.id }}{% endif %}"
+  class="section section--{{ section_settings.section_width }} spacing-style ppw-timeline-section{% if section_settings.enable_scroll_animation %} ppw-timeline-section--animate{% endif %}{% if section_settings.background_color != blank %} color-custom-{{ section.id }}{% endif %}"
   style="
     --timeline-line: {{ section_settings.line_color | default: '#e8821a' }};
     --timeline-card-bg: {{ section_settings.card_background | default: '#252522' }};
@@ -276,7 +276,72 @@
       font-size: 1.25rem;
     }
   }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .ppw-timeline-section--animate .ppw-timeline-item__card {
+      transition: transform 1.1s var(--animation-timing-fade-in);
+    }
+
+    .ppw-timeline-section--animate .ppw-timeline-item--left .ppw-timeline-item__card {
+      transform: translate3d(calc(-100% - 2rem), 0, 0);
+    }
+
+    .ppw-timeline-section--animate .ppw-timeline-item--right .ppw-timeline-item__card {
+      transform: translate3d(calc(100% + 2rem), 0, 0);
+    }
+
+    .ppw-timeline-section--animate .ppw-timeline-item.is-visible .ppw-timeline-item__card {
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) and (max-width: 749px) {
+    .ppw-timeline-section--animate .ppw-timeline-item--left .ppw-timeline-item__card {
+      transform: translate3d(calc(100% + 2rem), 0, 0);
+    }
+
+    .ppw-timeline-section--animate .ppw-timeline-item--left.is-visible .ppw-timeline-item__card {
+      transform: translate3d(0, 0, 0);
+    }
+  }
 {% endstylesheet %}
+
+{% javascript %}
+  const timelineMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  const revealTimelineCards = (section) => {
+    if (timelineMotion.matches || section.dataset.timelineReady === 'true') return;
+
+    const items = section.querySelectorAll('.ppw-timeline-item');
+    if (!items.length) return;
+
+    section.dataset.timelineReady = 'true';
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        });
+      },
+      { rootMargin: '0px 0px -10% 0px', threshold: 0.15 }
+    );
+
+    items.forEach((item) => observer.observe(item));
+  };
+
+  const initTimelineAnimation = (root) => {
+    const scope = root || document;
+    scope.querySelectorAll('.ppw-timeline-section--animate').forEach(revealTimelineCards);
+  };
+
+  initTimelineAnimation(document);
+
+  document.addEventListener('shopify:section:load', (event) => {
+    initTimelineAnimation(event.target);
+  });
+{% endjavascript %}
 
 {% schema %}
 {
@@ -395,6 +460,16 @@
       "label": "t:settings.letter_spacing",
       "default": 0,
       "visible_if": "{{ section.settings.heading_letter_spacing == 'custom' }}"
+    },
+    {
+      "type": "header",
+      "content": "t:names.animations"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_scroll_animation",
+      "label": "t:settings.animation",
+      "default": true
     },
     {
       "type": "header",
