@@ -1032,6 +1032,7 @@
     "left_padding": "Left padding",
     "length": "Length",
     "letter_spacing": "Letter spacing",
+    "fixed_max_width": "Fixed max width",
     "limit_content_width": "Limit content width",
     "limit_heading_text_width": "Limit heading and text width",
     "limit_media_to_screen_height": "Constrain to screen height",

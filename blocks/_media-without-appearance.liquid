@@ -793,6 +793,68 @@
       "visible_if": "{{ block.settings.tag_heading != blank or block.settings.tag_subheading != blank }}"
     },
     {
+      "type": "range",
+      "id": "tag_offset_top",
+      "label": "t:settings.top",
+      "min": -80,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 0,
+      "visible_if": "{{ block.settings.tag_position == 'top-left' or block.settings.tag_position == 'top-right' }}"
+    },
+    {
+      "type": "range",
+      "id": "tag_offset_bottom",
+      "label": "t:settings.bottom",
+      "min": -80,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 0,
+      "visible_if": "{{ block.settings.tag_position == 'bottom-left' or block.settings.tag_position == 'bottom-right' }}"
+    },
+    {
+      "type": "range",
+      "id": "tag_offset_left",
+      "label": "t:settings.left",
+      "min": -80,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 0,
+      "visible_if": "{{ block.settings.tag_position == 'top-left' or block.settings.tag_position == 'bottom-left' }}"
+    },
+    {
+      "type": "range",
+      "id": "tag_offset_right",
+      "label": "t:settings.right",
+      "min": -80,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 0,
+      "visible_if": "{{ block.settings.tag_position == 'top-right' or block.settings.tag_position == 'bottom-right' }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "tag_fixed_max_width",
+      "label": "t:settings.fixed_max_width",
+      "default": true,
+      "visible_if": "{{ block.settings.tag_heading != blank or block.settings.tag_subheading != blank }}"
+    },
+    {
+      "type": "range",
+      "id": "tag_max_width",
+      "label": "t:settings.max_width",
+      "min": 80,
+      "max": 480,
+      "step": 4,
+      "unit": "px",
+      "default": 192,
+      "visible_if": "{{ block.settings.tag_fixed_max_width == true and block.settings.tag_heading != blank or block.settings.tag_fixed_max_width == true and block.settings.tag_subheading != blank }}"
+    },
+    {
       "type": "color",
       "id": "tag_background_color",
       "label": "t:settings.background_color",
