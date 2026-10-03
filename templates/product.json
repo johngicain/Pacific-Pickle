@@ -4840,7 +4840,7 @@
                         "show_number": true,
                         "text_color": "{{ settings.color_palette.color3 }}",
                         "type_preset": "paragraph",
-                        "width": "100%",
+                        "width": "fit-content",
                         "alignment": "left"
                       },
                       "blocks": {}
@@ -4874,7 +4874,7 @@
                         "show_installments": false,
                         "show_tax_info": false,
                         "type_preset": "custom",
-                        "width": "100%",
+                        "width": "fit-content",
                         "alignment": "right",
                         "font": "var(--font-body--family)",
                         "font_size": "1rem",
