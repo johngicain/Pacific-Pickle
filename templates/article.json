@@ -1222,7 +1222,7 @@
                       "type": "text",
                       "name": "t:names.text",
                       "settings": {
-                        "text": "<p>{{ closest.article.metafields.custom.duration_hour | metafield_tag }} {{ closest.article.metafields.custom.duration_min | metafield_tag }}</p>",
+                        "text": "<p><strong>{{ closest.article.metafields.custom.duration_hour | metafield_tag }}</strong><strong> </strong><strong>{{ closest.article.metafields.custom.duration_min | metafield_tag }}</strong></p>",
                         "narrow_width": false,
                         "width": "fit-content",
                         "max_width": "normal",
